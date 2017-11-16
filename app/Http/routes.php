@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// 热门管理
+Route::resource('/admin/index','Admin\HotController');
+// 举报管理
+Route::resource('/admin/destroy','Admin\NoticeController');
+// 公告管理
+route::resource('/admin/index','Admin\ReportController');
+
+
+
