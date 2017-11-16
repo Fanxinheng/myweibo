@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//广告管理
+Route::get('advert', function () {
+
+    return view('admins.layout.admin');
+
+});
+
+//广告添加页面
+
+Route::get('/advert/add', 'Admin\AdvertController@stort');
+
+
+//广告列表页面
+Route::get('/advert/entry', 'Admin\AdvertController@index');
