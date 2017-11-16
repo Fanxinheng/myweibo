@@ -16,6 +16,7 @@ class HotController extends Controller
      */
     public function index()
     {
+
         return view('admins/hot/index');
     }
 
@@ -27,6 +28,7 @@ class HotController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -49,6 +51,7 @@ class HotController extends Controller
     public function show($id)
     {
         //
+       
     }
 
     /**

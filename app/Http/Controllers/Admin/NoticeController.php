@@ -17,6 +17,7 @@ class NoticeController extends Controller
     public function index()
     {
         return view('admins/notice/index');
+        
     }
 
     /**
@@ -27,6 +28,7 @@ class NoticeController extends Controller
     public function create()
     {
         return view('admins/notice/add');
+        //
     }
 
     /**
@@ -83,5 +85,6 @@ class NoticeController extends Controller
     public function destroy($id)
     {
         //
+        
     }
 }
