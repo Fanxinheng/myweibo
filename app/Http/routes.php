@@ -29,31 +29,31 @@ Route::get('admin/login',"Admin\LoginController@login");
 
 //后台主页面
 //中间件控制
-Route::group([],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 	//后台主页
-	Route::resource('admin/index','Admin\UserController');
+	Route::resource('index','UserController');
 
 	//后台管理员资源路由
-	Route::resource('admin/admins','Admin\AdminsController');
+	Route::resource('admins','AdminsController');
 
 	//后台热门微博资源路由
-	Route::resource('admin/hot','Admin\HotController');
+	Route::resource('hot','HotController');
 
 	//后台举报管理资源路由
-	Route::resource('admin/report','Admin\ReportController');
+	Route::resource('report','ReportController');
 
 	//后台广告管理资源路由
-	Route::resource('admin/advert','Admin\AdvertController');
+	Route::resource('advert','AdvertController');
 
 	//后台友情链接资源路由
-	Route::resource('admin/link','Admin\LinkController');
+	Route::resource('link','LinkController');
 
 	//后台系统公告资源路由
-	Route::resource('admin/notice','Admin\NoticeController');
+	Route::resource('notice','NoticeController');
 
 	//后台网站配置路由
-	Route::get('admin/config','Admin\ConfigController@edit');
+	Route::get('config','ConfigController@edit');
 
 });
 
