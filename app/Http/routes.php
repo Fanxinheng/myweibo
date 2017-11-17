@@ -36,7 +36,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 
 //后台主页面
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 	//后台主页
 	Route::resource('index','UserController');
