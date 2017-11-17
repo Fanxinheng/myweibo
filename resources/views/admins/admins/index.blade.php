@@ -30,7 +30,7 @@
 @endif
 <div class="mws-panel grid_8">
                     <div class="mws-panel-header">
-                        <span><i class="icon-table"></i> Data Table with Numbered Pagination</span>
+                        <span><i class="icon-table"></i>管理员列表</span>
                     </div>
                     <div class="mws-panel-body no-padding">
                         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper"><div id="DataTables_Table_1_length" class="dataTables_length"><label>Show <select name="DataTables_Table_1_length" size="1" aria-controls="DataTables_Table_1"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div class="dataTables_filter" id="DataTables_Table_1_filter"><label>Search: <input type="text" aria-controls="DataTables_Table_1"></label></div><table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">

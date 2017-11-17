@@ -19,17 +19,24 @@ Route::get('/', function () {
 
 //==========================后台路由===================================//
 
-//后台登录主页面
-Route::get('admin',"Admin\LoginController@index");
+//后台登录
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
-//后台登录功能
-Route::get('admin/login',"Admin\LoginController@login");
+	//后台登录主页面
+	Route::get('/',"LoginController@index");
+
+	//后台二维码生成
+	Route::get('code','LoginController@code');
+
+	//后台登录功能
+	Route::post('login',"LoginController@login");
+});
+
 
 
 
 //后台主页面
-//中间件控制
-Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],function(){
 
 	//后台主页
 	Route::resource('index','UserController');

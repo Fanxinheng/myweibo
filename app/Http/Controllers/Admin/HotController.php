@@ -16,7 +16,7 @@ class HotController extends Controller
      */
     public function index()
     {
-
+        echo 123;
         return view('admins/hot/index');
     }
 

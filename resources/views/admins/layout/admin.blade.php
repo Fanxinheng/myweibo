@@ -233,38 +233,38 @@
                 <ul>
                     
                     <li>
-                        <a href="/admins/#"><i class="icon-users"></i>用户管理</a>
+                        <a href="#"><i class="icon-users"></i>用户管理</a>
                         <ul class="closed">
                             <li><a href="/admin/admins/create">管理员添加</a></li>
                             <li><a href="/admin/admins">管理员列表</a></li>
                             <li><a href="/admin/index">用户列表</a></li>
                         </ul>
-                        <a href="/admins/#"><i class="icon-twitter-2"></i>热门微博</a>
+                        <a href="#"><i class="icon-twitter-2"></i>热门微博</a>
                         <ul class="closed">
-                            <li><a href="/admins/admin/hot">热门列表</a></li>
+                            <li><a href="/admin/hot">热门列表</a></li>
                         </ul>
-                        <a href="/admins/#"><i class="icon-bell-2"></i>举报管理</a>
+                        <a href="#"><i class="icon-bell-2"></i>举报管理</a>
                         <ul class="closed">
-                            <li><a href="/admins/admin/report">举报列表</a></li>
+                            <li><a href="/admin/report">举报列表</a></li>
                         </ul>
-                        <a href="/admins/#"><i class="icon-filter"></i>广告管理</a>
+                        <a href="#"><i class="icon-filter"></i>广告管理</a>
                         <ul class="closed">
-                            <li><a href="/admins/admin/advert/create">广告添加</a></li>
-                            <li><a href="/admins/admin/advert">广告列表</a></li>
+                            <li><a href="/admin/advert/create">广告添加</a></li>
+                            <li><a href="/admin/advert">广告列表</a></li>
                         </ul>
-                        <a href="/admins/#"><i class="icon-link"></i>友情链接</a>
-                        <ul class="closed"
-                            <li><a href="/admins/admin/link/create">链接添加</a></li>
-                            <li><a href="/admins/admin/link">链接列表</a></li>
-                        </ul>
-                        <a href="/admins/#"><i class="icon-calendar"></i>系统公告</a>
+                        <a href="#"><i class="icon-link"></i>友情链接</a>
                         <ul class="closed">
-                            <li><a href="/admins/admin/notice/create">公告添加</a></li>
-                            <li><a href="/admins/admin/notice">公告列表</a></li>
+                            <li><a href="/admin/link/create">链接添加</a></li>
+                            <li><a href="/admin/link">链接列表</a></li>
                         </ul>
-                        <a href="/admins/#"><i class="icon-tools"></i>网站配置</a>
+                        <a href="#"><i class="icon-calendar"></i>系统公告</a>
                         <ul class="closed">
-                            <li><a href="/admins/admin/config">配置修改</a></li>
+                            <li><a href="/admin/notice/create">公告添加</a></li>
+                            <li><a href="/admin/notice">公告列表</a></li>
+                        </ul>
+                        <a href="#"><i class="icon-tools"></i>网站配置</a>
+                        <ul class="closed">
+                            <li><a href="/admin/config">配置修改</a></li>
                         </ul>
 
                     </li>
