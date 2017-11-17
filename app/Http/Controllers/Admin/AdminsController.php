@@ -37,7 +37,29 @@ class AdminsController extends Controller
      */
     public function store(Request $request)
     {
-        echo 123;
+        //正则验证
+        $this->validate($request, [
+            'name' => 'required|regex:/^\w{6,12}$/',
+            'password' => 'required|regex:/^\w{6,12}$/', 
+            'repass' => 'same:password',
+            'phone' => 'required|regex:/^1[34578]\d{9}$/',
+
+
+            
+        ],[
+            'name.required' => '*用户名不能为空*', 
+            'name.regex' => '*请输入6~12位用户名*',
+            'password.required' => '*密码不能为空*', 
+            'password.regex' => '*请输入6~12位密码*',
+            'repass.same' => '*两次密码不一致*',
+            'phone.required' => '*手机号码不能为空*', 
+            'phone.regex' => '*手机号码合适不正确*',
+        ]);
+
+
+        $res = $request->except('_token','repass');
+
+
     }
 
     /**
