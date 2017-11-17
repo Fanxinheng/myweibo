@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//注册前首页
+Route::resource('/home/admin','Home\AdminController');
+
+//注册页面
+Route::resource('/home/register','Home\RegisterController');
+
+//登录页面
+Route::resource('/home/login','Home\LoginController');
