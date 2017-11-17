@@ -10,28 +10,28 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
     
 <!-- Plugin Stylesheets first to ease overrides -->
-<link rel="stylesheet" type="text/css" href="/admin/plugins/colorpicker/colorpicker.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admin/custom-plugins/wizard/wizard.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/plugins/colorpicker/colorpicker.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/custom-plugins/wizard/wizard.css" media="screen">
 
 <!-- Required Stylesheets -->
-<link rel="stylesheet" type="text/css" href="/admin/bootstrap/css/bootstrap.min.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admin/css/fonts/ptsans/stylesheet.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admin/css/fonts/icomoon/style.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/bootstrap/css/bootstrap.min.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/css/fonts/ptsans/stylesheet.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/css/fonts/icomoon/style.css" media="screen">
 
-<link rel="stylesheet" type="text/css" href="/admin/css/mws-style.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admin/css/icons/icol16.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admin/css/icons/icol32.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/css/mws-style.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/css/icons/icol16.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/css/icons/icol32.css" media="screen">
 
 <!-- Demo Stylesheet -->
-<link rel="stylesheet" type="text/css" href="/admin/css/demo.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/css/demo.css" media="screen">
 
 <!-- jQuery-UI Stylesheet -->
-<link rel="stylesheet" type="text/css" href="/admin/jui/css/jquery.ui.all.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admin/jui/jquery-ui.custom.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/jui/css/jquery.ui.all.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/jui/jquery-ui.custom.css" media="screen">
 
 <!-- Theme Stylesheet -->
-<link rel="stylesheet" type="text/css" href="/admin/css/mws-theme.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/admin/css/themer.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/css/mws-theme.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/admins/css/themer.css" media="screen">
 
 <title>@yield('title')</title>
 
@@ -51,7 +51,7 @@
         
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap">
-            	<h3 style="color: white">IT-FANS</h3>
+            	<h3 style="color: white;font-size: 30px">myweibo.com</h3>
 			</div>
         </div>
         
@@ -60,7 +60,7 @@
         
         	<!-- Notifications -->
         	<div id="mws-user-notif" class="mws-dropdown-menu">
-            	<a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
+            	<a href="/admins/#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
                 
                 <!-- Unread notification count -->
                 <span class="mws-dropdown-notif">35</span>
@@ -70,7 +70,7 @@
                 	<div class="mws-dropdown-content">
                         <ul class="mws-notifications">
                         	<li class="read">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="message">
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
                                     </span>
@@ -80,7 +80,7 @@
                                 </a>
                             </li>
                         	<li class="read">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
                                     </span>
@@ -90,7 +90,7 @@
                                 </a>
                             </li>
                         	<li class="unread">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
                                     </span>
@@ -100,7 +100,7 @@
                                 </a>
                             </li>
                         	<li class="unread">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
                                     </span>
@@ -111,7 +111,7 @@
                             </li>
                         </ul>
                         <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Notifications</a>
+	                        <a href="/admins/#">View All Notifications</a>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
             
             <!-- Messages -->
             <div id="mws-user-message" class="mws-dropdown-menu">
-            	<a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
+            	<a href="/admins/#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
                 
                 <!-- Unred messages count -->
                 <span class="mws-dropdown-notif">35</span>
@@ -129,7 +129,7 @@
                 	<div class="mws-dropdown-content">
                         <ul class="mws-messages">
                         	<li class="read">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="sender">John Doe</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
@@ -140,7 +140,7 @@
                                 </a>
                             </li>
                         	<li class="read">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="sender">John Doe</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
@@ -151,7 +151,7 @@
                                 </a>
                             </li>
                         	<li class="unread">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="sender">John Doe</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
@@ -162,7 +162,7 @@
                                 </a>
                             </li>
                         	<li class="unread">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="sender">John Doe</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
@@ -174,7 +174,7 @@
                             </li>
                         </ul>
                         <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Messages</a>
+	                        <a href="/admins/#">View All Messages</a>
                         </div>
                     </div>
                 </div>
@@ -185,7 +185,7 @@
             
             	<!-- User Photo -->
             	<div id="mws-user-photo">
-                	<img src="/admin/example/profile.jpg" alt="User Photo">
+                	<img src="/admins/example/profile.jpg" alt="User Photo">
                 </div>
                 
                 <!-- Username and Functions -->
@@ -194,9 +194,9 @@
                         Hello, John Doe
                     </div>
                     <ul>
-                    	<li><a href="#">Profile</a></li>
-                        <li><a href="#">Change Password</a></li>
-                        <li><a href="index.html">Logout</a></li>
+                    	<li><a href="/admins/#">Profile</a></li>
+                        <li><a href="/admins/#">Change Password</a></li>
+                        <li><a href="/admins/index.html">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -237,7 +237,7 @@
                         <ul class="closed">
                             <li><a href="/admin/admins/create">管理员添加</a></li>
                             <li><a href="/admin/admins">管理员列表</a></li>
-                            <li><a href="/admin/users">用户列表</a></li>
+                            <li><a href="/admin/index">用户列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-twitter-2"></i>热门微博</a>
                         <ul class="closed">
@@ -291,39 +291,39 @@
     </div>
 
     <!-- JavaScript Plugins -->
-    <script src="/admin/js/libs/jquery-1.8.3.min.js"></script>
-    <script src="/admin/js/libs/jquery.mousewheel.min.js"></script>
-    <script src="/admin/js/libs/jquery.placeholder.min.js"></script>
-    <script src="/admin/custom-plugins/fileinput.js"></script>
+    <script src="/admins/js/libs/jquery-1.8.3.min.js"></script>
+    <script src="/admins/js/libs/jquery.mousewheel.min.js"></script>
+    <script src="/admins/js/libs/jquery.placeholder.min.js"></script>
+    <script src="/admins/custom-plugins/fileinput.js"></script>
     
     <!-- jQuery-UI Dependent Scripts -->
-    <script src="/admin/jui/js/jquery-ui-1.9.2.min.js"></script>
-    <script src="/admin/jui/jquery-ui.custom.min.js"></script>
-    <script src="/admin/jui/js/jquery.ui.touch-punch.js"></script>
+    <script src="/admins/jui/js/jquery-ui-1.9.2.min.js"></script>
+    <script src="/admins/jui/jquery-ui.custom.min.js"></script>
+    <script src="/admins/jui/js/jquery.ui.touch-punch.js"></script>
 
     <!-- Plugin Scripts -->
-    <script src="/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/admins/plugins/datatables/jquery.dataTables.min.js"></script>
     <!--[if lt IE 9]>
     <script src="js/libs/excanvas.min.js"></script>
     <![endif]-->
-    <script src="/admin/plugins/flot/jquery.flot.min.js"></script>
-    <script src="/admin/plugins/flot/plugins/jquery.flot.tooltip.min.js"></script>
-    <script src="/admin/plugins/flot/plugins/jquery.flot.pie.min.js"></script>
-    <script src="/admin/plugins/flot/plugins/jquery.flot.stack.min.js"></script>
-    <script src="/admin/plugins/flot/plugins/jquery.flot.resize.min.js"></script>
-    <script src="/admin/plugins/colorpicker/colorpicker-min.js"></script>
-    <script src="/admin/plugins/validate/jquery.validate-min.js"></script>
-    <script src="/admin/custom-plugins/wizard/wizard.min.js"></script>
+    <script src="/admins/plugins/flot/jquery.flot.min.js"></script>
+    <script src="/admins/plugins/flot/plugins/jquery.flot.tooltip.min.js"></script>
+    <script src="/admins/plugins/flot/plugins/jquery.flot.pie.min.js"></script>
+    <script src="/admins/plugins/flot/plugins/jquery.flot.stack.min.js"></script>
+    <script src="/admins/plugins/flot/plugins/jquery.flot.resize.min.js"></script>
+    <script src="/admins/plugins/colorpicker/colorpicker-min.js"></script>
+    <script src="/admins/plugins/validate/jquery.validate-min.js"></script>
+    <script src="/admins/custom-plugins/wizard/wizard.min.js"></script>
 
     <!-- Core Script -->
-    <script src="/admin/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/admin/js/core/mws.js"></script>
+    <script src="/admins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/admins/js/core/mws.js"></script>
 
     <!-- Themer Script (Remove if not needed) -->
-    <script src="/admin/js/core/themer.js"></script>
+    <script src="/admins/js/core/themer.js"></script>
 
     <!-- Demo Scripts (remove if not needed) -->
-    <script src="/admin/js/demo/demo.dashboard.js"></script>
+    <script src="/admins/js/demo/demo.dashboard.js"></script>
     
     @section('js')
 

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
-
+// use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests;
+use App\Http\Model\contents;
 use App\Http\Controllers\Controller;
+
+use \DB;
 
 class UserController extends Controller
 {
@@ -17,7 +20,10 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('homes.user.index');
+        
+        $con = contents::all();
+        // var_dump($con);
+        return view('homes.user.index',['con'=>$con]);
     }
 
     /**
