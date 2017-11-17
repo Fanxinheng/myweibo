@@ -24,7 +24,7 @@
                 <div class="mws-form-row">
                     <label class="mws-form-label">用户名</label>
                     <div class="mws-form-item">
-                        <input type="text" class="small" name="uname" >
+                        <input type="text" class="small" name="name" >
                     </div>
                 </div>
                 <div class="mws-form-row">
