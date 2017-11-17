@@ -52,8 +52,8 @@
 	        			<div class="rr"></div>
 						
 	        		</div>
-	        		<div class="col-md-12" style="height:460px;">
-						<div class="col-md-12" style="height:400px;margin-top: 30px">
+	        		<div class="col-md-12" style="height:360px;">
+						<div class="col-md-12" style="height:300px;margin-top: 30px">
 							<form class="form-horizontal">
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" >手机号:</label>
@@ -71,7 +71,7 @@
 								    <label for="inputcode3" class="col-sm-2 control-label">激活码:</label>
 									
 									<div class="col-sm-offset-2 col-sm-2" style="margin-left:2px">
-								      <button type="submit" class="btn btn-default">免费获取短信激活码</button>
+								      <button type="submit" class="btn btn-default" id="btn1">免费获取短信激活码</button>
 								    </div>
 
 								    <div class="col-sm-2">
@@ -83,18 +83,38 @@
 								    <div class="col-sm-offset-2 col-sm-10">
 								      <button type="submit" class="btn btn-default" style="background:#FFA00A; color:white;width:200px">立即注册</button>
 								      已有账号,
-								      <a href="login">直接登录>></a>
+								      <a href="admin">直接登录>></a>
 								    </div>
 								  </div>
 								</form>
 						</div>
 						
 					</div>
+
+					<!-- 底部 -->
+					<div class="col-md-12" style="height:50px;margin-top: 30px;text-align: center;">
+						<div class="left_link" style="width:550px;float:left;">
+							<img src="/homes/images/favicon.ico" alt="">
+							<em class="company_name">北京微梦创科网络技术有限公司</em>
+					        <a href="//weibo.com/aj/static/jww.html">京网文[2011]0398-130号</a>
+					        <a href="http://www.miibeian.gov.cn">京ICP备12002058号</a>
+						</div>
+
+
+						<div class="copy" style="width:400px;float:right;">
+							<span>Copyright &copy; 2009-2017 WEIBO</span
+						</div>
+					</div>
 	        	</div>
        		</div>
     	</div>
-       
+      
+     <script>
+     	alert($);
+     	// $('#btn1').cli
+     </script>
     
     </body>
+
 
 </html>

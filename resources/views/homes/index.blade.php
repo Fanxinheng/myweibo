@@ -32,7 +32,7 @@
                         <!--spec start-->
                         <!--顶部导航-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
-                            <div class="gn_header clearfix">
+                            <div class="gn_header clearfix" style="width:1000px">
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="//weibo.com?topnav=1&amp;mod=logo">
                                     <a href="https://weibo.com/?topnav=1&amp;mod=logo" class="box" title=""
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
@@ -43,11 +43,9 @@
                                     </a>
                                 </div>
                                 <div class=" gn_search_v2">
-                                    <span class=" placeholder">
-                                        大家正在搜：驴友山体内打钉26枚被诉
-                                    </span>
+                                    
                                     <input node-type="searchInput" autocomplete="off" value="" class="W_input"
-                                    name="15102240605332" type="text" style="margin-bottom:2px">
+                                    name="15102240605332" type="text" style="height:25px">
                                     <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
                                     suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -68,7 +66,7 @@
                                     <div class="gn_nav">
                                         <ul class="gn_nav_list">
                                             <li>
-                                                <a href="https://weibo.com/" class="home S_txt1" suda-uatrack="key=topnav_tab&amp;value=homepage"
+                                                <a href="/home/admin" class="home S_txt1" suda-uatrack="key=topnav_tab&amp;value=homepage"
                                                 target="_top">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
@@ -89,13 +87,7 @@
                                                     注册
                                                 </a>
                                             </li>
-                                            <li class="W_vline S_line1">
-                                            </li>
-                                            <li>
-                                                <a node-type="loginBtn" href="login" class="S_txt1" target="_top" id="denglu">
-                                                    登录
-                                                </a>
-                                            </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -269,34 +261,23 @@
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
-                                                                    <div class="info_list username" node-type="username_box">
-                                                                        <div class="input_wrap" >
-                                                                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                                                            <input id="loginname" class="W_input" maxlength="128" autocomplete="off"
-                                                                            action-data="text=邮箱/会员帐号/手机号" action-type="text_copy" name="username"
-                                                                            node-type="username" tabindex="1" value="邮箱/会员帐号/手机号" type="text">
+                                                                    <form>
+                                                                        
+                                                                        <div class="form-group">
+                                                                            <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
+                                                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入手机号" style="width:250px;">
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="info_list password" node-type="password_box">
-                                                                        <div class="input_wrap">
-                                                                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-                                                                            <input class="W_input" maxlength="24" autocomplete="off" value="" action-type="text_copy"
-                                                                            name="password" node-type="password" tabindex="2" type="password">
-                                                                            <span class="enter_psw">
-                                                                                请输入密码
-                                                                            </span>
+
+                                                                        <div class="form-group">
+                                                                            <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
+                                                                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;">
                                                                         </div>
-                                                                    </div>
-                                                                   
+                      
+                                                                </div>
+                                                                
                                                                     
                                                                     <div class="info_list auto_login clearfix">
-                                                                        <div class="right W_fr">
-                                                                            <a href="javascript:void(0);" onclick="var loginname=document.getElementById('loginname').value;window.open('https://security.weibo.com/iforgot/loginname?entry=weibo&amp;loginname='+loginname);"
-                                                                            node-type="btn_password_recover" suda-data="key=tblog_weibologin3&amp;value=click_forgetpwd"
-                                                                            class="S_txt2">
-                                                                                忘记密码
-                                                                            </a>
-                                                                        </div>
+                                                                        
                                                                         <label for="login_form_savestate" class="W_fl W_label" title="建议在网吧或公共电脑上取消该选项。"
                                                                         action-data="content=建议在网吧或公共电脑上取消该选项。" action-type="customTip">
                                                                             <input id="login_form_savestate" checked="checked" node-type="savestate"
@@ -306,15 +287,7 @@
                                                                             </span>
                                                                         </label>
                                                                     </div>
-                                                                    <div class="info_list login_btn">
-                                                                        <a href="javascript:void(0)" class="W_btn_a btn_32px" action-type="btn_submit"
-                                                                        node-type="submitBtn" suda-data="key=tblog_weibologin3&amp;value=click_sign"
-                                                                        tabindex="6">
-                                                                            <span node-type="submitStates">
-                                                                                登录
-                                                                            </span>
-                                                                        </a>
-                                                                    </div>
+                                                                    <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;  ">登录</button>
                                                                     <div class="info_list register">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
@@ -337,7 +310,7 @@
                                             </div>
                                         </div>
                                         <div id="pl_unlogin_home_hotpersoncategory">
-                                            <div class="UG_box_l">
+                                            <div class="UG_box_l" style="width:340px;float: right;">
                                                 <h2 class="UG_box_title">
                                                     微博找人
                                                 </h2>
