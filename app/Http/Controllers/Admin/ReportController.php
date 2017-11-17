@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
 
-class AdvertController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,7 @@ class AdvertController extends Controller
      */
     public function index()
     {
-
-        return view('admins/advert/index');
+        return view('admins/report/index');
     }
 
     /**
@@ -28,8 +26,7 @@ class AdvertController extends Controller
      */
     public function create()
     {
-
-        return view('admins/advert/add');
+        //
     }
 
     /**
@@ -40,17 +37,7 @@ class AdvertController extends Controller
      */
     public function store(Request $request)
     {
-        //获取广告添加的参数
-        dd($request->except('_token'));
         //
-        if($request->hasFile('file')){
-            //已时间戳生成文件命
-            $name = rand(1111,9999).time();
-            //获取文件命的后缀
-            $suffix = $request->file('file')->get();
-        }
-
-        // $res = DB::insert('insert into advert(pic,link,user,time,status)values("")');
     }
 
     /**

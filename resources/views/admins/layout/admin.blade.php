@@ -51,7 +51,7 @@
 
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap">
-            	<h3 style="color: white">IT-FANS</h3>
+            	<h3 style="color: white;font-size: 30px">myweibo.com</h3>
 			</div>
         </div>
 
@@ -60,7 +60,8 @@
 
         	<!-- Notifications -->
         	<div id="mws-user-notif" class="mws-dropdown-menu">
-            	<a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
+
+            	<a href="/admins/#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
 
                 <!-- Unread notification count -->
                 <span class="mws-dropdown-notif">35</span>
@@ -70,7 +71,7 @@
                 	<div class="mws-dropdown-content">
                         <ul class="mws-notifications">
                         	<li class="read">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="message">
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
                                     </span>
@@ -80,7 +81,7 @@
                                 </a>
                             </li>
                         	<li class="read">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
                                     </span>
@@ -90,7 +91,7 @@
                                 </a>
                             </li>
                         	<li class="unread">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
                                     </span>
@@ -100,7 +101,7 @@
                                 </a>
                             </li>
                         	<li class="unread">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
                                     </span>
@@ -111,7 +112,7 @@
                             </li>
                         </ul>
                         <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Notifications</a>
+	                        <a href="/admins/#">View All Notifications</a>
                         </div>
                     </div>
                 </div>
@@ -119,7 +120,8 @@
 
             <!-- Messages -->
             <div id="mws-user-message" class="mws-dropdown-menu">
-            	<a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
+
+            	<a href="/admins/#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
 
                 <!-- Unred messages count -->
                 <span class="mws-dropdown-notif">35</span>
@@ -129,7 +131,7 @@
                 	<div class="mws-dropdown-content">
                         <ul class="mws-messages">
                         	<li class="read">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="sender">John Doe</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
@@ -140,7 +142,7 @@
                                 </a>
                             </li>
                         	<li class="read">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="sender">John Doe</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
@@ -151,7 +153,7 @@
                                 </a>
                             </li>
                         	<li class="unread">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="sender">John Doe</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
@@ -162,7 +164,7 @@
                                 </a>
                             </li>
                         	<li class="unread">
-                            	<a href="#">
+                            	<a href="/admins/#">
                                     <span class="sender">John Doe</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet
@@ -174,7 +176,7 @@
                             </li>
                         </ul>
                         <div class="mws-dropdown-viewall">
-	                        <a href="#">View All Messages</a>
+	                        <a href="/admins/#">View All Messages</a>
                         </div>
                     </div>
                 </div>
@@ -194,9 +196,9 @@
                         Hello, John Doe
                     </div>
                     <ul>
-                    	<li><a href="#">Profile</a></li>
-                        <li><a href="#">Change Password</a></li>
-                        <li><a href="index.html">Logout</a></li>
+                    	<li><a href="/admins/#">Profile</a></li>
+                        <li><a href="/admins/#">Change Password</a></li>
+                        <li><a href="/admins/index.html">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -235,36 +237,38 @@
                     <li>
                         <a href="#"><i class="icon-users"></i>用户管理</a>
                         <ul class="closed">
-                            <li><a href="/admins/admins/create">管理员添加</a></li>
-                            <li><a href="/admins/admins">管理员列表</a></li>
-                            <li><a href="/admins/users">用户列表</a></li>
+
+                            <li><a href="/admin/admins/create">管理员添加</a></li>
+                            <li><a href="/admin/admins">管理员列表</a></li>
+                            <li><a href="/admin/index">用户列表</a></li>
+
                         </ul>
                         <a href="#"><i class="icon-twitter-2"></i>热门微博</a>
                         <ul class="closed">
-                            <li><a href="/admins/hot">热门列表</a></li>
+                            <li><a href="/admin/hot">热门列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-bell-2"></i>举报管理</a>
                         <ul class="closed">
-                            <li><a href="/admins/report">举报列表</a></li>
+                            <li><a href="/admin/report">举报列表</a></li>
                         </ul>
-                        <a href="/advert"><i class="icon-filter"></i>广告管理</a>
+                        <a href="#"><i class="icon-filter"></i>广告管理</a>
                         <ul class="closed">
-                            <li><a href="/advert/add">广告添加</a></li>
-                            <li><a href="/advert/entry">广告列表</a></li>
+                            <li><a href="/admin/advert/create">广告添加</a></li>
+                            <li><a href="/admin/advert">广告列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-link"></i>友情链接</a>
                         <ul class="closed">
-                            <li><a href="/admins/link/create">链接添加</a></li>
-                            <li><a href="/admins/link">链接列表</a></li>
+                            <li><a href="/admin/link/create">链接添加</a></li>
+                            <li><a href="/admin/link">链接列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-calendar"></i>系统公告</a>
                         <ul class="closed">
-                            <li><a href="/admins/notice/create">公告添加</a></li>
-                            <li><a href="/admins/notice">公告列表</a></li>
+                            <li><a href="/admin/notice/create">公告添加</a></li>
+                            <li><a href="/admin/notice">公告列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-tools"></i>网站配置</a>
                         <ul class="closed">
-                            <li><a href="/admins/config">配置修改</a></li>
+                            <li><a href="/admin/config">配置修改</a></li>
                         </ul>
 
                     </li>
