@@ -1,11 +1,20 @@
 @extends('admins/layout/admin')
 
-@section('title','管理员添加')
+@section('title','管理员修改')
 
 @section('content')
+
+@if(session('msg'))
+    <div class="mws-form-message success">
+                                
+        {{session('msg')}}
+
+    </div>
+@endif
+
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
-        <span>管理员添加</span>
+        <span>管理员修改</span>
     </div>
     <div class="mws-panel-body no-padding">
         @if (count($errors) > 0)
@@ -18,47 +27,26 @@
         </div>
         @endif
 
-
-        @if(session('msg'))
-        <div class="mws-form-message error">
-                                    
-            {{session('msg')}}
-
-        </div>
-        @endif
-
-
     
-        <form action="/admin/admins/" class="mws-form" method="post" enctype="multipart/form-data">
+        <form action="/admin/admins/{{$res->id}}" class="mws-form" method="post" enctype="multipart/form-data">
             <div class="mws-form-inline">
                 <div class="mws-form-row">
                     <label class="mws-form-label">用户名</label>
                     <div class="mws-form-item">
-                        <input type="text" class="small" name="name" >
+                        <input type="text" class="small" name="name" value="{{$res->name}}">
                     </div>
                 </div>
                 <div class="mws-form-row">
-                    <label class="mws-form-label">密码</label>
+                    <label class="mws-form-label">手机</label>
                     <div class="mws-form-item">
-                        <input type="password" class="small" name="password" >
-                    </div>
-                </div>
-                <div class="mws-form-row">
-                    <label class="mws-form-label">确认密码</label>
-                    <div class="mws-form-item">
-                        <input type="password" class="small" name="repass">
-                    </div>
-                </div>
-                <div class="mws-form-row">
-                    <label class="mws-form-label">手机号</label>
-                    <div class="mws-form-item">
-                        <input type="text" class="small" name="phone" >
+                        <input type="text" class="small" name="phone" value="{{$res->phone}}">
                     </div>
                 </div>
             <div class="mws-button-row">
 
                 {{csrf_field()}}
-                <input type="submit" class="btn" value="添加">
+                {{method_field('PUT')}}
+                <input type="submit" class="btn btn-info" value="修改">
                 
             </div>
         </div>

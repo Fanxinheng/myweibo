@@ -16,21 +16,20 @@
     	<span>网站配置修改</span>
     </div>
     <div class="mws-panel-body no-padding">
-    	<form action="/admin/config/update" class="mws-form" method="post">
+    	<form action="/admin/logo/dologo" class="mws-form" method="post" enctype="multipart/form-data">
     		<div class="mws-form-block">
     			<div class="mws-form-row">
-    				<label class="mws-form-label">网站名称</label>
+    				<label class="mws-form-label">网站原LOGO</label>
     				<div class="mws-form-item">
-    					<input type="text" class="small" name="name" value="{{$config->name}}">
+    					<img src="{{$logo}}" style="width:200px;height:60px;">
     				</div>
     			</div>
     			<div class="mws-form-row">
-    				<label class="mws-form-label">网站版权</label>
-    				<div class="mws-form-item">
-    					<input type="text" class="large" name="bank" value="{{$config->bank}}">
-    				</div>
-    			</div>
-    			
+                        <label class="mws-form-label">上传网站新LOGO</label>
+                        <div class="mws-form-item">
+                            <input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="No file selected..." name="logo">
+                        </div>
+                    </div>
     		</div>
     		<div class="mws-button-row">
                 {{csrf_field()}}

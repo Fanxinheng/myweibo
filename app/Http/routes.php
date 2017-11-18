@@ -62,6 +62,22 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	//后台网站配置路由
 	Route::get('config','ConfigController@edit');
 
+	//后台网站配置修改
+	Route::post('config/update','ConfigController@update');
+
+	//后台网站LOGO配置修改
+	Route::get('logo','ConfigController@logo');
+
+	//后台网站LOGO配置修改功能
+	Route::post('logo/dologo','ConfigController@dologo');
+
+	//后台加载发送系统消息页面路由
+	Route::get('news/{id}','NewsController@add');
+
+	//后台执行发送系统消息功能路由
+	Route::post('send/{id}','NewsController@send');
+	
+
 });
 
 
