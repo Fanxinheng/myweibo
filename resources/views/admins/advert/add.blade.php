@@ -41,21 +41,12 @@
         				</div>
         			</div>
 
-        			<div class="mws-form-row">
-        				<label class="mws-form-label">广告状态</label>
-        				<div class="mws-form-item clearfix">
-        					<ul class="mws-form-list inline">
-        						<li><input type="radio" name="status" value="1" checked> <label>上线</label></li>
-        						<li><input type="radio" name="status" value="0"> <label>下线</label></li>
-        					</ul>
-        				</div>
-        			</div>
         		</div>
         		<div class="mws-button-row">
 
         			{{csrf_field()}}
-        			<input type="submit" class="btn btn-danger" value="添加">
 
+                    <input type="submit" class="btn btn-default" value="添加">
         		</div>
         	</form>
         </div>

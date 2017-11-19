@@ -33,6 +33,9 @@
 <link rel="stylesheet" type="text/css" href="/admins/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/admins/css/themer.css" media="screen">
 
+<!-- 分页样式 -->
+<link rel="stylesheet" stype="text/css" href="/admins/css/paging.css" media="screen"/>
+
 <title>@yield('title')</title>
 
 </head>
