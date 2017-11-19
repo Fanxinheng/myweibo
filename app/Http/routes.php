@@ -16,15 +16,33 @@ Route::get('/', function () {
     
 });
 
+//前台注册
+Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
-//注册前首页
-Route::get('/home/admin','Home\AdminController@index');
+	//注册前首页
+	Route::get('admin','AdminController@index');
 
-//注册页面
-Route::post('/home/register','Home\RegisterController@index');
+	//注册页面
+	Route::get('register','RegisterController@index');
 
-//前台短信验证
-// Route::
+	Route::post('register','RegisterController@verification');
+
+	//前台短信验证
+	Route::post('code','CodeController@send');
+
+	//完善个人信息
+	Route::get('details','DetailsController@index');
+
+});
+
+
+Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],function(){
+
+	//前台登录后首页
+	Route::get('login','LoginController@index');
+
+});
+
 
 
 //==========================后台路由===================================//

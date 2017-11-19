@@ -16,5 +16,11 @@ class RegisterController extends Controller
         return view('homes.register');
     }
 
+    public function verification(Requests $request)
+    {
+    	$res = $request->except('_token');
+    	dd($res);
+    }
+
     
 }

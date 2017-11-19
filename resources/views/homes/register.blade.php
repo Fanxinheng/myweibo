@@ -4,6 +4,7 @@
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
+        <meta name="csrf_token" content="{{ csrf_token() }}"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="微博注册"
@@ -41,7 +42,7 @@
 
     	<div class="container">
     		<div class="row">
-	       		<div class="col-md-12">
+	       		<div class="col-md-12" style="background: url('/homes/images/body_bg.jpg');">
 	        		<div class="W_nologin_logo_big">
 	        			<img src="/homes/images/wb_logo-x2.png" alt="">
 	        		</div>
@@ -54,17 +55,24 @@
 	        		</div>
 	        		<div class="col-md-12" style="height:360px;">
 						<div class="col-md-12" style="height:300px;margin-top: 30px">
-							<form class="form-horizontal">
+							<form class="form-horizontal" method="post" action="/home/details">
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" >手机号:</label>
-								    <div class="col-sm-4">
-								      <input type="phone" class="form-control"  placeholder="请输入手机号">
+								    <div class="col-sm-4" style="width: 450px;height:40px">
+								      <input type="text" class="form-control"  placeholder="请输入手机号" name="phone" id="phone" style="width: 345px;float: left">
+								      <span id="spa" style="float:left;margin-left: 8px;margin-top: 5px">ghj</span>
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label">密码:</label>
 								    <div class="col-sm-4">
-								      <input type="password" class="form-control" id="inputPassword3" placeholder="请设置密码">
+								      <input type="password" class="form-control" placeholder="请设置密码" name="password" id="password">
+								    </div>
+								  </div>
+								  <div class="form-group">
+								    <label for="inputPassword3" class="col-sm-2 control-label">确认密码:</label>
+								    <div class="col-sm-4">
+								      <input type="password" class="form-control" placeholder="再输一遍密码" name="surepass" id="surepass">
 								    </div>
 								  </div>
 								  <div class="form-group">
@@ -75,13 +83,14 @@
 								    </div>
 
 								    <div class="col-sm-2">
-								      <input type="text" class="form-control" id="inputPassword3" name="code" placeholder="输入验证码">
+								      <input type="text" class="form-control"  name="code" placeholder="输入验证码" name="code" id="code">
 								    </div>
 								    
 								  </div>
 								  <div class="form-group" style="margin-top:30px">
 								    <div class="col-sm-offset-2 col-sm-10">
-								      <button type="submit" class="btn btn-default" style="background:#FFA00A; color:white;width:200px">立即注册</button>
+								    	{{csrf_field()}}
+								      <button type="submit" class="btn btn-default" style="background:#FFA00A; color:white;width:200px" >立即注册</button>
 								      已有账号,
 								      <a href="admin">直接登录>></a>
 								    </div>
@@ -110,8 +119,121 @@
     	</div>
       
      <script>
-     	alert($);
-     	// $('#btn1').cli
+     	// alert($);
+     	$('#btn1').click(function(){
+
+     		$.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+		       }
+			});
+
+     		var phone = $('input[name=phone]').val();
+     		// console.log(phone);
+
+     		$.post('/home/code',{phone:phone},function(data){
+
+				// console.log(data);
+				// alert(data);
+			});
+
+			return false;
+     	});
+
+     	var phones = document.getElementById('phone');
+     	var password = document.getElementById('password');
+     	var surepass = document.getElementById('surepass');
+     	var spa = document.getElementById('spa');
+
+		//失去焦点事件
+		phones.onblur = function(){
+
+			//获取手机号
+			var pv = this.value;
+
+			//写正则
+			var reg = /^1[34578]\d{9}$/;
+
+			// console.log(pv);
+			//检测
+			var check = reg.test(pv);
+
+			// console.log(check);
+			if(check){
+
+				this.style.border = 'solid 2px green';
+				spa.innerHTML= '√';
+				spa.style.color='green';
+
+			} else {
+
+				this.style.border = 'solid 2px red';
+
+			}
+		};
+
+		password.onblur = function(){
+
+			//获取密码
+			 pass = this.value;
+
+			//写正则
+			var reg = /^\S{6,16}$/;
+
+			// console.log(pv);
+			//检测
+			var check = reg.test(pass);
+
+			// console.log(check);
+			if(check){
+
+				this.style.border = 'solid 2px green';
+				
+			} else {
+
+				this.style.border = 'solid 2px red';
+
+			}
+		};
+
+
+		surepass.onblur = function(){
+
+			//获取密码
+			var surepass = this.value;
+
+			
+			if(surepass==pass){
+
+				this.style.border = 'solid 2px green';
+				
+			} else {
+
+				this.style.border = 'solid 2px red';
+
+			}
+		}
+     	
+     	
+     	$('#btn2').click(function(){
+
+     		$.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+		       }
+			});
+
+     		var phone = $('input[name=phone]').val();
+     		var password = $('input[name=password]').val();
+     		var surepass = $('input[name=surepass]').val();
+     		var code = $('input[name=code]').val();
+
+     		$.post('/home/register',{phone:phone,password:password,surepass:surepass,code:code},function(data){
+     			// console.log(data);
+     		})
+     	})
+
+
      </script>
     
     </body>

@@ -6,8 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
-        <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！"
-        name="description">
+        <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
@@ -32,9 +31,10 @@
                         <!--spec start-->
                         <!--顶部导航-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
-                            <div class="gn_header clearfix" style="width:1000px">
-                                <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="//weibo.com?topnav=1&amp;mod=logo">
-                                    <a href="https://weibo.com/?topnav=1&amp;mod=logo" class="box" title=""
+                            <div class="gn_header clearfix" style="width:1200px">
+                                <!-- logo -->
+                                <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
+                                    <a href="/home/admin" class="box" title=""
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
@@ -44,22 +44,21 @@
                                 </div>
                                 <div class=" gn_search_v2">
                                     
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input"
-                                    name="15102240605332" type="text" style="height:25px">
+                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input" name="15102240605332" type="text" style="height:25px" placeholder="搜索你想要的">
                                     <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
                                     suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 
                                     </a>
                                     <!--搜索热词下拉-->
-                                    <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
+                                   <!--  <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
                                         <div class="gn_topmenulist">
                                             <div node-type="basic">
                                             </div>
                                             <div node-type="plus">
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!--/搜索热词下拉-->
                                 </div>
                                 <div class="gn_position">
@@ -148,12 +147,7 @@
                                             <!--榜单栏位置-->
                                          
                                       
-                                            <div class="UG_tips" action-type="unread_feed_tip" style="display: none;">
-                                                您有未读内容，点击查看
-                                                <em class="W_ficon ficon_close S_ficon">
-                                                    X
-                                                </em>
-                                            </div>
+                                           
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
@@ -261,7 +255,7 @@
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
-                                                                    <form>
+                                                                    <form action="/home/login" method="get">
                                                                         
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
@@ -270,9 +264,10 @@
 
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;">
+                                                                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-                      
+
+                                                                        
                                                                 </div>
                                                                 
                                                                     
@@ -287,7 +282,8 @@
                                                                             </span>
                                                                         </label>
                                                                     </div>
-                                                                    <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;  ">登录</button>
+                                                                  
+                                                                    <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
                                                                     <div class="info_list register">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
