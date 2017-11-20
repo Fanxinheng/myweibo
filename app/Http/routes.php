@@ -51,20 +51,29 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],function(){
 
 	//前台登录后首页
-	Route::post('login','LoginController@index');
+	Route::get('login','LoginController@index');
 
-	Route::post('login/phone','LoginController@phone');
+	//检测手机号是否已注册
+	Route::get('pho','LoginController@pho');
 
+	//检测密码是否与数据库一致
+	Route::get('pass','LoginController@pass');
 
-	// Route::get('ph','LoginController@ph');
+	//检测昵称是否存在,存在跳到首页,不存在跳到个人信息页
+	Route::post('nick','LoginController@nick');
 
 
 	//完善个人信息
-	Route::post('details','DetailsController@index');
+	Route::get('details','DetailsController@index');
 
 	//检验昵称是否存在
 	Route::get('details/uname','DetailsController@uname');
 
+	//检验邮箱是否存在
+	Route::get('details/email','DetailsController@email');
+
+	//把个人信息存入到数据库并跳转到首页
+	Route::post('details/deposit','DetailsController@deposit');
 
 });
 

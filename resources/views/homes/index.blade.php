@@ -258,31 +258,28 @@
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
-                                                                    <form action="/home/login" method="post">
+                                                                    <form action="/home/nick" method="post">
                                                                         
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="text" class="form-control" id="phone" placeholder="请输入手机号" style="width:250px;">
+                                                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号" style="width:250px; ">
                                                                         </div>
-                                                                       <!--  <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"></div>
- -->
-                                                                        <style>
-                                                                            #pha{color:red;font-size: 15px;margin-bottom:10px;margin-left:12px}
-                                                                        </style>
-                                                                        <div id="pha"></div>
-                                                                        
+                                                                        <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"></div>
+
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-                                                                        <style>
+                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"> 
+                                                                        </div>
+                                                                        <!-- <style>
                                                                             #pas{color:red;font-size: 15px;margin-bottom:10px;margin-left:12px}
                                                                         </style>  
 
                                                                         <div id="pas">
                                                                             
                                                                         </div>
-
+ -->
                                                                         
                                                                 </div>
                                                                 
@@ -429,69 +426,70 @@
         </div>
     
     <script type="text/javascript">
-    //      var ch2;
+         var ch2;
+         var ch3;
 
-    //     $('#phone').blur(function(){
-    // /*var phs = document.getElementById('phone');
-    // var e = document.getElementById('e');
-        
-    //     var req = /^1[345678]\d{9}$/;
-    //     var res = req.exec(ph);*/
-    // var ph  = $(this).val();
-    
-    // ch2 = checkTel($('#phone'),$('#e1'));
-    // if(ch2!=100){
-    //   $('#phone').css('border','solid 2px red');
-    //   $('#e1').css('display','block');
-    //   return;
-    // }else{
-    //   $('#e1').css('display','none');
-    //   ch2 = 100;
-    // }
-    // $.get("ph",{ph:ph},function(data){
-    //   if(data.length>0){
-    //     $('#phone').css('border','solid 2px red');
-    //     $('#e1').css('display','none');
-    //     ch2 = 100;
-    //     return;
-    //   }else{
-    //     $('#phone').css('border','solid 1px green');
-    //      $("#e1").html("该手机号还未注册");
-    //     $('#e1').css('display','block');
-    //     ch2 = 0;
-    //   }
-    // },'json')
-    //     /*if(res){
-    //         $(this).css('border','solid 2px green');
-    //     }else{
-    //         $(this).css('border','solid 2px red');
-    //     }*/
-    // })
+        //手机号失去焦点事件
+        $('#phone').blur(function(){
+           
+            var pho  = $(this).val();
+            
+            ch2 = checkTel($('#phone'),$('#e1'));
+            if(ch2!=100){
+              $('#phone').css('border','solid 2px red');
+              $('#e1').css('display','block');
+              return;
+            }else{
+              $('#e1').css('display','none');
+              ch2 = 100;
+            }
+            $.get("pho",{pho:pho},function(data){
+              if(data.length>0){
+                $('#phone').css('border','solid 2px green');
+                $('#e1').css('display','none');
+                ch2 = 100;
+                return;
+              }else{
+                $('#phone').css('border','solid 1px red');
+                 $("#e1").html("该手机号还未注册,请先去注册");
+                $('#e1').css('display','block');
+                ch2 = 0;
+              }
+            },'json')
+                
+            })
 
             
-    var phone = document.getElementById('phone');
-    var pha = document.getElementById('pha');
+            //密码失去焦点事件
+            $('input[name="password"]').blur(function(){
+            
+                var pas = $(this).val();
+                var pho = $('#phone').val();
 
-    phone.onfocus = function(){
-
-        pha.innerHTML= '哈哈哈哈';
-     }
-    phone.onblur = function(){
-
-        var phone = this.value;
-
-        $.post('/home/login/phone',{phone:phone},function(data){
-
-            if(data==0){
-                        pha.innerHTML= '手机号还未注册';
-                        pha.style.color='red';
-                    }else{
-
-                    }
-        })
-
-    }
-               
+                ch3 = checkPassword($('#password'),$('#e2'),6);
+                if(ch3!=100){
+                  $('#password').css('border','solid 2px red');
+                  $('#e2').css('display','block');
+                }else{
+                  $('#password').css('border','solid 1px green');
+                  $('#e2').css('display','none');
+                  ch3 = 100;
+                }
+                $.get("pass",{pas:pas,pho:pho},function(data){
+                  if(data==1){
+                    $('#phone').css('border','solid 2px green');
+                    $('#e2').css('display','none');
+                    ch2 = 100;
+                    return;
+                  }else{
+                    $('#password').css('border','solid 1px red');
+                     $("#e2").html("密码不正确");
+                    $('#e2').css('display','block');
+                    ch2 = 0;
+                  }
+                },'json')
+            })
+            
     </script>
     </body>
         }

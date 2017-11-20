@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/homes/js/validate.js"></script>
+
         <title>
             个人信息
         </title>
@@ -54,52 +57,53 @@
 	        		</div>
 	        		<div class="col-md-12" style="height:360px;">
 						<div class="col-md-12" style="height:300px;margin-top: 30px">
-							<form class="form-horizontal" method="get" action="/home/admin">
+							<form class="form-horizontal" method="post" action="/home/details/deposit" enctype="multipart/form-data">
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>昵称:</label>
-								    <div class="col-sm-4" style="width: 600px;height:40px">
-								      <input type="text" class="form-control"  placeholder="请输入昵称" name="nikeName" id="uname" style="width: 345px;float: left">
+								    <div class="col-sm-4" style="width: 700px;height:40px">
+								      <input type="text" class="form-control"  placeholder="请输入昵称" name="nickName" id="uname" style="width: 345px;float: left">
 								       <span id="spa" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
 								    </div>
 								  </div>
 								  <div class="form-group" >
 								  	<label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>性别:</label>
 								  	<label class="radio-inline" style="margin-left:15px">
-									  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="m"> 男
+									  <input type="radio" name="sex" id="inlineRadio1" value="m"> 男
 									</label>
 									<label class="radio-inline">
-									  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="w"> 女
+									  <input type="radio" name="sex" id="inlineRadio2" value="w"> 女
 									</label>
 								  </div>
 								  <div class="form-group">
-								    <label for="inputPassword3" class="col-sm-2 control-label">年龄:</label>
+								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>年龄:</label>
 								    <div class="col-sm-4" style="width: 600px;height:40px">
-								      <input type="text" class="form-control" id="age" style="width: 345px;float: left">
-								      <span id="spa1" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
+								      <input type="text" class="form-control" id="age" maxlength="3" style="width: 345px;float: left" name="age">
 								    </div>
 								  </div>
 								  <div class="form-group">
-								    <label for="inputcode3" class="col-sm-2 control-label" style="margin-right:15px">工作:</label> 
+								    <label for="inputcode3" class="col-sm-2 control-label" style="margin-right:15px"><span style="color:red;margin-right: 5px;">*</span>工作:</label> 
 									
-									<select class="form-control" style="width:340px;">
-									  <option>医生</option>
-									  <option>IT程序员</option>
-									  <option>销售</option>
-									  <option>教师</option>
-									  <option>餐饮</option>
-									  <option>其他</option>
+									<select class="form-control" style="width:340px;font-size: 18px" name="work">
+									  <option value="doctor">医生</option>
+									  <option value="it">IT程序员</option>
+									  <option value="market">销售</option>
+									  <option value="teacher">教师</option>
+									  <option value="repast">餐饮</option>
+									  <option value="other">其他</option>
 									</select>
 								  </div>
 								  <div class="form-group">
-								    <label for="inputPassword3" class="col-sm-2 control-label">邮箱:</label>
+								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>邮箱:</label>
 								    <div class="col-sm-4" style="width: 600px;height:40px">
-								      <input type="email" class="form-control" id="email"  placeholder="请输入邮箱" style="width: 345px;float: left">
-								      <span id="spa2" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
+								      <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" style="width: 345px;float: left">
+								     <div id="spa1" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px">
+								     </div>
+
 								    </div>
 								  </div>
 
 								  <div class="form-group">
-								    <label for="inputPassword3" class="col-sm-2 control-label">头像:</label>
+								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>头像:</label>
 								    <div class="col-sm-4">
 								      <input type="file" style="height: 45px" class="form-control" id="inputPassword3" name="photo" value="" >
 								    </div>
@@ -108,7 +112,7 @@
 
 								  <div class="form-group" style="margin-top:30px">
 								    <div class="col-sm-offset-2 col-sm-10">
-								    	
+								    	{{csrf_field()}}
 								      <button type="submit" class="btn btn-default" style="background:#FFA00A; color:white;width:200px">提交</button>
 								      
 								    </div>
@@ -142,14 +146,14 @@
      	//表单验证
      	var uname = document.getElementById('uname');
      	var spa = document.getElementById('spa');
-     	var age = document.getElementById('age');
+     	var email = document.getElementById('email');
      	var spa1 = document.getElementById('spa1');
 
      	//昵称获取焦点事件
-     	uname.onfoucs = function(){
+     	uname.onfocus = function(){
 
      		//添加提示信息
-     		spa.innerHTML = '请输入6-12位用户名(数字,字母,下划线)';
+     		spa.innerHTML = '请输入4-8位用户名(数字,字母,下划线)';
      	}
 
      	//昵称失去焦点事件
@@ -157,9 +161,10 @@
 
      		//获取昵称
      		var uname = this.value;
+     		// console.log(uname);
 
      		//写正则
-     		var reg  = /^\w{6,12}$/;
+     		var reg  = /^\w{4,8}$/;
 
      		//检测
      		var check = reg.test(uname);
@@ -169,7 +174,7 @@
 
      			//ajax传过去连接数据库检验昵称
      			$.get('/home/details/uname',{uname:uname},function(data){
-     				if(data==1){
+     				if(data==0){
      					spa.innerHTML = '该昵称已存在,请换一个昵称!';
      					spa.style.color = 'red';
      				}else{
@@ -179,7 +184,7 @@
      			})
      		}else{
      					spa.innerHTML = '昵称格式不正确!';
-     					spq.style.color = 'red';
+     					spa.style.color = 'red';
      				}
      				if(uname == null){
      					spa.innerHTML = '昵称不能为空!';
@@ -188,43 +193,41 @@
 
      	};
 
+     	var ch2;
 
-     	//年龄获取焦点事件
-     	age.onfoucs = function(){
-
-     		//添加提示信息
-     		spa1.innerHTML = '请输入6-12位用户名(数字,字母,下划线)';
+     	//邮箱获取焦点事件
+     	email.onfocus = function(){
+     		spa1.innerHTML = '请输入邮箱';
      	}
-
-     	//昵称失去焦点事件
-     	age.onblur = function(){
-
-     		//获取昵称
-     		var age = this.value;
-
-     		//写正则
-     		var reg  = /^\d$/;
-
-     		//检测
-     		var check = reg.test(age);
-
-     		//判断
-     		if(check){
-
-     					spa.innerHTML = '√';
-     					spa.style.color='green';
-     				}
-     			
-     		}else{
-     					spa.innerHTML = '昵称格式不正确!';
-     					spq.style.color = 'red';
-     				}
-     				if(uname == null){
-     					spa.innerHTML = '昵称不能为空!';
-     					spa.style.color='red';
-     				}
-
-     	};
+     	//邮箱失去焦点事件
+     	$('#email').blur(function(){
+           
+            var email  = $(this).val();
+            
+            ch2 = checkEmail($('#email'),$('#spa1'));
+            if(ch2!=100){
+              $('#spa1').css('display','block');
+              $('#spa1').css('color','red');
+              return;
+            }else{
+              $('#spa1').css('display','none');
+              ch2 = 100;
+            }
+            $.get("/home/details/email",{email:email},function(data){
+              if(data==1){
+                $('#spa1').css('display','none');
+                $('#spa1').css('color','green');
+                ch2 = 100;
+                return;
+              }else{
+              	$("#spa1").html("该邮箱已被注册!");
+                $('#spa1').css('display','block');
+                $('#spa1').css('color','red');
+                ch2 = 0;
+              }
+            },'json')
+                
+            })
      </script>
     
     </body>
