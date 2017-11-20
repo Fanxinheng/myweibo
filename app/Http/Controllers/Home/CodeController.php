@@ -34,6 +34,7 @@ class CodeController extends Controller
 
 		print_r($client->execute($sendSms));
 
-		session(['code'=>$code]);
+		session(["code"=>$code]);
+
     }
 }

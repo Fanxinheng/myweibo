@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Model\user;
 
 class RegisterController extends Controller
 {
@@ -16,10 +17,24 @@ class RegisterController extends Controller
         return view('homes.register');
     }
 
-    public function verification(Requests $request)
+    public function verification(Request $request)
+    {	
+        
+    	$res = $request->input('phone');
+    	// dd($res);die;
+        $phone = user::where('phone','=',$res)->value('phone');
+        if($phone){
+            echo "1";
+        }else{
+            echo "0";
+        }
+        // echo $phone;
+    }
+
+    public function code(Request $request)
     {
-    	$res = $request->except('_token');
-    	dd($res);
+    	$res = session('code');
+    	echo $res;
     }
 
     

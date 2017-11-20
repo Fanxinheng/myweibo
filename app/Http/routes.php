@@ -22,24 +22,49 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	//注册前首页
 	Route::get('admin','AdminController@index');
 
+	//注册跳登录页面
+	Route::post('admin','AdminController@alog');
+
+	//验证手机号是否存在
+	Route::post('admin/phones','AdminController@phone');
+
+
+
 	//注册页面
 	Route::get('register','RegisterController@index');
 
-	Route::post('register','RegisterController@verification');
+	//验证手机号是否存在
+	Route::get('register/phone','RegisterController@verification');
+
+	//检验验证码是否正确
+	Route::get('register/code','RegisterController@code');
+
+
 
 	//前台短信验证
 	Route::post('code','CodeController@send');
 
-	//完善个人信息
-	Route::get('details','DetailsController@index');
-
+	
 });
 
 
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],function(){
 
 	//前台登录后首页
-	Route::get('login','LoginController@index');
+	Route::post('login','LoginController@index');
+
+	Route::post('login/phone','LoginController@phone');
+
+
+	// Route::get('ph','LoginController@ph');
+
+
+	//完善个人信息
+	Route::post('details','DetailsController@index');
+
+	//检验昵称是否存在
+	Route::get('details/uname','DetailsController@uname');
+
 
 });
 

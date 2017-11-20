@@ -56,13 +56,14 @@
 						<div class="col-md-12" style="height:300px;margin-top: 30px">
 							<form class="form-horizontal" method="get" action="/home/admin">
 								  <div class="form-group" >
-								    <label for="inputphone3" class="col-sm-2 control-label" >昵称:</label>
-								    <div class="col-sm-4">
-								      <input type="text" class="form-control"  placeholder="请输入昵称" name="phone">
+								    <label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>昵称:</label>
+								    <div class="col-sm-4" style="width: 600px;height:40px">
+								      <input type="text" class="form-control"  placeholder="请输入昵称" name="nikeName" id="uname" style="width: 345px;float: left">
+								       <span id="spa" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
 								    </div>
 								  </div>
 								  <div class="form-group" >
-								  	<label for="inputphone3" class="col-sm-2 control-label" >性别:</label>
+								  	<label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>性别:</label>
 								  	<label class="radio-inline" style="margin-left:15px">
 									  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="m"> 男
 									</label>
@@ -72,8 +73,9 @@
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label">年龄:</label>
-								    <div class="col-sm-4">
-								      <input type="text" class="form-control" id="inputPassword3" >
+								    <div class="col-sm-4" style="width: 600px;height:40px">
+								      <input type="text" class="form-control" id="age" style="width: 345px;float: left">
+								      <span id="spa1" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
 								    </div>
 								  </div>
 								  <div class="form-group">
@@ -90,15 +92,16 @@
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label">邮箱:</label>
-								    <div class="col-sm-4">
-								      <input type="email" class="form-control" id="inputPassword3"  placeholder="请输入邮箱">
+								    <div class="col-sm-4" style="width: 600px;height:40px">
+								      <input type="email" class="form-control" id="email"  placeholder="请输入邮箱" style="width: 345px;float: left">
+								      <span id="spa2" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
 								    </div>
 								  </div>
 
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label">头像:</label>
 								    <div class="col-sm-4">
-								      <input type="file" style="height: 45px" class="form-control" id="inputPassword3" name="phone" value="">
+								      <input type="file" style="height: 45px" class="form-control" id="inputPassword3" name="photo" value="" >
 								    </div>
 								  </div>
 								
@@ -135,26 +138,93 @@
     	</div>
       
      <script>
-     	// alert($);
-     	$('#btn1').click(function(){
+  
+     	//表单验证
+     	var uname = document.getElementById('uname');
+     	var spa = document.getElementById('spa');
+     	var age = document.getElementById('age');
+     	var spa1 = document.getElementById('spa1');
 
-     		$.ajaxSetup({
-		        headers: {
-		            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-		       }
-			});
+     	//昵称获取焦点事件
+     	uname.onfoucs = function(){
 
-     		var phone = $('input[name=phone]').val();
-     		// console.log(phone);
+     		//添加提示信息
+     		spa.innerHTML = '请输入6-12位用户名(数字,字母,下划线)';
+     	}
 
-     		$.post('/home/code',{phone:phone},function(data){
+     	//昵称失去焦点事件
+     	uname.onblur = function(){
 
-				// console.log(data);
-				// alert(data);
-			});
+     		//获取昵称
+     		var uname = this.value;
 
-			return false;
-     	})
+     		//写正则
+     		var reg  = /^\w{6,12}$/;
+
+     		//检测
+     		var check = reg.test(uname);
+
+     		//判断
+     		if(check){
+
+     			//ajax传过去连接数据库检验昵称
+     			$.get('/home/details/uname',{uname:uname},function(data){
+     				if(data==1){
+     					spa.innerHTML = '该昵称已存在,请换一个昵称!';
+     					spa.style.color = 'red';
+     				}else{
+     					spa.innerHTML = '√';
+     					spa.style.color='green';
+     				}
+     			})
+     		}else{
+     					spa.innerHTML = '昵称格式不正确!';
+     					spq.style.color = 'red';
+     				}
+     				if(uname == null){
+     					spa.innerHTML = '昵称不能为空!';
+     					spa.style.color='red';
+     				}
+
+     	};
+
+
+     	//年龄获取焦点事件
+     	age.onfoucs = function(){
+
+     		//添加提示信息
+     		spa1.innerHTML = '请输入6-12位用户名(数字,字母,下划线)';
+     	}
+
+     	//昵称失去焦点事件
+     	age.onblur = function(){
+
+     		//获取昵称
+     		var age = this.value;
+
+     		//写正则
+     		var reg  = /^\d$/;
+
+     		//检测
+     		var check = reg.test(age);
+
+     		//判断
+     		if(check){
+
+     					spa.innerHTML = '√';
+     					spa.style.color='green';
+     				}
+     			
+     		}else{
+     					spa.innerHTML = '昵称格式不正确!';
+     					spq.style.color = 'red';
+     				}
+     				if(uname == null){
+     					spa.innerHTML = '昵称不能为空!';
+     					spa.style.color='red';
+     				}
+
+     	};
      </script>
     
     </body>

@@ -8,12 +8,13 @@
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
-        <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml"
-        rel="search">
+        <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+    
+        <!-- <link rel="stylesheet" href="/homes/css/login.css"> -->
 
         <title>
             我的首页 微博-随时随地发现新鲜事

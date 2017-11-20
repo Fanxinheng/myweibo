@@ -4,6 +4,7 @@
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
+        <meta name="csrf_token" content="{{ csrf_token() }}"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
@@ -12,6 +13,8 @@
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="/homes/js/validate.js"></script>
         <title>
             微博-随时随地发现新鲜事
         </title>
@@ -255,16 +258,29 @@
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
-                                                                    <form action="/home/login" method="get">
+                                                                    <form action="/home/login" method="post">
                                                                         
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入手机号" style="width:250px;">
+                                                                            <input type="text" class="form-control" id="phone" placeholder="请输入手机号" style="width:250px;">
                                                                         </div>
-
+                                                                       <!--  <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"></div>
+ -->
+                                                                        <style>
+                                                                            #pha{color:red;font-size: 15px;margin-bottom:10px;margin-left:12px}
+                                                                        </style>
+                                                                        <div id="pha"></div>
+                                                                        
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
+                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
+                                                                        </div>
+                                                                        <style>
+                                                                            #pas{color:red;font-size: 15px;margin-bottom:10px;margin-left:12px}
+                                                                        </style>  
+
+                                                                        <div id="pas">
+                                                                            
                                                                         </div>
 
                                                                         
@@ -282,7 +298,7 @@
                                                                             </span>
                                                                         </label>
                                                                     </div>
-                                                                  
+                                                                    {{csrf_field()}}
                                                                     <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
                                                                     <div class="info_list register">
                                                                         <span class="S_txt2">
@@ -411,7 +427,73 @@
         </div>
             </div>
         </div>
-      
+    
+    <script type="text/javascript">
+    //      var ch2;
+
+    //     $('#phone').blur(function(){
+    // /*var phs = document.getElementById('phone');
+    // var e = document.getElementById('e');
+        
+    //     var req = /^1[345678]\d{9}$/;
+    //     var res = req.exec(ph);*/
+    // var ph  = $(this).val();
+    
+    // ch2 = checkTel($('#phone'),$('#e1'));
+    // if(ch2!=100){
+    //   $('#phone').css('border','solid 2px red');
+    //   $('#e1').css('display','block');
+    //   return;
+    // }else{
+    //   $('#e1').css('display','none');
+    //   ch2 = 100;
+    // }
+    // $.get("ph",{ph:ph},function(data){
+    //   if(data.length>0){
+    //     $('#phone').css('border','solid 2px red');
+    //     $('#e1').css('display','none');
+    //     ch2 = 100;
+    //     return;
+    //   }else{
+    //     $('#phone').css('border','solid 1px green');
+    //      $("#e1").html("该手机号还未注册");
+    //     $('#e1').css('display','block');
+    //     ch2 = 0;
+    //   }
+    // },'json')
+    //     /*if(res){
+    //         $(this).css('border','solid 2px green');
+    //     }else{
+    //         $(this).css('border','solid 2px red');
+    //     }*/
+    // })
+
+            
+    var phone = document.getElementById('phone');
+    var pha = document.getElementById('pha');
+
+    phone.onfocus = function(){
+
+        pha.innerHTML= '哈哈哈哈';
+     }
+    phone.onblur = function(){
+
+        var phone = this.value;
+
+        $.post('/home/login/phone',{phone:phone},function(data){
+
+            if(data==0){
+                        pha.innerHTML= '手机号还未注册';
+                        pha.style.color='red';
+                    }else{
+
+                    }
+        })
+
+    }
+               
+    </script>
     </body>
+        }
 
 </html>
