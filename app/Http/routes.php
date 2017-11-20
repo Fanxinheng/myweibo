@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-    
+
 });
 
 
@@ -119,6 +119,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	//后台举报管理资源路由
 	Route::resource('/report','ReportController');
 
+	//后台标签管理资源路由
+	Route::resource('label','LabelController');
+
 	//后台广告管理资源路由
 	Route::resource('/advert','AdvertController');
 
@@ -146,6 +149,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	//后台执行发送系统消息功能路由
 	Route::post('/send/{id}','NewsController@send');
 	
+
+
 
 });
 
