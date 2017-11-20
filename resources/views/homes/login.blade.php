@@ -30,7 +30,7 @@
                             <div class="gn_header clearfix" style="width:1000px">
                                 <!-- logo -->
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
-                                    <a href="/home/admin" class="box" title=""
+                                    <a href="/home/login" class="box" title=""
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
@@ -63,7 +63,7 @@
                                 <div class="gn_nav">
                                         <ul class="gn_nav_list">
                                             <li>
-                                                <a href="/home/admin" class="home S_txt1" suda-uatrack="key=topnav_tab&amp;value=homepage"
+                                                <a href="/home/login" class="home S_txt1" suda-uatrack="key=topnav_tab&amp;value=homepage"
                                                 target="_top">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
@@ -74,13 +74,12 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a dot="pos55b9e0848171d" bpfilter="page_frame" href="profile.html" nm="name"
-                                                class="gn_name" suda-uatrack="key=topnav_tab&amp;value=profile" indepth="true">
+                                                <a href="#" class="gn_name" >
                                                     <em class="W_ficon ficon_user S_ficon">
                                                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                                     </em>
                                                     <em class="S_txt1">
-                                                        坏张筱
+                                                        {{$user->nickName}}
                                                     </em>
                                                 </a>
                                             </li>
@@ -97,7 +96,7 @@
                     </div>
                     <!--/简易顶部导航拼页面用-->
                 </div>
-                <div class="WB_main clearfix" id="plc_frame" style="background: url('/homes/images/body_bg.jpg');">
+                <div class="WB_main clearfix" id="plc_frame">
                     <div id="v6_pl_guide_bubbletip">
                     </div>
                     <div id="v6_pl_content_hometip">
@@ -108,7 +107,7 @@
                                 <div class="WB_left_nav WB_left_nav_Atest" node-type="groupList" fixed-item="true">
                                     <div class="lev_Box lev_Box_noborder">
                                         <h3 class="lev">
-                                            <a href="home_002.html" class="S_txt1" node-type="item" bpfilter="main"
+                                            <a href="/home/login" class="S_txt1" node-type="item" bpfilter="main"
                                             nm="status" suda-uatrack="key=V6update_leftnavigate&amp;value=homepage"
                                             indepth="true">
                                                 <span class="levtxt">
@@ -119,108 +118,37 @@
                                     </div>
                                     <div class="lev_Box lev_Box_noborder">
                                         <h3 class="lev">
-                                            <a dot="pos55b9e09c8ae74" href="fav.html" class="S_txt1" node-type="item"
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/hot" class="S_txt1" node-type="item"
                                             bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
                                             indepth="true">
                                                 <span class="levtxt">
-                                                    我的收藏
+                                                    热门微博
                                                 </span>
                                             </a>
                                         </h3>
                                     </div>
+
+                                    @foreach($label as $v)
                                     <div class="lev_Box lev_Box_noborder">
                                         <h3 class="lev">
-                                            <a dot="pos55b9e0b0ca122" href="outbox.html" class="S_txt1" node-type="item"
+                                            <a dot="pos55b9e0b0ca122" href="/home/index/label/{{$v->id}}" class="S_txt1" node-type="item"
                                             bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
                                             indepth="true">
                                                 <span class="levtxt">
-                                                    我的赞
+                                                    {{$v->lcontent}}
                                                 </span>
                                                 <i class="W_new" like-dot="likeDot" style="display: none;">
                                                 </i>
                                             </a>
                                         </h3>
                                     </div>
-                                    <div class="lev_line lev_line_v2">
-                                        <fieldset>
-                                        </fieldset>
-                                    </div>
-                                    <div class="lev_Box lev_Box_noborder">
-                                        <div class="lev">
-                                            <a page_id="102803_ctg1_1760_-_ctg1_1760" dot="" href="default_006.html"
-                                            class="S_txt1" node-type="item" suda-uatrack="key=V6update_leftnavigate&amp;value=left_hotweibo"
-                                            indepth="true">
-                                                <span class="ico_block">
-                                                    <em class="W_ficon ficon_hot S_ficon">
-                                                        <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
-                                                    </em>
-                                                </span>
-
-                                                <span class="levtxt">
-                                                    热门微博
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="lev">
-                                            <a page_id="" dot="" href="default.html" class="S_txt1" node-type="item"
-                                            suda-uatrack="key=V6update_leftnavigate&amp;value=left_video" indepth="true">
-                                                <span class="ico_block">
-                                                    <em class="W_ficon ficon_video_v3 S_ficon">
-                                                        <span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span>
-                                                    </em>
-                                                </span>
-                                                <span class="levtxt">
-                                                    热门视频
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <!-- <div class="lev">
-                                        <a dot="" href="/feed/olympics?leftnav=1" class="S_txt1" node-type="item" bpfilter="main" suda-uatrack="key=V6update_leftnavigate&value=left_news""><span class="ico_block"><em class="W_ficon ficon_olympic S_ficon">&#xe60e;</em></span><span class="levtxt">里约奥运会</span></a>        
-                                        </div>
-                                        -->
-                                    </div>
-                                    
-                                    <div node-type="leftnav_scroll">
-                                        <div class="lev_Box">
-                                            <div class="lev">
-                                                <a href="friends.html" title="好友圈" class="S_txt1" node-type="item" bpfilter="main"
-                                                isfriends="1" nm="moments_to_me" suda-uatrack="key=V6update_leftnavigate&amp;value=friends"
-                                                indepth="true">
-                                                    <span class="ico_block">
-                                                        <em node-type="left_item" class="W_ficon ficon_friends S_ficon">
-                                                            <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
-                                                        </em>
-                                                    </span>
-                                                    <span class="levtxt">
-                                                        好友圈
-                                                    </span>
-                                                </a>
-                                            </div>
-                                            <div node-type="system_list" specialgid="3861231306107773">
-                                                <div class="lev" gid="3861231306107773" node-type="group" action-data="id=3861231306107773">
-                                                    <a href="mygroups.html" class="S_txt1" title="" node-type="item" bpfilter="main"
-                                                    gid="3861231306107773" suda-uatrack="key=V6update_leftnavigate&amp;value=special"
-                                                    indepth="true">
-                                                        <span class="ico_block">
-                                                            <em node-type="left_item" class="W_ficon ficon_p_interest S_ficon">
-                                                                <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
-                                                            </em>
-                                                        </span>
-                                                        <span class="levtxt">
-                                                            特别关注
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                         <div id="plc_main" style="width:490px">
                             <div class="WB_main_c">
-                                <div id="v6_pl_content_publishertop">
+                                <div id="v6_pl_content_publishertop" >
                                     <div class="send_weibo S_bg2 clearfix send_weibo_long" node-type="wrap">
                                         <div class="title_area clearfix">
                                             <div class="title" node-type="publishTitle">
@@ -238,16 +166,15 @@
                                             </div>
                                             
                                         </div>
-                                        
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        
+
+                                            <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容"></textarea>
                                         
                                             
-                                            <div class="kind" style="height: 35px;margin-top: 3px">
+                                            <div class="kind" style="height: 35px;margin-top: 3px;">
                                                 <a class="S_txt1" href="javascript:void(0);" action-type="face" action-data="type=500&amp;action=1&amp;log=face&amp;cate=1"
                                                 title="表情" node-type="smileyBtn" suda-uatrack="key=tblog_home_edit&amp;value=phiz_button">
                                                     <em class="W_ficon ficon_face">
-                                                        <img src="/homes/images/bq.png" alt="" style="width: 15px;height: 15px;">
+                                                        <img src="/homes/images/bq.png" alt="" style="width: 15px;height: 15px;margin-bottom: 5px">
                                                     </em>
                                                     表情
                                                 </a>
@@ -263,12 +190,21 @@
                                                         target="upload_target" enctype="multipart/form-data" method="POST" style="overflow: hidden; opacity: 0; height: 24px; width: 49px;"
                                                         action="https://weibo.com/u/5647038766/home?wvr=5&amp;sudaref=www.baidu.com&amp;display=0&amp;retcode=6102">
                                                             <input accept="image/jpg,image/jpeg,image/png,image/gif" hidefoucs="true"
-                                                            node-type="fileBtn" name="pic1" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
+                                                            node-type="fileBtn" name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
                                                             id="swf_upbtn_151022433406913" multiple="multiple" type="file">
                                                         </form>
-                                                    </div>
-                                                    
+                                                    </div>  
                                                 </a>
+                                                
+                                                <span>
+                                                    @foreach($label as $val)
+                                                    <label class="checkbox-inline" style="margin-bottom: 15px">
+                                                      <input type="checkbox" id="inlineCheckbox1" name="label" value="{{$val->id}}">{{$val->lcontent}}
+                                                    </label>
+                                                    
+                                                    @endforeach
+                                               </span> 
+                                                
                                             </div>
                                             <div style="float: right;margin-top: 6px;">
                                                 <button style="width:100px;height:40px;border-radius:5px;background:orange;color:white;font-size: 16px">发布</button>
@@ -278,6 +214,8 @@
                                     </div>
                                 </div>
                                 
+
+                                @foreach($index as $v)
                                 <div id="v6_pl_content_homefeed">
                                     <div node-type="homefeed">
                                         
@@ -294,9 +232,9 @@
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
-                                                            href="3305085281.html" title="噗嗤大叔" indepth="true">
-                                                                <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="噗嗤大叔"
-                                                                alt="" src="/homes/images/1.jpg" class="W_face_radius"
+                                                            href="3305085281.html" title="{{$v->nickName}}" indepth="true">
+                                                                <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->nickName}}"
+                                                                alt="" src="{{$v->photo == null ? '/homes/uploads/default.jpg' : $v->photo}}" class="W_face_radius"
                                                                 width="50" height="50">
                                                             </a>
                                                         </div>
@@ -304,25 +242,25 @@
                                                     <div class="WB_detail">
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
-                                                            target="_top" class="W_f14 W_fb S_txt1" nick-name="噗嗤大叔" title="噗嗤大叔" href="3305085281_001.html"
+                                                            target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
-                                                                噗嗤大叔
+                                                                {{$v->nickName}}
                                                             </a>
                                                             
                                                            
                                                         </div>
                                                         <div class="WB_from S_txt2">
                                                             <!-- minzheng add part 2 -->
-                                                            <a target="_top" href="fujdvfbrd.html" title="2017-11-09 18:11" date="1510222313000"
+                                                            <a target="_top" title="2017-11-09 18:11" date="1510222313000"
                                                             class="S_txt2" node-type="feed_list_item_date" suda-data="key=tblog_home_new&amp;value=feed_time:4172237139817031:frommainfeed"
                                                             indepth="true">
-                                                                35分钟前
+                                                                {{date('Y-m-d H:i:s',$v->time)}}
                                                             </a>
                                                             
                                                             <!-- minzheng add part 2 -->
                                                         </div>
                                                         <div class="WB_text W_f14" node-type="feed_list_content">
-                                                            如何用手机拍出一张特别好看的自拍？ ​​​​
+                                                            {{$v->content}} ​​​​
                                                         </div>
                                                         <div class="WB_expand_media_box " style="display: none;" node-type="feed_list_media_disp">
                                                         </div>
@@ -338,16 +276,15 @@
                                                     <div class="WB_handle">
                                                         <ul class="WB_row_line WB_row_r4 clearfix S_line2">
                                                             <li>
-                                                                <a class="S_txt2" suda-data="key=smart_feed&amp;value=time_sort_collect"
-                                                                href="javascript:void(0);" diss-data="fuid=3305085281" action-type="fl_favorite">
+                                                                <a class="S_txt2" title="举报">
                                                                     <span class="pos">
                                                                         <span class="line S_line1" node-type="favorite_btn_text">
                                                                             <span>
                                                                                 <em class="W_ficon ficon_favorite S_ficon">
-                                                                                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
+                                                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px">
-                                                                                    收藏
+                                                                                    举报
                                                                                 </em>
                                                                             </span>
                                                                         </span>
@@ -355,9 +292,7 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a class="S_txt2" suda-data="key=smart_feed&amp;value=time_sort_tran:4172237139817031"
-                                                                href="javascript:void(0);" action-history="rec=1" action-type="fl_forward"
-                                                                action-data="allowForward=1&amp;url=https://weibo.com/3305085281/FujdvFbRd&amp;mid=4172237139817031&amp;name=噗嗤大叔&amp;uid=3305085281&amp;domain=3305085281&amp;pid=c4ff9961gy1flbzx5q250j214m8ujqv7">
+                                                                <a class="S_txt2" title="转发">
                                                                     <span class="pos">
                                                                         <span class="line S_line1" node-type="forward_btn_text">
                                                                             <span>
@@ -365,7 +300,7 @@
                                                                                     <span class="glyphicon glyphicon-new-window" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px">
-                                                                                    144
+                                                                                    {{$v->fnum}}
                                                                                 </em>
                                                                             </span>
                                                                         </span>
@@ -374,7 +309,7 @@
                                                             </li>
                                                             <li>
                                                                 <a class="S_txt2" suda-data="key=smart_feed&amp;value=time_sort_comm:4172237139817031"
-                                                                href="javascript:void(0);" action-type="fl_comment" action-data="ouid=3305085281&amp;location=home">
+                                                                href="javascript:void(0);" action-type="fl_comment" action-data="ouid=3305085281&amp;location=home" title="评论">
                                                                     <span class="pos">
                                                                         <span class="line S_line1" node-type="comment_btn_text">
                                                                             <span>
@@ -382,7 +317,7 @@
                                                                                     <span class="glyphicon glyphicon-comment" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px">
-                                                                                    73
+                                                                                    {{$v->rnum}}
                                                                                 </em>
                                                                             </span>
                                                                         </span>
@@ -400,7 +335,7 @@
                                                             <li>
                                                                 <!--cuslike用于前端判断是否显示个性赞，1:显示-->
                                                                 <a href="javascript:void(0);" class="S_txt2" action-type="fl_like" action-data="version=mini&amp;qid=heart&amp;mid=4172237139817031&amp;like_src=1&amp;cuslike=1"
-                                                                title="赞">
+                                                                title="点赞">
                                                                     <span class="pos">
                                                                         <span class="line S_line1">
                                                                             <span node-type="like_status" class="">
@@ -408,7 +343,7 @@
                                                                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px">
-                                                                                    303
+                                                                                    {{$v->pnum}}
                                                                                 </em>
                                                                             </span>
                                                                         </span>
@@ -424,39 +359,40 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
+
                                 
-  </div>                     
-   
-  </div>
-       <div id="v6_pl_rightmod_myinfo" style="float: right;width:245px">
+                              </div>                     
+                               
+                              </div>
+                                   <div id="v6_pl_rightmod_myinfo" style="float: right;width:245px">
                                         <div class="WB_cardwrap S_bg2">
-                                            <div class="W_person_info" style="">
+                                            <div class="W_person_info" style="height:190px">
                                                 <div class="cover" id="skin_cover_s" style="background-image: url('/homes/images/001_s.jpg');">
                                                     <div class="headpic">
-                                                        <a bpfilter="page_frame" href="profile_001.html" title="坏张筱" indepth="true">
-                                                            <img class="W_face_radius" src="/homes/images/2.jpg"
-                                                            alt="坏张筱" width="60" height="60">
+                                                        <a bpfilter="page_frame" href="profile_001.html"  indepth="true">
+                                                            <img class="W_face_radius" src="{{$user->photo == null ? '/homes/uploads/default.jpg' : $user->photo}}"
+                                                             width="60" height="60">
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="WB_innerwrap">
-                                                    <div class="nameBox">
-                                                        <a bpfilter="page_frame" href="profile_001.html" class="name S_txt1" title="坏张筱"
-                                                        indepth="true" style="margin-top: 6px">
-                                                            坏张筱
+                                                <div class="WB_innerwrap" >
+                                                    <div class="nameBox" style="height:38px;">
+                                                        <a href="#" class="name S_txt1" title="积分" style="padding-top: 10px">
+                                                            {{$user->nickName}}  
+                                                        <em class="W_ficon ficon_favorite S_ficon">
+                                                            <span class="glyphicon glyphicon-tint" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
+                                                        </em>
+                                                        <em style="font-size: 14px">
+                                                            {{$user->socre}}
+                                                        </em>
                                                         </a>
-                                                        <a action-type="ignore_list" title="微博会员" target="_top" href="default_010.html"
-                                                        indepth="true">
-                                                            <i class="W_icon icon_member_dis">
-                                                            </i>
-                                                        </a>
-                                                        
                                                     </div>
-                                                    <ul class="user_atten clearfix W_f18">
+                                                    <ul class="user_atten clearfix W_f18" style="padding-left: 10px">
                                                         <li class="S_line1">
-                                                            <a bpfilter="page_frame" href="follow.html" class="S_txt1" indepth="true">
+                                                            <a bpfilter="page_frame" href="#" class="S_txt1" indepth="true">
                                                                 <strong node-type="follow">
-                                                                    151
+                                                                    {{$unum}}
                                                                 </strong>
                                                                 <span class="S_txt2">
                                                                     关注
@@ -464,9 +400,9 @@
                                                             </a>
                                                         </li>
                                                         <li class="S_line1">
-                                                            <a bpfilter="page_frame" href="fans.html" class="S_txt1" indepth="true">
+                                                            <a bpfilter="page_frame" href="#" class="S_txt1" indepth="true">
                                                                 <strong node-type="fans">
-                                                                    80
+                                                                    {{$gnum}}
                                                                 </strong>
                                                                 <span class="S_txt2">
                                                                     粉丝
@@ -474,9 +410,9 @@
                                                             </a>
                                                         </li>
                                                         <li class="S_line1">
-                                                            <a bpfilter="page_frame" href="profile_002.html" class="S_txt1" indepth="true">
+                                                            <a bpfilter="page_frame" href="#" class="S_txt1" indepth="true">
                                                                 <strong node-type="weibo">
-                                                                    102
+                                                                    {{$cnum}}
                                                                 </strong>
                                                                 <span class="S_txt2">
                                                                     微博
@@ -488,9 +424,9 @@
                                             </div>
                                         </div>
                                     </div>
-       </div>
-      </div>
-        </div>
-    </body>
+                               </div>
+                            </div>
+                        </div>
+                    </body>
 
-</html>
+                </html>

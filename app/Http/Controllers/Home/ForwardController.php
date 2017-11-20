@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\contents;
 use App\Http\Model\user_info;
 use App\Http\Model\forward;
+use App\Http\Model\label;
+
 
 use session;
 
@@ -18,6 +20,10 @@ class ForwardController extends Controller
 {
     public function create ($id)
     {
+
+        //查询标签内容
+        $label = label::get();
+
     	//查看微博内容
     	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
 
@@ -25,7 +31,7 @@ class ForwardController extends Controller
     	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
 
 
-    	return view('homes/forward',['res'=>$res,'forward'=>$forward]);
+    	return view('homes/forward',['label'=>$label,'res'=>$res,'forward'=>$forward]);
     }
 
     public function store (Request $request)

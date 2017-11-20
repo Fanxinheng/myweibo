@@ -8,69 +8,53 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Model\contents;
+use App\Http\Model\label;
 
 class AdminController extends Controller
 {
    
     public function index()
     {
+        //查询标签内容
+        $label = label::get();
+
        //查询微博内容
         $index = contents::join('user_info',function($join){
         	$join->on('contents.uid','=','user_info.uid');
         })->orderBy('time','desc')->get();
 
-       return view('homes/index',['index'=>$index]);
+       return view('homes/index',['label'=>$label,'index'=>$index]);
     }
-
 
     public function hot ()
     {
-    	//查询微博内容
+        //查询标签内容
+        $label = label::get();
+
+    	//查询热门微博内容
         $index = contents::join('user_info',function($join){
         	$join->on('contents.uid','=','user_info.uid');
-        })->orderBy('time','desc')->where('hot',1)->get();
+        })->where('hot',1)
+        ->orWhere('fnum','>',1)
+        ->orWhere('rnum','>',1)
+        ->orderBy('time','desc')
+        ->get();
 
-       return view('homes/index',['index'=>$index]);
+       return view('homes/index',['label'=>$label,'index'=>$index]);
     }
 
-    public function start ()
+    public function label ($id)
     {
-    	//查询微博内容
-        $index = contents::join('user_info',function($join){
-        	$join->on('contents.uid','=','user_info.uid');
-        })->orderBy('time','desc')->where('content','like','%明%星%')->get();
+        //查询标签内容
+        $label = label::get();
 
-       return view('homes/index',['index'=>$index]);
+        //查询标签
+        $index = contents::join('user_info',function($join){
+            $join->on('contents.uid','=','user_info.uid');
+        })->where('label','like','%'.$id.'%')->get();
+
+        return view('homes/index',['label'=>$label,'index'=>$index]);
     }
 
-    public function society ()
-    {
-    	//查询微博内容
-        $index = contents::join('user_info',function($join){
-        	$join->on('contents.uid','=','user_info.uid');
-        })->orderBy('time','desc')->where('content','like','%社%会%')->get();
-
-       return view('homes/index',['index'=>$index]);
-    }
-
-    public function feel ()
-    {
-    	//查询微博内容
-        $index = contents::join('user_info',function($join){
-        	$join->on('contents.uid','=','user_info.uid');
-        })->orderBy('time','desc')->where('content','like','%情%感%')->get();
-
-       return view('homes/index',['index'=>$index]);
-    }
-
-    public function it ()
-    {
-    	//查询微博内容
-        $index = contents::join('user_info',function($join){
-        	$join->on('contents.uid','=','user_info.uid');
-        })->orderBy('time','desc')->where('content','like','%科%技%')->get();
-
-       return view('homes/index',['index'=>$index]);
-    }
-    
+   
 }

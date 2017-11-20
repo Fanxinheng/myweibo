@@ -10,20 +10,32 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\contents;
 use App\Http\Model\user_info;
 use App\Http\Model\replay;
+use App\Http\Model\label;
+
 
 
 class ReplayController extends Controller
 {
     public function create ($id)
     {
+
+        //查询标签内容
+        $label = label::get();
+
     	//查看微博内容
     	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
 
-    	//查询评论信息->where('tid',$id)
+    	//查询评论信息
     	$replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
 
-    	return view('homes/replay',['res'=>$res,'replay'=>$replay]);
+    	return view('homes/replay',['label'=>$label,'res'=>$res,'replay'=>$replay]);
     }
+
+
+
+
+
+    
 
     public function store (Request $request)
     {

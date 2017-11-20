@@ -21,8 +21,11 @@ Route::get('/', function () {
 
 
 
-//前台注册
+//前台未登录页
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
+
+	//前台登录后首页
+	Route::get('/login','LoginController@index');
 
 	//注册前首页全部微博
 	Route::get('/admin','AdminController@index');
@@ -30,29 +33,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	//热门微博列表
 	Route::get('/hot','AdminController@hot');
 
-	//热门微博列表
-	Route::get('/hot','AdminController@hot');
-
-	//明星微博列表
-	Route::get('/start','AdminController@start');
-
-	//社会微博列表
-	Route::get('/society','AdminController@society');
-
-	//情感微博列表
-	Route::get('/feel','AdminController@feel');
-
-	//科技微博列表
-	Route::get('/it','AdminController@it');
-	
-
-
-
-
-	
-
-
-
+	//微博标签列表
+	Route::get('/label/{id}','AdminController@label');
 
 	//微博详情页
 	Route::get('/show/{id}','ShowController@show');
@@ -61,25 +43,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	//微博转发页面
 	Route::get('/forward/{id}','ForwardController@create');
 
-	//微博转发功能
-	Route::post('/forward/store/','ForwardController@store');
-
-
 	//微博评论页面
 	Route::get('/replay/{id}','ReplayController@create');
-
-	//微博转发功能
-	Route::post('/replay/store/','ReplayController@store');
-
-
-	//微博点赞
-	Route::get('/point/{id}','PointController@point');
-
-
-
-
-
-
 
 	//注册页面
 	Route::get('/register','RegisterController@index');
@@ -89,16 +54,33 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	//前台短信验证
 	Route::post('/code','CodeController@send');
 
-	//完善个人信息
-	Route::get('/details','DetailsController@index');
+	
 
 });
 
+//前台登录后页面					！！！！！(记得最后别忘了放中间件)			
+Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
-Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],function(){
+	//微博转发功能
+	Route::post('/forward/store/','ForwardController@store');
 
-	//前台登录后首页
-	Route::get('/login','LoginController@index');
+	//微博评论功能
+	Route::post('/replay/store/','ReplayController@store');
+
+	//微博点赞功能
+	Route::get('/point/{id}','PointController@point');
+
+	//热门微博列表
+	Route::get('/index/hot','LoginController@hot');
+
+	//微博标签列表
+	Route::get('/index/label/{id}','LoginController@label');
+	
+
+
+
+	//完善个人信息
+	Route::get('/details','DetailsController@index');
 
 });
 
