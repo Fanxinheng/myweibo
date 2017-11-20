@@ -8,4 +8,9 @@ class user_info extends Model
 {
     public $table = 'user_info';
 
+    public function user()
+    {
+        return $this->belongsTo('App\Http\user','id');
+    }
+
 }
