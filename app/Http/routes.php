@@ -21,9 +21,21 @@ Route::get('/', function () {
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	
 	//个人主页
-	Route::resource('user','UserController');
-
-	//
+	Route::get('user','UserController@index');
+	//个人相册
+	Route::get('photo','UserController@photo');
+	//个人的点赞
+	Route::get('point','UserController@point');
+	//个人微博的评论
+	Route::get('replay','UserController@replay');
+	//个人的转发
+	Route::get('forward','UserController@forward');
+	//删除微博
+	Route::post('delete/{id}','UserController@delete');
+	//关注
+	Route::resource('attention','AttentionController');
+	//粉丝
+	Route::resource('fans','FansController');
 
 });
 

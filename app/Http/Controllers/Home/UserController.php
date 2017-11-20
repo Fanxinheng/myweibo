@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 // use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests;
 use App\Http\Model\contents;
+use App\Http\Model\point;
+use App\Http\Model\replay;
+use App\Http\Model\forward;
+use App\Http\Model\user_info;
+
 use App\Http\Controllers\Controller;
 
 use \DB;
@@ -20,75 +25,49 @@ class UserController extends Controller
     public function index()
     {
         //
-        
-        $con = contents::all();
-        // var_dump($con);
-        return view('homes.user.index',['con'=>$con]);
+        $id=1;
+        $res = contents::where('uid','=',$id)->get();
+        $rev = user_info::where('uid','=',$id)->first();
+        return view('homes.user.index',['res'=>$res,'rev'=>$rev]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function photo()
     {
-        //
+        return view('homes.user.photo');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function point()
     {
-        //
+        $pid=1;    
+        $res = point::where('pid',$pid)->with(['content','users'])->get();
+        $rev = point::where('pid',$pid)->first();
+        return view('homes.user.point',['res'=>$res,'rev'=>$rev]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function delete($id)
     {
-        //
+        $res = contents::where('cid',$id)->delete();
+        return redirect('/home/user');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function replay()
     {
-        //
+        $uid = 1;
+       
+       
+        $res = replay::where(['uid'=>$uid])->with(['content','user_info'])->get();
+
+
+        return view('homes.user.replay',['res'=>$res]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function forward()
     {
-        //
+        $uid = 1;
+        $res = forward::where(['uid'=>$uid])->with(['content','user_info'])->get();
+        // var_dump($res);
+        return view('homes.user.forward',['res'=>$res]);
+        // echo "123";
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

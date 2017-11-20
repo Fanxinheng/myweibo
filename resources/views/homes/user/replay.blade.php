@@ -4,7 +4,6 @@
     <head>
         <meta charset="UTF-8">
         <title>
-           
         </title>
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
@@ -12,14 +11,15 @@
         </script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js">
         </script>
-
-        <link rel="stylesheet" href="/homes/css/user.fans.css">
+        <link rel="stylesheet" href="/homes/css/user.replay.css">
     </head>
-    <body>   
+    
+    <body>
+        <div id="b">
             <div>
-                <nav class="navbar navbar-fixed-top" id = "navbar">
+                <nav class="navbar navbar-fixed-top" id="navbar">
                     <div class="container">
-                        <div class="navbar-header" id="navbar-header1" >
+                        <div class="navbar-header" id="navbar-header1">
                             <img src="/homes/images/wb_logo.png" alt="">
                         </div>
                         <div class="navbar-header" id="navbar-header2">
@@ -28,12 +28,11 @@
                                     <input type="text" class="form-control" placeholder="搜索框" style="">
                                 </div>
                                 <button class="btn btn-success" type="submit">
-                                   搜索
+                                    搜索
                                 </button>
                             </form>
                         </div>
-
-                        <div  id="nav-1">
+                        <div id="nav-1">
                             <button type="button" class="btn btn-default" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-home" aria-hidden="true">
                                 </span>
@@ -48,27 +47,25 @@
                     </div>
                 </nav>
             </div>
-        <!-- 头结束 -->
-
-        <!-- 中间开始 -->
+            <!-- 头结束 -->
+            <!-- 中间开始 -->
             <div class="row" id="weibo">
-                <div class="container" >
+                <div class="container">
                     <!-- 头像 及北京-->
-                    <div class="container" >
+                    <div class="container">
                         <div class="jumbotron" id="backg">
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
                                 <!-- 头像 -->
-                                <div id="jimg" >
-                                    <img width="100" height="100"  src="/homes/images/197.jpg" class="img-circle">
+                                <div id="jimg">
+                                    <img width="100" height="100" src="/homes/images/197.jpg" class="img-circle">
                                 </div>
                                 <div>
-                                    <!-- 昵称  -->
-                                    <div id="nickname" >
-                                   
+                                    <!-- 昵称 -->
+                                    <div id="nickname">
                                     </div>
-                                    <!-- 签名  -->     
+                                    <!-- 签名 -->
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -76,7 +73,7 @@
                         </div>
                     </div>
                     <!-- 头像 及北京-->
-                    <!-- 栏目及遍历   -->
+                    <!-- 栏目及遍历 -->
                     <div class="container">
                         <!-- 栏目 -->
                         <div class="col-md-3 sidebar" id="lanmu">
@@ -124,47 +121,53 @@
                             </ul>
                         </div>
                         <!-- 栏目结束 -->
-
                         <!-- 微博 -->
-                        <div class="col-md-8 sidebar" id="tiezi"> 
-
-                           
-                            <div class="col-lg-12" id="atit">
-                                <h3>点赞</h3>
-                            </div>
+                        <div class="col-md-8 sidebar">
                             <!-- 微博遍历的地方 -->
                             @foreach($res as $k=>$v)
-                            <div class="col-lg-12" id="tiezi2">
-                                <div class="col-lg-12" >
+                            <div class="col-lg-12" id="tiezi">
+                                <div class="col-lg-12">
                                     <!-- 头像 -->
-                                    <div class="col-log-2" style="float: left;margin-top: 10px;margin-right: 10px">
-
-                                        <img width="30" height="30" src="/homes/images/2015.jpg"
+                                    <div class="col-log-2" id="tieimg">
+                                        <img width="50" height="50" alt="Generic placeholder image" src="/homes/images/2015.jpg"
                                         class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
-                                    <div class="col-log-8" style="margin-top:18px;">
-                                        {{$v->users->nickName}}给我点赞{{date('Y-m-d H:i:s',$rev->ptime)}}
-                                    </div>
-                                    <div class="col-log-10" style="margin-left: 40px;margin-top: 5px">
-                                        
-                                      {{$v->content->content}} 
-                                        
+                                    <div class="col-log-8" id="tiename" style="margin-top: 20px">
+                                        <b>
+                                            {{$v->user_info->nickName}}
+                                        </b>
+                                        <br/>
+                                        <em>
+                                            {{date('Y-m-d H:i:s',$v->time)}}
+                                        </em>
                                     </div>
                                 </div>
-                             </div>
-                             @endforeach
-                            <!-- 微博遍历结束 -->                           
-                        <!-- 微博结束 -->
+                                <!-- 内容 -->
+                                <div class="col-lg-10" id="tiecon">
+                                    {{$v->rcontent}}
+                                </div>
+                                @foreach($v->content as $re)
+                                <div class="col-lg-10" id="tiecon" style="background-color: #ccc;padding:5px">
+                                    <i>
+                                        评论我的微博:
+                                    </i>
+                                    {{$re->content}}
+                                </div>
+                                @endforeach
+                            </div>
+                            @endforeach
+                            <!-- 微博遍历结束 -->
                         </div>
+                        <!-- 微博 -->
                     </div>
                 </div>
             </div>
             <!-- 中间结束 -->
-     
+            
             <div id="foot">
-                <footer class="footer" id="foot1" >
-                    <div class="container">
+                <footer class="footer" id="foot1" style="background-color: #fff">
+                    <div class="container" style="height: 50px; text-align: center;">
                         <p class="text-muted">
                             Place sticky footer content here.
                         </p>
@@ -172,9 +175,8 @@
                 </footer>
                 <!-- footer 开始-->
             </div>
-        <!-- footer结束 -->
+            <!-- footer结束 -->
         </div>
-        
     </body>
 
 </html>

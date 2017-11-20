@@ -66,7 +66,7 @@
                                 <div>
                                     <!-- 昵称  -->
                                     <div id="nickname" >
-                                   
+                                     {{$id->nickName}}
                                     </div>
                                     <!-- 签名  -->     
                                 </div>
@@ -128,33 +128,55 @@
                         <!-- 微博 -->
                         <div class="col-md-8 sidebar" id="tiezi"> 
 
-                           
-                            <div class="col-lg-12" id="atit">
-                                <h3>点赞</h3>
-                            </div>
                             <!-- 微博遍历的地方 -->
-                            @foreach($res as $k=>$v)
-                            <div class="col-lg-12" id="tiezi2">
-                                <div class="col-lg-12" >
-                                    <!-- 头像 -->
-                                    <div class="col-log-2" style="float: left;margin-top: 10px;margin-right: 10px">
+                            <div class="col-lg-12" id="atit">
+                                <h3>粉丝</h3>
+                            </div>
 
-                                        <img width="30" height="30" src="/homes/images/2015.jpg"
+
+                            <div class="col-lg-12" id="tiezi2">
+                                
+                               @foreach($res as $k=>$v)
+
+                                <div class="col-lg-12" id="tiezi3">
+                                    <!-- 头像 -->
+                                    <div class="col-log-2" id="tieimg">
+                                        <img width="65" height="65" src="/homes/images/wb_logo.png"
                                         class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
-                                    <div class="col-log-8" style="margin-top:18px;">
-                                        {{$v->users->nickName}}给我点赞{{date('Y-m-d H:i:s',$rev->ptime)}}
+                                    <div class="col-log-8" id="tiecon" >
+                                        <h3>
+                                            {{$v->nickName}}
+                                        </h3>
+                                        <h5>
+                                            关注:{{$v->id}}|粉丝:123|微博:123
+                                        </h5>
                                     </div>
-                                    <div class="col-log-10" style="margin-left: 40px;margin-top: 5px">
-                                        
-                                      {{$v->content->content}} 
-                                        
+                                    <!-- 删除分享的地方 -->
+                                    <div class="col-log-2">
+                                        <div class="dropup">
+                                            <form action="/home/fans/{{$v->id}}" method="post" >
+                                                <button class="btn btn-danger dropdown-toggle" name="but1">
+                                                    删除
+                                                </button>
+                                                {{csrf_field()}}
+                                                {{method_field('DELETE')}}
+                                            </form>
+
+                                            <button class="btn btn-warning dropdown-toggle">
+                                                关注
+                                            </button>
+
+
+
+                                        </div>
                                     </div>
+                                    <!-- 删除分享的结束地方 -->
                                 </div>
-                             </div>
-                             @endforeach
-                            <!-- 微博遍历结束 -->                           
+                                @endforeach
+                            <!-- 微博遍历结束 -->
+                            </div>
                         <!-- 微博结束 -->
                         </div>
                     </div>
