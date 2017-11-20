@@ -17,9 +17,25 @@ class LinkController extends Controller
      */
     public function index(Request $request)
     {
-        $res = link::paginate(5);
+        //获取分页信息
+        //获取搜索全部信息
+        // var_dump($request->all());
+
+        //对数据库进行模糊查询
+        $res = link::where('user','like','%'.$request->input('search').'%')->
+
+        orderBy('user','asc')->
+        //默认搜索5条数据
+        paginate($request->input('paging',5));
+        //echo "<pre>";
         // var_dump($res);
-        return view('admins/link/index',['res'=>$res]);
+
+       /* $count = advert::count('id');
+        $request['count'] = $coi
+        var_dump($count);*/
+
+        //将数据传递到页面中
+        return view('admins/link/index',['res'=>$res,'request'=>$request]);
 
 
     }
@@ -63,11 +79,8 @@ class LinkController extends Controller
 
             $res['status'] = "0";
 
-            // dd($res);
             //打印form传过来的参数
             // var_dump($res);
-            //打印图片信息
-            // dd($res['pic']);
 
             //添加至数据库
             $data = link::insert($res);

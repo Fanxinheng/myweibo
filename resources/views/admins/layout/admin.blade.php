@@ -254,6 +254,11 @@
                         <ul class="closed">
                             <li><a href="/admin/report">举报列表</a></li>
                         </ul>
+                        <a href="#"><i class="icon-list"></i>标签管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/label/create">标签添加</a></li>
+                            <li><a href="/admin/label">标签列表</a></li>
+                        </ul>
                         <a href="#"><i class="icon-filter"></i>广告管理</a>
                         <ul class="closed">
                             <li><a href="/admin/advert/create">广告添加</a></li>

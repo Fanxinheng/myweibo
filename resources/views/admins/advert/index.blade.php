@@ -41,36 +41,35 @@
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
 
-            <form action="/admin/advert" method="get" class=""></form>
+            <form action="/admin/advert" method="get" class="">
 
                 <div id="DataTables_Table_1_length" class="dataTables_length">
                     <label>
                         显示
                         <select name="paging" size="1" aria-controls="DataTables_Table_1">
-                            <option value="1" selected="selected">
-                                1
+                            <option value="5" @if($request->paging == "5" ) selected="selected" @endif>
+                               5
                             </option>
-                            <option value="2">
-                               2
+
+                            <option value="10" @if($request->paging == "10" ) selected="selected" @endif>
+                               10
                             </option>
-                            <option value="3">
-                               3
+                            <option value="25" @if($request->paging == "25" ) selected="selected" @endif>
+                               25
                             </option>
-                            <option value="100">
-                                100
+                            <option value="50" @if($request->paging == "50" ) selected="selected" @endif>
+                                50
                             </option>
                         </select>
                         页
                     </label>
                 </div>
-
                 <div class="dataTables_filter" id="DataTables_Table_1_filter">
                     <label>
                         关键字:
-                        <input type="text" name="search" aria-controls="DataTables_Table_1" >
-                        <button class="btn btn-default">搜索</button>
-
+                        <input type="text" name="search" value="{{ $request['search']}}" aria-controls="DataTables_Table_1" >
                     </label>
+                        <button class="btn btn-default">搜索</button>
                 </div>
 
             </form>
@@ -78,27 +77,27 @@
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                 <thead>
                         <tr role="row">
-                            <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                             rowspan="1" colspan="1" style="width: 200px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                                 商户名
                             </th>
-                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                             rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">
                                 链接地址
                             </th>
-                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                             rowspan="1" colspan="1" style="width: 300px;" aria-label="Platform(s): activate to sort column ascending">
                                 图片
                             </th>
-                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                             rowspan="1" colspan="1" style="width: 200px;" aria-label="Engine version: activate to sort column ascending">
                                 广告添加时间
                             </th>
-                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                             rowspan="1" colspan="1" style="width: 200px;" aria-label="Engine version: activate to sort column ascending">
                                 广告状态
                             </th>
-                            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                            <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                             rowspan="1" colspan="1" style="width: 200px;" aria-label="CSS grade: activate to sort column ascending">
                                 操作
                             </th>
@@ -127,7 +126,8 @@
                                     </td>
                                     <td class=" ">
                                         <center>
-                                            <a href="/admin/advert/{{$v->id}}/edit"><input type="submit" class="btn btn-default" value="修改"></a>
+                                            <a href="/admin/advert/{{$v->id}}/edit">
+                                            <input type="submit" class="btn btn-default" value="修改"></a>
                                             <form action="/admin/advert/{{$v->id}}"" method="post" style="display:inline">
                                                 <button class="btn btn-default">删除</button>
                                                 {{csrf_field()}}
@@ -148,11 +148,12 @@
 
 
            <div class="dataTables_info" id="DataTables_Table_1_info">
-                Showing 1 to 10 of 57 entries
+                显示 1 条 10 of   总共 条数据
             </div>
+
             <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
 
-                {!! $res->render() !!}
+                {!! $res->appends($request->all())->render() !!}
 
             </div>
 
@@ -163,7 +164,6 @@
         </div>
     </div>
 </div>
-
 
 
 

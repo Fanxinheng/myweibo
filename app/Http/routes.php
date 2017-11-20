@@ -50,6 +50,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 	//后台举报管理资源路由
 	Route::resource('report','ReportController');
 
+	//后台标签管理资源路由
+	Route::resource('label','LabelController');
+
 	//后台广告管理资源路由
 	Route::resource('advert','AdvertController');
 
@@ -61,6 +64,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 	//后台网站配置路由
 	Route::get('config','ConfigController@edit');
+
+
 
 });
 

@@ -19,18 +19,24 @@ class AdvertController extends Controller
     public function index(request $request)
     {
         //获取分页信息
-        var_dump($request->all());
+        //获取搜索全部信息
+        // var_dump($request->all());
 
-        //分页
-        $res = advert::paginate(1);
+        //对数据库进行模糊查询
+        $res = advert::where('user','like','%'.$request->input('search').'%')->
+
+        orderBy('user','asc')->
+        //默认搜索5条数据
+        paginate($request->input('paging',5));
         //echo "<pre>";
         // var_dump($res);
 
+       /* $count = advert::count('id');
+        $request['count'] = $coi
+        var_dump($count);*/
 
-        // var_dump($res);
-
-
-        return view('admins/advert/index',['res'=>$res]);
+        //将数据传递到页面中
+        return view('admins/advert/index',['res'=>$res,'request'=>$request]);
     }
 
     /**
