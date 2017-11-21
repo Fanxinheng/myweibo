@@ -64,11 +64,6 @@
         	<!-- Notifications -->
         	<div id="mws-user-notif" class="mws-dropdown-menu">
 
-            	<a href="/admins/#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
-
-                <!-- Unread notification count -->
-                <span class="mws-dropdown-notif">35</span>
-
                 <!-- Notifications dropdown -->
                 <div class="mws-dropdown-box">
                 	<div class="mws-dropdown-content">
@@ -123,11 +118,6 @@
 
             <!-- Messages -->
             <div id="mws-user-message" class="mws-dropdown-menu">
-
-            	<a href="/admins/#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
-
-                <!-- Unred messages count -->
-                <span class="mws-dropdown-notif">35</span>
 
                 <!-- Messages dropdown -->
                 <div class="mws-dropdown-box">
@@ -187,24 +177,26 @@
 
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
-
             	<!-- User Photo -->
-            	<div id="mws-user-photo">
-                	<img src="/admins/example/profile.jpg" alt="User Photo">
-                </div>
-
-                <!-- Username and Functions -->
-                <div id="mws-user-functions">
-                    <div id="mws-username">
-                        Hello, John Doe
+                	<div id="mws-user-photo">
+                    	<img src="" alt="User Photo">
                     </div>
-                    <ul>
-                    	<li><a href="/admins/#">Profile</a></li>
-                        <li><a href="/admins/#">Change Password</a></li>
-                        <li><a href="/admins/index.html">Logout</a></li>
-                    </ul>
-                </div>
+
+                    <!-- Username and Functions -->
+                    <div id="mws-user-functions">
+
+
+                            <div id="mws-username">
+                               Hello:
+                            </div>
+                            <ul>
+                                <li><a href="/admin/id/edit"> 修改密码</a></li>
+                                <li><a href="/admins/index.html">退出</a></li>
+                            </ul>
+
+                    </div>
             </div>
+
         </div>
     </div>
 
@@ -278,7 +270,6 @@
                         <ul class="closed">
                             <li><a href="/admin/config">配置修改</a></li>
                         </ul>
-
                     </li>
                 </ul>
             </div>

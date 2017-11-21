@@ -25,14 +25,14 @@
                     <div class="mws-form-row">
                         <label class="mws-form-label">标签名</label>
                         <div class="mws-form-item">
-                            <input type="text" class="small" name="content" value="{{old('content')}}">
+                            <input type="text" class="small" name="lcontent" value="{{old('lcontent')}}">
                         </div>
                     </div>
                 </div>
                 <div class="mws-button-row">
 
                     {{csrf_field()}}
-                    <input type="submit" class="btn btn-danger" value="添加">
+                    <input type="submit" class="btn btn-default" value="添加">
 
                 </div>
             </form>

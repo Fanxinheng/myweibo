@@ -25,7 +25,7 @@
                     <div class="mws-form-row">
                         <label class="mws-form-label">标签名</label>
                         <div class="mws-form-item">
-                            <input type="text" class="small" name="content" value="{{ $res->content}} ">
+                            <input type="text" class="small" name="lcontent" value="{{ $res->lcontent}} ">
                         </div>
                     </div>
 

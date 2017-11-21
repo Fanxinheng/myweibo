@@ -72,7 +72,7 @@
                                 <center>{{$v->id }}</center>
                             </td>
                             <td class=" ">
-                                <center>{{$v->content}}</center>
+                                <center>{{$v->lcontent}}</center>
                             </td>
                             <td class=" ">
                                 <center>
