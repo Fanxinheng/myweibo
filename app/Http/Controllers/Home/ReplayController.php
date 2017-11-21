@@ -32,11 +32,6 @@ class ReplayController extends Controller
     }
 
 
-
-
-
-    
-
     public function store (Request $request)
     {
     	//获取评论内容

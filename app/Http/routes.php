@@ -87,7 +87,23 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 //===============前台登录后页面===============//
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],function(){
 
+//=========================关于微博===============================//
 
+	//热门微博列表
+	Route::get('/index/hot','LoginController@hot');
+
+	//微博标签列表
+	Route::get('/index/label/{id}','LoginController@label');
+
+	//发布微博
+	Route::post('/release','ReleaseController@store');
+
+	//举报微博
+	Route::get('/blog/report/','BlogController@report');
+
+	//加载转发微博页面
+	Route::get('/blog/forward/{id}','BlogController@forward');
+	
 	//微博转发功能
 	Route::post('/forward/store/','ForwardController@store');
 
@@ -97,11 +113,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//微博点赞功能
 	Route::get('/point/{id}','PointController@point');
 
-	//热门微博列表
-	Route::get('/index/hot','LoginController@hot');
-
-	//微博标签列表
-	Route::get('/index/label/{id}','LoginController@label');
+	
 
 
 
@@ -159,7 +171,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 //==========================后台路由===================================//
 
 //后台登录
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 	//后台登录主页面
 	Route::get('/',"LoginController@index");
@@ -173,7 +185,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 
 //后台主页面
-Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],function(){
 
 	//后台主页
 	Route::resource('/index','UserController');

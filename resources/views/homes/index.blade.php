@@ -166,7 +166,7 @@
                                                     <div class="list_des">
                                                         <a href="/home/replay/{{$v->cid}}">
                                                         <h3 class="list_title_s">
-                                                            <div>
+                                                            <div style="word-break:break-all">
                                                                 {{$v->content}}
                                                             </div>
                                                         </h3>
@@ -255,8 +255,7 @@
                                                                 <div class="info_header">
                                                                     <div class="tab clearfix">
                                                                         <a href="javascript:void(0);" node-type="normal_tab" action-type="switchTab"
-                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login"
-                                                                        >
+                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login">
                                                                             <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
                                                                             帐号登录
                                                                         </a>

@@ -158,74 +158,8 @@
                         </div>
                         <div id="plc_main" style="width:490px">
                             <div class="WB_main_c">
-                                <div id="v6_pl_content_publishertop" >
-                                    <div class="send_weibo S_bg2 clearfix send_weibo_long" node-type="wrap">
-                                        <div class="title_area clearfix">
-                                            <div class="title" node-type="publishTitle">
-                                                <span class="txt">
-                                                    What’s new with you?
-                                                </span>
-                                                <p class="W_swficon ficon_swtxt">
-                                                    <em class="spac1">
-                                                        有什么新鲜事想告诉大家?
-                                                    </em>
-                                                    
-                                                </p>
-                                            </div>
-                                            
-                                            
-                                        </div>
-
-
-                                    <form action="/home/release/" method="post" enctype="multipart/form-data">
-                                            <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
-                                        
-                                            
-                                            <div class="kind" style="height: 35px;margin-top: 3px;">
-                                               <a class="S_txt1" href="javascript:void(0);" action-type="face" action-data="type=500&amp;action=1&amp;log=face&amp;cate=1"
-                                               title="表情" node-type="smileyBtn" suda-uatrack="key=tblog_home_edit&amp;value=phiz_button">
-                                                   <em class="W_ficon ficon_face">
-                                                       <img src="/homes/images/bq.png" alt="" style="width: 15px;height: 15px;margin-bottom: 5px">
-                                                   </em>
-                                                   表情
-                                               </a>
-                                                <a class="S_txt1" title="图片" style="position: relative;">
-                                                    <em class="W_ficon ficon_image" style="font-size:16px">
-                                                        <span class="glyphicon glyphicon-picture" aria-hidden="true" ></span>
-                                                    </em>
-                                                    图片
-                                                    <div style="position: absolute; left: 0px; top: 0px; display: block; overflow: hidden; background-color: rgb(0, 0, 0); opacity: 0; width: 49px; height: 24px;">
-                                                            <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
-                                                             multiple="multiple" type="file">
-                                                    </div>  
-                                                </a>
-                                                
-                                                <span>
-                                                    
-
-                                                    @foreach($label as $val)
-
-                                                    <label class="checkbox-inline" style="margin-bottom: 15px">
-                                                      <input type="checkbox" id="inlineCheckbox1" name="label[]" value="{{$val->id}}">{{$val->lcontent}}
-                                                    </label>
-                                                    
-                                                    @endforeach
-                                               </span> 
-                                                
-                                            </div>
-                                            <div style="float: right;margin-top: 6px;">
-                                                {{csrf_field()}}
-                                                <button id="release" style="width:100px;height:40px;border-radius:5px;background:orange;color:white;font-size: 16px">发布</button>
-                                                
-                                            </div>
-                                            
-                                    </form>
-
-                                    </div>
-                                </div>
                                 
-
-                                @foreach($index as $v)
+                              
                                 <div id="v6_pl_content_homefeed">
                                     <div node-type="homefeed">
                                         
@@ -241,10 +175,9 @@
                                                     
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
-                                                            <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
-                                                            href="3305085281.html" title="{{$v->nickName}}" indepth="true">
-                                                                <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->nickName}}"
-                                                                alt="" src="{{$v->photo == null ? '/homes/uploads/default.jpg' : $v->photo}}" class="W_face_radius"
+                                                            <a title="{{$content->nickName}}" indepth="true">
+                                                                <img title="{{$content->nickName}}"
+                                                                src="{{$content->photo == null ? '/homes/uploads/default.jpg' : $content->photo}}" class="W_face_radius"
                                                                 width="50" height="50">
                                                             </a>
                                                         </div>
@@ -252,133 +185,143 @@
                                                     <div class="WB_detail">
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
-                                                            target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
+                                                            target="_top" class="W_f14 W_fb S_txt1" title="{{$content->nickName}}" 
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
-                                                                {{$v->nickName}}
+                                                                {{$content->nickName}}
                                                             </a>
-                                                            <!-- 判断微博是否为登录用户自己发布 -->
-                                                            @if($uid == $v->uid)
-                                                                
-                                                                <a href="#" class="glyphicon glyphicon-remove" style="float: right" title="删除微博">
-                                                                    
-                                                                </a>
-                                                            @endif
-                                                            
                                                            
                                                         </div>
                                                         <div class="WB_from S_txt2">
                                                             <!-- minzheng add part 2 -->
-                                                            <a title="发布时间" class="S_txt2">
-                                                                {{date('Y-m-d H:i:s',$v->time)}}
+                                                            <a target="_top" title="发布时间" date="1510222313000"
+                                                            class="S_txt2" node-type="feed_list_item_date" suda-data="key=tblog_home_new&amp;value=feed_time:4172237139817031:frommainfeed"
+                                                            indepth="true">
+                                                                {{date('Y-m-d H:i:s',$content->time)}}
                                                             </a>
                                                             
                                                             <!-- minzheng add part 2 -->
                                                         </div>
                                                         <div class="WB_text W_f14" node-type="feed_list_content" style="word-break:break-all">
-                                                            {{$v->content}} ​​​​
+                                                            {{$content->content}} ​​​​
                                                         </div>
-                                                        @if($v->image)
-                                                        <div id="image">
-                                                            <img src="{{$v->image}}" style="width:100px;" id="img">
-                                                        </div>
-                                                       @else
-
-                                                       @endif
+                                                        
                                                         
                                                     </div>
                                                    
                                                 </div>
                                                 <!-- minzheng add part 3 -->
-                                                <div class="WB_feed_handle">
-                                                    <div class="WB_handle">
-                                                        <ul class="WB_row_line WB_row_r4 clearfix S_line2">
-                                                            <li>
-                                                                <a  class="S_txt2" title="举报">
-                                                                    <span class="report" id="">
-                                                                        <span class="line S_line1" node-type="favorite_btn_text">
-                                                                            <span>
-                                                                                <em class="W_ficon ficon_favorite S_ficon">
-                                                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
-                                                                                </em>
-                                                                                <em style="font-size: 14px">
-                                                                                    <input type="hidden" id="rep" value="{{$v->cid}}">
-                                                                                    举报
-                                                                                </em>
-                                                                            </span>
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-                                                                
-                                                            </li>
-                                                            <li>
-                                                                <a href="/home/blog/forward/{{$v->cid}}" class="S_txt2" title="转发">
-                                                                    <span class="pos">
-                                                                        <span class="line S_line1" node-type="forward_btn_text">
-                                                                            <span>
-                                                                                <em class="W_ficon ficon_forward S_ficon">
-                                                                                    <span class="glyphicon glyphicon-share" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
-                                                                                </em>
-                                                                                <em style="font-size: 14px">
-                                                                                    {{$v->fnum}}
-                                                                                </em>
-                                                                            </span>
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt2" title="评论">
-                                                                    <span class="pos">
-                                                                        <span class="line S_line1" node-type="comment_btn_text">
-                                                                            <span>
-                                                                                <em class="W_ficon ficon_repeat S_ficon">
-                                                                                    <span class="glyphicon glyphicon-comment" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
-                                                                                </em>
-                                                                                <em style="font-size: 14px">
-                                                                                    {{$v->rnum}}
-                                                                                </em>
-                                                                            </span>
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-                                                                <span class="arrow" style="display: none;" node-type="cmtarrow">
-                                                                    <span class="W_arrow_bor W_arrow_bor_t">
-                                                                        <i class="S_line1">
-                                                                        </i>
-                                                                        <em class="S_bg1_br">
-                                                                        </em>
-                                                                    </span>
-                                                                </span>
-                                                            </li>
-                                                            <li>
-                                                                <!--cuslike用于前端判断是否显示个性赞，1:显示-->
-                                                                <a href="javascript:void(0);" class="S_txt2" 
-                                                                title="点赞">
-                                                                    <span class="pos">
-                                                                        <span class="line S_line1">
-                                                                            <span node-type="like_status" class="">
-                                                                                <em class="W_ficon ficon_praised S_txt2">
-                                                                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
-                                                                                </em>
-                                                                                <em style="font-size: 14px">
-                                                                                    {{$v->pnum}}
-                                                                                </em>
-                                                                            </span>
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                
+                                               
                                             </div>
                                            
                                         </div>
                                     </div>
                                 </div>
+                             
+                                
+                                <div id="v6_pl_content_homefeed">
+                                    <div node-type="homefeed">
+                                        
+                                        <!--feed list-->
+                                        <div class="WB_feed WB_feed_v3 WB_feed_v4" pagenum="1" node-type="feed_list"
+                                        unread_mode="1">
+                                           
+                                            <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
+                                            class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
+                                            action-type="feed_list_item">
+                                            <form action="/home/forward/store/" method="post">
+                                                <div class="WB_feed_detail clearfix" node-type="feed_content" ">
+                                                    <textarea class="form-control" rows="3" name="fcontent"></textarea>
+                                                    <input type="hidden" name="uid" value="{{$content->uid}}">
+                                                    <input type="hidden" name="tid" value="{{$content->cid}}">
+                                                    {{csrf_field()}}
+                                                    <button class="btn btn-default btn-sm" id="report" style="float: right;margin:5px 0 5px 0">转发</button>
+                                                   
+                                                </div> 
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                @if($content->fnum == 0)
+                                <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
+                                class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
+                                action-type="feed_list_item">
+                                    <div class="WB_feed_detail clearfix" node-type="feed_content" ">
+                                       
+                                        <div class="WB_detail">
+                                            <div class="WB_info">
+                                                <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
+                                                target="_top" class="W_f14 W_fb S_txt1" title="{{$v->nickName}}" 
+                                                usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
+                                                    亲，这么好的微博还没有转发那，快去试试吧:)
+                                                </a>
+                                               
+                                            </div>
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                    <!-- minzheng add part 3 -->
+                                   
+                                </div>
+                                @endif
+                                
+
+
+                                @foreach($forward as $v)
+                                <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
+                                class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
+                                action-type="feed_list_item">
+                                    <div class="WB_feed_detail clearfix" node-type="feed_content" ">
+                                        
+                                        
+                                        <div class="WB_face W_fl">
+                                            <div class="face">
+                                                <a title="{{$v->nickName}}" indepth="true">
+                                                    <img title="{{$v->nickName}}"
+                                                    src="{{$v->photo == null ? '/homes/uploads/default.jpg' : $v->photo}}" class="W_face_radius"
+                                                    width="50" height="50">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="WB_detail">
+                                            <div class="WB_info">
+                                                <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
+                                                target="_top" class="W_f14 W_fb S_txt1" title="{{$v->nickName}}" 
+                                                usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
+                                                    {{$v->nickName}}
+                                                </a>
+                                               
+                                            </div>
+                                            <div class="WB_from S_txt2">
+                                                <!-- minzheng add part 2 -->
+                                                <a target="_top" title="发布时间" date="1510222313000"
+                                                class="S_txt2" node-type="feed_list_item_date" suda-data="key=tblog_home_new&amp;value=feed_time:4172237139817031:frommainfeed"
+                                                indepth="true">
+                                                    {{date('Y-m-d H:i:s',$v->time)}}
+                                                </a>
+                                                
+                                                <!-- minzheng add part 2 -->
+                                            </div>
+                                            <div class="WB_text W_f14" node-type="feed_list_content" style="word-break:break-all">
+                                                
+                                                {{$v->fcontent}}
+                                                
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                    <!-- minzheng add part 3 -->
+                                   
+                                </div>
                                 @endforeach
-                              </div>                     
+                                
+
+                                </div>
+
                                
                               </div>
                                    <div id="v6_pl_rightmod_myinfo" style="float: right;width:245px">
@@ -442,11 +385,13 @@
                                     </div>
                                </div>
                             </div>
+
+
                         </div>
                         <script type="text/javascript">
-                            $('#release').on('click', function(){
+                            $('#report').on('click', function(){
                                 
-                                layer.msg('新微博发布成功:)');
+                                layer.msg('微博转发成功:)');
                               });
 
                             $('.report').on('click',function(){

@@ -24,7 +24,7 @@ class LoginController extends Controller
     public function index()
     {
 
-      //获取用户ID
+      //获取登录用户ID
       $uid = Session('uid');
 
   	  //查询标签内容
@@ -47,7 +47,7 @@ class LoginController extends Controller
       	$join->on('contents.uid','=','user_info.uid');
       })->orderBy('time','desc')->get();
 
-    	return view('homes/login',['label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+    	return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
     //加载热门微博页面
@@ -80,7 +80,7 @@ class LoginController extends Controller
       ->orderBy('time','desc')
       ->get();
 
-     return view('homes/login',['label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+     return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
     //加载标签微博页面
@@ -104,12 +104,14 @@ class LoginController extends Controller
      	//查询登录用户微博数量
      	$cnum = contents::where('uid',$uid)->count();
 
-      //查询标签
+      //查询标签微博内容
       $index = contents::join('user_info',function($join){
       	$join->on('contents.uid','=','user_info.uid');
-      })->where('label','like','%'.$id.'%')->get();
+      })->where('label','like','%'.$id.'%')
+      ->orderBy('time','desc')
+      ->get();
 
-      return view('homes/login',['label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+      return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
     //验证手机号是否已注册

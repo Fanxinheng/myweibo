@@ -52,7 +52,7 @@ class LoginController extends Controller
         }
 
         //将登录成功后的用户ID存入缓存以便验证登录
-        session(['uid' => $login->id]);
+        session(['pid' => $login->id]);
         
         return redirect('/admin/index');
 

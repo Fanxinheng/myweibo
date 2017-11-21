@@ -12,8 +12,7 @@ use App\Http\Model\user_info;
 use App\Http\Model\forward;
 use App\Http\Model\label;
 
-
-use session;
+use Session;
 
 
 class ForwardController extends Controller
@@ -38,12 +37,12 @@ class ForwardController extends Controller
     {
     	//获取转发内容
     	$res = $request->except('_token');
-
+        
     	//获取转发时间
     	$res['time'] = time();
 
     	//获取转发人id
-    	$res['fid'] = 1;
+    	$res['fid'] = Session('uid');
 
     	//将指定微博转发数量+1
     	$fnum = contents::where('cid',$request->only('tid'))->value('fnum');
@@ -56,9 +55,9 @@ class ForwardController extends Controller
     	$data1 = forward::insert($res);
 
     	if($data && $data1){
-    		return back()->with('success','转发成功！');
+    		return back();
     	}else{
-    		return back()->with('fail','转发失败！');
+    		return back();
 
     	}
 
