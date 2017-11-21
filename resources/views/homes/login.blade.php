@@ -8,12 +8,13 @@
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
-        <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml"
-        rel="search">
+        <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+    
+        <!-- <link rel="stylesheet" href="/homes/css/login.css"> -->
 
         <title>
             我的首页 微博-随时随地发现新鲜事
@@ -63,8 +64,7 @@
                                 <div class="gn_nav">
                                         <ul class="gn_nav_list">
                                             <li>
-                                                <a href="/home/login" class="home S_txt1" suda-uatrack="key=topnav_tab&amp;value=homepage"
-                                                target="_top">
+                                                <a href="/home/login"  title="微博首页">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                                     </em>
@@ -74,16 +74,25 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#" class="gn_name" >
+                                                <a href="/home/details"  title="修改个人信息">
                                                     <em class="W_ficon ficon_user S_ficon">
-                                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                                        <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
                                                     </em>
                                                     <em class="S_txt1">
                                                         {{$user->nickName}}
                                                     </em>
                                                 </a>
                                             </li>
-                                           
+                                            <li>
+                                                <a href="#"  title="退出登录">
+                                                    <em class="W_ficon ficon_home S_ficon">
+                                                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                                    </em>
+                                                    <em class="S_txt1">
+                                                        退出
+                                                    </em>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                         
@@ -370,7 +379,7 @@
                                             <div class="W_person_info" style="height:190px">
                                                 <div class="cover" id="skin_cover_s" style="background-image: url('/homes/images/001_s.jpg');">
                                                     <div class="headpic">
-                                                        <a bpfilter="page_frame" href="profile_001.html"  indepth="true">
+                                                        <a bpfilter="page_frame" href="/home/user"  indepth="true">
                                                             <img class="W_face_radius" src="{{$user->photo == null ? '/homes/uploads/default.jpg' : $user->photo}}"
                                                              width="60" height="60">
                                                         </a>
@@ -378,7 +387,7 @@
                                                 </div>
                                                 <div class="WB_innerwrap" >
                                                     <div class="nameBox" style="height:38px;">
-                                                        <a href="#" class="name S_txt1" title="积分" style="padding-top: 10px">
+                                                        <a href="/home/user" class="name S_txt1" title="积分" style="padding-top: 10px">
                                                             {{$user->nickName}}  
                                                         <em class="W_ficon ficon_favorite S_ficon">
                                                             <span class="glyphicon glyphicon-tint" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
@@ -390,7 +399,7 @@
                                                     </div>
                                                     <ul class="user_atten clearfix W_f18" style="padding-left: 10px">
                                                         <li class="S_line1">
-                                                            <a bpfilter="page_frame" href="#" class="S_txt1" indepth="true">
+                                                            <a bpfilter="page_frame" href="/home/attention" class="S_txt1" indepth="true">
                                                                 <strong node-type="follow">
                                                                     {{$unum}}
                                                                 </strong>
@@ -400,7 +409,7 @@
                                                             </a>
                                                         </li>
                                                         <li class="S_line1">
-                                                            <a bpfilter="page_frame" href="#" class="S_txt1" indepth="true">
+                                                            <a bpfilter="page_frame" href="/home/fans" class="S_txt1" indepth="true">
                                                                 <strong node-type="fans">
                                                                     {{$gnum}}
                                                                 </strong>
@@ -410,7 +419,7 @@
                                                             </a>
                                                         </li>
                                                         <li class="S_line1">
-                                                            <a bpfilter="page_frame" href="#" class="S_txt1" indepth="true">
+                                                            <a bpfilter="page_frame" href="/home/user" class="S_txt1" indepth="true">
                                                                 <strong node-type="weibo">
                                                                     {{$cnum}}
                                                                 </strong>

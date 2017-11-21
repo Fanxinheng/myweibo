@@ -11,7 +11,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
         <title>
@@ -125,7 +125,7 @@
                                             suda-uatrack="key=www_unlogin_home&amp;value=billboard">
                                                 <li>
                                                     <a href="/home/label/{{$v->id}}" class="nav_item">
-                                                          {{$v->content}}
+                                                          {{$v->lcontent}}
                                                     </a>
                                                 </li>
                                             </div>

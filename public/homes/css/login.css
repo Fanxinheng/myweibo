@@ -13,7 +13,7 @@ body { font: 12px/1.3 "Arial","Microsoft YaHei"; overflow-x: hidden; color: rgb(
 :focus { outline-color: rgb(235, 115, 80); }
 .W_swficon { font-family: "WBswficon" !important; font-size: 18px !important; display: inline-block; -webkit-text-stroke-width: 0.2px; }
 @font-face {
-  font-family: "WBswficon";  font-style: normal;  font-weight: normal;  src: url('swbficon.eot') format("embedded-opentype"), url('swbficon.svg') format("svg"), url('swbficon.woff') format("woff"), url('swbficon.ttf') format("truetype");}
+  font-family: "WBswficon";  font-style: normal;  font-weight: normal;  src: url('swbficon.eot') format("embedded-opentype"), url('swbficon.svg') format("svg"), url('/homes/css/swbficon.woff') format("woff"), url('swbficon.ttf') format("truetype");}
 .W_swficon { font-size: 18px !important; }
 .W_ficon { font-family: "wbficonregular" !important; display: inline-block; }
 .ficon_arrow_left, .ficon_arrow_right { vertical-align: middle; }
@@ -179,7 +179,6 @@ fieldset legend { padding: 0px 5px; font-weight: bold; }
 @media �screen,screen	 {
   .W_piccut_h img, .W_piccut_v img { position: static; top: auto; left: auto; }
 }
-.W_app_level, .W_app_level em, .W_icon_live .l_yizhibo, .W_icon { display: inline-block; background-image: url('icon.png'); background-repeat: no-repeat; }
 @media not all, not all {
   .W_app_level, .W_app_level em, .W_icon_live .l_yizhibo, .W_icon { background-image: url('icon-x2.png'); background-size: 625px 325px; }
   .W_icon_live .l_red { background-image: url('bg_l_red-x2.png'); background-size: 34px 42px; }
@@ -335,7 +334,7 @@ a:hover .ficon_live_v2 { color: rgb(242, 68, 118); }
 .WB_global_nav .gn_logo { float: left; position: relative; width: 140px; height: 48px; }
 .WB_global_nav .gn_logo .box { position: absolute; left: -50px; top: 0px; }
 .WB_global_nav .gn_logo .box { width: 190px; height: 48px; cursor: pointer; }
-.WB_global_nav .gn_logo .box .logo { display: block; margin-left: 50px; width: 140px; height: 48px; cursor: pointer; background: rgba(0, 0, 0, 0) url('wb_logo.png') no-repeat scroll 0px 40%; }
+.WB_global_nav .gn_logo .box .logo { display: block; margin-left: 50px; width: 140px; height: 48px; cursor: pointer; background: rgba(0, 0, 0, 0)  }
 .WB_global_nav .W_ficon { font-size: 22px; width: 26px; }
 .WB_global_nav .ficon_video_v2 { font-size: 18px; }
 .WB_global_nav .ficon_search { font-size: 18px; width: 18px; }
@@ -1046,7 +1045,7 @@ html .WB_feed_v3 .WB_media_a .WB_video_h5 li::after { display: none; }
 .S_ficon_dis, a.S_ficon_dis:hover, a:hover .S_ficon_dis { cursor: default; opacity: 0.5; }
 .send_weibo { background-image: none; }
 .WB_miniblog { padding-top: 50px; }
-body, .S_page { background-color: rgb(180, 218, 240); background-image: url('/homes/images/body_repeat.png'); background-repeat: repeat-x; background-position: center 0px; }
+body, .S_page { background-color: rgb(180, 218, 240);  background-repeat: repeat-x; background-position: center 0px; }
 .send_weibo .ficon_swtxt { color: rgb(27, 127, 182); }
 body, legend, .W_input:focus, .S_txt1, .W_btn_b, .SW_fun .S_func1 { color: rgb(51, 51, 51); text-decoration: none; }
 .S_txt2, .W_input, .W_btn_b_disable, .W_btn_b_disable:hover { color: rgb(128, 128, 128); text-decoration: none; }
@@ -1066,3 +1065,4 @@ a, .S_link1, a.S_txt1:hover, a.current .S_txt1, a.S_txt2:hover, .SW_fun:hover .S
 .WB_frame { background-color: rgba(70, 149, 194, 0.3); }
 .WB_timeline .current em, .WB_timeline .S_dot, .W_gotop { background-color: rgb(71, 166, 217); }
 .WB_miniblog { background: rgba(0, 0, 0, 0) url('/homes/images/body_bg.jpg') no-repeat scroll center top; }
+
