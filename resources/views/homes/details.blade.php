@@ -84,12 +84,12 @@
 								    <label for="inputcode3" class="col-sm-2 control-label" style="margin-right:15px"><span style="color:red;margin-right: 5px;">*</span>工作:</label> 
 									
 									<select class="form-control" style="width:340px;font-size: 18px" name="work">
-									  <option value="doctor">医生</option>
-									  <option value="it">IT程序员</option>
-									  <option value="market">销售</option>
-									  <option value="teacher">教师</option>
-									  <option value="repast">餐饮</option>
-									  <option value="other">其他</option>
+									  <option value="医生">医生</option>
+									  <option value="IT程序员">IT程序员</option>
+									  <option value="销售">销售</option>
+									  <option value="教师">教师</option>
+									  <option value="餐饮">餐饮</option>
+									  <option value="其他">其他</option>
 									</select>
 								  </div>
 								  <div class="form-group">

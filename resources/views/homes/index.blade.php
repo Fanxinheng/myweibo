@@ -286,14 +286,12 @@
                                                                     
                                                                     <div class="info_list auto_login clearfix">
                                                                         
-                                                                        <label for="login_form_savestate" class="W_fl W_label" title="建议在网吧或公共电脑上取消该选项。"
-                                                                        action-data="content=建议在网吧或公共电脑上取消该选项。" action-type="customTip">
-                                                                            <input id="login_form_savestate" checked="checked" node-type="savestate"
-                                                                            tabindex="5" class="W_checkbox" type="checkbox">
-                                                                            <span class="S_txt2">
-                                                                                记住我
-                                                                            </span>
-                                                                        </label>
+                                                                        
+
+                                                                        <div style="float: right;margin-right:10px">
+                                                                            <a href="/home/admin/find">忘记密码</a>
+                                                                        </div>
+                                                                            
                                                                     </div>
                                                                     {{csrf_field()}}
                                                                     <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>

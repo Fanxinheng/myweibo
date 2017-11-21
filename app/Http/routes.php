@@ -19,21 +19,23 @@ Route::get('/', function () {
 //前台注册
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
-	//注册前首页
+	//注册前登录首页
 	Route::get('admin','AdminController@index');
 
 	//注册跳登录页面
 	Route::post('admin','AdminController@alog');
 
-	//验证手机号是否存在
+	//登录时验证手机号是否已注册
 	Route::post('admin/phones','AdminController@phone');
 
+	//忘记密码页面
+	Route::get('admin/find','AdminController@find');
 
 
 	//注册页面
 	Route::get('register','RegisterController@index');
 
-	//验证手机号是否存在
+	//注册时验证手机号是否存在
 	Route::get('register/phone','RegisterController@verification');
 
 	//检验验证码是否正确

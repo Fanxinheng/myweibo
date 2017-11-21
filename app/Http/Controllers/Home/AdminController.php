@@ -20,7 +20,7 @@ class AdminController extends Controller
 
     }
 
-    //获取表单传过来的值并添加到数据库
+    //获取表单传过来的值并添加到user表中
     public function alog(Request $request)
     {
         //
@@ -62,5 +62,13 @@ class AdminController extends Controller
             echo "0";
     	};
 	}
+
+    //忘记密码页面
+    public function find()
+    {
+        return view('homes/findpass');
+    }
+
+
 
 }
