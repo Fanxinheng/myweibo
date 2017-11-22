@@ -39,7 +39,14 @@
                     </div>
 
                     <div class="mws-form-row">
-                        <label class="mws-form-label">图片</label>
+                        <label class="mws-form-label">广告原图</label>
+                        <div class="mws-form-item">
+                            <img src="{{$res->pic}}" alt="" style="width: 200px; height:130px;" />
+                        </div>
+                    </div>
+
+                    <div class="mws-form-row">
+                        <label class="mws-form-label">修改图片</label>
                         <div class="mws-form-item">
                             <input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="No file selected..." name="pic">
                         </div>

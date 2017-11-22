@@ -24,19 +24,21 @@ class AdvertController extends Controller
 
         //对数据库进行模糊查询
         $res = advert::where('user','like','%'.$request->input('search').'%')->
-
+        //倒叙排列
         orderBy('user','asc')->
         //默认搜索5条数据
         paginate($request->input('paging',5));
-        //echo "<pre>";
+        // echo "<pre>";
         // var_dump($res);
 
        /* $count = advert::count('id');
         $request['count'] = $coi
         var_dump($count);*/
 
+
         //将数据传递到页面中
         return view('admins/advert/index',['res'=>$res,'request'=>$request]);
+
     }
 
     /**

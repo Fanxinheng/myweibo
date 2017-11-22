@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Gregwar\Captcha\CaptchaBuilder;
 use Session;
 use App\Http\Model\admin;
+use Hash;
 
 
 
@@ -45,8 +46,8 @@ class LoginController extends Controller
         }
 
         //判断密码是否正确
-        // if(!Hash::check($res['password'],$login->password)){
-        if($login->password != $res['password']){
+        if(!Hash::check($res['password'],$login->password)){
+        // if($login->password != $res['password']){
             return redirect('/admin')->with('msg','用户名或密码不正确！');
         }
 

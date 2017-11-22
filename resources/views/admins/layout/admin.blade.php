@@ -33,8 +33,12 @@
 <link rel="stylesheet" type="text/css" href="/admins/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/admins/css/themer.css" media="screen">
 
+
+<link rel="stylesheet" href="/admins/layer/skin/layer.css">
+
 <!-- 分页样式 -->
 <link rel="stylesheet" stype="text/css" href="/admins/css/paging.css" media="screen"/>
+
 
 <title>@yield('title')</title>
 
@@ -62,118 +66,6 @@
         <div id="mws-user-tools" class="clearfix">
 
         	<!-- Notifications -->
-        	<div id="mws-user-notif" class="mws-dropdown-menu">
-
-                <!-- Notifications dropdown -->
-                <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
-                        <ul class="mws-notifications">
-                        	<li class="read">
-                            	<a href="/admins/#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="read">
-                            	<a href="/admins/#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="/admins/#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="/admins/#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-	                        <a href="/admins/#">View All Notifications</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Messages -->
-            <div id="mws-user-message" class="mws-dropdown-menu">
-
-                <!-- Messages dropdown -->
-                <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
-                        <ul class="mws-messages">
-                        	<li class="read">
-                            	<a href="/admins/#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="read">
-                            	<a href="/admins/#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="/admins/#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="/admins/#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-	                        <a href="/admins/#">View All Messages</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
@@ -217,13 +109,8 @@
                 <span></span>
             </div>
 
-        	<!-- Searchbox -->
-        	<div id="mws-searchbox" class="mws-inset">
-            	<form action="typography.html">
-                	<input type="text" class="mws-search-input" placeholder="Search...">
-                    <button type="submit" class="mws-search-submit"><i class="icon-search"></i></button>
-                </form>
-            </div>
+
+
 
             <!-- Main Navigation -->
             <div id="mws-navigation">
@@ -269,6 +156,7 @@
                         <a href="#"><i class="icon-tools"></i>网站配置</a>
                         <ul class="closed">
                             <li><a href="/admin/config">配置修改</a></li>
+                            <li><a href="/admin/logo">LOGO修改</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -298,6 +186,8 @@
     <script src="/admins/js/libs/jquery.mousewheel.min.js"></script>
     <script src="/admins/js/libs/jquery.placeholder.min.js"></script>
     <script src="/admins/custom-plugins/fileinput.js"></script>
+
+    <script src="/admins/layer/layer.js"></script>
 
     <!-- jQuery-UI Dependent Scripts -->
     <script src="/admins/jui/js/jquery-ui-1.9.2.min.js"></script>
