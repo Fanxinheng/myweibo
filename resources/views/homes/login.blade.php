@@ -279,11 +279,11 @@
                                                         </div>
                                                         @if($v->image)
                                                         <div id="image">
-                                                            <img src="{{$v->image}}" style="width:100px;" id="img">
+                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
                                                         </div>
-                                                       @else
+                                                        @else
 
-                                                       @endif
+                                                        @endif
                                                         
                                                     </div>
                                                    
@@ -294,14 +294,14 @@
                                                         <ul class="WB_row_line WB_row_r4 clearfix S_line2">
                                                             <li>
                                                                 <a  class="S_txt2" title="举报">
-                                                                    <span class="report" id="">
+                                                                    <span class="report">
                                                                         <span class="line S_line1" node-type="favorite_btn_text">
                                                                             <span>
                                                                                 <em class="W_ficon ficon_favorite S_ficon">
                                                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px">
-                                                                                    <input type="hidden" id="rep" value="{{$v->cid}}">
+                                                                                    <input type="hidden" class="rep" value="{{$v->cid}}">
                                                                                     举报
                                                                                 </em>
                                                                             </span>
@@ -327,7 +327,7 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a class="S_txt2" title="评论">
+                                                                <a href="/home/blog/replay/{{$v->cid}}" class="S_txt2" title="评论">
                                                                     <span class="pos">
                                                                         <span class="line S_line1" node-type="comment_btn_text">
                                                                             <span>
@@ -351,10 +351,10 @@
                                                                 </span>
                                                             </li>
                                                             <li>
-                                                                <!--cuslike用于前端判断是否显示个性赞，1:显示-->
-                                                                <a href="javascript:void(0);" class="S_txt2" 
+                                                           
+                                                                <a href="/home/point/{{$v->cid}}" class="S_txt2" 
                                                                 title="点赞">
-                                                                    <span class="pos">
+                                                                    <span class="point">
                                                                         <span class="line S_line1">
                                                                             <span node-type="like_status" class="">
                                                                                 <em class="W_ficon ficon_praised S_txt2">
@@ -444,22 +444,44 @@
                             </div>
                         </div>
                         <script type="text/javascript">
+
+                            //微博发布
                             $('#release').on('click', function(){
+
+                                var index = layer.load(0, {shade: false});
                                 
-                                layer.msg('新微博发布成功:)');
                               });
 
+                            $('.point').on('click', function(){
+                                
+                                layer.msg('微博点赞成功:)');
+                              });
+
+                            //举报验证
                             $('.report').on('click',function(){
 
-                                var cid = $('#rep').val();
+                                var cid = $(this).find('.rep').val();
 
-                                console.log(cid);
+                                layer.msg('您确定举报此微博吗？', {
+                                  time: 0 //不自动关闭
+                                  ,btn: ['确定', '取消']
+                                  ,yes: function(index){
 
-                                $.get('/home/blog/report', {cid:cid}, function (data) {
-                                    console.log(data);
-                                })
+                                    $.get('/home/blog/report', {cid:cid}, function (data) {
+                                        if(data){
+                                            layer.close(index);
+                                            layer.msg('我们收到了您的举报，感谢您的监督:)', {
+                                              icon: 6
+                                              ,btn: ['再见']
+                                            });
+                                        }else{
 
-                            })
+                                        }
+                                    });
+                                   
+                                  }
+                                });    
+                            });
 
                         </script>
                     </body>

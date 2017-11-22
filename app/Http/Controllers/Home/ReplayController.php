@@ -12,10 +12,12 @@ use App\Http\Model\user_info;
 use App\Http\Model\replay;
 use App\Http\Model\label;
 
-
+use Session;
 
 class ReplayController extends Controller
 {
+
+    //前台未登录加载评论页面
     public function create ($id)
     {
 
@@ -31,7 +33,7 @@ class ReplayController extends Controller
     	return view('homes/replay',['label'=>$label,'res'=>$res,'replay'=>$replay]);
     }
 
-
+    //微博评论功能
     public function store (Request $request)
     {
     	//获取评论内容
@@ -41,7 +43,7 @@ class ReplayController extends Controller
     	$res['time'] = time();
 
     	//获取评论人id
-    	$res['rid'] = 2;
+    	$res['rid'] = Session('uid');
 
     	//将指定微博评论数量+1
     	$rnum = contents::where('cid',$request->only('tid'))->value('rnum');
@@ -50,15 +52,38 @@ class ReplayController extends Controller
 
     	$data = contents::where('cid',$request->only('tid'))->update($num);
 
+        //登录用户积分+1
+        $socre = user_info::where('uid',Session('uid'))->value('socre');
+
+        $socres['socre'] = $socre + 1;
+
+        $data2 = user_info::where('uid',Session('uid'))->update($socres);
+
     	//将转发内容存入数据库
     	$data1 = replay::insert($res);
 
-    	if($data && $data1){
+    	if($data && $data1 && $data2){
     		return back();
     	}else{
     		return back();
 
     	}
 
+    }
+
+
+    //ajax判断微博评论是否为空
+    public function empty (Request $request)
+    {
+        //获取评论内容
+        $res['content'] = $request->input('content');
+
+        //判断并返回标记
+        if($res['content'] == ''){
+            echo 0;
+        }else{
+            
+            echo 1;
+        }
     }
 }

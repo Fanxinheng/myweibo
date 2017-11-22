@@ -168,8 +168,15 @@
                                                         <h3 class="list_title_s">
                                                             <div style="word-break:break-all">
                                                                 {{$v->content}}
-                                                            </div>
+                                                            </div> 
                                                         </h3>
+                                                        @if($v->image)
+                                                        <div id="image">
+                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                                        </div>
+                                                        @else
+
+                                                        @endif
                                                         </a>
                                                         <div class="subinfo_box clearfix">
                                                             

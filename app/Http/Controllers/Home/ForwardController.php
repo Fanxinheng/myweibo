@@ -17,6 +17,7 @@ use Session;
 
 class ForwardController extends Controller
 {
+    //未登录时转发页面
     public function create ($id)
     {
 
@@ -33,6 +34,8 @@ class ForwardController extends Controller
     	return view('homes/forward',['label'=>$label,'res'=>$res,'forward'=>$forward]);
     }
 
+
+    //微博转发功能
     public function store (Request $request)
     {
     	//获取转发内容
@@ -47,14 +50,21 @@ class ForwardController extends Controller
     	//将指定微博转发数量+1
     	$fnum = contents::where('cid',$request->only('tid'))->value('fnum');
 
-    	$num['fnum'] = $fnum +1;
+    	$fnums['fnum'] = $fnum +1;
 
-    	$data = contents::where('cid',$request->only('tid'))->update($num);
+    	$data = contents::where('cid',$request->only('tid'))->update($fnums);
 
     	//将转发内容存入数据库
     	$data1 = forward::insert($res);
 
-    	if($data && $data1){
+        //登录用户积分+2
+        $socre = user_info::where('uid',Session('uid'))->value('socre');
+
+        $socres['socre'] = $socre +2;
+
+        $data2 = user_info::where('uid',Session('uid'))->update($socres);
+
+    	if($data && $data1 && $data2){
     		return back();
     	}else{
     		return back();

@@ -89,6 +89,10 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 
 //=========================关于微博===============================//
 
+
+	//前台登录成功后进入首页
+	Route::get('/login','LoginController@index');
+
 	//热门微博列表
 	Route::get('/index/hot','LoginController@hot');
 
@@ -101,14 +105,20 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//举报微博
 	Route::get('/blog/report/','BlogController@report');
 
-	//加载转发微博页面
+	//加载微博转发页面
 	Route::get('/blog/forward/{id}','BlogController@forward');
+
+	//加载微博评论页面
+	Route::get('/blog/replay/{id}','BlogController@replay');
 	
 	//微博转发功能
 	Route::post('/forward/store/','ForwardController@store');
 
 	//微博评论功能
 	Route::post('/replay/store/','ReplayController@store');
+
+	//ajax判断微博评论是否为空
+	Route::post('/replay/empty/','ReplayController@empty');
 
 	//微博点赞功能
 	Route::get('/point/{id}','PointController@point');
@@ -121,9 +131,6 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	
 	//完善个人信息
 	Route::get('/details','DetailsController@index');
-
-	//前台登录成功后进入首页
-	Route::get('/login','LoginController@index');
 
 	//检验昵称是否存在
 	Route::get('details/uname','DetailsController@uname');

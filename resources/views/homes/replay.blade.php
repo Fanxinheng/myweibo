@@ -167,7 +167,13 @@ PE html>
                                                                     {{$res->content}}
                                                                 </div>
                                                             </h3>
-                                                            
+                                                            @if($res->image)
+                                                            <div id="image">
+                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"" style="width:100px;" id="img">
+                                                            </div>
+                                                            @else
+
+                                                            @endif
                                                             <div class="subinfo_box clearfix">
                                                                 
                                                                     <span class="subinfo_face ">
@@ -188,14 +194,11 @@ PE html>
                                                             
                                                         <hr>
 
-                                                        <form action="/home/replay/store/" method="post">
-                                                            <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
-                                                            <input type="hidden" name="uid" value="{{$res->uid}}">
-                                                            <input type="hidden" name="tid" value="{{$res->cid}}">
-                                                            {{csrf_field()}}
-                                                            <button id="replay" style="margin:5px 0 5px 605px;" class="btn btn-default">评论</button>
-
-                                                        </form>
+                                                    <a href="#">
+                                                        <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
+                                                       
+                                                        <button id="replay" style="margin:5px 0 5px 605px;" class="btn btn-default">评论</button>
+                                                    </a>
 
                                                     <!-- 转发内容 -->
 

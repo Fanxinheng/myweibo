@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
+        <meta name="csrf_token" content="{{ csrf_token() }}"/>
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
@@ -237,13 +238,13 @@
                                             <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                             class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
                                             action-type="feed_list_item">
-                                            <form action="/home/forward/store/" method="post">
+                                            <form action="/home/replay/store/" method="post">
                                                 <div class="WB_feed_detail clearfix" node-type="feed_content" ">
-                                                    <textarea class="form-control" rows="3" name="fcontent"></textarea>
+                                                    <textarea class="form-control" rows="3" name="rcontent"></textarea>
                                                     <input type="hidden" name="uid" value="{{$content->uid}}">
                                                     <input type="hidden" name="tid" value="{{$content->cid}}">
                                                     {{csrf_field()}}
-                                                    <button class="btn btn-default btn-sm" id="report" style="float: right;margin:5px 0 5px 0">转发</button>
+                                                    <button class="btn btn-default btn-sm" id="replay" style="float: right;margin:5px 0 5px 0">评论</button>
                                                    
                                                 </div> 
                                             </form>
@@ -252,7 +253,7 @@
                                     </div>
                                 </div>
                                 
-                                @if($content->fnum == 0)
+                                @if($content->rnum == 0)
                                 <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                 class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
                                 action-type="feed_list_item">
@@ -263,7 +264,7 @@
                                                 <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
                                                 target="_top" class="W_f14 W_fb S_txt1" title="{{$v->nickName}}" 
                                                 usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
-                                                    这么好的微博还没有人转发那，快去试试吧:)
+                                                    这么好的微博还没有人评论那，快去试试吧:)
                                                 </a>
                                                
                                             </div>
@@ -278,7 +279,7 @@
                                 
 
 
-                                @foreach($forward as $v)
+                                @foreach($replay as $v)
                                 <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                 class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
                                 action-type="feed_list_item">
@@ -314,19 +315,13 @@
                                                 <!-- minzheng add part 2 -->
                                             </div>
 
-                                            @if($v->fcontent)
+                                            
                                             <div class="WB_text W_f14" node-type="feed_list_content" style="word-break:break-all">
                                                 
-                                                {{$v->fcontent}}
+                                                {{$v->rcontent}}
                                                 
                                             </div>
-                                            @else
-                                            <div class="WB_text W_f14" node-type="feed_list_content" style="word-break:break-all">
-                                                
-                                                转发微博
-                                                
-                                            </div>
-                                            @endif
+                                            
                                         </div>
                                        
                                     </div>
@@ -405,23 +400,35 @@
 
                         </div>
                         <script type="text/javascript">
-                            $('#report').on('click', function(){
+                            
+                            $('#replay').mouseover(function() {
+                             
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                                   }
+                                });
+
+                                var content = $(this).siblings('textarea').val();
                                 
-                                layer.msg('微博转发成功:)');
-                              });
+                                $.post('/home/replay/empty', {content:content}, function(data){
+                                    if(data == 0){
+                                        layer.alert('微博评论内容不能为空！', {
+                                          icon:2 ,
+                                        })
+                                        
+                                        return false;
+                                        
+                                    }else{
+                                        $('#replay').click(function() {
+                                            layer.msg('微博评论成功:)');
+                                        });
 
-                            $('.report').on('click',function(){
-
-                                var cid = $('#rep').val();
-
-                                console.log(cid);
-
-                                $.get('/home/blog/report', {cid:cid}, function (data) {
-                                    console.log(data);
-                                })
-
-                            })
-
+                                    }
+                                });
+                                
+                                
+                            });         
                         </script>
                     </body>
 
