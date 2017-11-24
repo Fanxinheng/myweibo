@@ -322,11 +322,6 @@
 
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
-
-    <!-- Theme layer -->
-    <script type="text/javascript" src="/admins/layer/jquery.js'"></script>
-    <script type="text/javascript" src="/admins/layer/layer.js'"></script>
-    <script type="text/javascript" src="/admins/layer/extend/layer.ext.js'"></script>
     @section('js')
 
 

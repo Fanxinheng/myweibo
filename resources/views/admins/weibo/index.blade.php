@@ -63,7 +63,7 @@
             aria-controls="DataTables_Table_1" 
             type="text"  
             name="content" 
-            value="{{isset($_GET['content']) ? $_GET['content'] : $v->id }}"/>
+            value="{{isset($_GET['content']) ? $_GET['content'] : '' }}"/>
             {{ csrf_field()}}
 
         </label>

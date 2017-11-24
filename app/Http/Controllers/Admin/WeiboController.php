@@ -113,13 +113,15 @@ class WeiboController extends Controller
     public function update(Request $request, $id)
     {   
         //查询contents表中微博ID与模板页面传递过来要删除的微博ID条件相同的赋值给$res
-        $res = contents::where('cid',$id)->value('cid');
+        // $res = contents::where('cid',$id)->value('cid');
 
         // 通过ID查询到要删除的那一条微博ID从数据库删除
-        $resc = contents::where('cid',$id)->delete($res);
+        // $resc = contents::where('cid',$id)->delete($res);
 
+        // $resa = replay::where('rid',$id)->delete($resc);
+        var_dump($id);die;
         // 重新加载页面重走路由
-        return view('admin/weibo');
+        // return view('admin/weibo');
     }
 
     /**
