@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Model\notice;
+
 class NoticeController extends Controller
 {
     /**
@@ -16,8 +18,10 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        return view('admins/notice/index');
-        
+        //查询数据库notice表所有内容
+        $res = notice::get();
+        //返回到index页面视图中
+        return view('admins/notice/index', ['res' => $res]);   
     }
 
     /**
@@ -26,9 +30,8 @@ class NoticeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admins/notice/add');
-        //
+    {   
+        return view('admins/notice/add');  
     }
 
     /**
@@ -38,8 +41,16 @@ class NoticeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+                                                                                     
+        $res = $request->except('_token');
+        $res['time']=time();
+        $data = notice::insert($res);
+         if($data){
+             return redirect('admin/notice');
+         } else {
+             return back();
+         }       
     }
 
     /**
