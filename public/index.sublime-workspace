@@ -1,0 +1,610 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"l",
+				"left"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"if",
+				"if\tif …"
+			],
+			[
+				"res",
+				"res"
+			],
+			[
+				"con",
+				"constant"
+			],
+			[
+				"content",
+				"contents"
+			],
+			[
+				"contetn",
+				"contents"
+			],
+			[
+				"onclick",
+				"ondblclick\tAttr"
+			],
+			[
+				"user",
+				"user_info"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"ho",
+				"hots"
+			],
+			[
+				"hot",
+				"hot"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"reque",
+				"request"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"fl",
+				"float"
+			],
+			[
+				"requ",
+				"request"
+			],
+			[
+				"list",
+				"list-style"
+			],
+			[
+				"al",
+				"align-content"
+			],
+			[
+				"align",
+				"align-content"
+			],
+			[
+				"echo",
+				"echo\techo \"…\""
+			],
+			[
+				"index",
+				"index"
+			],
+			[
+				"up",
+				"update"
+			],
+			[
+				"has",
+				"hash_file"
+			],
+			[
+				"request",
+				"Request"
+			],
+			[
+				"ro",
+				"route"
+			],
+			[
+				"redir",
+				"readdir"
+			],
+			[
+				"function",
+				"function"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
+				"php",
+				"php"
+			],
+			[
+				"Me",
+				"memcache_debug"
+			],
+			[
+				"new",
+				"newIco"
+			],
+			[
+				"st",
+				"statics"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"_",
+				"_POST"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"ac",
+				"action\tAttr"
+			],
+			[
+				"tr",
+				"tr\tTag"
+			],
+			[
+				"bottom",
+				"border-bottom"
+			],
+			[
+				"rpv",
+				"RPV"
+			],
+			[
+				"用户名",
+				"用户名格式不正确"
+			],
+			[
+				"uv",
+				"UV"
+			],
+			[
+				"渐",
+				"渐显"
+			],
+			[
+				"chec",
+				"checked"
+			],
+			[
+				"che",
+				"che"
+			],
+			[
+				"check",
+				"checkbox"
+			],
+			[
+				"text",
+				"text"
+			],
+			[
+				"select",
+				"select"
+			],
+			[
+				"div",
+				"divs"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"json_",
+				"json_encode"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"创建",
+				"创建ajax"
+			],
+			[
+				"nth",
+				"nth-child"
+			],
+			[
+				"img",
+				"images"
+			],
+			[
+				"im",
+				"images"
+			],
+			[
+				"remover",
+				"removeAttr"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"arr",
+				"array_key_exists"
+			],
+			[
+				"sub",
+				"substr_count"
+			],
+			[
+				"array",
+				"array_search"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"bo",
+				"border"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"move",
+				"moveTo"
+			],
+			[
+				"se",
+				"setTimeout"
+			],
+			[
+				"bu",
+				"buts"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: pci",
+				"Package Control: Create Package File"
+			]
+		],
+		"width": 540.0
+	},
+	"console":
+	{
+		"height": 220.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/HotController.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/WeiboController.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/weibo/index.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/routes.php",
+		"/D/ruanjian/feiqiu/feiq/Recv Files/login.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/layout/admin.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/ReportController.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/report/index.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/hot/index.blade.php",
+		"/D/ruanjian/wamp/www/myapp/resources/views/admins/user/index.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/storage/framework/views/341e20eb5b8544e104f96eba5ea0ebb4",
+		"/D/ruanjian/wamp/www/myapp/app/Http/Controllers/UserController.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Model/report.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Model/contents.php",
+		"/D/ruanjian/vagrant_new/myweibo/storage/framework/views/f9633db9bc0316efe6a7d486fe9f5005",
+		"/C/Users/Administrator/Desktop/welcome.blade.php",
+		"/D/ruanjian/wamp/www/KeCheng/lesson49_Javascript_04/01_array-bianli.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson33_OOP_PDO/4.PDO_YCL.php",
+		"/D/ruanjian/wamp/www/KeCheng/lesson33_OOP_PDO/2.PDO.php",
+		"/D/ruanjian/wamp/www/KeCheng/lesson25_Mysql_03/demo1.php",
+		"/D/ruanjian/vagrant_new/myweibo/composer.json",
+		"/D/ruanjian/vagrant_new/myweibo/vendor/autoload.php",
+		"/D/ruanjian/wamp/www/xiangmu/laravel/app/Http/Controllers/UserController.php",
+		"/D/ruanjian/wamp/www/myapp/resources/views/admins/user/add.blade.php",
+		"/D/ruanjian/wamp/www/myapp/app/Http/Controllers/AdminLoginController.php",
+		"/D/ruanjian/vagrant_new/myweibo/public/index.sublime-project",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/Default/Distraction Free.sublime-settings",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/README.md",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/LESS/README.md",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/NoticeController.php",
+		"/D/ruanjian/vagrant_new/myweibo/public/admins/css/table.css",
+		"/D/ruanjian/vagrant_new/laravel_5.1/app/Http/Controllers/Controller.php",
+		"/D/ruanjian/vagrant_new/laravel_5.1/config/app.php",
+		"/D/ruanjian/vagrant_new/laravel_5.1/resources/views/homes/login.blade.php",
+		"/D/ruanjian/wamp/www/myapp/resources/views/admins/user/edit.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/notice/add.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/notice/index.blade.php",
+		"/D/ruanjian/wamp/www/xiangmu/laravel/resources/views/admin/extends/add.blade.php",
+		"/D/ruanjian/feiqiu/feiq/Recv Files/myapp/resources/views/admins/user/index.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/hot/weibo.blade.php",
+		"/C/Users/Administrator/Desktop/redis_sl.php",
+		"/D/ruanjian/wamp/www/KeCheng/lesson76_laravel_04/HTML_b/dashboard.html",
+		"/D/ruanjian/feiqiu/feiq/Recv Files/myapp/resources/views/admins/user/add.blade.php",
+		"/D/ruanjian/feiqiu/feiq/Recv Files/myapp/app/Http/Controllers/UserController.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Model/replay.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/report/report.blade.php",
+		"/D/ruanjian/wamp/www/xiangmu/laravel/resources/views/admin/news/add.blade.php",
+		"/D/ruanjian/wamp/www/xiangmu/laravel/resources/views/admin/news/index.blade.php",
+		"/D/ruanjian/wamp/www/xiangmu/laravel/resources/views/admin/news/menu.blade.php",
+		"/D/ruanjian/wamp/www/KeCheng/lesson55_Javascript_10/03_bak.html",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/hot/show.blade.php",
+		"/D/ruanjian/wamp/www/KeCheng/lesson46_Javascript_01/01_use-script.html",
+		"/D/ruanjian/vagrant_new/myweibo/public/admins/css/form.css",
+		"/D/ruanjian/wamp/www/KeCheng/lesson76_laravel_04/HTML_b/form_layouts.html",
+		"/D/ruanjian/vagrant_new/myweibo/storage/framework/views/0f25bcae3b7c0e90ac454c48834ad6d0",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/admins/add.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/AdminsController.php",
+		"/D/ruanjian/vagrant_new/myweibo/public/admins/bootstrap/css/bootstrap.css",
+		"/D/ruanjian/wamp/www/laravel_5.1/app/Http/routes.php",
+		"/D/ruanjian/wamp/www/laravel_5.1/resources/views/homes/login.blade.php",
+		"/D/ruanjian/wamp/www/laravel_5.1/app/Http/Controllers/home/LoginController.php",
+		"/D/ruanjian/vagrant_new/myweibo/song.html",
+		"/D/ruanjian/wamp/www/laravel_5.1/.env",
+		"/D/ruanjian/wamp/www/KeCheng/lesson58_Jquery_02/fuxi.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson58_Jquery_02/form.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson58_Jquery_02/01_offset.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson58_Jquery_02/02_elemet.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson57_Jquery_01/test/type_3.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson56_Javascript_ajax_11/01_ajax.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson56_Javascript_ajax_11/01_ajax.php",
+		"/D/ruanjian/wamp/www/KeCheng/lesson56_Javascript_ajax_11/jquery/bak.html",
+		"/C/Users/Administrator/Documents/Tencent Files/1727771360/FileRecv/w3school/www.w3school.com.cn/ajax/ajax_asp_php.asp.htm",
+		"/D/ruanjian/wamp/www/laravel_5.1/app/Http/Controllers/home/YanController.php",
+		"/D/ruanjian/wamp/www/laravel_5.1/resources/views/welcome.blade.php",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/D/ruanjian/wamp/bin/apache/apache2.4.18/conf/extra/httpd-vhosts.conf",
+		"/D/ruanjian/wamp/bin/php/php7.0.4/extras/ssl/openssl.cnf",
+		"/D/ruanjian/wamp/www/laravel_5.1/app/Http/Controllers/Home/LoginController.php",
+		"/D/ruanjian/wamp/www/moban/后台1/login.html",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/Alignment/Base File.sublime-settings",
+		"/D/ruanjian/wamp/www/laravel_5.1/app/Http/Controllers/Home/YanController.php",
+		"/D/ruanjian/vagrant_new/laravel_5.1/app/Http/routes.php",
+		"/D/ruanjian/wamp/www/laravel_5.1/public/index.php",
+		"/D/ruanjian/wamp/www/laravel_5.1/resources/views/home/login.blade.php",
+		"/D/ruanjian/wamp/www/laravel_5.1/resources/views/home/yan.blade.php",
+		"/D/ruanjian/wamp/www/laravel_5.1/resources/views/home/xinxi.blade.php",
+		"/D/ruanjian/vagrant_new/laravel_5.1/composer.json",
+		"/D/ruanjian/wamp/bin/php/php7.1.11/phpForApache.ini",
+		"/D/ruanjian/wamp/bin/php/php7.1.11/wampserver.conf",
+		"/D/ruanjian/wamp/bin/php/php7.1.11/php.ini",
+		"/D/ruanjian/wamp/bin/php/php5.6.19/php.ini",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/admin/HotController.php",
+		"/D/ruanjian/vagrant_new/laravel_5.1/.env",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/HotController.php",
+		"/D/ruanjian/vagrant_new/myweibo/public/admins/php/wizard.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/notice/notice.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/.env.example",
+		"/C/Users/Administrator/Downloads/@我的微博 微博-随时随地发现新鲜事.htm",
+		"/D/ruanjian/vagrant_new/laravel_5.1/public/.htaccess",
+		"/D/ruanjian/vagrant_new/Vagrantfile",
+		"/D/ruanjian/vagrant_new/laravel_5.1/public/index.php",
+		"/D/ruanjian/vagrant_new/index.html",
+		"/D/ruanjian/vagrant_work/index.html",
+		"/D/ruanjian/vagrant_work/vagrantfile",
+		"/D/ruanjian/vagrant_work/index.php",
+		"/D/ruanjian/vagrant_work/Vagrantfile",
+		"/D/ruanjian/Vagrant_01/Vagrantfile",
+		"/D/ruanjian/VirtualBox/VBoxManage.exe",
+		"/D/ruanjian/wamp/www/laravel/lamp192/app/Http/Controllers/UserController.php",
+		"/D/ruanjian/wamp/www/laravel/lamp192/.env",
+		"/D/ruanjian/wamp/www/laravel/lamp192/app/Http/Controllers/AdminController.php",
+		"/D/ruanjian/wamp/www/laravel/lamp192/resources/views/admins/user/add.blade.php",
+		"/D/ruanjian/wamp/www/laravel/lamp192/app/Http/routes.php",
+		"/D/ruanjian/wamp/www/xiangmu/laravel/resources/views/admin/layout/admins.blade.php",
+		"/D/ruanjian/wamp/www/xiangmu/laravel/app/Http/routes.php",
+		"/D/ruanjian/wamp/www/laravel/lamp192/storage/framework/views/285c395f25f6edcde8be0545fb723ee5",
+		"/D/ruanjian/wamp/www/KeCheng/lesson75_laravel_03/laravel/error.html",
+		"/D/ruanjian/wamp/www/laravel/lamp192/resources/views/layout/admins.blade.php",
+		"/D/ruanjian/wamp/www/xiangmu/laravel/app/Http/Kernel.php",
+		"/D/ruanjian/wamp/www/KeCheng/lesson60_Bootstrap_01/bootstrap/03_table.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson60_Bootstrap_01/bootstrap/04_zujian.html",
+		"/D/ruanjian/wamp/www/KeCheng/lesson60_Bootstrap_01/bootstrap/02_peizhi.html",
+		"/D/ruanjian/wamp/www/test/主页.html",
+		"/C/Users/Administrator/.ssh/id_rsa.pub",
+		"/C/Users/Administrator/Desktop/1.html",
+		"/C/Users/Administrator/Desktop/git_test/3.html"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 256.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"rep",
+			"release",
+			"jquery",
+			",'",
+			"id",
+			"request",
+			"endif",
+			"id",
+			"search",
+			"request"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 88.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 144.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 143.0
+	},
+	"pinned_build_system": "",
+	"project": "index.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"341e20eb5b8544e104f96eba5ea0ebb4",
+				"myweibo\\storage\\framework\\views\\341e20eb5b8544e104f96eba5ea0ebb4"
+			],
+			[
+				"f9633db9bc0316efe6a7d486fe9f5005",
+				"storage\\framework\\views\\f9633db9bc0316efe6a7d486fe9f5005"
+			],
+			[
+				"0f25bcae3b7c0e90ac454c48834ad6d0",
+				"myweibo\\storage\\framework\\views\\0f25bcae3b7c0e90ac454c48834ad6d0"
+			],
+			[
+				"285c395f25f6edcde8be0545fb723ee5",
+				"laravel\\lamp192\\storage\\framework\\views\\285c395f25f6edcde8be0545fb723ee5"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

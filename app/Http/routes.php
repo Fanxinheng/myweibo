@@ -188,7 +188,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 	Route::get('/password/delete/{id}','PwdController@delete');
 
 	//后台热门微博资源路由
-	Route::resource('/hot','HotController');
+
+	Route::resource('hot','HotController');
+	//后台微博管理资源路由
+	Route::resource('weibo','WeiboController');
 
 	//后台举报管理资源路由
 	Route::resource('/report','ReportController');
