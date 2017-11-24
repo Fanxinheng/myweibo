@@ -19,9 +19,9 @@ class NoticeController extends Controller
     public function index()
     {
         //查询数据库notice表所有内容
-        $res = notice::get();
+        $res = notice::paginate(4);
         //返回到index页面视图中
-        return view('admins/notice/index', ['res' => $res]);   
+        return view('admins/notice/index', ['res' => $res]);
     }
 
     /**
@@ -30,8 +30,8 @@ class NoticeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
-        return view('admins/notice/add');  
+    {
+        return view('admins/notice/add');
     }
 
     /**
@@ -41,8 +41,8 @@ class NoticeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-                                                                                     
+    {
+
         $res = $request->except('_token');
         $res['time']=time();
         $data = notice::insert($res);
@@ -50,7 +50,7 @@ class NoticeController extends Controller
              return redirect('admin/notice');
          } else {
              return back();
-         }       
+         }
     }
 
     /**
@@ -96,6 +96,6 @@ class NoticeController extends Controller
     public function destroy($id)
     {
         //
-        
+
     }
 }

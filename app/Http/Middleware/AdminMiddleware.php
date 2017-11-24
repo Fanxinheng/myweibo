@@ -17,7 +17,7 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         //验证用户是否登录
-        if(session('uid')){
+        if(session('pid')){
             return $next($request);
         } else {
             return redirect('/admin');

@@ -28,20 +28,20 @@
 
 	@endif
     	<form action="/admin/notice" method="post" class="mws-form" enctype="multipart/form-data">
-    		<div class="mws-form-inline">       			
+    		<div class="mws-form-inline">
 			<div class="mws-form-row">
                 <label class="mws-form-label">系统公告</label>
                 <div class="mws-form-item">
                     <textarea class="large" cols="" rows="" name="content"></textarea>
                 </div>
-            </div>       			
+            </div>
     		</div>
     		<div class="mws-button-row">
     			{{csrf_field()}}
-    			<input type="submit" class="btn btn-danger" value="添加">		
+    			<input type="submit" class="btn btn-default" value="添加">
     		</div>
     	</form>
-    </div>    	
+    </div>
 </div>
 
 @endsection
@@ -51,7 +51,7 @@
 
 <script type="text/javascript">
 	// alert($);
-	
+
 	$('.mws-form-message').delay(3000).slideUp(1000);
 </script>
 

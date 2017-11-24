@@ -21,4 +21,5 @@ class report extends Model
 
     	return $this->hasMany('App\Http\Model\contents','cid','tid');
     }
+
 }
