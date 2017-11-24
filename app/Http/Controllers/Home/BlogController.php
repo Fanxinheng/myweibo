@@ -16,6 +16,8 @@ use App\Http\Model\forward;
 use App\Http\Model\report;
 use App\Http\Model\replay;
 
+use zgldh\QiniuStorage\QiniuStorage;
+
 use Session;
 
 class BlogController extends Controller
@@ -113,6 +115,47 @@ class BlogController extends Controller
         $replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
 
         return view('homes/blog/replay',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'content'=>$content,'replay'=>$replay]);
+        
+    }
+
+
+    //删除自己的微博
+    public function destroy (Request $request)
+    {
+        //获取删除ID
+        $cid = $_GET['did'];
+
+        //删除此微博的转发
+        $bool = forward::where('tid',$cid)->delete();
+
+        //删除此微博的评论
+        $bool1 = replay::where('tid',$cid)->delete();
+
+        //删除此微博的举报
+        $bool2 = report::where('tid',$cid)->delete();
+
+        //删除七牛云微博图片
+        $image = contents::where('cid',$cid)->value('image');
+
+        if($image){
+
+            //初始化七牛云
+            $disk = QiniuStorage::disk('qiniu');
+
+            //删除云中图片
+            $disk->delete($image);
+
+        }
+
+        //删除此微博内容
+        $bool3 = contents::where('cid',$cid)->delete();
+
+        //查询登录用户微博数量
+        $cnum = contents::where('uid',Session('uid'))->count();
+        
+        return $cnum;
+
+
         
     }
 }

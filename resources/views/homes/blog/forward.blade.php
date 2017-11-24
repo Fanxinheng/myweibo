@@ -137,6 +137,17 @@
                                             </a>
                                         </h3>
                                     </div>
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/forward" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    微博转发
+                                                </span>
+                                            </a>
+                                        </h3>
+                                    </div>
 
                                     @foreach($label as $v)
                                     <div class="lev_Box lev_Box_noborder" >

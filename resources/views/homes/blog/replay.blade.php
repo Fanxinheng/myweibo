@@ -138,6 +138,17 @@
                                             </a>
                                         </h3>
                                     </div>
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/forward" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    微博转发
+                                                </span>
+                                            </a>
+                                        </h3>
+                                    </div>
 
                                     @foreach($label as $v)
                                     <div class="lev_Box lev_Box_noborder" >
@@ -238,13 +249,13 @@
                                             <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                             class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
                                             action-type="feed_list_item">
-                                            <form action="/home/replay/store/" method="post">
+                                            <form id="replay_form" method="post">
                                                 <div class="WB_feed_detail clearfix" node-type="feed_content" ">
                                                     <textarea class="form-control" rows="3" name="rcontent"></textarea>
                                                     <input type="hidden" name="uid" value="{{$content->uid}}">
                                                     <input type="hidden" name="tid" value="{{$content->cid}}">
                                                     {{csrf_field()}}
-                                                    <button class="btn btn-default btn-sm" id="replay" style="float: right;margin:5px 0 5px 0">评论</button>
+                                                    <div class="btn btn-default btn-sm" id="replay" style="float: right;margin:5px 0 5px 0">评论</div>
                                                    
                                                 </div> 
                                             </form>
@@ -401,6 +412,7 @@
                         </div>
                         <script type="text/javascript">
                             
+                            //判断评论内容是否为空以及微博评论
                             $('#replay').mouseover(function() {
                              
                                 $.ajaxSetup({
@@ -409,7 +421,8 @@
                                    }
                                 });
 
-                                var content = $(this).siblings('textarea').val();
+                                //获取评论内容
+                                 content = $(this).siblings('textarea').val();
                                 
                                 $.post('/home/replay/empty', {content:content}, function(data){
                                     if(data == 0){
@@ -420,15 +433,56 @@
                                         return false;
                                         
                                     }else{
-                                        $('#replay').click(function() {
-                                            layer.msg('微博评论成功:)');
-                                        });
-
+                                        
                                     }
                                 });
                                 
                                 
-                            });         
+                            }); 
+
+                            $('#replay').click(function() {
+
+                                //获取登录用户ID
+                                var uid = $(this).siblings('input[name=uid]').val();
+
+                                //获取评论微博ID
+                                var tid = $(this).siblings('input[name=tid]').val();
+
+                                
+
+                                console.log(content);
+                                console.log(uid);
+                                console.log(tid);
+
+                                $.ajax({
+                                    type: "post",
+                                    url: "/home/replay/store/",
+                                    data: {rcontent:content,uid:uid,tid:tid},
+                                    
+                                    beforeSend:function(){
+                                          
+                                           a = layer.load();
+                                      },
+                                    success: function(data) {
+                                        layer.close(a);
+                                        console.log(data);
+                                        /*console.log(data.rcontent);
+                                        console.log(data.times);
+                                        console.log(data.times);*/
+                                        // $('#img1').attr('src','5.jpg');
+
+                                      // $('#art_thumb').val(data);
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert("上传失败，请检查网络后重试");
+                                    }
+                                });
+
+                                layer.alert('微博评论成功:)', {
+                                          icon:1 ,
+                                        })
+                            });
+
                         </script>
                     </body>
 

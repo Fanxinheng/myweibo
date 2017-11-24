@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
+        <meta name="csrf_token" content="{{ csrf_token() }}"/>
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
@@ -137,6 +138,17 @@
                                             </a>
                                         </h3>
                                     </div>
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/forward" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    微博转发
+                                                </span>
+                                            </a>
+                                        </h3>
+                                    </div>
 
                                     @foreach($label as $v)
                                     <div class="lev_Box lev_Box_noborder" >
@@ -226,7 +238,7 @@
                                 
 
                                 @foreach($index as $v)
-                                <div id="v6_pl_content_homefeed">
+                                <div id="v6_pl_content_homefeed" class="blog">
                                     <div node-type="homefeed">
                                         
                                         <!--feed list-->
@@ -242,7 +254,7 @@
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
-                                                            href="3305085281.html" title="{{$v->nickName}}" indepth="true">
+                                                            href="/home/user" title="{{$v->nickName}}" indepth="true">
                                                                 <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->nickName}}"
                                                                 alt="" src="{{$v->photo == null ? '/homes/uploads/default.jpg' : $v->photo}}" class="W_face_radius"
                                                                 width="50" height="50">
@@ -253,15 +265,16 @@
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
-                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
+                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/user">
                                                                 {{$v->nickName}}
                                                             </a>
                                                             <!-- 判断微博是否为登录用户自己发布 -->
                                                             @if($uid == $v->uid)
-                                                                
-                                                                <a href="#" class="glyphicon glyphicon-remove" style="float: right" title="删除微博">
-                                                                    
+                                                                <!-- <a href="/home/blog/destory/{{$v->cid}}"></a> -->
+                                                                <a class="glyphicon glyphicon-remove destroy" style="float: right;cursor: pointer;" title="删除微博">
+                                                                    <input type="hidden" name="destroy" value="{{$v->cid}}">
                                                                 </a>
+
                                                             @endif
                                                             
                                                            
@@ -274,9 +287,11 @@
                                                             
                                                             <!-- minzheng add part 2 -->
                                                         </div>
-                                                        <div class="WB_text W_f14" node-type="feed_list_content" style="word-break:break-all">
-                                                            {{$v->content}} ​​​​
-                                                        </div>
+                                                        <a href="/home/blog/replay/{{$v->cid}}">
+                                                            <div class="WB_text W_f14" node-type="feed_list_content" style="word-break:break-all">
+                                                                {{$v->content}} ​​​​
+                                                            </div>
+                                                        </a>
                                                         @if($v->image)
                                                         <div id="image">
                                                             <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
@@ -295,13 +310,14 @@
                                                             <li>
                                                                 <a  class="S_txt2" title="举报">
                                                                     <span class="report">
+                                                                        <input type="hidden" class="rep" value="{{$v->cid}}">
                                                                         <span class="line S_line1" node-type="favorite_btn_text">
                                                                             <span>
                                                                                 <em class="W_ficon ficon_favorite S_ficon">
                                                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px">
-                                                                                    <input type="hidden" class="rep" value="{{$v->cid}}">
+                                                                                    
                                                                                     举报
                                                                                 </em>
                                                                             </span>
@@ -351,16 +367,18 @@
                                                                 </span>
                                                             </li>
                                                             <li>
-                                                           
-                                                                <a href="/home/point/{{$v->cid}}" class="S_txt2" 
+                                                                <!-- <a href="/home/point/{{$v->cid}}"></a> -->
+                                                                <a class="S_txt2" 
                                                                 title="点赞">
                                                                     <span class="point">
+                                                                        <input type="hidden" name="point" value="{{$v->cid}}">
                                                                         <span class="line S_line1">
-                                                                            <span node-type="like_status" class="">
+                                                                            <span id="point{{$v->cid}}" node-type="like_status" onclick="point({{$v->cid}})">
                                                                                 <em class="W_ficon ficon_praised S_txt2">
                                                                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
-                                                                                <em style="font-size: 14px">
+                                                                                <em style="font-size: 14px" id="pnum{{$v->cid}}">
+                                                                                    
                                                                                     {{$v->pnum}}
                                                                                 </em>
                                                                             </span>
@@ -427,7 +445,7 @@
                                                         </li>
                                                         <li class="S_line1">
                                                             <a bpfilter="page_frame" href="/home/user" class="S_txt1" indepth="true">
-                                                                <strong node-type="weibo">
+                                                                <strong node-type="weibo" id="cnum">
                                                                     {{$cnum}}
                                                                 </strong>
                                                                 <span class="S_txt2">
@@ -443,6 +461,8 @@
                                </div>
                             </div>
                         </div>
+                        
+
                         <script type="text/javascript">
 
                             //微博发布
@@ -452,12 +472,44 @@
                                 
                               });
 
-                            $('.point').on('click', function(){
-                                
-                                layer.msg('微博点赞成功:)');
-                              });
 
-                            //举报验证
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                               }
+                            });
+
+                            //微博点赞
+                            function point (id){
+
+                                $.ajax({
+                                    type: "post",
+                                    url: "/home/point",
+                                    data: {poid:id},
+                                    
+                                    beforeSend:function(){
+                                         a = layer.load();
+                                      },
+                                    success: function(data) {
+
+                                        layer.close(a);
+
+                                        document.getElementById('pnum'+id).innerHTML = data;
+
+                                        layer.msg('点赞成功:)', {icon: 1});
+
+                                       $('#point'+id).off('click','point');
+                                        
+                                        
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert("点赞失败，请检查网络后重试");
+                                    }
+                                });
+                              };
+
+
+                            //微博举报
                             $('.report').on('click',function(){
 
                                 var cid = $(this).find('.rep').val();
@@ -474,6 +526,7 @@
                                               icon: 6
                                               ,btn: ['再见']
                                             });
+
                                         }else{
 
                                         }
@@ -482,6 +535,53 @@
                                   }
                                 });    
                             });
+
+
+
+
+                            //微博删除
+                            $('.destroy').on('click',function(){
+
+                                //获取要删除微博的id
+                                did = $(this).children('input[name=destroy]').val();
+  
+                                layer.confirm('您确定要删除此微博吗？', {
+                                  btn: ['确定','取消'] //按钮
+                                }, function(){
+
+                                    $.ajax({
+                                    type: "get",
+                                    url: "/home/blog/destroy",
+                                    data: {did:did},
+                                    
+                                    beforeSend:function(){
+                                        //加载样式
+                                        a = layer.load(0, {shade: false});
+                                      },
+                                    success: function(data) {
+
+                                        //关闭加载样式
+                                        layer.close(a)
+
+                                        //移除微博
+                                        $('.blog:first').remove();
+ 
+                                        document.getElementById('cnum').innerHTML = data;
+
+                                        layer.msg('删除成功:)', {icon: 1});
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert("删除失败，请检查网络后重试！");
+                                        
+                                    }
+                                });
+
+                                }, function(){
+
+                                });
+
+                            });
+
 
                         </script>
                     </body>

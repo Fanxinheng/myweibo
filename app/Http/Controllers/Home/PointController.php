@@ -17,10 +17,13 @@ use Session;
 class PointController extends Controller
 {
     //微博点赞
-    public function point ($id)
+    public function point ()
     {
+
     	//获取微博id
-    	$res['tid'] = $id;
+        $id = $_POST['poid'];
+
+        $res['tid'] = $id;
 
         //获取发布者ID
         $res['uid'] = contents::where('cid',$id)->value('uid');
@@ -41,12 +44,7 @@ class PointController extends Controller
     	//将点赞数据存入数据库
     	$data1 = point::insert($res);
 
-    	if($data && $data1){
-    		return back();
-    	}else{
-    		return back();
-
-    	}
+    	return $pnum + 1;
 
     }
 }

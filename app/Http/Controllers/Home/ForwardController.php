@@ -31,7 +31,7 @@ class ForwardController extends Controller
     	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
 
 
-    	return view('homes/forward',['label'=>$label,'res'=>$res,'forward'=>$forward]);
+    	return view('homes/show/forward',['label'=>$label,'res'=>$res,'forward'=>$forward]);
     }
 
 

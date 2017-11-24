@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html>
     
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
-        <meta name="csrf_token" content="{{ csrf_token() }}"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
@@ -14,7 +14,6 @@
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/homes/js/validate.js"></script>
         <title>
             微博-随时随地发现新鲜事
         </title>
@@ -120,8 +119,7 @@
                                                     </a>
                                                 </li>
                                             </div>
-
-                                            @foreach($label as $v)
+                                             @foreach($label as $v)
 
                                              <div category_id="99991" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:99991"
                                             suda-uatrack="key=www_unlogin_home&amp;value=billboard">
@@ -131,8 +129,10 @@
                                                     </a>
                                                 </li>
                                             </div>
-                                          @endforeach
-    
+                                            @endforeach
+                                          
+                                            
+                                          
                                         </ul>
                                     </div>
                                 </div>
@@ -161,81 +161,83 @@
                                                     suda-uatrack="key=www_unlogin_home&amp;value=recommend_feed">
 
 
-                                                @foreach($index as $k=>$v)
-                                                    
-                                                    <div class="list_des">
-                                                        <a href="/home/replay/{{$v->cid}}">
-                                                        <h3 class="list_title_s">
-                                                            <div style="word-break:break-all">
-                                                                {{$v->content}}
-                                                            </div> 
-                                                        </h3>
-                                                        @if($v->image)
-                                                        <div id="image">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
-                                                        </div>
-                                                        @else
+                                                        <div class="list_des">
+                                                            
+                                                            <h3 class="list_title_s">
+                                                                <div>
+                                                                    {{$res->content}}
+                                                                </div>
+                                                            </h3>
+                                                            @if($res->image)
+                                                            <div id="image">
+                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                                            </div>
+                                                            @else
 
-                                                        @endif
-                                                        </a>
-                                                        <div class="subinfo_box clearfix">
-                                                            
-                                                                <span class="subinfo_face ">
-                                                                    <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}" alt="" width="20" height="20">
-                                                                </span>
-                                                            
-                                                            
+                                                            @endif
+                                                            <div class="subinfo_box clearfix">
+                                                                
+                                                                    <span class="subinfo_face ">
+                                                                        <img src="{{$res->photo == NULL ? '/homes/uploads/default.jpg' : $res->photo}}" alt="" width="20" height="20">
+                                                                    </span>
+                                                                
+                                                                
+                                                                    <span class="subinfo S_txt2">
+                                                                        {{$res->nickName}} 
+                                                                    </span>
+                                                               
                                                                 <span class="subinfo S_txt2">
-                                                                    {{$v->nickName}} 
+                                                                    {{date('Y-m-d H:i:s',$res->time)}} 
                                                                 </span>
-                                                           
-                                                            <span class="subinfo S_txt2">
-                                                                {{date('Y-m-d H:i:s',$v->time)}} 
-                                                            </span>
 
-                                                            
-                                                            <span class="subinfo_rgt S_txt2" class="point">
-                                                                <em class="W_ficon ficon_praised S_ficon W_f16">
-                                                                    <span class="glyphicon glyphicon-thumbs-up" id="point" aria-hidden="true" ></span>
-                                                                </em>
-                                                                <em>
-                                                                    {{$v->pnum}} 
-                                                                </em>
-                                                            </span>
-                                                            
-
-                                                            <a href="/home/replay/{{$v->cid}}">
-                                                            <span class="rgt_line W_fr">
-                                                            </span>
-                                                            <span class="subinfo_rgt S_txt2" >
-                                                                <em class="W_ficon ficon_repeat S_ficon W_f16">
-                                                                   <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                                                </em>
-                                                                <em>
-                                                                    {{$v->rnum}} 
-                                                                </em>
-                                                            </span>
-                                                            </a>
-
-                                                            <a href="/home/forward/{{$v->cid}}">
-                                                            <span class="rgt_line W_fr">
-                                                            </span>
-                                                            <span class="subinfo_rgt S_txt2">
-                                                                <em class="W_ficon ficon_forward S_ficon W_f16">
-                                                                    <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                                                                </em>
-                                                                <em>
-                                                                    {{$v->fnum}} 
-                                                                </em>
-                                                            </span>
-                                                            </a>
+                                                            </div>
                                                         </div>
-                                                        </div>
-
+                                                            
                                                         <hr>
 
-                                                    @endforeach  
-                                                    </div> 
+                                                    <a href="#">
+                                                        <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
+                                                       
+                                                        <button id="forward" style="margin:5px 0 5px 605px;" class="btn btn-default">转发</button>
+                                                    </a>
+                                                       
+
+                                                    <!-- 转发内容 -->
+
+                                                    <div class="list_des" style="height:60px;border-radius:10px;padding-left:10px;background-color: #F2F2F5;">
+
+                                                    @if($res->fnum == 0)
+                                                    <h3 class="list_title_s">
+                                                        <div>
+                                                          亲，微博还没有转发，快去试试吧:)
+                                                        </div>
+                                                    </h3>
+                                                    @endif
+
+                                                    @foreach($forward as $k=>$v) 
+                                                    <div class="subinfo_box clearfix" >
+                                                           
+                                                            <span class="subinfo_face ">
+                                                                <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}" alt="" width="20" height="20">
+                                                            </span>
+                                                        
+                                                            <span class="subinfo S_txt2">
+                                                            {{$v->nickName}}
+                                                            </span>
+                                                        
+                                                        <span class="subinfo S_txt2">
+                                                            {{date('Y-m-d H:i:s',$v->time)}} 
+                                                        </span>
+                                                      
+                                                    </div>
+                                                    <h3 class="list_title_s">
+                                                        <div>
+                                                          {{$v->fcontent}}
+                                                        </div>
+                                                    </h3>
+                                                    @endforeach
+                                                    </div>
+                                                     </div> 
                                                     <!-- read_pos -->
                                                     <!--/read_pos-->
                                                 </ul>
@@ -262,7 +264,8 @@
                                                                 <div class="info_header">
                                                                     <div class="tab clearfix">
                                                                         <a href="javascript:void(0);" node-type="normal_tab" action-type="switchTab"
-                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login">
+                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login"
+                                                                        >
                                                                             <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
                                                                             帐号登录
                                                                         </a>
@@ -274,34 +277,34 @@
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
-                                                                    <form action="/home/nick" method="post">
+                                                                    <form action="/home/login" method="get">
                                                                         
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号" style="width:250px; ">
+                                                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入手机号" style="width:250px;">
                                                                         </div>
-                                                                        <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"></div>
 
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
+                                                                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"> 
-                                                                        </div>
-                                                                        <!-- <style>
-                                                                            #pas{color:red;font-size: 15px;margin-bottom:10px;margin-left:12px}
-                                                                        </style>  
 
-                                                                        <div id="pas">
-                                                                            
-                                                                        </div>
- -->
                                                                         
                                                                 </div>
                                                                 
                                                                     
-                                                                 
-                                                                    {{csrf_field()}}
+                                                                    <div class="info_list auto_login clearfix">
+                                                                        
+                                                                        <label for="login_form_savestate" class="W_fl W_label" title="建议在网吧或公共电脑上取消该选项。"
+                                                                        action-data="content=建议在网吧或公共电脑上取消该选项。" action-type="customTip">
+                                                                            <input id="login_form_savestate" checked="checked" node-type="savestate"
+                                                                            tabindex="5" class="W_checkbox" type="checkbox">
+                                                                            <span class="S_txt2">
+                                                                                记住我
+                                                                            </span>
+                                                                        </label>
+                                                                    </div>
+                                                                  
                                                                     <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
                                                                     <div class="info_list register">
                                                                         <span class="S_txt2">
@@ -430,87 +433,13 @@
         </div>
             </div>
         </div>
-
     <script type="text/javascript">
-         $('.glyphicon-thumbs-up').on('click', function(){
-            
-            layer.msg('亲，您好像忘了登录呦:)');
+         $('#forward').on('click', function(){
+            layer.msg('亲，您好像忘了登录呦:)', {
+              time: 20000, //20s后自动关闭
+            });
           });
-
-         $('.subinfo_face').on('click', function(){
-            
-            layer.msg('亲，您好像忘了登录呦:)');
-          });
-    </script>
-
-    
-    <script type="text/javascript">
-         var ch2;
-         var ch3;
-
-        //手机号失去焦点事件
-        $('#phone').blur(function(){
-           
-            var pho  = $(this).val();
-            
-            ch2 = checkTel($('#phone'),$('#e1'));
-            if(ch2!=100){
-              $('#phone').css('border','solid 2px red');
-              $('#e1').css('display','block');
-              return;
-            }else{
-              $('#e1').css('display','none');
-              ch2 = 100;
-            }
-            $.get("pho",{pho:pho},function(data){
-              if(data.length>0){
-                $('#phone').css('border','solid 2px green');
-                $('#e1').css('display','none');
-                ch2 = 100;
-                return;
-              }else{
-                $('#phone').css('border','solid 1px red');
-                 $("#e1").html("该手机号还未注册,请先去注册");
-                $('#e1').css('display','block');
-                ch2 = 0;
-              }
-            },'json')
-                
-            })
-
-            
-            //密码失去焦点事件
-            $('input[name="password"]').blur(function(){
-            
-                var pas = $(this).val();
-                var pho = $('#phone').val();
-
-                ch3 = checkPassword($('#password'),$('#e2'),6);
-                if(ch3!=100){
-                  $('#password').css('border','solid 2px red');
-                  $('#e2').css('display','block');
-                }else{
-                  $('#password').css('border','solid 1px green');
-                  $('#e2').css('display','none');
-                  ch3 = 100;
-                }
-                $.get("pass",{pas:pas,pho:pho},function(data){
-                  if(data==1){
-                    $('#phone').css('border','solid 2px green');
-                    $('#e2').css('display','none');
-                    ch2 = 100;
-                    return;
-                  }else{
-                    $('#password').css('border','solid 1px red');
-                     $("#e2").html("密码不正确");
-                    $('#e2').css('display','block');
-                    ch2 = 0;
-                  }
-                },'json')
-            })
-
     </script>
     </body>
-        
 
 </html>

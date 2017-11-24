@@ -99,11 +99,17 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//微博标签列表
 	Route::get('/index/label/{id}','LoginController@label');
 
+	//微博转发列表
+	Route::get('/index/forward','LoginController@forward');
+
 	//发布微博
 	Route::post('/release','ReleaseController@store');
 
 	//举报微博
 	Route::get('/blog/report/','BlogController@report');
+
+	//删除自己的微博
+	Route::get('/blog/destroy/','BlogController@destroy');
 
 	//加载微博转发页面
 	Route::get('/blog/forward/{id}','BlogController@forward');
@@ -121,7 +127,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	Route::post('/replay/empty/','ReplayController@empty');
 
 	//微博点赞功能
-	Route::get('/point/{id}','PointController@point');
+	Route::post('/point/','PointController@point');
+
 
 	
 

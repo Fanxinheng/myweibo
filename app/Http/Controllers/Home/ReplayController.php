@@ -30,27 +30,35 @@ class ReplayController extends Controller
     	//查询评论信息
     	$replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
 
-    	return view('homes/replay',['label'=>$label,'res'=>$res,'replay'=>$replay]);
+    	return view('homes/show/replay',['label'=>$label,'res'=>$res,'replay'=>$replay]);
     }
 
     //微博评论功能
     public function store (Request $request)
     {
+
     	//获取评论内容
-    	$res = $request->except('_token');
+    	$res['rcontent'] = $_POST['rcontent'];
+
+        //获取指定微博ID
+        $res['tid'] = $_POST['tid'];
+
+        //获取指定微博发布者ID
+        $res['uid'] = $_POST['uid'];
 
     	//获取评论时间
     	$res['time'] = time();
+
 
     	//获取评论人id
     	$res['rid'] = Session('uid');
 
     	//将指定微博评论数量+1
-    	$rnum = contents::where('cid',$request->only('tid'))->value('rnum');
+    	$rnum = contents::where('cid',$_POST['tid'])->value('rnum');
 
     	$num['rnum'] = $rnum +1;
 
-    	$data = contents::where('cid',$request->only('tid'))->update($num);
+    	$data = contents::where('cid',$_POST['tid'])->update($num);
 
         //登录用户积分+1
         $socre = user_info::where('uid',Session('uid'))->value('socre');
@@ -62,10 +70,20 @@ class ReplayController extends Controller
     	//将转发内容存入数据库
     	$data1 = replay::insert($res);
 
+        //将数据拼装返回
     	if($data && $data1 && $data2){
-    		return back();
+
+            $ress['image'] = user_info::where('uid',Session('uid'))->value('photo');
+
+            $ress['nickName'] = user_info::where('uid',Session('uid'))->value('nickName');
+
+            $ress['times'] = date('Y-m-d H:i:s',time());
+
+            $ress['content'] = $_POST['rcontent'];
+
+    		return $ress;
     	}else{
-    		return back();
+    		return 0;
 
     	}
 

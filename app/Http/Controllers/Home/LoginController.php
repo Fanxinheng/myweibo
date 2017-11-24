@@ -11,6 +11,7 @@ use App\Http\Model\user_info;
 use App\Http\Model\label;
 use App\Http\Model\contents;
 use App\Http\Model\user_attention;
+use App\Http\Model\forward;
 
 
 use Hash;
@@ -112,6 +113,35 @@ class LoginController extends Controller
       ->get();
 
       return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+    }
+
+    //加载微博转发页面
+    public function forward ()
+    {
+      //获取用户ID
+      $uid = Session('uid');
+
+      //查询标签内容
+      $label = label::get();
+
+      //查询登录用户信息 session('uid')
+      $user = user_info::where('uid',$uid)->first();
+
+      //查询登录用户关注数量
+      $unum = user_attention::where('uid',$uid)->count();
+
+      //查询登录用户粉丝数量
+      $gnum = user_attention::where('gid',$uid)->count();
+
+      //查询登录用户微博数量
+      $cnum = contents::where('uid',$uid)->count();
+
+      //查询转发内容相关
+      $index = forward::with('contents.user_info','user_info')->orderBy('time','desc')->get();
+      // dd($index);
+      
+
+      return view('homes/forward',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
     //验证手机号是否已注册

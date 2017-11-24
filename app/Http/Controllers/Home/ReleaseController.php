@@ -53,8 +53,11 @@ class ReleaseController extends Controller
         //获取微博内容
 		$res['content'] = $_POST['content'];
 
-        //获取微博标签内容
-    	$res['label'] = implode(",",$_POST['label']);
+        if($request->has('label')){
+            //获取微博标签内容
+            $res['label'] = implode(",",$_POST['label']);
+        }
+        
 		
     	//获取发布时间
     	$res['time'] = time();
