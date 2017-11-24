@@ -69,9 +69,13 @@
 
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
+
+                <?php
+                    $result = DB::table('admin')->where('id',session('pid'))->first();
+                ?>
             	<!-- User Photo -->
                 	<div id="mws-user-photo">
-                    	<img src="" alt="User Photo">
+                    	<img src="{{$result->pic}}" alt="User Photo">
                     </div>
 
                     <!-- Username and Functions -->
@@ -79,11 +83,12 @@
 
 
                             <div id="mws-username">
-                               Hello:
+                               用户名:&nbsp;&nbsp;&nbsp;{{$result->name}}
                             </div>
                             <ul>
-                                <li><a href="/admin/id/edit"> 修改密码</a></li>
-                                <li><a href="/admins/index.html">退出</a></li>
+                                <li><a href="/admin/admins/{{$result->id}}/edit"> 修改个人信息</a></li>
+                                <li><a href="/admin/password/{{$result->id}}"> 修改密码</a></li>
+                                <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
                             </ul>
 
                     </div>

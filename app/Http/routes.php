@@ -159,7 +159,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 //==========================后台路由===================================//
 
 //后台登录
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 	//后台登录主页面
 	Route::get('/',"LoginController@index");
@@ -173,13 +173,19 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 
 //后台主页面
-Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],function(){
 
 	//后台主页
 	Route::resource('/index','UserController');
 
 	//后台管理员资源路由
 	Route::resource('/admins','AdminsController');
+	//后台管理员修改普通路由
+	Route::get('/password/{id}','PwdController@edit');
+	//后台管理员修改方法路由
+	Route::post('/password/update/{id}','PwdController@update');
+	//后台管理员删除方法路由
+	Route::get('/password/delete/{id}','PwdController@delete');
 
 	//后台热门微博资源路由
 	Route::resource('/hot','HotController');
