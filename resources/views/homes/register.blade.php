@@ -49,18 +49,18 @@
 	        		</div>
 	        		<div class="col-md-12" style="height:360px;">
 						<div class="col-md-12" style="height:300px;margin-top: 30px">
-							<form class="form-horizontal" method="post" action="/home/admin">
+							<form class="form-horizontal" method="post" action="/home/admin" onsubmit="return mysubmit();">
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>手机号:</label>
-								    <div class="col-sm-4" style="width: 600px;height:40px">
-								      <input type="text" class="form-control"  placeholder="请输入手机号" name="phone" id="phone" style="width: 345px;float: left">
+								    <div class="col-sm-4" style="width: 800px;height:40px">
+								      <input type="text" class="form-control"  placeholder="请输入手机号" name="phone" id="phone" style="width: 345px;float: left" value="">
 								      <span id="spa" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>密码:</label>
 								    <div class="col-sm-4" style="width: 800px;height:40px">
-								      <input type="password" class="form-control" placeholder="请设置密码" name="password" id="password" style="width: 345px;float: left">
+								      <input type="password" class="form-control" placeholder="请设置密码" name="password" id="password" style="width: 345px;float: left" value="">
 								      <span id="spa1" style="float:left;margin-left: 10px;margin-top: 10px;color:#3EA0E1;font-size:18px">
 								    </div>
 								  </div>
@@ -75,7 +75,7 @@
 								    <label for="inputcode3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>激活码:</label>
 									
 									<div class="col-sm-offset-2 col-sm-2" style="margin-left:2px">
-								      <button type="submit" class="btn btn-default" id="btn1">免费获取短信激活码</button>
+								      <button type="submit" class="btn btn-default" id="btn1" style="font-size:16px">免费获取短信激活码</button>
 								    </div>
 
 								    <div class="col-sm-2" style="width: 600px;height:40px">
@@ -87,7 +87,7 @@
 								  <div class="form-group" style="margin-top:30px">
 								    <div class="col-sm-offset-2 col-sm-10">
 								    	{{csrf_field()}}
-								      <button type="submit" class="btn btn-default" style="background:#FFA00A; color:white;width:200px" id="btn2">立即注册</button>
+								      <input type="submit" value="立即注册" style="background:#FFA00A; color:white;width:200px;height:40px;border-radius:5px;font-size:19px">
 								      已有账号,
 								      <a href="/home/admin">直接登录>></a>
 								    </div>
@@ -118,6 +118,7 @@
       <script>
       		
      	// alert($);
+     	//验证码发送ajax
      	$('#btn1').click(function(){
 
      		$.ajaxSetup({
@@ -148,6 +149,10 @@
      	var spa2 = document.getElementById('spa2');
      	var spa3 = document.getElementById('spa3');
      	var code = document.getElementById('code');
+     	var PH = 0;
+     	var PA = 0;
+     	var SP = 0;
+     	var CO = 0;
 
      	//手机号获取焦点事件
      	phones.onfocus = function(){
@@ -160,47 +165,50 @@
 		phones.onblur = function(){
 
 			//获取手机号
-			var pv = this.value;
+			var phone = this.value;
 
 			//写正则
 			var reg = /^1[34578]\d{9}$/;
 
 			// console.log(pv);
 			//检测
-			var check = reg.test(pv);
+			var check = reg.test(phone);
 
 			// console.log(check);
-			//判断
-			if(check){
+			//判断手机号是否为空,在判断正则
+			if(phone==""){
+
+				spa.innerHTML= '手机号不能为空!';
+				spa.style.color='red';
+				PH = 0;
+
+			}else if(check){
 
 				//ajax传过去链接数据库检验手机号
-				$.get('/home/register/phone',{phone:pv},function(data){
+				$.get('/home/register/phone',{phone:phone},function(data){
 				// console.log(data);
 					if(data==1){
-						spa.innerHTML= '手机号已存在!';
+
+						spa.innerHTML= '手机号已注册,请直接去登陆!';
 						spa.style.color='red';
-						
+						PH = 0;
 					}else{
 						spa.innerHTML= '√';
 						spa.style.color='green';
+						PH = 1;
 					}
 					
 				});
-
 			}else{
 
-				this.style.border = 'solid 2px red';
 				spa.innerHTML= '手机号格式不正确!';
 				spa.style.color='red';
-			}
-			if(pv==null){
-				this.style.border = 'solid 2px red';
-				spa.innerHTML= '手机号不能为空!';
-				spa.style.color='red';
+				PH = 0;
 			}
 
 			
 		};
+	
 
 		//密码获取去焦点事件
 		password.onfocus = function(){
@@ -214,7 +222,7 @@
 		password.onblur = function(){
 
 			//获取密码
-			 pass = this.value;
+			pass = this.value;
 
 			//写正则
 			var reg = /^\S{6,16}$/;
@@ -224,18 +232,22 @@
 			var check = reg.test(pass);
 
 			// console.log(check);
-			if(check){
+			if(pass==""){
 
-				this.style.border = 'solid 2px green';
+				spa1.innerHTML= '密码不能为空!';
+				spa1.style.color='red';
+				PA = 0; 
+
+			}else if(check){
+
 				spa1.innerHTML= '√';
 				spa1.style.color='green';
-				
+				PA = 1;
 			} else {
 
-				this.style.border = 'solid 2px red';
 				spa1.innerHTML= '密码格式不正确!';
 				spa1.style.color='red';
-
+				PA = 0;
 			}
 		};
 
@@ -252,19 +264,21 @@
 			//获取密码
 			var surepass = this.value;
 
-			
-			if(surepass==pass){
+			if(surepass==""){
 
-				this.style.border = 'solid 2px green';
+				spa2.innerHTML='密码不能为空';
+				spa2.style.color='red';
+				SP = 0;
+			}else if(surepass==pass){
+
 				spa2.innerHTML= '√';
 				spa2.style.color='green';
-				
+				SP = 1;
 			} else {
 
-				this.style.border = 'solid 2px red';
 				spa2.innerHTML= '两次密码不一致!';
 				spa2.style.color='red';
-
+				SP = 0;
 			}
 		};
 
@@ -288,19 +302,32 @@
      			console.log(code);
      			console.log(data);
 
-     			if(code==data){
+     			if(code==""){
+
+     				spa3.innerHTML= '验证码不能为空!';
+					spa3.style.color='red';
+					CO = 0;
+     			}else if(code==data){
      				spa3.innerHTML= '√';
 					spa3.style.color='green';
 					// alert('122345');
+					CO = 1;
      			}else{
      				// alert('adsd');
      				spa3.innerHTML= '验证码不正确!';
 					spa3.style.color='red';
-
+					CO = 0;
      			}
      		});
 			
 		};
+
+		//表单验证都正确才能提交的方法
+		function mysubmit(){
+			if(PH==0&&PA==0&&SP==0&&CO==0){ //这里判断
+				return false;
+				}
+			} 
 
 	 </script>
     </body>

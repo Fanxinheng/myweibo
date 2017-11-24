@@ -4,6 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 
+use Session;
+
+
 class HomeMiddleware
 {
     /**
@@ -15,6 +18,11 @@ class HomeMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        //验证用户是否登录
+        if(Session('uid')){
+            return $next($request);
+        } else {
+            return redirect('/home/admin');
+        }
     }
 }

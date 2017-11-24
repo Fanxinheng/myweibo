@@ -11,9 +11,9 @@
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
-
         <script type="text/javascript" src="/homes/js/validate.js"></script>
         <title>
             微博-随时随地发现新鲜事
@@ -103,41 +103,36 @@
                             <div class="WB_main_l">
                                 <div id="pl_unlogin_home_leftnav">
                                     <div class="UG_left_nav" node-type="UG_fixed_nav" style="position: absolute; top: 66px; bottom: auto;">
-                                        <ul>
+                                        <ul >
                                             <div category_id="0" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:0"
                                             suda-uatrack="key=www_unlogin_home&amp;value=recommend">
-                                                <li>
-                                                    <a href="https://weibo.com/?category=0" class="nav_item cur">
-                                                        热门
+                                                <li >
+                                                    <a href="/home/admin/" class="nav_item">
+                                                        全部
                                                     </a>
                                                 </li>
                                             </div>
                                             <div category_id="2" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:2"
                                             suda-uatrack="key=www_unlogin_home&amp;value=star">
                                                 <li>
-                                                    <a href="https://weibo.com/?category=2" class="nav_item">
-                                                        明星
+                                                    <a href="/home/hot/" class="nav_item">
+                                                        热门
                                                     </a>
                                                 </li>
                                             </div>
-                                            <div category_id="1760" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:1760"
-                                            suda-uatrack="key=www_unlogin_home&amp;value=headline">
-                                                <li>
-                                                    <a href="https://weibo.com/?category=1760" class="nav_item">
-                                                        头条
-                                                    </a>
-                                                </li>
-                                            </div>
-                                          
-                                            <div category_id="99991" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:99991"
+
+                                            @foreach($label as $v)
+
+                                             <div category_id="99991" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:99991"
                                             suda-uatrack="key=www_unlogin_home&amp;value=billboard">
                                                 <li>
-                                                    <a href="https://weibo.com/?category=99991" class="nav_item">
-                                                        榜单
+                                                    <a href="/home/label/{{$v->id}}" class="nav_item">
+                                                          {{$v->lcontent}}
                                                     </a>
                                                 </li>
                                             </div>
-                                          
+                                          @endforeach
+    
                                         </ul>
                                     </div>
                                 </div>
@@ -145,87 +140,95 @@
                             <!-- ／左导 -->
                             <div id="plc_main">
                                 <div id="plc_unlogin_home_main">
+
+
+
+                                    
                                     <div class="WB_frame_c">
                                         <div id="pl_unlogin_home_feed">
                                             <!--榜单栏位置-->
                                          
-                                      
                                            
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
                                                     
                                                     <!--article feed-->
-                                                   
-
-                                                   
-                                                
-                                                    
+                                                     
                                                     <!--广告模块-->
                                                     <div class="UG_list_b" mid="4171968871140682" action-type="feed_list_item"
                                                     href="//weibo.com/5187664653/FuceP4MK6?ref=feedsdk" suda="key=nologin_home&amp;value=nologin_card_weibo:4171968871140682"
                                                     suda-uatrack="key=www_unlogin_home&amp;value=recommend_feed">
-                                                        <div class="pic W_piccut_h">
-                                                            <img src="/homes/images/005f4uyxgy1flb538nhq4j307o04agls.jpg" alt="">
-                                                        </div>
-                                                        <div class="list_des">
-                                                            <h3 class="list_title_s">
-                                                                <div>
-                                                                    陈赫到底经历了什么？ ​​​​
-                                                                </div>
-                                                            </h3>
-                                                            <div class="subinfo_box clearfix">
-                                                                <a href="https://weibo.com/dengchao?from=feed&amp;loc=nickname" target="_top">
-                                                                    <span class="subinfo_face ">
-                                                                        <img src="/homes/images/005f4uyxly8fet0xr9thnj30e80e8jrx.jpg" alt="" width="20" height="20">
-                                                                    </span>
-                                                                </a>
-                                                                <a href="https://weibo.com/dengchao?from=feed&amp;loc=nickname" target="_top">
-                                                                    <span class="subinfo S_txt2">
-                                                                        邓超
-                                                                    </span>
-                                                                </a>
-                                                                <span class="subinfo S_txt2">
-                                                                    今天 00:25
-                                                                </span>
-                                                                <span class="subinfo_rgt S_txt2">
-                                                                    <em class="W_ficon ficon_praised S_ficon W_f16">
-                                                                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                                                                    </em>
-                                                                    <em>
-                                                                        456112
-                                                                    </em>
-                                                                </span>
-                                                                <span class="rgt_line W_fr">
-                                                                </span>
-                                                                <span class="subinfo_rgt S_txt2">
-                                                                    <em class="W_ficon ficon_repeat S_ficon W_f16">
-                                                                       <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                                                                    </em>
-                                                                    <em>
-                                                                        17657
-                                                                    </em>
-                                                                </span>
-                                                                <span class="rgt_line W_fr">
-                                                                </span>
-                                                                <span class="subinfo_rgt S_txt2">
-                                                                    <em class="W_ficon ficon_forward S_ficon W_f16">
-                                                                        <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-                                                                    </em>
-                                                                    <em>
-                                                                        3487
-                                                                    </em>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
+
+                                                @foreach($index as $k=>$v)
                                                     
-                                                    <div class="UG_list_b" mid="4171979990844561" action-type="feed_list_item"
-                                                    href="//weibo.com/1574684061/FucwL3xHX?ref=feedsdk" suda="key=nologin_home&amp;value=nologin_card_weibo:4171979990844561"
-                                                    suda-uatrack="key=www_unlogin_home&amp;value=recommend_feed">
-                                                        
-                                                        
-                                                    </div>
+                                                    <div class="list_des">
+                                                        <a href="/home/replay/{{$v->cid}}">
+                                                        <h3 class="list_title_s">
+                                                            <div>
+                                                                {{$v->content}}
+                                                            </div>
+                                                        </h3>
+                                                        </a>
+                                                        <div class="subinfo_box clearfix">
+                                                            
+                                                                <span class="subinfo_face ">
+                                                                    <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}" alt="" width="20" height="20">
+                                                                </span>
+                                                            
+                                                            
+                                                                <span class="subinfo S_txt2">
+                                                                    {{$v->nickName}} 
+                                                                </span>
+                                                           
+                                                            <span class="subinfo S_txt2">
+                                                                {{date('Y-m-d H:i:s',$v->time)}} 
+                                                            </span>
+
+                                                            
+                                                            <span class="subinfo_rgt S_txt2" class="point">
+                                                                <em class="W_ficon ficon_praised S_ficon W_f16">
+                                                                    <span class="glyphicon glyphicon-thumbs-up" id="point" aria-hidden="true" ></span>
+                                                                </em>
+                                                                <em>
+                                                                    {{$v->pnum}} 
+                                                                </em>
+                                                            </span>
+                                                            
+
+                                                            <a href="/home/replay/{{$v->cid}}">
+                                                            <span class="rgt_line W_fr">
+                                                            </span>
+                                                            <span class="subinfo_rgt S_txt2" >
+                                                                <em class="W_ficon ficon_repeat S_ficon W_f16">
+                                                                   <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                                                </em>
+                                                                <em>
+                                                                    {{$v->rnum}} 
+                                                                </em>
+                                                            </span>
+                                                            </a>
+
+                                                            <a href="/home/forward/{{$v->cid}}">
+                                                            <span class="rgt_line W_fr">
+                                                            </span>
+                                                            <span class="subinfo_rgt S_txt2">
+                                                                <em class="W_ficon ficon_forward S_ficon W_f16">
+                                                                    <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                                                                </em>
+                                                                <em>
+                                                                    {{$v->fnum}} 
+                                                                </em>
+                                                            </span>
+                                                            </a>
+                                                        </div>
+                                                        </div>
+
+                                                        <hr>
+
+                                                    @endforeach  
+                                                    </div> 
                                                     <!-- read_pos -->
                                                     <!--/read_pos-->
                                                 </ul>
@@ -233,6 +236,13 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
+
+
+
+
                                     <div class="WB_main_r" fixed-box="true">
                                         <div id="pl_unlogin_home_login">
                                             <div style="visibility: hidden;">
@@ -246,7 +256,7 @@
                                                                     <div class="tab clearfix">
                                                                         <a href="javascript:void(0);" node-type="normal_tab" action-type="switchTab"
                                                                         action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login"
-                                                                        class="cur W_fb">
+                                                                        >
                                                                             <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
                                                                             帐号登录
                                                                         </a>
@@ -264,9 +274,11 @@
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号" style="width:250px; ">
                                                                         </div>
-                                                                        <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"></div>
+                                                                        <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-left: 13px">
+                                                            
+                                                                        </div>
 
-                                                                        <div class="form-group">
+                                                                        <div class="form-group" style="margin-top:10px">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
@@ -283,23 +295,26 @@
                                                                         
                                                                 </div>
                                                                 
-                                                                    
                                                                     <div class="info_list auto_login clearfix">
                                                                         
                                                                         
 
-                                                                        <div style="float: right;margin-right:10px">
+                                                                        <div style="float: right;margin-right:10px;font-size: 15px">
                                                                             <a href="/home/admin/find">忘记密码</a>
                                                                         </div>
                                                                             
                                                                     </div>
+
                                                                     {{csrf_field()}}
-                                                                    <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
-                                                                    <div class="info_list register">
+                                                                    <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
+
+                                                                </form>
+                                                                    
+                                                                    <div class="info_list register" style="font-size:14px">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
                                                                         </span>
-                                                                        <a target="_top" href="register">
+                                                                        <a target="_top" href="/home/register">
                                                                             立即注册!
                                                                         </a>
                                                                     </div>
@@ -401,60 +416,74 @@
               <div id="plc_bot">
 
             <!--footer-->
-              <div class="WB_footer S_bg2">
-               
-                <div class="other_link S_bg1 clearfix T_add_ser">
-                  
-                    <p class="copy_v2">
-                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
-                    </p>
-                    <p class="company"></p>
-                </div>
-              </div>
+             <!--  <div class="WB_footer S_bg2">
+              
+               <div class="other_link S_bg1 clearfix T_add_ser">
+                 
+                   <p class="copy_v2">
+                       <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
+                       <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
+                       <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
+                       <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
+                       <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
+                       <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                   </p>
+                   <p class="company"></p>
+               </div>
+             </div> -->
 
-        <a style="visibility: visible; transform: translateZ(0px); " href="javascript:void(0);" id="base_scrollToTop" class="W_gotop"><em class="W_ficon ficon_backtop"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></em></a>
+        
         <!--/footer-->
         </div>
             </div>
         </div>
+
+    <script type="text/javascript">
+         $('.glyphicon-thumbs-up').on('click', function(){
+            
+            layer.msg('亲，您好像忘了登录呦:)');
+          });
+    </script>
     
     <script type="text/javascript">
-         var ch2;
-         var ch3;
+         var ch2 ;
+         var ch3 ;
+         var aaa=0;
+         var bbb=0;
 
         //手机号失去焦点事件
         $('#phone').blur(function(){
            
             var pho  = $(this).val();
-            
             ch2 = checkTel($('#phone'),$('#e1'));
-            if(ch2!=100){
-              $('#phone').css('border','solid 2px red');
-              $('#e1').css('display','block');
-              return;
-            }else{
+
+            if(ch2==100){
               $('#e1').css('display','none');
               ch2 = 100;
+              
+            }else{
+              $('#e1').css('display','block');
+              //ch2 = 100;
+              return;
+           
             }
             $.get("pho",{pho:pho},function(data){
-              if(data.length>0){
-                $('#phone').css('border','solid 2px green');
+
+              if(data=='1'){
                 $('#e1').css('display','none');
                 ch2 = 100;
-                return;
+           
+                aaa=1;
               }else{
-                $('#phone').css('border','solid 1px red');
-                 $("#e1").html("该手机号还未注册,请先去注册");
-                $('#e1').css('display','block');
+
                 ch2 = 0;
+                $("#e1").html("该手机号还未注册,请先去注册");
+                $('#e1').css('display','block');
+                aaa=0;
+       
               }
             },'json')
-                
+                console.log(ch2);
             })
 
             
@@ -465,31 +494,41 @@
                 var pho = $('#phone').val();
 
                 ch3 = checkPassword($('#password'),$('#e2'),6);
+
                 if(ch3!=100){
-                  $('#password').css('border','solid 2px red');
                   $('#e2').css('display','block');
+                   ch3 = 0;
+
                 }else{
-                  $('#password').css('border','solid 1px green');
                   $('#e2').css('display','none');
                   ch3 = 100;
+            
                 }
                 $.get("pass",{pas:pas,pho:pho},function(data){
-                  if(data==1){
-                    $('#phone').css('border','solid 2px green');
+                  if(data=='1'){
                     $('#e2').css('display','none');
-                    ch2 = 100;
-                    return;
+                    ch3 = 100;
+                    bbb=1;
+                  
                   }else{
-                    $('#password').css('border','solid 1px red');
-                     $("#e2").html("密码不正确");
+                    $("#e2").html("密码不正确");
                     $('#e2').css('display','block');
-                    ch2 = 0;
+                    ch3 = 0;
+                    bbb=0;            
                   }
                 },'json')
+
+                // console.log(ch3);
+                if (aaa==1 && bbb==1 ) {
+                    next();
+                }else{
+                    return false;
+                }
             })
+
             
     </script>
     </body>
-        }
+        
 
 </html>

@@ -8,7 +8,7 @@
 
 <!-- Viewport Metatag -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    
+
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/admins/plugins/colorpicker/colorpicker.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/admins/custom-plugins/wizard/wizard.css" media="screen">
@@ -33,161 +33,53 @@
 <link rel="stylesheet" type="text/css" href="/admins/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/admins/css/themer.css" media="screen">
 
+
+<link rel="stylesheet" href="/admins/layer/skin/layer.css">
+
+<!-- 分页样式 -->
+<link rel="stylesheet" stype="text/css" href="/admins/css/paging.css" media="screen"/>
+
+
 <title>@yield('title')</title>
 
 </head>
 
 <body>
 
-	<!-- Themer (Remove if not needed) -->  
-	
+	<!-- Themer (Remove if not needed) -->
+
     <!-- Themer End -->
 
 	<!-- Header -->
 	<div id="mws-header" class="clearfix">
-    
+
     	<!-- Logo Container -->
     	<div id="mws-logo-container">
-        
+
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap">
             	<h3 style="color: white;font-size: 30px">myweibo.com</h3>
 			</div>
         </div>
-        
+
         <!-- User Tools (notifications, logout, profile, change password) -->
         <div id="mws-user-tools" class="clearfix">
-        
+
         	<!-- Notifications -->
-        	<div id="mws-user-notif" class="mws-dropdown-menu">
-            	<a href="/admins/#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
-                
-                <!-- Unread notification count -->
-                <span class="mws-dropdown-notif">35</span>
-                
-                <!-- Notifications dropdown -->
-                <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
-                        <ul class="mws-notifications">
-                        	<li class="read">
-                            	<a href="/admins/#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="read">
-                            	<a href="/admins/#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="/admins/#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="/admins/#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-	                        <a href="/admins/#">View All Notifications</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        	
             
             <!-- Messages -->
-            <div id="mws-user-message" class="mws-dropdown-menu">
-            	<a href="/admins/#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
-                
-                <!-- Unred messages count -->
-                <span class="mws-dropdown-notif">35</span>
-                
-                <!-- Messages dropdown -->
-                <div class="mws-dropdown-box">
-                	<div class="mws-dropdown-content">
-                        <ul class="mws-messages">
-                        	<li class="read">
-                            	<a href="/admins/#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="read">
-                            	<a href="/admins/#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="/admins/#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        	<li class="unread">
-                            	<a href="/admins/#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-	                        <a href="/admins/#">View All Messages</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
+
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
-            
+
             	<!-- User Photo -->
             	<div id="mws-user-photo">
                 	<img src="/admins/example/profile.jpg" alt="User Photo">
                 </div>
-                
+
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
@@ -202,42 +94,39 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Start Main Wrapper -->
     <div id="mws-wrapper">
-    
+
     	<!-- Necessary markup, do not remove -->
 		<div id="mws-sidebar-stitch"></div>
 		<div id="mws-sidebar-bg"></div>
-        
+
         <!-- Sidebar Wrapper -->
         <div id="mws-sidebar">
-        
+
             <!-- Hidden Nav Collapse Button -->
             <div id="mws-nav-collapse">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
+
             
-        	<!-- Searchbox -->
-        	<div id="mws-searchbox" class="mws-inset">
-            	<form action="typography.html">
-                	<input type="text" class="mws-search-input" placeholder="Search...">
-                    <button type="submit" class="mws-search-submit"><i class="icon-search"></i></button>
-                </form>
-            </div>
-            
+        
+
             <!-- Main Navigation -->
             <div id="mws-navigation">
                 <ul>
-                    
+
                     <li>
                         <a href="#"><i class="icon-users"></i>用户管理</a>
                         <ul class="closed">
+
                             <li><a href="/admin/admins/create">管理员添加</a></li>
                             <li><a href="/admin/admins">管理员列表</a></li>
                             <li><a href="/admin/index">用户列表</a></li>
+
                         </ul>
                         <a href="#"><i class="icon-twitter-2"></i>热门微博</a>
                         <ul class="closed">
@@ -246,6 +135,11 @@
                         <a href="#"><i class="icon-bell-2"></i>举报管理</a>
                         <ul class="closed">
                             <li><a href="/admin/report">举报列表</a></li>
+                        </ul>
+                        <a href="#"><i class="icon-list"></i>标签管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/label/create">标签添加</a></li>
+                            <li><a href="/admin/label">标签列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-filter"></i>广告管理</a>
                         <ul class="closed">
@@ -265,16 +159,17 @@
                         <a href="#"><i class="icon-tools"></i>网站配置</a>
                         <ul class="closed">
                             <li><a href="/admin/config">配置修改</a></li>
+                            <li><a href="/admin/logo">LOGO修改</a></li>
                         </ul>
 
                     </li>
                 </ul>
-            </div>         
+            </div>
         </div>
-        
+
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
-            
+
             <div class="container">
             @section('content')
 
@@ -287,7 +182,7 @@
 
         </div>
         <!-- Main Container End -->
-        
+
     </div>
 
     <!-- JavaScript Plugins -->
@@ -295,7 +190,9 @@
     <script src="/admins/js/libs/jquery.mousewheel.min.js"></script>
     <script src="/admins/js/libs/jquery.placeholder.min.js"></script>
     <script src="/admins/custom-plugins/fileinput.js"></script>
-    
+
+    <script src="/admins/layer/layer.js"></script>
+ 
     <!-- jQuery-UI Dependent Scripts -->
     <script src="/admins/jui/js/jquery-ui-1.9.2.min.js"></script>
     <script src="/admins/jui/jquery-ui.custom.min.js"></script>
@@ -324,7 +221,7 @@
 
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
-    
+
     @section('js')
 
 

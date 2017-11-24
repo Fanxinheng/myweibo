@@ -1,0 +1,28 @@
+#b{ background-color: #B3D9F0;} 
+#navbar{background-color: #fff}
+#navbar #navbar-header1{margin-top: 13px;}
+#navbar #navbar-header2{ margin-left:100px;}
+#navbar #navbar-header2 input{ width: 500px;}
+#navbar #nav-1{margin-top: 5px;float: right;}
+#navbar #nav-1 button{ width:70px;height: 40px;} 
+#weibo { width:auto;margin-bottom: 50px ;margin-top: 60px} 
+#weibo #backg{background:url('/homes/images/197.jpg');height: 300px}
+#weibo #backg #jimg{margin-top: 10px;margin-left: 100px}
+#weibo #backg #nickname{text-align: center;margin-top: 15px}
+#weibo #lanmu { background-color: #fff; height:500px;}
+#weibo #lanmu li { margin-top: 5px; font-size: 20px; }
+
+
+#weibo  #tiezi .col-lg-12{width:830px; margin-left: 12px;background-color: #fff ;margin-bottom:10px;padding:10px;}
+#weibo  #tiezi  #at{float:left;height: 130px; width:330px; margin-left:50px;background-color: #f2f2f5;margin-top: 20px;}
+#weibo #tiezi #at #acon{float: left;width: 70px;margin-top: 30px}
+#weibo #tiezi #at #acon2{width: auto;margin-top: 30px;float: right;}
+#weibo #tiezi #at #acon #span1{font-size: 20px;}
+#weibo #tiezi #at #acon #span2{font-size: 14px;}
+#weibo #at #img{float:left; margin-top:10px;width: 100px;height:100px; }
+#weibo #at #img img{ margin-top:27px; margin-left: 20px; }
+#weibo #at #acontent{ float:left; margin-top: 10px; margin-left: 10px;width: 200px; height:80px;}
+
+
+#foot .container{ height: 50px; text-align: center; }
+#foot #foot1{background-color: #fff}

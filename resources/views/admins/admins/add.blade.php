@@ -18,13 +18,23 @@
         </div>
         @endif
 
+
+        @if(session('msg'))
+        <div class="mws-form-message error">
+                                    
+            {{session('msg')}}
+
+        </div>
+        @endif
+
+
     
         <form action="/admin/admins/" class="mws-form" method="post" enctype="multipart/form-data">
             <div class="mws-form-inline">
                 <div class="mws-form-row">
                     <label class="mws-form-label">用户名</label>
                     <div class="mws-form-item">
-                        <input type="text" class="small" name="uname" >
+                        <input type="text" class="small" name="name" >
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -48,7 +58,7 @@
             <div class="mws-button-row">
 
                 {{csrf_field()}}
-                <input type="submit" class="btn btn-danger" value="添加">
+                <input type="submit" class="btn" value="添加">
                 
             </div>
         </div>
