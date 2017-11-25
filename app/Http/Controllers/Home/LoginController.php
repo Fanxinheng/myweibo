@@ -20,7 +20,7 @@ use Session;
 
 class LoginController extends Controller
 {
-    //
+    
     //加载主页页面
     public function index()
     {
@@ -31,7 +31,7 @@ class LoginController extends Controller
   	  //查询标签内容
       $label = label::get();
 
-      //查询登录用户信息 session('uid')
+      //查询登录用户信息 
      	$user = user_info::where('uid',$uid)->first();
 
      	//查询登录用户关注数量
@@ -46,10 +46,42 @@ class LoginController extends Controller
       //查询微博内容
       $index = contents::join('user_info',function($join){
       	$join->on('contents.uid','=','user_info.uid');
-      })->orderBy('time','desc')->get();
+      })->orderBy('time','desc')->paginate(10);
 
     	return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
+
+    //微博内容搜索
+    public function search(Request $request)
+    {
+      //获取登录用户ID
+      $uid = Session('uid');
+
+      //查询标签内容
+      $label = label::get();
+
+      //查询登录用户信息
+      $user = user_info::where('uid',$uid)->first();
+
+      //查询登录用户关注数量
+      $unum = user_attention::where('uid',$uid)->count();
+
+      //查询登录用户粉丝数量
+      $gnum = user_attention::where('gid',$uid)->count();
+
+      //查询登录用户微博数量
+      $cnum = contents::where('uid',$uid)->count();
+
+      //查询搜索内容
+      $index = contents::join('user_info','contents.uid','=','user_info.uid')
+      ->where('content','like','%'.$request->input('search').'%')
+      ->orWhere('nickName','like','%'.$request->input('search').'%')
+      ->orderBy('time','desc')
+      ->paginate(10);
+
+      return view('homes/blog/search',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index,'request'=>$request]);
+    }
+
 
     //加载热门微博页面
     public function hot ()
@@ -60,7 +92,7 @@ class LoginController extends Controller
       //查询标签内容
       $label = label::get();
 
-      //查询登录用户信息 session('uid')
+      //查询登录用户信息
      	$user = user_info::where('uid',$uid)->first();
 
      	//查询登录用户关注数量
@@ -79,7 +111,7 @@ class LoginController extends Controller
       ->orWhere('fnum','>',1)
       ->orWhere('rnum','>',1)
       ->orderBy('time','desc')
-      ->get();
+      ->paginate(10);
 
      return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
@@ -110,7 +142,7 @@ class LoginController extends Controller
       	$join->on('contents.uid','=','user_info.uid');
       })->where('label','like','%'.$id.'%')
       ->orderBy('time','desc')
-      ->get();
+      ->paginate(5);
 
       return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
@@ -124,7 +156,7 @@ class LoginController extends Controller
       //查询标签内容
       $label = label::get();
 
-      //查询登录用户信息 session('uid')
+      //查询登录用户信息
       $user = user_info::where('uid',$uid)->first();
 
       //查询登录用户关注数量
@@ -137,7 +169,7 @@ class LoginController extends Controller
       $cnum = contents::where('uid',$uid)->count();
 
       //查询转发内容相关
-      $index = forward::with('contents.user_info','user_info')->orderBy('time','desc')->get();
+      $index = forward::with('contents.user_info','user_info')->orderBy('time','desc')->paginate(5);
       // dd($index);
       
 

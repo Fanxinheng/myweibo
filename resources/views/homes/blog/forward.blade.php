@@ -40,27 +40,16 @@
                                         </span>
                                     </a>
                                 </div>
+                                <!-- 搜索 -->
                                 <div class=" gn_search_v2">
-                                    
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input"
-                                    name="15102240605332" type="text" style="height:25px">
-                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
-                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    <form action="/home/search" method="get">
+                                        <input node-type="searchInput" autocomplete="off" value="" class="W_input"
+                                        name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
 
-                                    </a>
-                                    <!--搜索热词下拉-->
-                                    <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
-                                        <div class="gn_topmenulist">
-                                            <div node-type="basic">
-                                            </div>
-                                            <div node-type="plus">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--/搜索热词下拉-->
+                                        {{csrf_field()}}
+                                        <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+                                    </form> 
                                 </div>
-                            <!-- 搜索 -->
                             <div class="gn_position">
                                 <div class="gn_nav">
                                         <ul class="gn_nav_list">
@@ -200,7 +189,21 @@
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
                                                                 {{$content->nickName}}
                                                             </a>
-                                                           
+                                                            
+                                                            <!-- 判断微博是否为登录用户发布 -->
+                                                            @if($uid != $content->uid)
+                                                                @if($bool)
+                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 14px;" onclick="attent({{$content->uid}})" title="取消关注">√ 已关注
+                                                                        <input type="hidden" name="attent" value="{{$content->uid}}">
+                                                                    </a>
+
+                                                                @else
+                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 15px;" onclick="attent({{$content->uid}})" title="关注博主">关注
+                                                                        <input type="hidden" name="attent" value="{{$content->uid}}">
+                                                                    </a>
+                                                                @endif
+
+                                                            @endif
                                                         </div>
                                                         <div class="WB_from S_txt2">
                                                             <!-- minzheng add part 2 -->
@@ -345,7 +348,9 @@
                                    
                                 </div>
                                 @endforeach
-                                
+                                <div style="float: right">
+                                    {!! $forward->render() !!}
+                                </div>
 
                                 </div>
 
@@ -377,7 +382,7 @@
                                                     <ul class="user_atten clearfix W_f18" style="padding-left: 10px">
                                                         <li class="S_line1">
                                                             <a bpfilter="page_frame" href="/home/attention" class="S_txt1" indepth="true">
-                                                                <strong node-type="follow">
+                                                                <strong node-type="follow" id="attention">
                                                                     {{$unum}}
                                                                 </strong>
                                                                 <span class="S_txt2">
@@ -416,22 +421,49 @@
 
                         </div>
                         <script type="text/javascript">
+
+                            //微博转发
                             $('#report').on('click', function(){
                                 
-                                layer.msg('微博转发成功:)');
+                                layer.msg('微博转发成功:)', {icon: 1});
+                                
                               });
 
-                            $('.report').on('click',function(){
+                            //关注博主
+                            function attent(id){
+                                $.ajax({
+                                    type: "get",
+                                    url: "/home/attent",
+                                    data: {gid:id},
+                                    
+                                    beforeSend:function(){
+                                         a = layer.load();
+                                      },
+                                    success: function(data) {
 
-                                var cid = $('#rep').val();
+                                        layer.close(a);
 
-                                console.log(cid);
+                                        if(data.a == 0){
+                                            layer.msg('已取消关注', {icon: 1});
+                                            document.getElementById('attent').innerHTML = '关注';
+                                            document.getElementById('attention').innerHTML = data.gnum;
 
-                                $.get('/home/blog/report', {cid:cid}, function (data) {
-                                    console.log(data);
-                                })
+                                        }else{
+                                            layer.msg('已关注', {icon: 1});
+                                            document.getElementById('attent').innerHTML = '√ 已关注';
+                                            document.getElementById('attention').innerHTML = data.gnum;
 
-                            })
+                                        }
+   
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                  
+                                        layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
+
+                                    }
+                                });
+                            }
+
 
                         </script>
                     </body>

@@ -24,7 +24,7 @@ class AdminController extends Controller
        //查询微博内容
         $index = contents::join('user_info',function($join){
             $join->on('contents.uid','=','user_info.uid');
-        })->orderBy('time','desc')->get();
+        })->orderBy('time','desc')->paginate(10);
 
        return view('homes/index',['label'=>$label,'index'=>$index]);
 
@@ -43,7 +43,7 @@ class AdminController extends Controller
         ->orWhere('fnum','>',1)
         ->orWhere('rnum','>',1)
         ->orderBy('time','desc')
-        ->get();
+        ->paginate(10);
 
        return view('homes/index',['label'=>$label,'index'=>$index]);
     }
@@ -59,11 +59,26 @@ class AdminController extends Controller
             $join->on('contents.uid','=','user_info.uid');
         })->where('label','like','%'.$id.'%')
         ->orderBy('time','desc')
-        ->get();
+        ->paginate(10);
 
         return view('homes/index',['label'=>$label,'index'=>$index]);
     }
 
+    //微博搜索
+    public function search(Request $request)
+    {
+        //查询标签内容
+        $label = label::get();
+
+        //查询搜索内容
+        $index = contents::join('user_info','contents.uid','=','user_info.uid')
+        ->where('content','like','%'.$request->input('search').'%')
+        ->orWhere('nickName','like','%'.$request->input('search').'%')
+        ->orderBy('time','desc')
+        ->paginate(10);
+
+        return view('homes/search',['label'=>$label,'index'=>$index,'request'=>$request]);
+    }
    
 
    //获取表单传过来的值并添加到数据库
@@ -72,7 +87,6 @@ class AdminController extends Controller
 
         //获取表单传过来的信息
         $res = $request->only('phone','password');
-        // dd($res);die;
 
         //密码用哈希加密
         $res['password']=Hash::make($request->input('password'));

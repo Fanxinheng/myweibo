@@ -22,6 +22,7 @@ class ReleaseController extends Controller
     {
     	//获取发布者ID
     	$res['uid'] = Session('uid');
+
     	//文件上传
         if($request->hasFile('image')){
             
@@ -36,22 +37,25 @@ class ReleaseController extends Controller
 
             //获取上传文件后缀
             $suffix = $request->file('image')->getClientOriginalExtension();
-
-            // $request->file('image')->move('./homes/c_images/',$name.'.'.$suffix);
             
             //拼装文件名
-            $logo = '/homes/c_images/'.$name.'.'.$suffix;
+            $logo = 'homes/c_images/'.$name.'.'.$suffix;
 
             $res['image'] = $logo;
 
             //上传到七牛云
             $bool = $disk->put($logo,file_get_contents($file->getRealPath()));
 
-
         }
 
-        //获取微博内容
-		$res['content'] = $_POST['content'];
+
+        //判断微博内容是否为空
+        if($request->has('content')){
+            $res['content'] = $_POST['content'];
+        }else{
+            $res['content'] = '发布微博';
+        }
+
 
         if($request->has('label')){
             //获取微博标签内容

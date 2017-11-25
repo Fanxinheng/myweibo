@@ -22,16 +22,22 @@ Route::get('/', function () {
 
 
 
-//==============前台未登录=====================//
+//===========================前台未登录==============================//
+
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
-	
+
+//============================关于微博=========================//
+
 
 	//注册前首页全部微博
 	Route::get('/admin','AdminController@index');
 
 	//热门微博列表
 	Route::get('/hot','AdminController@hot');
+
+	//微博搜索
+	Route::get('/admin/search','AdminController@search');
 
 	//微博标签列表
 	Route::get('/label/{id}','AdminController@label');
@@ -93,6 +99,9 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//前台登录成功后进入首页
 	Route::get('/login','LoginController@index');
 
+	//微博内容搜索栏
+	Route::get('/search','LoginController@search');
+
 	//热门微博列表
 	Route::get('/index/hot','LoginController@hot');
 
@@ -120,6 +129,9 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//微博转发功能
 	Route::post('/forward/store/','ForwardController@store');
 
+	//删除微博转发
+	Route::get('/blog/delete/','BlogController@delete');
+
 	//微博评论功能
 	Route::post('/replay/store/','ReplayController@store');
 
@@ -129,6 +141,11 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//微博点赞功能
 	Route::post('/point/','PointController@point');
 
+	//用户关注
+	Route::get('/attent','AttentController@attent');
+
+	//用户取消关注
+	Route::get('/noattent','AttentController@noattent');
 
 	
 

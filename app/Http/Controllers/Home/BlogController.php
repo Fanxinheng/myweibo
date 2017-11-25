@@ -15,6 +15,7 @@ use App\Http\Model\user_attention;
 use App\Http\Model\forward;
 use App\Http\Model\report;
 use App\Http\Model\replay;
+use App\Http\Model\point;
 
 use zgldh\QiniuStorage\QiniuStorage;
 
@@ -32,6 +33,13 @@ class BlogController extends Controller
         //获取举报微博ID
         $res['tid'] = $request->input('cid');
 
+        //判断是否为同一用户举报同一微博
+        $bool = report::where('rid',$res['rid'])->where('tid',$res['tid'])->value('id');
+
+        if($bool){
+            return 0;
+        }
+
         //获取被举报者ID
         $res['uid'] = contents::where('cid',$request->input('cid'))->value('uid');
 
@@ -39,7 +47,7 @@ class BlogController extends Controller
         $res['time'] = time();
 
         //将数据插入数据库
-        $bool = report::insert($res);
+        $bool2 = report::insert($res);
 
         //举报微博举报次数+1
         $report = contents::where('cid',$request->input('cid'))->value('report');
@@ -48,10 +56,8 @@ class BlogController extends Controller
 
         $data = contents::where('cid',$request->input('cid'))->update($num);
 
-        if($bool && $data){
-            echo 1;
-        }else{
-            echo 0;
+        if($bool2 && $data){
+            return 1;
         }
     }
 
@@ -80,9 +86,12 @@ class BlogController extends Controller
     	$content = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
 
         //查询转发信息
-    	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
+    	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
-    	return view('homes/blog/forward',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'content'=>$content,'forward'=>$forward]);
+        //查询用户关注信息
+        $bool = user_attention::where('uid',$uid)->where('gid',$content->uid)->value('id');
+
+    	return view('homes/blog/forward',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'content'=>$content,'forward'=>$forward,'bool'=>$bool]);
     	
     }
 
@@ -112,9 +121,12 @@ class BlogController extends Controller
         $content = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
 
         //查询评论信息
-        $replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
+        $replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
-        return view('homes/blog/replay',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'content'=>$content,'replay'=>$replay]);
+        //查询用户关注信息
+        $bool = user_attention::where('uid',$uid)->where('gid',$content->uid)->value('id');
+
+        return view('homes/blog/replay',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'content'=>$content,'replay'=>$replay,'bool'=>$bool]);
         
     }
 
@@ -122,17 +134,20 @@ class BlogController extends Controller
     //删除自己的微博
     public function destroy (Request $request)
     {
-        //获取删除ID
+        //获取此微博ID
         $cid = $_GET['did'];
 
         //删除此微博的转发
-        $bool = forward::where('tid',$cid)->delete();
+        forward::where('tid',$cid)->delete();
 
         //删除此微博的评论
-        $bool1 = replay::where('tid',$cid)->delete();
+        replay::where('tid',$cid)->delete();
 
         //删除此微博的举报
-        $bool2 = report::where('tid',$cid)->delete();
+        report::where('tid',$cid)->delete();
+
+        //删除此微博的点赞
+        point::where('tid',$cid)->delete();
 
         //删除七牛云微博图片
         $image = contents::where('cid',$cid)->value('image');
@@ -147,15 +162,48 @@ class BlogController extends Controller
 
         }
 
+        //登录用户积分-5
+        $socre = user_info::where('uid',Session('uid'))->value('socre');
+
+        $num['socre'] = $socre - 5;
+
+        user_info::where('uid',Session('uid'))->update($num);
+
         //删除此微博内容
-        $bool3 = contents::where('cid',$cid)->delete();
+        contents::where('cid',$cid)->delete();
 
         //查询登录用户微博数量
-        $cnum = contents::where('uid',Session('uid'))->count();
+        $num['cnum'] = contents::where('uid',Session('uid'))->count();
         
-        return $cnum;
+        return $num;
+
+    }
 
 
+    //删除微博转发
+    public function delete ()
+    {
+
+        //获取微博转发ID
+        $id = $_GET['did'];
+
+        //获取原微博id
+        $tid = forward::where('id',$id)->value('tid');
+
+        //此微博转发数量-1
+        $fnum = contents::where('cid',$tid)->value('fnum');
+
+        $fnums['fnum'] = $fnum - 1;
+
+        $bool = contents::where('cid',$tid)->update($fnums);
+
+        //删除此转发
+        $bool1 = forward::where('id',$id)->delete();
+
+        if($bool && $bool1) {
+            return 1;
+        }
+        
         
     }
 }

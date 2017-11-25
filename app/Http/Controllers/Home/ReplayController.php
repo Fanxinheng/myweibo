@@ -49,23 +49,22 @@ class ReplayController extends Controller
     	//获取评论时间
     	$res['time'] = time();
 
-
     	//获取评论人id
     	$res['rid'] = Session('uid');
 
     	//将指定微博评论数量+1
-    	$rnum = contents::where('cid',$_POST['tid'])->value('rnum');
+    	$rnum = contents::where('cid',$res['tid'])->value('rnum');
 
     	$num['rnum'] = $rnum +1;
 
-    	$data = contents::where('cid',$_POST['tid'])->update($num);
+    	$data = contents::where('cid',$res['tid'])->update($num);
 
         //登录用户积分+1
-        $socre = user_info::where('uid',Session('uid'))->value('socre');
+        $socre = user_info::where('uid',$res['uid'])->value('socre');
 
         $socres['socre'] = $socre + 1;
 
-        $data2 = user_info::where('uid',Session('uid'))->update($socres);
+        $data2 = user_info::where('uid',$res['uid'])->update($socres);
 
     	//将转发内容存入数据库
     	$data1 = replay::insert($res);
@@ -73,17 +72,9 @@ class ReplayController extends Controller
         //将数据拼装返回
     	if($data && $data1 && $data2){
 
-            $ress['image'] = user_info::where('uid',Session('uid'))->value('photo');
-
-            $ress['nickName'] = user_info::where('uid',Session('uid'))->value('nickName');
-
-            $ress['times'] = date('Y-m-d H:i:s',time());
-
-            $ress['content'] = $_POST['rcontent'];
-
-    		return $ress;
+    		return back();
     	}else{
-    		return 0;
+    		return back();
 
     	}
 

@@ -41,27 +41,16 @@
                                         </span>
                                     </a>
                                 </div>
+                                <!-- 搜索 -->
                                 <div class=" gn_search_v2">
-                                    
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input"
-                                    name="15102240605332" type="text" style="height:25px">
-                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
-                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    <form action="/home/search" method="get">
+                                        <input node-type="searchInput" autocomplete="off" value="" class="W_input"
+                                        name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
 
-                                    </a>
-                                    <!--搜索热词下拉-->
-                                    <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
-                                        <div class="gn_topmenulist">
-                                            <div node-type="basic">
-                                            </div>
-                                            <div node-type="plus">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--/搜索热词下拉-->
+                                        {{csrf_field()}}
+                                        <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+                                    </form> 
                                 </div>
-                            <!-- 搜索 -->
                             <div class="gn_position">
                                 <div class="gn_nav">
                                         <ul class="gn_nav_list">
@@ -201,6 +190,21 @@
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
                                                                 {{$content->nickName}}
                                                             </a>
+
+                                                            <!-- 判断微博是否为登录用户发布 -->
+                                                            @if($uid != $content->uid)
+                                                                @if($bool)
+                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 14px;" onclick="attent({{$content->uid}})" title="取消关注">√ 已关注
+                                                                        <input type="hidden" name="attent" value="{{$content->uid}}">
+                                                                    </a>
+
+                                                                @else
+                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 15px;" onclick="attent({{$content->uid}})" title="关注博主">关注
+                                                                        <input type="hidden" name="attent" value="{{$content->uid}}">
+                                                                    </a>
+                                                                @endif
+
+                                                            @endif
                                                            
                                                         </div>
                                                         <div class="WB_from S_txt2">
@@ -249,13 +253,13 @@
                                             <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                             class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
                                             action-type="feed_list_item">
-                                            <form id="replay_form" method="post">
+                                            <form action="/home/replay/store/" method="post">
                                                 <div class="WB_feed_detail clearfix" node-type="feed_content" ">
                                                     <textarea class="form-control" rows="3" name="rcontent"></textarea>
                                                     <input type="hidden" name="uid" value="{{$content->uid}}">
                                                     <input type="hidden" name="tid" value="{{$content->cid}}">
                                                     {{csrf_field()}}
-                                                    <div class="btn btn-default btn-sm" id="replay" style="float: right;margin:5px 0 5px 0">评论</div>
+                                                    <button class="btn btn-default btn-sm" id="replay" style="float: right;margin:5px 0 5px 0">评论</button>
                                                    
                                                 </div> 
                                             </form>
@@ -340,7 +344,9 @@
                                    
                                 </div>
                                 @endforeach
-                                
+                                <div style="float: right">
+                                    {!! $replay->render() !!}
+                                </div>
 
                                 </div>
 
@@ -372,7 +378,7 @@
                                                     <ul class="user_atten clearfix W_f18" style="padding-left: 10px">
                                                         <li class="S_line1">
                                                             <a bpfilter="page_frame" href="/home/attention" class="S_txt1" indepth="true">
-                                                                <strong node-type="follow">
+                                                                <strong node-type="follow" id="attention">
                                                                     {{$unum}}
                                                                 </strong>
                                                                 <span class="S_txt2">
@@ -412,7 +418,7 @@
                         </div>
                         <script type="text/javascript">
                             
-                            //判断评论内容是否为空以及微博评论
+                            //判断评论内容是否为空
                             $('#replay').mouseover(function() {
                              
                                 $.ajaxSetup({
@@ -440,9 +446,12 @@
                                 
                             }); 
 
+
+
+                            //微博评论
                             $('#replay').click(function() {
 
-                                //获取登录用户ID
+                                /*//获取登录用户ID
                                 var uid = $(this).siblings('input[name=uid]').val();
 
                                 //获取评论微博ID
@@ -466,22 +475,54 @@
                                     success: function(data) {
                                         layer.close(a);
                                         console.log(data);
-                                        /*console.log(data.rcontent);
-                                        console.log(data.times);
-                                        console.log(data.times);*/
-                                        // $('#img1').attr('src','5.jpg');
-
-                                      // $('#art_thumb').val(data);
+                                        // console.log(data.rcontent);
+                                        
                                     },
                                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                                         alert("上传失败，请检查网络后重试");
                                     }
                                 });
-
-                                layer.alert('微博评论成功:)', {
+*/
+                                layer.msg('微博评论成功:)', {
                                           icon:1 ,
                                         })
                             });
+
+
+                            //关注博主
+                            function attent(id){
+                                $.ajax({
+                                    type: "get",
+                                    url: "/home/attent",
+                                    data: {gid:id},
+                                    
+                                    beforeSend:function(){
+                                         a = layer.load();
+                                      },
+                                    success: function(data) {
+
+                                        layer.close(a);
+
+                                        if(data.a == 0){
+                                            layer.msg('已取消关注', {icon: 1});
+                                            document.getElementById('attent').innerHTML = '关注';
+                                            document.getElementById('attention').innerHTML = data.gnum;
+
+                                        }else{
+                                            layer.msg('已关注', {icon: 1});
+                                            document.getElementById('attent').innerHTML = '√ 已关注';
+                                            document.getElementById('attention').innerHTML = data.gnum;
+
+                                        }
+   
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                  
+                                        layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
+
+                                    }
+                                });
+                            }
 
                         </script>
                     </body>

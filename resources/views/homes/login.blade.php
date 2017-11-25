@@ -16,7 +16,7 @@
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
     
-        <!-- <link rel="stylesheet" href="/homes/css/login.css"> -->
+
 
         <title>
             我的首页 微博-随时随地发现新鲜事
@@ -29,7 +29,7 @@
             <div class="WB_miniblog_fb">
                 <div id="plc_top">
                     <!--简易顶部导航拼页面用-->
-                                           <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
+                        <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
                             <div class="gn_header clearfix" style="width:1000px">
                                 <!-- logo -->
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
@@ -41,27 +41,17 @@
                                         </span>
                                     </a>
                                 </div>
-                                <div class=" gn_search_v2">
-                                    
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input"
-                                    name="15102240605332" type="text" style="height:25px">
-                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
-                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 
-                                    </a>
-                                    <!--搜索热词下拉-->
-                                    <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
-                                        <div class="gn_topmenulist">
-                                            <div node-type="basic">
-                                            </div>
-                                            <div node-type="plus">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--/搜索热词下拉-->
+                                <div class=" gn_search_v2">
+                                    <form action="/home/search" method="get">
+                                        <input node-type="searchInput" autocomplete="off" value="" class="W_input"
+                                        name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
+
+                                        {{csrf_field()}}
+                                        <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+                                    </form> 
                                 </div>
-                            <!-- 搜索 -->
+                           
                             <div class="gn_position">
                                 <div class="gn_nav">
                                         <ul class="gn_nav_list">
@@ -238,7 +228,7 @@
                                 
 
                                 @foreach($index as $v)
-                                <div id="v6_pl_content_homefeed" class="blog">
+                                <div id="destroy{{$v->cid}}" class="blog">
                                     <div node-type="homefeed">
                                         
                                         <!--feed list-->
@@ -271,7 +261,7 @@
                                                             <!-- 判断微博是否为登录用户自己发布 -->
                                                             @if($uid == $v->uid)
                                                                 <!-- <a href="/home/blog/destory/{{$v->cid}}"></a> -->
-                                                                <a class="glyphicon glyphicon-remove destroy" style="float: right;cursor: pointer;" title="删除微博">
+                                                                <a class="glyphicon glyphicon-remove destroy" onclick="destroy({{$v->cid}})" style="float: right;cursor: pointer;" title="删除微博" id="des{{$v->cid}}">
                                                                     <input type="hidden" name="destroy" value="{{$v->cid}}">
                                                                 </a>
 
@@ -396,6 +386,14 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                <div style="float: right">
+                                    <nav aria-label="...">
+                                      <ul class="pager">
+                                        <li class="previous"><a href="{{$index->previousPageUrl()}}"><span aria-hidden="true">&larr;</span> Older</a></li>
+                                        <li class="next"><a href="{{$index->nextPageUrl()}}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+                                      </ul>
+                                    </nav>
+                                </div>
                               </div>                     
                                
                               </div>
@@ -417,7 +415,7 @@
                                                         <em class="W_ficon ficon_favorite S_ficon">
                                                             <span class="glyphicon glyphicon-tint" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                         </em>
-                                                        <em style="font-size: 14px">
+                                                        <em style="font-size: 14px" id="socre">
                                                             {{$user->socre}}
                                                         </em>
                                                         </a>
@@ -468,8 +466,9 @@
                             //微博发布
                             $('#release').on('click', function(){
 
-                                var index = layer.load(0, {shade: false});
-                                
+                                var a = layer.load(0, {shade: false});
+
+                                layer.msg('微博发布成功:)', {icon: 1});
                               });
 
 
@@ -494,16 +493,22 @@
 
                                         layer.close(a);
 
-                                        document.getElementById('pnum'+id).innerHTML = data;
+                                        //判断是否重复点赞
+                                        if(data == 0){
+                                            layer.msg('您已赞过此微博:)', {icon:2 ,})
+                                        }else{
+                                            document.getElementById('pnum'+id).innerHTML = data;
 
-                                        layer.msg('点赞成功:)', {icon: 1});
+                                            layer.msg('点赞成功:)', {icon: 1});
 
-                                       $('#point'+id).off('click','point');
-                                        
-                                        
+                                           $('#point'+id).off('click','point');
+                                        }
+   
                                     },
                                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert("点赞失败，请检查网络后重试");
+                                      
+                                        layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
+
                                     }
                                 });
                               };
@@ -520,7 +525,7 @@
                                   ,yes: function(index){
 
                                     $.get('/home/blog/report', {cid:cid}, function (data) {
-                                        if(data){
+                                        if(data == 1){
                                             layer.close(index);
                                             layer.msg('我们收到了您的举报，感谢您的监督:)', {
                                               icon: 6
@@ -528,7 +533,7 @@
                                             });
 
                                         }else{
-
+                                            layer.msg('您已举报过此微博:)', {icon:2 ,})
                                         }
                                     });
                                    
@@ -537,14 +542,12 @@
                             });
 
 
-
-
                             //微博删除
-                            $('.destroy').on('click',function(){
+                            function destroy(id){
 
                                 //获取要删除微博的id
-                                did = $(this).children('input[name=destroy]').val();
-  
+                                did = $('#des'+id).children('input[name=destroy]').val();
+
                                 layer.confirm('您确定要删除此微博吗？', {
                                   btn: ['确定','取消'] //按钮
                                 }, function(){
@@ -564,14 +567,19 @@
                                         layer.close(a)
 
                                         //移除微博
-                                        $('.blog:first').remove();
- 
-                                        document.getElementById('cnum').innerHTML = data;
+                                        $('#destroy'+id).remove();
+                                        
+                                        //微博数量-1
+                                        document.getElementById('cnum').innerHTML = data.cnum;
 
-                                        layer.msg('删除成功:)', {icon: 1});
+                                        //微博积分-5
+                                        document.getElementById('socre').innerHTML = data.socre;
+
+                                        layer.msg('微博删除成功:)', {icon: 1});
                                     },
                                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                        alert("删除失败，请检查网络后重试！");
+                                        layer.msg("微博删除失败，请检查网络后重试", {icon:2 ,})
+                                        
                                         
                                     }
                                 });
@@ -580,7 +588,7 @@
 
                                 });
 
-                            });
+                            };
 
 
                         </script>

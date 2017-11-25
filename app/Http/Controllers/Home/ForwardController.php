@@ -28,7 +28,7 @@ class ForwardController extends Controller
     	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
 
     	//查询转发信息
-    	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
+    	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(1);
 
 
     	return view('homes/show/forward',['label'=>$label,'res'=>$res,'forward'=>$forward]);
@@ -40,7 +40,7 @@ class ForwardController extends Controller
     {
     	//获取转发内容
     	$res = $request->except('_token');
-        
+
     	//获取转发时间
     	$res['time'] = time();
 
@@ -57,19 +57,25 @@ class ForwardController extends Controller
     	//将转发内容存入数据库
     	$data1 = forward::insert($res);
 
-        //登录用户积分+2
-        $socre = user_info::where('uid',Session('uid'))->value('socre');
+        //判断转发人和登录用户是否为同一个人
+        if($request->only('uid')['uid'] != $res['fid']){
 
-        $socres['socre'] = $socre +2;
+            //登录用户积分+2
+            $socre = user_info::where('uid',Session('uid'))->value('socre');
 
-        $data2 = user_info::where('uid',Session('uid'))->update($socres);
+            $socres['socre'] = $socre +2;
 
-    	if($data && $data1 && $data2){
-    		return back();
-    	}else{
-    		return back();
+            $data2 = user_info::where('uid',Session('uid'))->update($socres);
 
-    	}
+            //微博发布者积分+2
+            $socre1 = user_info::where('uid',$request->only('uid'))->value('socre');
+
+            $socres1['socre'] = $socre1 +2;
+
+            $data3 = user_info::where('uid',$request->only('uid'))->update($socres1);
+        }
+
+       return back();
 
     }
 }

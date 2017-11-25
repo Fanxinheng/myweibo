@@ -162,7 +162,7 @@ PE html>
 
                                                         <div class="list_des">
                                                             
-                                                            <h3 class="list_title_s">
+                                                            <h3 class="list_title_s" style="padding-bottom: 10px">
                                                                 <div>
                                                                     {{$res->content}}
                                                                 </div>

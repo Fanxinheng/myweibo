@@ -46,23 +46,13 @@
                                     </a>
                                 </div>
                                 <div class=" gn_search_v2">
-                                    
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input" name="15102240605332" type="text" style="height:25px" placeholder="搜索你想要的">
-                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
-                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    <form action="/home/admin/search" method="get">
+                                        <input node-type="searchInput" autocomplete="off" value="" class="W_input"
+                                        name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
 
-                                    </a>
-                                    <!--搜索热词下拉-->
-                                   <!--  <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
-                                        <div class="gn_topmenulist">
-                                            <div node-type="basic">
-                                            </div>
-                                            <div node-type="plus">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!--/搜索热词下拉-->
+                                        {{csrf_field()}}
+                                        <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+                                    </form> 
                                 </div>
                                 <div class="gn_position">
                                     <div class="gn_nav">
@@ -153,20 +143,13 @@
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
                                                     
-                                                    <!--article feed-->
-                                                     
-                                                    <!--广告模块-->
-                                                    <div class="UG_list_b" mid="4171968871140682" action-type="feed_list_item"
-                                                    href="//weibo.com/5187664653/FuceP4MK6?ref=feedsdk" suda="key=nologin_home&amp;value=nologin_card_weibo:4171968871140682"
-                                                    suda-uatrack="key=www_unlogin_home&amp;value=recommend_feed">
-
 
                                                 @foreach($index as $k=>$v)
-                                                    
+                                                
                                                     <div class="list_des">
                                                         <a href="/home/replay/{{$v->cid}}">
                                                         <h3 class="list_title_s">
-                                                            <div style="word-break:break-all">
+                                                            <div style="word-break:break-all;padding-bottom:10px;">
                                                                 {{$v->content}}
                                                             </div> 
                                                         </h3>
@@ -234,21 +217,26 @@
 
                                                         <hr>
 
-                                                    @endforeach  
-                                                    </div> 
+                                                    @endforeach 
+
+                                                    
+                                                    <div style="float: right">
+                                                        <nav aria-label="...">
+                                                          <ul class="pager">
+                                                            <li class="previous"><a href="{{$index->previousPageUrl()}}"><span aria-hidden="true">&larr;</span> Older</a></li>
+                                                            <li class="next"><a href="{{$index->nextPageUrl()}}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+                                                          </ul>
+                                                        </nav>
+                                                    </div>
                                                     <!-- read_pos -->
                                                     <!--/read_pos-->
                                                 </ul>
                                                 <!--/feed内容-->
                                             </div>
+
                                         </div>
+
                                     </div>
-
-
-
-
-
-
 
                                     <div class="WB_main_r" fixed-box="true">
                                         <div id="pl_unlogin_home_login">
@@ -408,25 +396,6 @@
                 </div>
               <div id="plc_bot">
 
-            <!--footer-->
-             <!--  <div class="WB_footer S_bg2">
-              
-               <div class="other_link S_bg1 clearfix T_add_ser">
-                 
-                   <p class="copy_v2">
-                       <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                       <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                       <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                       <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                       <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                       <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
-                   </p>
-                   <p class="company"></p>
-               </div>
-             </div> -->
-
-        
-        <!--/footer-->
         </div>
             </div>
         </div>
