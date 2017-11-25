@@ -6,7 +6,7 @@
 
 @if(session('msg'))
     <div class="mws-form-message success">
-                                
+
         {{session('msg')}}
 
     </div>
@@ -18,19 +18,50 @@
                     <div class="mws-panel-body no-padding">
                         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
                             <form action="/admin/index" method="get">
-                                
+
                                 <div class="dataTables_filter" id="DataTables_Table_1_filter">
                                     <label>用户名: <input type="text" aria-controls="DataTables_Table_1" name="search" value="{{$request['search']}}">
-                                   
+
                                     <button type="submit" class="btn btn-default">搜索</button></label>
-                                    
+
                                 </div>
                             </form>
                         <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                             <thead>
-                                <tr role="row"><th style="width: 100px;" aria-label="Browser: activate to sort column ascending">手机</th><th style="width: 180px;" aria-label="Browser: activate to sort column ascending">昵称</th><th  style="width: 50px;" aria-label="Platform(s): activate to sort column ascending">性别</th><th  style="width: 50px;" aria-label="Engine version: activate to sort column ascending">年龄</th><th style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">职业</th><th style="width: 250px;" aria-label="CSS grade: activate to sort column ascending">邮箱</th><th  style="width: 50px;" aria-label="CSS grade: activate to sort column ascending">头像</th><th = style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">积分</th><th style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">状态</th><th =style="width: 250px;" aria-label="CSS grade: activate to sort column ascending">操作</th></tr>
+                                <tr role="row">
+                                    <th style="width: 100px;" aria-label="Browser: activate to sort column ascending">
+                                        手机
+                                    </th>
+                                    <th style="width: 180px;" aria-label="Browser: activate to sort column ascending">
+                                        昵称
+                                    </th>
+                                    <th style="width: 50px;" aria-label="Platform(s): activate to sort column ascending">
+                                        性别
+                                    </th>
+                                    <th style="width: 50px;" aria-label="Engine version: activate to sort column ascending">
+                                        年龄
+                                    </th>
+                                    <th style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
+                                        职业
+                                    </th>
+                                    <th style="width: 250px;" aria-label="CSS grade: activate to sort column ascending">
+                                        邮箱
+                                    </th>
+                                    <th style="width: 50px;" aria-label="CSS grade: activate to sort column ascending">
+                                        头像
+                                    </th>
+                                    <th tyle="width: 100px;" aria-label="CSS grade: activate to sort column ascending">
+                                        积分
+                                    </th>
+                                    <th style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">
+                                        状态
+                                    </th>
+                                    <th style="width: 250px;" aria-label="CSS grade: activate to sort column ascending">
+                                        操作
+                                    </th>
+                                </tr>
                             </thead>
-                            
+
                         <tbody role="alert" aria-live="polite" aria-relevant="all">
                                 @foreach($res as $k => $v)
                                 <tr class="@if($k%2 == 0) odd @else even @endif" style="text-align: center;">
@@ -49,7 +80,7 @@
                                             {{csrf_field()}}
                                             {{method_field('PUT')}}
                                             <button class="btn btn-default">{{$v->status == 1 ? '恢复用户' : '冻结用户'}}</button>
-                                            
+
                                         </form>
                                         <a href="/admin/news/{{$v->uid}}"><button class="btn btn-default">系统消息</button></a>
                                     </td>
@@ -58,10 +89,7 @@
                         </tbody>
                     </table>
                     <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
-                    <style type="text/css">
-                        .pagination li{background-color: #444444; border-left: 1px solid rgba(255, 255, 255, 0.15); border-right: 1px solid rgba(0, 0, 0, 0.5); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.15) inset; color: #fff; cursor: pointer; display: block; float: left; font-size: 12px; height: 20px; line-height: 20px; outline: medium none; padding: 0 10px; text-align: center; text-decoration: none; } .pagination .disabled{color: #666666; cursor: default; } .pagination .active{background-image: none; border: medium none; box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) inset; color: #323232; background-color: #c5d52b; } 
-                        ul{margin:0px; }
-                    </style>
+
                     {!! $res->appends($request->all())->render() !!}
                     </div>
                     </div>
@@ -74,6 +102,6 @@
 @section('js')
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
-       
+
     </script>
 @endsection

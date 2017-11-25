@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
@@ -15,15 +15,12 @@
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
-    
-
-
         <title>
             我的首页 微博-随时随地发现新鲜事
         </title>
         <link media="all" href="/homes/css/login.css" type="text/css" rel="stylesheet">
     </head>
-    
+
     <body class="FRAME_main B_index">
         <div class="WB_miniblog">
             <div class="WB_miniblog_fb">
@@ -43,9 +40,11 @@
                                 </div>
 
                                 <div class=" gn_search_v2">
+
                                     <form action="/home/search" method="get">
                                         <input node-type="searchInput" autocomplete="off" value="" class="W_input"
                                         name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
+
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
@@ -87,11 +86,11 @@
                                             </li>
                                         </ul>
                                     </div>
-                                        
-                                        
+
+
                                     </ul>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -171,9 +170,10 @@
                                                     <em class="spac1">
                                                         有什么新鲜事想告诉大家?
                                                     </em>
-                                                    
+
                                                 </p>
                                             </div>
+
                                             
                                             
                                         </div>
@@ -182,7 +182,7 @@
                                     <form action="/home/release/" method="post" enctype="multipart/form-data">
                                             <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
                                         
-                                            
+
                                             <div class="kind" style="height: 35px;margin-top: 3px;">
                                                <a class="S_txt1" href="javascript:void(0);" action-type="face" action-data="type=500&amp;action=1&amp;log=face&amp;cate=1"
                                                title="表情" node-type="smileyBtn" suda-uatrack="key=tblog_home_edit&amp;value=phiz_button">
@@ -197,11 +197,13 @@
                                                     </em>
                                                     图片
                                                     <div style="position: absolute; left: 0px; top: 0px; display: block; overflow: hidden; background-color: rgb(0, 0, 0); opacity: 0; width: 49px; height: 24px;">
+
                                                             <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
                                                              multiple="multiple" type="file">
                                                     </div>  
+
                                                 </a>
-                                                
+
                                                 <span>
                                                     
 
@@ -210,37 +212,41 @@
                                                     <label class="checkbox-inline" style="margin-bottom: 15px">
                                                       <input type="checkbox" id="inlineCheckbox1" name="label[]" value="{{$val->id}}">{{$val->lcontent}}
                                                     </label>
-                                                    
+
                                                     @endforeach
-                                               </span> 
-                                                
+                                               </span>
+
                                             </div>
                                             <div style="float: right;margin-top: 6px;">
                                                 {{csrf_field()}}
                                                 <button id="release" style="width:100px;height:40px;border-radius:5px;background:orange;color:white;font-size: 16px">发布</button>
                                                 
                                             </div>
+
                                             
                                     </form>
 
+
                                     </div>
                                 </div>
-                                
+
 
                                 @foreach($index as $v)
                                 <div id="destroy{{$v->cid}}" class="blog">
                                     <div node-type="homefeed">
-                                        
+
                                         <!--feed list-->
                                         <div class="WB_feed WB_feed_v3 WB_feed_v4" pagenum="1" node-type="feed_list"
                                         unread_mode="1">
-                                           
+
                                             <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                             class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
                                             action-type="feed_list_item">
+
                                                 <div class="WB_feed_detail clearfix" node-type="feed_content" ">
                                                     
                                                     
+
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
@@ -254,6 +260,7 @@
                                                     <div class="WB_detail">
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
+
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/user">
                                                                 {{$v->nickName}}
@@ -266,15 +273,14 @@
                                                                 </a>
 
                                                             @endif
-                                                            
-                                                           
+
                                                         </div>
                                                         <div class="WB_from S_txt2">
                                                             <!-- minzheng add part 2 -->
                                                             <a title="发布时间" class="S_txt2">
                                                                 {{date('Y-m-d H:i:s',$v->time)}}
                                                             </a>
-                                                            
+
                                                             <!-- minzheng add part 2 -->
                                                         </div>
                                                         <a href="/home/blog/replay/{{$v->cid}}">
@@ -286,12 +292,14 @@
                                                         <div id="image">
                                                             <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
                                                         </div>
+
                                                         @else
 
                                                         @endif
                                                         
+
                                                     </div>
-                                                   
+
                                                 </div>
                                                 <!-- minzheng add part 3 -->
                                                 <div class="WB_feed_handle">
@@ -379,13 +387,14 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
-                                           
+
                                         </div>
                                     </div>
                                 </div>
                                 @endforeach
+
                                 <div style="float: right">
                                     <nav aria-label="...">
                                       <ul class="pager">
@@ -395,7 +404,7 @@
                                     </nav>
                                 </div>
                               </div>                     
-                               
+
                               </div>
                                    <div id="v6_pl_rightmod_myinfo" style="float: right;width:245px">
                                         <div class="WB_cardwrap S_bg2">
@@ -411,7 +420,7 @@
                                                 <div class="WB_innerwrap" >
                                                     <div class="nameBox" style="height:38px;">
                                                         <a href="/home/user" class="name S_txt1" title="积分" style="padding-top: 10px">
-                                                            {{$user->nickName}}  
+                                                            {{$user->nickName}}
                                                         <em class="W_ficon ficon_favorite S_ficon">
                                                             <span class="glyphicon glyphicon-tint" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                         </em>
@@ -455,12 +464,78 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                        <div style="background-color: #FFFFFF;border-radius: 5px;">
+                            <div >
+                                <div  style="margin: 10px;padding:10px;">
+                                    <div style="font-size: 15px;padding-bottom: 10px;">
+                                            系统公告
                                     </div>
+                                    @foreach($notice as $not)
+                                    <a href="#" class="UG_tag_list" title="公告标题">
+                                        <div style="font-size: 14px" onclick="notice({{$not->id}})">
+                                            {{$not->title}}
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                       </div>
+                           <!-- 广告显示页面 -->
+                        @foreach($advert as $k=>$v)
+                            @if($v->status == 0)
+                             <div class="WB_cardwrap S_bg2">
+                                <div class="W_person_info" style="height:190px">
+                                    <div class="UG_contents">
+                                        <div class="UG_tag_list">
+                                            <span>
+                                                <a target="_blank" class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous" href="//{{($v->link)}}">
+                                                    <i class="item_icon">
+                                                       <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" alt="" style="padding:10px;width: 243px;height:187px"/>
+                                                    </i>
+                                                </a>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                              </div>
+                           </div>
+
+                            @endif
+                        @endforeach
+
+
+                                    </div>
+
                                </div>
                             </div>
                         </div>
                         
-
+        <div id="plc_bot">
+                    
+            <div class="WB_footer S_bg2">
+                <!-- 友情链接 -->
+                <div class="other_link S_bg1 clearfix T_add_ser">
+                    <p class="copy_v2">
+                        @foreach($link as $k=>$v)
+                            @if($v->status==0)
+                                <a href="//{{$v->link}}" target="_blank" class="S_txt2">{{$v->user}}</a>
+                            @endif
+                        @endforeach
+                    </p>
+                    <p class="copy_v2">
+                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
+                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
+                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
+                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
+                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
+                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                    </p>
+                
+                </div>
+            </div>
+            
+        </div>
                         <script type="text/javascript">
 
                             //微博发布
@@ -591,7 +666,47 @@
                             };
 
 
+                            //系统公告
+                            function notice(id){
+
+                                $.ajax({
+                                    type: "get",
+                                    url: "/home/notice",
+                                    data: {id:id},
+                                    
+                                    beforeSend:function(){
+                                        //加载样式
+                                        a = layer.load(0, {shade: false});
+                                      },
+                                    success: function(data) {
+
+                                        //关闭加载样式
+                                        layer.close(a)
+
+                                        layer.open({
+                                          type: 1
+                                          ,title: data.title //不显示标题栏
+                                          ,closeBtn: false
+                                          ,area: '300px;'
+                                          ,shade: 0.8
+                                          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                                          ,resize: false
+                                          ,btn: ['知道了']
+                                          ,btnAlign: 'c'
+                                          ,moveType: 1 //拖拽模式，0或者1
+                                          ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                                          ,
+                                        });
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                                        
+                                        
+                                    }
+                                });
+                            }
+
                         </script>
                     </body>
-
-                </html>
+        
+    </html>

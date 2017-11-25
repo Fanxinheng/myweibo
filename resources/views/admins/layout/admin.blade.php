@@ -67,31 +67,33 @@
 
         	<!-- Notifications -->
 
-        	
-            
-            <!-- Messages -->
-            
-
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
 
+                <?php
+                    $result = DB::table('admin')->where('id',session('pid'))->first();
+                ?>
             	<!-- User Photo -->
-            	<div id="mws-user-photo">
-                	<img src="/admins/example/profile.jpg" alt="User Photo">
-                </div>
-
-                <!-- Username and Functions -->
-                <div id="mws-user-functions">
-                    <div id="mws-username">
-                        Hello, John Doe
+                	<div id="mws-user-photo">
+                    	<img src="{{$result->pic}}" alt="User Photo">
                     </div>
-                    <ul>
-                    	<li><a href="/admins/#">Profile</a></li>
-                        <li><a href="/admins/#">Change Password</a></li>
-                        <li><a href="/admins/index.html">Logout</a></li>
-                    </ul>
-                </div>
+
+                    <!-- Username and Functions -->
+                    <div id="mws-user-functions">
+
+
+                            <div id="mws-username">
+                               用户名:&nbsp;&nbsp;&nbsp;{{$result->name}}
+                            </div>
+                            <ul>
+                                <li><a href="/admin/admins/{{$result->id}}/edit"> 修改个人信息</a></li>
+                                <li><a href="/admin/password/{{$result->id}}"> 修改密码</a></li>
+                                <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
+                            </ul>
+
+                    </div>
             </div>
+
         </div>
     </div>
 
@@ -112,13 +114,10 @@
                 <span></span>
             </div>
 
-            
-        
 
             <!-- Main Navigation -->
             <div id="mws-navigation">
                 <ul>
-
                     <li>
                         <a href="#"><i class="icon-users"></i>用户管理</a>
                         <ul class="closed">
@@ -128,9 +127,10 @@
                             <li><a href="/admin/index">用户列表</a></li>
 
                         </ul>
-                        <a href="#"><i class="icon-twitter-2"></i>热门微博</a>
+                        <a href="#"><i class="icon-twitter-2"></i>微博管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/hot">热门列表</a></li>
+                            <li><a href="/admin/weibo">微博列表</a></li>
+                             <li><a href="/admin/hot">热门列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-bell-2"></i>举报管理</a>
                         <ul class="closed">
@@ -161,7 +161,6 @@
                             <li><a href="/admin/config">配置修改</a></li>
                             <li><a href="/admin/logo">LOGO修改</a></li>
                         </ul>
-
                     </li>
                 </ul>
             </div>
@@ -173,16 +172,14 @@
             <div class="container">
             @section('content')
 
-
             @show
             </div>
             <div id="mws-footer">
-                Copyright Your Website 2012. All Rights Reserved.
+            Copyright Your Website 2012. All Rights Reserved.
             </div>
-
         </div>
-        <!-- Main Container End -->
 
+        <!-- Main Container End -->
     </div>
 
     <!-- JavaScript Plugins -->
@@ -192,7 +189,7 @@
     <script src="/admins/custom-plugins/fileinput.js"></script>
 
     <script src="/admins/layer/layer.js"></script>
- 
+
     <!-- jQuery-UI Dependent Scripts -->
     <script src="/admins/jui/js/jquery-ui-1.9.2.min.js"></script>
     <script src="/admins/jui/jquery-ui.custom.min.js"></script>

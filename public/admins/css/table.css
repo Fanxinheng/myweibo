@@ -32,7 +32,7 @@
 }
 
 .mws-table thead tr th {
-    padding: 10px 16px;
+    padding:16px;
     border-bottom: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
 }
@@ -44,7 +44,7 @@
 
 .mws-table tbody td, 
 .mws-table tfoot td {
-    padding: 8px 16px;
+    padding: 1px 2px;
     border-left-width: 1px;
     border-left-style: dotted;
     border-left-color: #bebebe !important;
@@ -69,10 +69,6 @@
 
 .mws-table tbody tr.even {
     background-color: #fafafa;
-}
-
-.mws-table tbody tr.odd td.sorting_1 {
-    background-color: #cccccc;
 }
 
 .mws-table tbody tr.even td.sorting_1 {

@@ -28,9 +28,6 @@ class LoginController extends Controller
       //获取登录用户ID
       $uid = Session('uid');
 
-  	  //查询标签内容
-      $label = label::get();
-
       //查询登录用户信息 
      	$user = user_info::where('uid',$uid)->first();
 
@@ -48,7 +45,7 @@ class LoginController extends Controller
       	$join->on('contents.uid','=','user_info.uid');
       })->orderBy('time','desc')->paginate(10);
 
-    	return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+    	return view('homes/login',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
     //微博内容搜索
@@ -56,9 +53,6 @@ class LoginController extends Controller
     {
       //获取登录用户ID
       $uid = Session('uid');
-
-      //查询标签内容
-      $label = label::get();
 
       //查询登录用户信息
       $user = user_info::where('uid',$uid)->first();
@@ -79,7 +73,7 @@ class LoginController extends Controller
       ->orderBy('time','desc')
       ->paginate(10);
 
-      return view('homes/blog/search',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index,'request'=>$request]);
+      return view('homes/blog/search',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index,'request'=>$request]);
     }
 
 
@@ -88,9 +82,6 @@ class LoginController extends Controller
     {
       //获取用户ID
       $uid = Session('uid');
-
-      //查询标签内容
-      $label = label::get();
 
       //查询登录用户信息
      	$user = user_info::where('uid',$uid)->first();
@@ -113,7 +104,7 @@ class LoginController extends Controller
       ->orderBy('time','desc')
       ->paginate(10);
 
-     return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+     return view('homes/login',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
     //加载标签微博页面
@@ -121,9 +112,6 @@ class LoginController extends Controller
     {
       //获取用户ID
       $uid = Session('uid');
-
-      //查询标签内容
-      $label = label::get();
 
       //查询登录用户信息 session('uid')
      	$user = user_info::where('uid',$uid)->first();
@@ -144,7 +132,7 @@ class LoginController extends Controller
       ->orderBy('time','desc')
       ->paginate(5);
 
-      return view('homes/login',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+      return view('homes/login',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
     //加载微博转发页面
@@ -152,9 +140,6 @@ class LoginController extends Controller
     {
       //获取用户ID
       $uid = Session('uid');
-
-      //查询标签内容
-      $label = label::get();
 
       //查询登录用户信息
       $user = user_info::where('uid',$uid)->first();
@@ -173,7 +158,7 @@ class LoginController extends Controller
       // dd($index);
       
 
-      return view('homes/forward',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+      return view('homes/forward',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
     //验证手机号是否已注册

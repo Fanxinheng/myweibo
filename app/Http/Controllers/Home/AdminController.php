@@ -7,35 +7,32 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\user;
-use Hash;
-
 use App\Http\Model\contents;
-use App\Http\Model\label;
+use App\Http\Model\notice;
 
+use Session;
+
+use Hash;
 class AdminController extends Controller
 {
    
    //加载全部微博
     public function index(Request $request)
     {
-        //查询标签内容
-        $label = label::get();
-
+       
        //查询微博内容
         $index = contents::join('user_info',function($join){
             $join->on('contents.uid','=','user_info.uid');
         })->orderBy('time','desc')->paginate(10);
 
-       return view('homes/index',['label'=>$label,'index'=>$index]);
+       return view('homes/index',['index'=>$index]);
 
     }
 
     //加载热门微博
     public function hot ()
     {
-        //查询标签内容
-        $label = label::get();
-
+        
     	//查询热门微博内容
         $index = contents::join('user_info',function($join){
         	$join->on('contents.uid','=','user_info.uid');
@@ -45,15 +42,13 @@ class AdminController extends Controller
         ->orderBy('time','desc')
         ->paginate(10);
 
-       return view('homes/index',['label'=>$label,'index'=>$index]);
+       return view('homes/index',['index'=>$index]);
     }
 
     //加载标签微博
     public function label ($id)
     {
-        //查询标签内容
-        $label = label::get();
-
+       
         //查询标签
         $index = contents::join('user_info',function($join){
             $join->on('contents.uid','=','user_info.uid');
@@ -61,15 +56,13 @@ class AdminController extends Controller
         ->orderBy('time','desc')
         ->paginate(10);
 
-        return view('homes/index',['label'=>$label,'index'=>$index]);
+        return view('homes/index',['index'=>$index]);
     }
 
     //微博搜索
     public function search(Request $request)
     {
-        //查询标签内容
-        $label = label::get();
-
+    
         //查询搜索内容
         $index = contents::join('user_info','contents.uid','=','user_info.uid')
         ->where('content','like','%'.$request->input('search').'%')
@@ -77,7 +70,29 @@ class AdminController extends Controller
         ->orderBy('time','desc')
         ->paginate(10);
 
-        return view('homes/search',['label'=>$label,'index'=>$index,'request'=>$request]);
+        return view('homes/search',['index'=>$index,'request'=>$request]);
+    }
+
+    //系统公告
+    public function notice ()
+    {
+
+        //查询公告内容
+        $index = notice::where('id',$_GET['id'])->first();
+
+        //判断用户是否登陆
+        $bool = Session('uid');
+
+        /*if($bool){
+           return view('homes/notice/notice',['index'=>$index]); 
+
+        }else{
+           return view('homes/notice/index',['index'=>$index]); 
+        }*/
+
+        return $index;
+
+        
     }
    
 

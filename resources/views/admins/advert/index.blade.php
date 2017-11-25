@@ -116,7 +116,8 @@
                                         <center> {{$v->link}}</center>
                                     </td>
                                     <td class=" ">
-                                        <center><img src="{{$v->pic}}" style="width:50px;height:50px" alt=""></center>
+                                        <center><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                        </center>
                                     </td>
                                     <td class=" ">
                                         <center> {{date("Y年m月d日 H:i:s",$v->time+8*60*60)}}</center>
@@ -143,13 +144,6 @@
                 </tbody>
             </table>
 
-
-
-
-
-           <div class="dataTables_info" id="DataTables_Table_1_info">
-                显示 1 条 10 of   总共 条数据
-            </div>
 
             <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
 

@@ -21,8 +21,6 @@ class ForwardController extends Controller
     public function create ($id)
     {
 
-        //查询标签内容
-        $label = label::get();
 
     	//查看微博内容
     	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
@@ -31,7 +29,7 @@ class ForwardController extends Controller
     	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(1);
 
 
-    	return view('homes/show/forward',['label'=>$label,'res'=>$res,'forward'=>$forward]);
+    	return view('homes/show/forward',['res'=>$res,'forward'=>$forward]);
     }
 
 

@@ -35,8 +35,7 @@ class LoginController extends Controller
         if(Session('code') != $res['code']){
             return redirect('/admin')->with('msg','验证码不正确！');
         }
-        
-        
+
         //查询登录人信息
         $login = admin::where('phone','=',$res['phone'])->first();
 
@@ -52,11 +51,11 @@ class LoginController extends Controller
         }
 
         //将登录成功后的用户ID存入缓存以便验证登录
+
         Session(['pid' => $login->id]);
         
         return redirect('/admin/index');
 
-    	
     }
 
 

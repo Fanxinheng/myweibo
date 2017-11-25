@@ -472,11 +472,73 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div style="background-color: #FFFFFF;border-radius: 5px;">
+                                            <div >
+                                                <div  style="margin: 10px;padding:10px;">
+                                                    <div style="font-size: 15px;padding-bottom: 10px;">
+                                                            系统公告
+                                                    </div>
+                                                    @foreach($notice as $not)
+                                                    <a href="/home/notice/{{$not->id}}" class="UG_tag_list" title="公告标题">
+                                                        <div style="font-size: 14px">
+                                                            {{$not->title}}
+                                                        </div>
+                                                    </a>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                       </div>
+                                        @foreach($advert as $k=>$v)
+                                            @if($v->status == 0)
+                                             <div class="WB_cardwrap S_bg2">
+                                                <div class="W_person_info" style="height:190px">
+                                                    <div class="UG_contents">
+                                                        <div class="UG_tag_list">
+                                                            <span>
+                                                                <a target="_blank" class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous" href="//{{($v->link)}}">
+                                                                    <i class="item_icon">
+                                                                       <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" alt="" style="padding:10px;width: 243px;height:187px"/>
+                                                                    </i>
+                                                                </a>
+
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                              </div>
+                                           </div>
+
+                                            @endif
+                                        @endforeach
                                     </div>
                                </div>
                             </div>
                         </div>
-                        
+                        <div id="plc_bot">
+                        <!--footer-->
+                        <div class="WB_footer S_bg2">
+                            <!-- 友情链接 -->
+                            <div class="other_link S_bg1 clearfix T_add_ser">
+                                <p class="copy_v2">
+                                    @foreach($link as $k=>$v)
+                                        @if($v->status==0)
+                                            <a href="//{{$v->link}}" target="_blank" class="S_txt2">{{$v->user}}</a>
+                                        @endif
+                                    @endforeach
+                                </p>
+                                <p class="copy_v2">
+                                    <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
+                                    <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
+                                    <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
+                                    <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
+                                    <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
+                                    <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                                </p>
+                            <p class="company"></p>
+                            </div>
+                        </div>
+                        <!--/footer-->
+                    </div>
 
                         <script type="text/javascript">
 

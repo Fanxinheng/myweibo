@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
@@ -22,6 +22,7 @@
         </title>
         <link media="all" href="/homes/css/login.css" type="text/css" rel="stylesheet">
     </head>
+
     
     <body class="FRAME_main B_index">
         <div class="WB_miniblog">
@@ -30,6 +31,7 @@
                     <!--简易顶部导航拼页面用-->
                                            <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
                             <div class="gn_header clearfix" style="width:1000px">
+
                                 <!-- logo -->
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
                                     <a href="/home/login" class="box" title=""
@@ -43,9 +45,11 @@
                                 
                                 <!-- 搜索 -->
                                 <div class=" gn_search_v2">
+
                                     <form action="/home/search" method="get">
                                         <input node-type="searchInput" autocomplete="off" value="" class="W_input"
                                         name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
+
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
@@ -65,6 +69,8 @@
                                                     </em>
                                                 </a>
                                             </li>
+
+
                                             <li>
                                                 <a href="/home/details"  title="修改个人信息">
                                                     <em class="W_ficon ficon_user S_ficon">
@@ -85,6 +91,7 @@
                                                     </em>
                                                 </a>
                                             </li>
+
                                         </ul>
                                     </div>
                                         
@@ -140,6 +147,7 @@
                                         </h3>
                                     </div>
 
+
                                     @foreach($label as $v)
                                     <div class="lev_Box lev_Box_noborder" >
                                         <h3 class="lev">
@@ -153,10 +161,12 @@
                                                 </i>
                                             </a>
                                         </h3>
+
                                     </div>
                                     @endforeach
                                 </div>
                             </div>
+
                         </div>
                         <div id="plc_main" style="width:490px">
                             <div class="WB_main_c">
@@ -177,6 +187,7 @@
                                             
                                             
                                         </div>
+
 
 
                                     <form action="/home/release/" method="post" enctype="multipart/form-data">
@@ -250,6 +261,7 @@
                                                                 width="50" height="50">
                                                             </a>
                                                         </div>
+
                                                     </div>
                                                     <div class="WB_detail">
                                                         <div class="WB_info">
@@ -297,9 +309,11 @@
                                                                 </div>
                                                                 </a>
 
+
                                                                 <div class="WB_from S_txt2" node-type="feed_list_content" title="发布时间" style="word-break:break-all;"">
                                                                 {{date('Y-m-d H:i:s',$con->time)}}
                                                                 </div>
+
 
                                                                 <a href="/home/blog/forward/{{$con->cid}}">
                                                                 <div class="WB_text W_f14" node-type="feed_list_content" title="微博内容" style="word-break:break-all;"">
@@ -314,6 +328,7 @@
                                                                 @else
                                                              
                                                                 @endif
+
                                                             </div>
                                                       @endforeach
                                                         
@@ -325,6 +340,7 @@
                                             </div>
                                            
                                         </div>
+
                                     </div>
                                 </div>
                                 @endforeach
@@ -394,69 +410,188 @@
                                                             </a>
                                                         </li>
                                                     </ul>
-                                                </div>
-                                            </div>
+                                           </div>
                                         </div>
+
                                     </div>
-                               </div>
+                    <div style="background-color: #FFFFFF;border-radius: 5px;">
+                        <div >
+                            <div  style="margin: 10px;padding:10px;">
+                                <div style="font-size: 15px;padding-bottom: 10px;">
+                                        系统公告
+                                </div>
+                                @foreach($notice as $not)
+                                <a href="#" class="UG_tag_list" title="公告标题">
+                                    <div style="font-size: 14px" onclick="notice({{$not->id}})">
+                                        {{$not->title}}
+                                    </div>
+                                </a>
+                                @endforeach
                             </div>
                         </div>
-                        <script type="text/javascript">
+                   </div>
+                <!-- 广告显示页面 -->
+                    @foreach($advert as $k=>$v)
+                        @if($v->status == 0)
+                         <div class="WB_cardwrap S_bg2">
+                            <div class="W_person_info" style="height:190px">
+                                <div class="UG_contents">
+                                    <div class="UG_tag_list">
+                                        <span>
+                                            <a target="_blank" class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous" href="//{{($v->link)}}">
+                                                <i class="item_icon">
+                                                   <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" alt="" style="padding:10px;width: 243px;height:187px"/>
+                                                </i>
+                                            </a>
 
-                            //微博发布
-                            $('#release').on('click', function(){
+                                        </span>
+                                    </div>
+                                </div>
+                          </div>
+                       </div>
 
-                                var a = layer.load(0, {shade: false});
-                                
-                                layer.msg('微博发布成功:)', {icon: 1});
-                                
-                              });
+                        @endif
+                    @endforeach
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="plc_bot">
+            <!--footer-->
+            <div class="WB_footer S_bg2">
+                <!-- 友情链接 -->
+                <div class="other_link S_bg1 clearfix T_add_ser">
+                    <p class="copy_v2">
+                        @foreach($link as $k=>$v)
+                            @if($v->status==0)
+                                <a href="//{{$v->link}}" target="_blank" class="S_txt2">{{$v->user}}</a>
+                            @endif
+                        @endforeach
+                    </p>
+                    <p class="copy_v2">
+                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
+                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
+                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
+                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
+                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
+                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                    </p>
+                <p class="company"></p>
+                </div>
+            </div>
+            <!--/footer-->
+        </div>
 
 
-                            //删除转发
-                            $('.destroy').on('click',function(){
 
-                                //获取要删除转发的id
-                                did = $(this).children('input[name=destroy]').val();
-  
-                                layer.confirm('您确定要删除此转发吗？', {
-                                  btn: ['确定','取消'] //按钮
-                                }, function(){
+        </div>
+        </div>
+        <script type="text/javascript">
 
-                                    $.ajax({
-                                    type: "get",
-                                    url: "/home/blog/delete",
-                                    data: {did:did},
-                                    
-                                    beforeSend:function(){
-                                        //加载样式
-                                        a = layer.load(0, {shade: false});
-                                      },
-                                    success: function(data) {
+        //微博发布
+        $('#release').on('click', function(){
 
-                                        //关闭加载样式
-                                        layer.close(a)
+            var a = layer.load(0, {shade: false});
+            
+            layer.msg('微博发布成功:)', {icon: 1});
+            
+          });
 
-                                        //移除微博
-                                        $('.blog:first').remove();
- 
-                                        layer.msg('转发删除成功:)', {icon: 1});
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                        layer.msg("转发删除失败，请检查网络后重试", {icon:2 ,})
-                                                                                
-                                    }
-                                });
 
-                                }, function(){
+        //删除转发
+        $('.destroy').on('click',function(){
 
-                                });
+            //获取要删除转发的id
+            did = $(this).children('input[name=destroy]').val();
 
-                            });
+            layer.confirm('您确定要删除此转发吗？', {
+              btn: ['确定','取消'] //按钮
+            }, function(){
 
-                            
+                $.ajax({
+                type: "get",
+                url: "/home/blog/delete",
+                data: {did:did},
+                
+                beforeSend:function(){
+                    //加载样式
+                    a = layer.load(0, {shade: false});
+                  },
+                success: function(data) {
 
-                        </script>
-                    </body>
+                    //关闭加载样式
+                    layer.close(a)
 
-                </html>
+                    //移除微博
+                    $('.blog:first').remove();
+
+                    layer.msg('转发删除成功:)', {icon: 1});
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("转发删除失败，请检查网络后重试", {icon:2 ,})
+                                                            
+                }
+            });
+
+            }, function(){
+
+            });
+
+        });
+
+        //系统公告
+        function notice(id){
+
+            $.ajax({
+                type: "get",
+                url: "/home/notice",
+                data: {id:id},
+                
+                beforeSend:function(){
+                    //加载样式
+                    a = layer.load(0, {shade: false});
+                  },
+                success: function(data) {
+
+                    //关闭加载样式
+                    layer.close(a)
+
+                    layer.open({
+                      type: 1
+                      ,title: data.title //不显示标题栏
+                      ,closeBtn: false
+                      ,area: '300px;'
+                      ,shade: 0.8
+                      ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                      ,resize: false
+                      ,btn: ['知道了']
+                      ,btnAlign: 'c'
+                      ,moveType: 1 //拖拽模式，0或者1
+                      ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                      ,
+                    });
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                    
+                    
+                }
+            });
+        }
+
+        
+
+    </script>
+    <script type="text/javascript">
+         $('#forward').on('click', function(){
+            layer.msg('亲，您好像忘了登录呦:)', {
+              time: 20000, //20s后自动关闭
+            });
+          });
+    </script>
+    </body>
+
+    </html>

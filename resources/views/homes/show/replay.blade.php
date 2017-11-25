@@ -1,6 +1,6 @@
-PE html>
+<!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
@@ -17,9 +17,9 @@ PE html>
             微博-随时随地发现新鲜事
         </title>
     </head>
-    
+
     <body class="FRAME_login">
-        
+
         <div style="position: absolute; top: -9999px;">
             <div id="js_style_css_module_global_WB_outframe">
             </div>
@@ -44,23 +44,15 @@ PE html>
                                     </a>
                                 </div>
                                 <div class=" gn_search_v2">
-                                    
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input" name="15102240605332" type="text" style="height:25px" placeholder="搜索你想要的">
-                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
-                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 
-                                    </a>
-                                    <!--搜索热词下拉-->
-                                   <!--  <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
-                                        <div class="gn_topmenulist">
-                                            <div node-type="basic">
-                                            </div>
-                                            <div node-type="plus">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!--/搜索热词下拉-->
+                                    <form action="/home/admin/search" method="get">
+                                        <input node-type="searchInput" autocomplete="off" value="" class="W_input"
+                                        name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
+
+                                        {{csrf_field()}}
+                                        <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+                                    </form> 
+
                                 </div>
                                 <div class="gn_position">
                                     <div class="gn_nav">
@@ -76,8 +68,8 @@ PE html>
                                                     </em>
                                                 </a>
                                             </li>
-                                           
-                                           
+
+
                                         </ul>
                                     </div>
                                     <div class="gn_login">
@@ -87,7 +79,7 @@ PE html>
                                                     注册
                                                 </a>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </div>
@@ -129,9 +121,9 @@ PE html>
                                                 </li>
                                             </div>
                                             @endforeach
-                                          
-                                            
-                                          
+
+
+
                                         </ul>
                                     </div>
                                 </div>
@@ -142,18 +134,18 @@ PE html>
 
 
 
-                                    
+
                                     <div class="WB_frame_c">
                                         <div id="pl_unlogin_home_feed">
                                             <!--榜单栏位置-->
-                                         
-                                           
+
+
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
-                                                    
+
                                                     <!--article feed-->
-                                                     
+
                                                     <!--广告模块-->
                                                     <div class="UG_list_b" mid="4171968871140682" action-type="feed_list_item"
                                                     href="//weibo.com/5187664653/FuceP4MK6?ref=feedsdk" suda="key=nologin_home&amp;value=nologin_card_weibo:4171968871140682"
@@ -161,12 +153,15 @@ PE html>
 
 
                                                         <div class="list_des">
+
                                                             
                                                             <h3 class="list_title_s" style="padding-bottom: 10px">
+
                                                                 <div>
                                                                     {{$res->content}}
                                                                 </div>
                                                             </h3>
+
                                                             @if($res->image)
                                                             <div id="image">
                                                                 <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"" style="width:100px;" id="img">
@@ -174,24 +169,25 @@ PE html>
                                                             @else
 
                                                             @endif
+
                                                             <div class="subinfo_box clearfix">
-                                                                
+
                                                                     <span class="subinfo_face ">
                                                                         <img src="{{$res->photo == NULL ? '/homes/uploads/default.jpg' : $res->photo}}" alt="" width="20" height="20">
                                                                     </span>
-                                                                
-                                                                
+
+
                                                                     <span class="subinfo S_txt2">
-                                                                        {{$res->nickName}} 
+                                                                        {{$res->nickName}}
                                                                     </span>
-                                                               
+
                                                                 <span class="subinfo S_txt2">
-                                                                    {{date('Y-m-d H:i:s',$res->time)}} 
+                                                                    {{date('Y-m-d H:i:s',$res->time)}}
                                                                 </span>
 
                                                             </div>
                                                         </div>
-                                                            
+
                                                         <hr>
 
                                                     <a href="#">
@@ -212,21 +208,21 @@ PE html>
                                                     </h3>
                                                     @endif
 
-                                                    @foreach($replay as $k=>$v) 
+                                                    @foreach($replay as $k=>$v)
                                                     <div class="subinfo_box clearfix" >
-                                                           
+
                                                             <span class="subinfo_face ">
                                                                 <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}" alt="" width="20" height="20">
                                                             </span>
-                                                        
+
                                                             <span class="subinfo S_txt2">
                                                             {{$v->nickName}}
                                                             </span>
-                                                        
+
                                                         <span class="subinfo S_txt2">
-                                                            {{date('Y-m-d H:i:s',$v->time)}} 
+                                                            {{date('Y-m-d H:i:s',$v->time)}}
                                                         </span>
-                                                      
+
                                                     </div>
                                                     <h3 class="list_title_s">
                                                         <div>
@@ -236,17 +232,11 @@ PE html>
                                                     @endforeach
                                                     </div>
 
-                                                     </div> 
-                                                    <!-- read_pos -->
-                                                    <!--/read_pos-->
+                                                     </div>
                                                 </ul>
-                                                <!--/feed内容-->
                                             </div>
                                         </div>
                                     </div>
-
-
-
 
 
 
@@ -263,21 +253,19 @@ PE html>
                                                                 <div class="info_header">
                                                                     <div class="tab clearfix">
                                                                         <a href="javascript:void(0);" node-type="normal_tab" action-type="switchTab"
-                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login"
-                                                                        >
-                                                                            <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
+                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login">
                                                                             帐号登录
                                                                         </a>
-                                    
+
                                                                     </div>
-                                                                 
+
                                                                 </div>
-                                                               
+
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
                                                                     <form action="/home/login" method="get">
-                                                                        
+
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入手机号" style="width:250px;">
@@ -287,24 +275,9 @@ PE html>
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-
-                                                                        
+                                                                        <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
+                                                                    </form>
                                                                 </div>
-                                                                
-                                                                    
-                                                                    <div class="info_list auto_login clearfix">
-                                                                        
-                                                                        <label for="login_form_savestate" class="W_fl W_label" title="建议在网吧或公共电脑上取消该选项。"
-                                                                        action-data="content=建议在网吧或公共电脑上取消该选项。" action-type="customTip">
-                                                                            <input id="login_form_savestate" checked="checked" node-type="savestate"
-                                                                            tabindex="5" class="W_checkbox" type="checkbox">
-                                                                            <span class="S_txt2">
-                                                                                记住我
-                                                                            </span>
-                                                                        </label>
-                                                                    </div>
-                                                                  
-                                                                    <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
                                                                     <div class="info_list register">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
@@ -314,123 +287,88 @@ PE html>
                                                                         </a>
                                                                     </div>
                                                                 </div>
-                                                               
-                                                                
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style="height: 1px; margin-top: -1px; visibility: hidden;">
-                                                </div>
-                                            </div>
-                                            <div class="bg" node-type="qr_help" style="position: absolute; top: 2px; left: -220px; width: 264px; height: 372px; background-position: -300px -150px; background-repeat: no-repeat; z-index: 999; background-image: url('sprite_login.png'); display: none;">
                                             </div>
                                         </div>
-                                        <div id="pl_unlogin_home_hotpersoncategory">
-                                            <div class="UG_box_l" style="width:340px;float: right;">
-                                                <h2 class="UG_box_title">
-                                                    微博找人
-                                                </h2>
-                                                <div class="UG_contents">
-                                                    <div class="UG_tag_list">
-                                                        <h3 class="tag_title">
-                                                            名人
-                                                        </h3>
-                                                        <ul class="clearfix">
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_1003_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1003_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        明星
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_1001_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1001_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        商界
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_5007_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1007_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        媒体精英
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_2003_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1005_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        作家
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_7002_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1004_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        政府官员
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                  
-                                                 
-                                                   
-                                                </div>
-                                            </div>
+                                </div>
+                            </div>
+
+
+                        <!-- 右边一列div -->
+                    <div style="width:340px; float:right;">
+                        <!-- 公告专用 -->
+                        <div class="UG_box_l" style="width:340px;height:220px;">
+                            <div class="UG_contents">
+                                    <div style="font-size: 15px;padding-bottom: 10px">
+                                            系统公告
+                                    </div>
+                                    @foreach($notice as $not)
+                                    <a href="/home/notice/{{$not->id}}" class="UG_tag_list" title="公告标题">
+                                        <div style="font-size: 14px">
+                                            {{$not->title}}
                                         </div>
+                                    </a>
+                                    @endforeach
+                            </div>
+                        </div>
+
+                         <!-- 广告显示页面 -->
+                        @foreach($advert as $k=>$v)
+                            @if($v->status == 0)
+                            <div class="UG_box_l" style="width:340px;height:220px;">
+                                <div class="UG_contents">
+                                    <div class="UG_tag_list">
+                                        <a target="_blank" class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
+                                        href="//{{($v->link)}}">
+                                            <span class="item_icon">
+                                               <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" alt="" style="width:300px;height:178px"/>
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                       
-                      
+
+                            @endif
+                        @endforeach
+
                     </div>
                 </div>
-              <div id="plc_bot">
-
-            <!--footer-->
-             <!--  <div class="WB_footer S_bg2">
-              
-               <div class="other_link S_bg1 clearfix T_add_ser">
-                 
-                   <p class="copy_v2">
-                       <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                       <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                       <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                       <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                       <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                       <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
-                   </p>
-                   <p class="company"></p>
-               </div>
-             </div> -->
-
-       
-        <!--/footer-->
-        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+        </div>
+
+        <div id="plc_bot">
+            <!--footer-->
+            <div class="WB_footer S_bg2">
+                <!-- 友情链接 -->
+                <div class="other_link S_bg1 clearfix T_add_ser">
+                    <p class="copy_v2">
+                        @foreach($link as $k=>$v)
+                            @if($v->status==0)
+                                <a href="//{{$v->link}}" target="_blank" class="S_txt2">{{$v->user}}</a>
+                            @endif
+                        @endforeach
+                    </p>
+                    <p class="copy_v2">
+                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
+                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
+                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
+                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
+                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
+                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                    </p>
+                <p class="company"></p>
+                </div>
+            </div>
+        </div>
+
+
+        </div>
         </div>
         <script type="text/javascript">
          $('#replay').on('click', function(){
@@ -438,7 +376,7 @@ PE html>
               time: 20000, //20s后自动关闭
             });
           });
-    </script>
-    </body>
+        </script>
+        </body>
 
 </html>
