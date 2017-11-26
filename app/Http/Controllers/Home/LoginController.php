@@ -14,7 +14,6 @@ use App\Http\Model\user_attention;
 use App\Http\Model\forward;
 use App\Http\Model\job;
 
-
 use Hash;
 use Session;
 
@@ -73,6 +72,7 @@ class LoginController extends Controller
       ->orWhere('nickName','like','%'.$request->input('search').'%')
       ->orderBy('time','desc')
       ->paginate(10);
+
 
       return view('homes/blog/search',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index,'request'=>$request]);
     }
@@ -222,10 +222,19 @@ class LoginController extends Controller
       $pho = $request->input('pho'); 
 
       //在数据表中查询填写的手机号        
-      $res = user::where('phone',$pho)->get();            
-      
-      //返回查询结果
-      echo $res;      
+      $res = user::where('phone',$pho)->value('phone');            
+           
+      //判断input框里的手机号是否为空
+      if($pho==null){
+
+      }else{
+        //判断form获取的手机号和user表中是否一致
+        if ($pho==$res) {
+          echo "1";
+        }else{
+          echo "0";
+        }
+      }
     }
 
     //验证密码是否与数据库中的一致
@@ -244,7 +253,7 @@ class LoginController extends Controller
       }else{
         //判断form获取的密码和数据库中是否一致(hash的检测方法,指定子串和加密的判断)
         if (Hash::check($pas['pas'], $res->password)) {
-        echo "1";
+          echo "1";
         }else{
           echo "0";
         }
@@ -263,22 +272,25 @@ class LoginController extends Controller
       $res = user::where('phone',$req)->value('id');
 
       //在user_info表中根据user表中的id查出其uid
-      $nick = user_info::where('uid','=',$res)->value('uid');
-
+      $uid = user_info::where('uid','=',$res)->value('uid');
+      
+      
       //判断uid是否为空(因为上面传过来的是null)
-      if($nick==null){
+      if($uid==null){
 
           Session(['uid'=>$res]);
+
           return redirect('/home/details');
          
       }else{
 
-           Session(['uid'=>$res]);
+          Session(['uid'=>$res]);
+
           return redirect('/home/login');
 
       }
 
     }
     
-    
+
 }

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
-        <meta name="csrf_token" content="{{ csrf_token() }}" />
+        <meta name="csrf_token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！"
@@ -12,12 +11,9 @@
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js">
-        </script>
-        <script type="text/javascript" src="/homes/layer/layer.js">
-        </script>
-        <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js">
-        </script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/homes/layer/layer.js"></script>
+        <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/homes/js/validate.js">
         </script>
         <title>
@@ -248,30 +244,32 @@
                                                                         </div>
                                                                         <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
                                                                         </div>
-                                                                        <div class="form-group">
-                                                                            <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px">
-                                                                            </span>
-                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码"
-                                                                            style="width:250px;" name="password">
+
+                                                                        <div class="form-group" style="margin-top:10px">
+                                                                            <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
+                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
+
                                                                         </div>
                                                                         <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
                                                                         </div>
                                                                         {{csrf_field()}}
-                                                                        <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;"
-                                                                        id="btn1">
-                                                                            登录
-                                                                        </button>
+                                                                        <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
+
                                                                     </form>
 
                                                                 </div>
                                                                     
-                                                                <div class="info_list register">
-                                                                    <span class="S_txt2">
-                                                                        还没有微博？
-                                                                    </span>
-                                                                    <a target="_top" href="register">
-                                                                        立即注册!
-                                                                    </a>
+                                                                    <div class="info_list register" style="font-size:14px">
+                                                                        <span class="S_txt2">
+                                                                            还没有微博？
+                                                                        </span>
+                                                                        <a target="_top" href="/home/register">
+                                                                            立即注册!
+                                                                        </a>
+                                                                        <a href="/home/admin/find" style="float: right;">忘记密码</a>
+
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -358,9 +356,8 @@
         </div>
         </div>
         <script type="text/javascript">
-            $('.glyphicon-thumbs-up').on('click',
-            function() {
-
+            $('.glyphicon-thumbs-up').on('click',function() {
+                alert($);
                 layer.msg('亲，您好像忘了登录呦:)');
             });
 
@@ -368,6 +365,7 @@
             
             layer.msg('亲，您好像忘了登录呦:)');
           });
+
 
             //系统公告
             function notice(id){
@@ -409,45 +407,46 @@
                 });
             }
         </script>
-  
+
+    
         <script type="text/javascript">
-             var ch2;
-             var ch3;
+         var ch2 ;
+         var ch3 ;
+         var aaa=0;
+         var bbb=0;
 
-            //手机号失去焦点事件
-            $('#phone').blur(function() {
+        //手机号失去焦点事件
+        $('#phone').blur(function(){
+           
+            var pho  = $(this).val();
+            ch2 = checkTel($('#phone'),$('#e1'));
 
-                var pho = $(this).val();
+            if(ch2==100){
+              $('#e1').css('display','none');
+              ch2 = 100;
+              
+            }else{
+              $('#e1').css('display','block');
+              return;
+           
+            }
+            $.get("pho",{pho:pho},function(data){
 
-                ch2 = checkTel($('#phone'), $('#e1'));
-                if (ch2 != 100) {
-                    $('#phone').css('border', 'solid 2px red');
-                    $('#e1').css('display', 'block');
-                    return;
-                } else {
-                    $('#e1').css('display', 'none');
-                    ch2 = 100;
-                }
-                $.get("pho", {
-                    pho: pho
-                },
-                function(data) {
-                    if (data.length > 0) {
-                        $('#phone').css('border', 'solid 2px green');
-                        $('#e1').css('display', 'none');
-                        ch2 = 100;
-                        return;
-                    } else {
-                        $('#phone').css('border', 'solid 1px red');
-                        $("#e1").html("该手机号还未注册,请先去注册");
-                        $('#e1').css('display', 'block');
-                        ch2 = 0;
-                    }
-                },
-                'json')
+              if(data=='1'){
+                $('#e1').css('display','none');
+                ch2 = 100;
+           
+                aaa=1;
+              }else{
 
-
-            })
+                ch2 = 0;
+                $("#e1").html("该手机号还未注册,请先去注册");
+                $('#e1').css('display','block');
+                aaa=0;
+       
+              }
+            },'json')
+            });
 
             //密码失去焦点事件
             $('input[name="password"]').blur(function() {
@@ -455,35 +454,43 @@
                 var pas = $(this).val();
                 var pho = $('#phone').val();
 
-                ch3 = checkPassword($('#password'), $('#e2'), 6);
-                if (ch3 != 100) {
-                    $('#password').css('border', 'solid 2px red');
-                    $('#e2').css('display', 'block');
-                } else {
-                    $('#password').css('border', 'solid 1px green');
-                    $('#e2').css('display', 'none');
-                    ch3 = 100;
+
+                ch3 = checkPassword($('#password'),$('#e2'),6);
+
+                if(ch3!=100){
+                  $('#e2').css('display','block');
+                   ch3 = 0;
+
+                }else{
+                  $('#e2').css('display','none');
+                  ch3 = 100;
+            
                 }
-                $.get("pass", {
-                    pas: pas,
-                    pho: pho
-                },
-                function(data) {
-                    if (data == 1) {
-                        $('#phone').css('border', 'solid 2px green');
-                        $('#e2').css('display', 'none');
-                        ch2 = 100;
-                        return;
-                    } else {
-                        $('#password').css('border', 'solid 1px red');
-                        $("#e2").html("密码不正确");
-                        $('#e2').css('display', 'block');
-                        ch2 = 0;
-                    }
-                },
-                'json')
-            })
+                $.get("pass",{pas:pas,pho:pho},function(data){
+                  if(data=='1'){
+                    $('#e2').css('display','none');
+                    ch3 = 100;
+                    bbb=1;
+                  
+                  }else{
+                    $("#e2").html("密码不正确");
+                    $('#e2').css('display','block');
+                    ch3 = 0;
+                    bbb=0;            
+                  }
+                },'json')
+
+                // console.log(ch3);
+                if (aaa==1 && bbb==1 ) {
+                    next();
+                }else{
+                    return false;
+                }
+            });
+
+            
         </script>
+
     </body>
 
 </html>

@@ -29,6 +29,9 @@ class AdminController extends Controller
 
     }
 
+
+    //获取表单传过来的值并添加到user表中
+
     //加载热门微博
     public function hot ()
     {
@@ -90,7 +93,7 @@ class AdminController extends Controller
     }
    
 
-   //获取表单传过来的值并添加到数据库
+   //注册
     public function alog(Request $request)
     {
 
@@ -110,6 +113,7 @@ class AdminController extends Controller
             
         }else{
 
+            echo "<script>alert('注册失败')</script>";
             return back()->withinput();
         }
     }
@@ -131,6 +135,57 @@ class AdminController extends Controller
             echo "0";
     	};
 	}
+
+
+    //忘记密码页面
+    public function find()
+    {
+        return view('homes/findpass');
+    }
+
+    //忘记密码页面修改手机号验证是否注册
+    public function fphone(Request $request)
+    {
+        //获取input框里输入的手机号
+        $res = $request->input('phone');
+
+        //从数据库查询电话号码
+        $phone = user::where('phone','=',$res)->value('phone');
+
+        //判断
+        if($phone==null){
+            echo "0";
+        }else{
+            echo "1";
+        };
+    }
+
+
+    //忘记密码form表单的值更新数据库
+    public function fupdate(Request $request)
+    {
+        //获取表单传过来的信息
+        $res = $request->only('phone','password');
+        // dd($res);die;
+
+        //密码用哈希加密
+        $res['password']=Hash::make($request->input('password'));
+
+        // //往user表里更新数据
+        $data = user::where('phone',$res['phone'])->update($res);
+
+        //判断修改成功
+        if($data){
+
+            echo "<script>alert('修改成功');window.location.href='/home/admin';</script>";
+            
+        }else{
+
+            echo "<script>alert('修改失败')</script>";
+            return back()->withinput();
+        }
+    }
+
 
 
 }

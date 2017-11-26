@@ -39,7 +39,13 @@
                                     </a>
                                 </div>
 
-                                <div class=" gn_search_v2">
+                                <div class=" gn_search_v2" style="width:450px">
+                                    
+                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input" name="15102240605332" type="text" style="height:25px">
+                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
+                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+
 
                                     <form action="/home/search" method="get">
                                         <input node-type="searchInput" autocomplete="off" value="" class="W_input"
@@ -65,7 +71,8 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/home/details"  title="修改个人信息">
+
+                                                <a href="/home/details/edit"  title="修改个人信息">
                                                     <em class="W_ficon ficon_user S_ficon">
                                                         <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
                                                     </em>
@@ -75,7 +82,17 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#"  title="退出登录">
+                                                <a href="/home/changepass"  title="修改密码">
+                                                    <em class="W_ficon ficon_home S_ficon">
+                                                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                                    </em>
+                                                    <em class="S_txt1">
+                                                        修改密码
+                                                    </em>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/home/details/quit"  title="退出登录">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                                     </em>
@@ -183,13 +200,8 @@
                                                     </em>
 
                                                 </p>
-                                            </div>
-
-                                            
-                                            
+                                            </div>   
                                         </div>
-
-
                                     <form action="/home/release/" method="post" enctype="multipart/form-data">
                                             <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
                                         
@@ -422,9 +434,8 @@
                                             <div class="W_person_info" style="height:190px">
                                                 <div class="cover" id="skin_cover_s" style="background-image: url('/homes/images/001_s.jpg');">
                                                     <div class="headpic">
-                                                        <a bpfilter="page_frame" href="/home/user"  indepth="true">
-                                                            <img class="W_face_radius" src="{{$user->photo == null ? '/homes/uploads/default.jpg' : $user->photo}}"
-                                                             width="60" height="60">
+                                                        <a indepth="true"  href="profile_001.html" bpfilter="page_frame">
+                                                            <img class="W_face_radius" width="60" height="60"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$user->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                         </a>
                                                     </div>
                                                 </div>

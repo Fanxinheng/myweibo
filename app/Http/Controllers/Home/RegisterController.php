@@ -16,7 +16,7 @@ class RegisterController extends Controller
         //
         return view('homes/register');
     }
-
+    
     public function verification(Request $request)
     {	
         

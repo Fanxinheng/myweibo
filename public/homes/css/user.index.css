@@ -1,28 +1,29 @@
-#b{ background-color: #B3D9F0; } 
+
 #navbar{background-color: #fff}
 #navbar #navbar-header1{margin-top: 13px;}
 #navbar #navbar-header2{ margin-left:100px;}
 #navbar #navbar-header2 input{ width: 500px;}
 #navbar #nav-1{margin-top: 5px;float: right;}
 #navbar #nav-1 button{ width:70px;height: 40px;} 
-#weibo { width:auto;margin-bottom: 50px ;margin-top: 60px} 
-#weibo #backg{background:url('/homes/images/197.jpg');height: 300px}
-#weibo #backg #jimg{margin-top: 10px;margin-left: 100px}
+#navbar #nav-1 .nav-11{float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px}
+#navbar #nav-1  .nav-11 #mess{width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px }
+#weibo {margin-bottom: 50px ;margin-top: 60px} 
+#weibo #backg{height: 300px}
+#weibo #backg #jimg{margin-top: 10px;}
 #weibo #backg #nickname{text-align: center;margin-top: 15px}
-#weibo #lanmu { background-color: #fff; height:500px;}
-#weibo #lanmu li { margin-top: 5px; font-size: 20px; }
+#weibo #lanmu { background-color: #fff; height:300px;}
+#weibo #lanmu li { margin-top: 5px; font-size: 14px}
 
-
-#weibo #tiezi {background-color: #fff; margin-bottom: 10px; margin-left: 12px; width: 820px;}
-#weibo #tiezi #tieimg{float: left ;margin-top:15px;height:45px}
-#weibo #tiezi #tiename{float: left;margin-left: 20px}
-#weibo #tiezi .dropup{float: right;margin-top: 20px}
-#weibo #tiezi #tiecon{margin-left: 100px;margin-top: 20px;margin-bottom: 20px;word-break:break-all;}
-#weibo #tiezi #gongneng li{ float: left; list-style:
-none; width:185px; height:50px; font-size: 15px; line-height: 20px; text-align:
-center; overflow: hidden; }
-
-
-#foot .container{ height: 50px; text-align: center; }
-#foot #foot1{background-color: #fff}
-#foot #foot2{background-color: #fff}
+#weibo #lanmu ul li{font-size:14px } 
+#weibo #tiezi #gongneng {margin-top:10px;border-top: 1px solid #D9D9D9;border-bottom:1px solid #D9D9D9;overflow:hidden;width: 840px;margin-left:-15px;}
+#weibo #tiezi #gongneng ul li{list-style:noneoutside none;color:#808080;font-size:12px;float: left;line-height: 22px;text-align:center;width:180px; } 
+#weibo #tiezi #v {background:#F2F2F5;width:830;}
+#weibo #tiezi #v .disd1{display:none;padding:5px;}
+#weibo #tiezi #v .disd1 #tex{margin-left: 64px;float:left; }
+#weibo #tiezi #v .disd1 #tex #conn{resize:none;line-height: 20px;height: 28px;margin-right:10px} 
+#weibo #tiezi #v #rimg{float:left;margin-left: 20px;margin-top: 13px}
+#weibo #tiezi #v .col-lg-12{background-color:#F2F2F5;margin-left: -15px;width: 830px }
+#weibo #tiezi #v #cont{margin-top: 14px;margin-left: 60px;margin-bottom:
+10px} #weibo #tiezi #v #cont #div1{margin-top: 5px;font-size: 12px;word-break:break-all;
+width: 600px} #weibo #tiezi #v #con #div2{margin-top: 10px;font-size: 12px;word-break:break-all;
+width: 600px}

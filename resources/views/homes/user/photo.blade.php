@@ -12,9 +12,14 @@
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js">
         </script>
         <link rel="stylesheet" href="/homes/css/user.photo.css">
+        <meta name="csrf_token" content="{{ csrf_token() }}"/>
+
+        <script type="text/javascript" src="/homes/layer/layer.js"></script>
+
     </head>
     
-    <body>
+    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';">
+    
         <div id="b">
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
@@ -31,16 +36,35 @@
                             </button>
                         </form>
                     </div>
-                    <div id="nav-1">
-                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                   <div id="nav-1">
+                        <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-home" aria-hidden="true">
                             </span>
-                            首页
-                        </button>
-                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                            <a href="/home/message">
+                                系统消息
+                                @if($message>0)
+                                <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px  ">
+                                    {{$message}}
+                                </div>
+                                @else
+                                <div></div>
+                                @endif
+                            </a>
+                        </div>
+                        <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-                        </button>
+                            <a href="/home/user">
+                               
+                            </a>
+                        </div>
+                        <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true">
+                            </span>
+                            <a href="/home/admin">
+                                首页
+                            </a>
+                        </div>
                     </div>
                     <!--/.navbar-collapse -->
                 </div>
@@ -63,6 +87,7 @@
                                 <div>
                                     <!-- 昵称 -->
                                     <div id="nickname">
+                                    {{$rev->nickName}}
                                     </div>
                                     <!-- 签名 -->
                                 </div>
@@ -72,6 +97,8 @@
                         </div>
                     </div>
                     <!-- 头像 及北京-->
+                    <style> #weibo #lanmu li { margin-top: 5px; font-size: 14px}</style>
+                    
                     <!-- 栏目及遍历 -->
                     <div class="container">
                         <!-- 栏目 -->
@@ -79,42 +106,58 @@
                            <ul class="nav nav-sidebar">
                                 <li class="active">
                                     <a href="/home/user">
-                                        我的微博
+                                        微博
                                     </a>
                                 </li>
                                 <li>
                                     <a href="/home/fans">
-                                        我的粉丝
+                                        粉丝
                                     </a>
                                 </li>
                                 <li>
                                     <a href="/home/attention">
-                                        我的关注
+                                        关注
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/home/phone">
+                                    <a href="/home/photo">
                                         相册管理
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/home/user">
-                                        我点赞的微博
                                     </a>
                                 </li>
                                 <li>
                                     <a href="/home/point">
                                         我微博的赞
+                                        @if($point>0)
+                                        <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px ">
+                                            {{$point}}
+                                        </div>
+                                        @else
+                                        <div></div>
+                                        @endif
                                     </a>
                                 </li>
                                 <li>
                                     <a href="/home/replay">
-                                        谁给我的微博评论
+                                        微博评论
+                                        @if($replay>0)
+                                        <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px ">
+                                            {{$replay}}
+                                        </div>
+                                        @else
+                                        <div></div>
+                                        @endif
                                     </a>
                                 </li>
                                 <li>
                                     <a href="/home/forward">
-                                        谁转发了我的微博
+                                        微博转发
+                                        @if($forward>0)
+                                        <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px  ">
+                                            {{$forward}}
+                                        </div>
+                                        @else
+                                        <div></div>
+                                        @endif
                                     </a>
                                 </li>
                             </ul>
@@ -123,50 +166,71 @@
 
 
                         <!-- 关注 -->
-                        <div class="col-md-8 sidebar" id="tiezi" style="background-color: #fff;margin-left: 30px;width: 820px;padding-bottom: 20px">
-                            <div class="col-lg-12" id="tit">
+                        <div class="col-md-8 sidebar" id="tiezi" >
+                            <div class="col-lg-12" style="background-color: #fff;margin-left: 30px;width: 820px;">
                                 <h3>
-                                    相册
+                                    相册 <span id="overall" style="font-size: 14px;margin-left: 30px"><em>删除全部</em></span>
                                 </h3>
                             </div>
-                            <div class="col-lg-12" >
+                            <div class="col-lg-12" style="background-color: #fff;margin-left: 30px;width: 820px;padding-bottom: 20px;margin-top: 10px" >
                                 <!-- 图像遍历的地方 -->
+
+                                @if($res == null)
+
+                                <div style="line-height: 20px;padding:10px;">你还没有上传图片哟!@~@</div>
+
+                                @else
                                 <!-- 头像 -->
+                                @foreach($res as $k=>$v)
                                 <div id="weiimg" style="margin-top: 20px;margin-left: 20px;float: left">
-                                    <img width="230" height="220" src="/homes/images/197.jpg">
+                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img">
                                 </div>
-                                 <div id="weiimg" style="margin-top: 20px;margin-left: 20px;float: left">
-                                    <img width="230" height="220" src="/homes/images/197.jpg">
-                                </div>
-                                 <div id="weiimg" style="margin-top: 20px;margin-left: 20px;float: left">
-                                    <img width="230" height="220" src="/homes/images/197.jpg">
-                                </div>
-                                 <div id="weiimg" style="margin-top: 20px;margin-left: 20px;float: left">
-                                    <img width="230" height="220" src="/homes/images/197.jpg">
-                                </div>
+                                 @endforeach
+
+                                 @endif
                                 <!-- 图像遍历结束 -->
                             </div>
                             <!-- 关注栏结束 -->
                         </div>
 
-
-
-
                     </div>
                 </div>
             </div>
-            <div id="foot">
-                <footer class="footer" id="foot1">
-                    <div class="container">
-                        <p class="text-muted">
-                            Place sticky footer content here.
-                        </p>
-                    </div>
-                </footer>
-                <!-- footer 开始-->
-            </div>
-        <!-- footer结束 -->
         </div>
+        <script>
+
+         $.ajaxSetup({
+                headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                }
+            });
+         $('#overall').on( 'click',function (){
+      
+            layer.confirm('您确定删除全部？', {
+                btn: ['确定','取消'] //按钮
+                }, function(){
+                    $.ajax({
+                        url:'/home/photo/delete',
+                        type:'POST',
+                        success:function(data){
+
+                            $('.img').remove();
+
+                            document.getElementById('weiimg').innerHTML = "你还没有上传图片哟!@~@";
+                            
+                            layer.msg('删除成功', {icon: 1});
+                        },
+                        async:false,
+                    });
+                
+
+                }, function(){
+                
+                });
+         });   
+
+
+        </script>
     </body>
 
 </html>

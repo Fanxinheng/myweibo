@@ -10,8 +10,9 @@ use App\Http\Model\user;
 use App\Http\Model\user_attention;
 use App\Http\Model\user_info;
 use \DB;
+use \Redis;
 
-use session;
+use Session;
 
 class AttentionController extends Controller
 {
@@ -20,16 +21,33 @@ class AttentionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //关注页
     public function index()
     {
 
-        session(['id'=>1]);
-        $id = user_info::where('uid','=','1')->first();
+        //获取缓存中的id
+        $uid = Session('uid');
 
-        $res = user_attention::join('user_info','user_attention.gid','=','user_info.uid')->where('user_attention.uid',1)->get();
+        //获取登录用户的信息
+        $rev = user_info::where('uid','=',$uid)->first();
 
+        //根据id查询关注的所有人
+        $res = user_attention::join('user_info','user_attention.gid','=','user_info.uid')->where('user_attention.uid',$uid)->get();
 
-        return view('homes/user/attention',['res'=>$res,'id'=>$id]);
+        //获取微博评论的消息
+        $replay = Session('replay');
+
+        //获取微博评论的消息
+        $forward = Session('forward');
+
+        //获取微博评论的消息
+        $message = Session('message');
+
+        //获取微博评论的消息
+        $point = Session('point');
+
+        //跳转个人关注页
+        return view('homes/user/attention',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
     }
 
     /**
@@ -95,17 +113,18 @@ class AttentionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     //取消关注
     public function destroy($id)
     {
-        //
-        $uid = session('id');
-        // echo "as";
 
+        //获取缓存中的id
+        $uid = Session('uid');
+
+        //从数据库删除关注的信息
         $res = user_attention::where(['gid'=>$id,'uid'=>$uid])->delete();
 
-        // if($res){
-            return redirect('/home/attention');
-        // }
+        //跳转到控制器中
+        return redirect('/home/attention');
 
     }
 }
