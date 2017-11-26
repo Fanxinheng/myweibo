@@ -139,7 +139,17 @@
                                             </a>
                                         </h3>
                                     </div>
-
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/attention" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    我的关注
+                                                </span>
+                                            </a>
+                                        </h3>
+                                    </div>
                                     @foreach($label as $v)
                                     <div class="lev_Box lev_Box_noborder" >
                                         <h3 class="lev">
@@ -480,8 +490,8 @@
                                                             系统公告
                                                     </div>
                                                     @foreach($notice as $not)
-                                                    <a href="/home/notice/{{$not->id}}" class="UG_tag_list" title="公告标题">
-                                                        <div style="font-size: 14px">
+                                                    <a href="#"></span>" class="UG_tag_list" title="公告标题">
+                                                        <div style="font-size: 14px" onclick="notice({{$not->id}})">
                                                             {{$not->title}}
                                                         </div>
                                                     </a>
@@ -668,6 +678,48 @@
                                 });
 
                             };
+
+
+                            //系统公告
+                            function notice(id){
+
+                                $.ajax({
+                                    type: "get",
+                                    url: "/home/notice",
+                                    data: {id:id},
+                                    
+                                    beforeSend:function(){
+                                        //加载样式
+                                        a = layer.load(0, {shade: false});
+                                      },
+                                    success: function(data) {
+
+                                        //关闭加载样式
+                                        layer.close(a)
+
+                                        layer.open({
+                                          type: 1
+                                          ,title: data.title //不显示标题栏
+                                          ,closeBtn: false
+                                          ,area: '300px;'
+                                          ,shade: 0.8
+                                          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                                          ,resize: false
+                                          ,btn: ['知道了']
+                                          ,btnAlign: 'c'
+                                          ,moveType: 1 //拖拽模式，0或者1
+                                          ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                                          ,
+                                        });
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                                        
+                                        
+                                    }
+                                });
+                            }
+
 
 
                         </script>

@@ -131,23 +131,11 @@
                             <!-- ／左导 -->
                             <div id="plc_main">
                                 <div id="plc_unlogin_home_main">
-
-
-
-                                    
                                     <div class="WB_frame_c">
                                         <div id="pl_unlogin_home_feed">
-                                            <!--榜单栏位置-->
-                                         
-                                           
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
-                                                <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
-                                                    
-                                                    <!--article feed-->
-                                                     
-                                                    <!--广告模块-->
-                                                    <div class="UG_list_b" mid="4171968871140682" action-type="feed_list_item"
+                                                    <div  mid="4171968871140682" action-type="feed_list_item"
                                                     href="//weibo.com/5187664653/FuceP4MK6?ref=feedsdk" suda="key=nologin_home&amp;value=nologin_card_weibo:4171968871140682"
                                                     suda-uatrack="key=www_unlogin_home&amp;value=recommend_feed">
 
@@ -195,7 +183,7 @@
 
                                                     <!-- 转发内容 -->
 
-                                                    <div class="list_des" style="height:60px;border-radius:10px;padding-left:10px;background-color: #F2F2F5;">
+                                                    <div class="list_des" style="border-radius:10px;padding:10px;background-color: #F2F2F5;">
 
                                                     @if($res->fnum == 0)
                                                     <h3 class="list_title_s">
@@ -235,12 +223,16 @@
                                                     
                                                     </div>
                                                      </div> 
-                                                    {!! $forward->render() !!}
+
+                                                    <div style="float: right">
+                                                       {!!$forward->render()!!}
+                                                    </div>
+
                                                 </ul>
+                                                
                                             </div>
                                          
                                         </div>
-
                                     </div>
                                     <div class="WB_main_r" fixed-box="true">
                                         <div id="pl_unlogin_home_login">
@@ -294,16 +286,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <div style="width:340px; float:right;">
-                                             <!-- 公告专用 -->
-                                            <div class="UG_box_l" style="width:340px;height:220px;">
-                                                <div class="UG_contents">
+                                            
+                                            <!-- 公告专用 -->
+                                            <div class="UG_box_l" style="width:340px;">
+                                                <div class="UG_contents" style="padding-bottom:10px;">
                                                         <div style="font-size: 15px;padding-bottom: 10px">
                                                                 系统公告
                                                         </div>
                                                         @foreach($notice as $not)
-                                                        <a href="/home/notice/{{$not->id}}" class="UG_tag_list" title="公告标题">
-                                                            <div style="font-size: 14px">
+                                                        <a href="#" class="UG_tag_list" title="公告标题">
+                                                            <div style="font-size: 14px" onclick="notice({{$not->id}})">
                                                                 {{$not->title}}
                                                             </div>
                                                         </a>
@@ -375,6 +367,46 @@
               time: 20000, //20s后自动关闭
             });
           });
+
+         //系统公告
+        function notice(id){
+
+            $.ajax({
+                type: "get",
+                url: "/home/notice",
+                data: {id:id},
+                
+                beforeSend:function(){
+                    //加载样式
+                    a = layer.load(0, {shade: false});
+                  },
+                success: function(data) {
+
+                    //关闭加载样式
+                    layer.close(a)
+
+                    layer.open({
+                      type: 1
+                      ,title: data.title //不显示标题栏
+                      ,closeBtn: false
+                      ,area: '300px;'
+                      ,shade: 0.8
+                      ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                      ,resize: false
+                      ,btn: ['知道了']
+                      ,btnAlign: 'c'
+                      ,moveType: 1 //拖拽模式，0或者1
+                      ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                      ,
+                    });
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                    
+                    
+                }
+            });
+        }
     </script>
     </body>
 

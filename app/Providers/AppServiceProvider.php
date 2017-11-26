@@ -8,6 +8,7 @@ use App\Http\Model\link;
 use App\Http\Model\notice;
 use App\Http\Model\label;
 
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -37,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share('notice',$notice);
 
         view()->share('label',$label);
+
+        
 
 
     }

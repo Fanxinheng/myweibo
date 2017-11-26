@@ -138,6 +138,17 @@
                                             </a>
                                         </h3>
                                     </div>
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/attention" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    我的关注
+                                                </span>
+                                            </a>
+                                        </h3>
+                                    </div>
 
                                     @foreach($label as $v)
                                     <div class="lev_Box lev_Box_noborder" >
@@ -464,7 +475,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                        <!-- 系统公告 -->
                         <div style="background-color: #FFFFFF;border-radius: 5px;">
                             <div >
                                 <div  style="margin: 10px;padding:10px;">
@@ -480,8 +491,52 @@
                                     @endforeach
                                 </div>
                             </div>
-                       </div>
-                           <!-- 广告显示页面 -->
+                        </div>
+
+                        <!-- 微博找人
+                        <div style="background-color: #FFFFFF;border-radius: 5px;">
+                            <div >
+                                <div  style="margin: 10px;padding:10px;line-height: 30px;">
+                                    <div style="font-size: 15px;padding-bottom: 10px;">
+                                            微博找人
+                                    </div>
+                                    
+                                    <a href="#">
+                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
+                                            医生
+                                        </label>
+                                    </a>
+                                    <a href="#">
+                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:11px;border-radius: 10px;">
+                                            餐饮
+                                        </label>
+                                    </a>
+                                    <a href="#" >
+                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:13px;border-radius: 10px;">
+                                            销售
+                                        </label>
+                                    </a>
+                                    <br>
+                                    <a href="#" >
+                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
+                                            教师
+                                        </label>
+                                    </a>
+                                    <a href="#" >
+                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
+                                            IT  
+                                        </label>
+                                    </a>
+                                    <a href="#" >
+                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
+                                            其他
+                                        </label>
+                                    </a>   
+                                    
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- 广告显示页面 -->
                         @foreach($advert as $k=>$v)
                             @if($v->status == 0)
                              <div class="WB_cardwrap S_bg2">
@@ -536,177 +591,178 @@
             </div>
             
         </div>
-                        <script type="text/javascript">
+        <script type="text/javascript">
 
-                            //微博发布
-                            $('#release').on('click', function(){
+            //微博发布
+            $('#release').on('click', function(){
 
-                                var a = layer.load(0, {shade: false});
+                var a = layer.load(0, {shade: false});
 
-                                layer.msg('微博发布成功:)', {icon: 1});
-                              });
+                layer.msg('微博发布成功:)', {icon: 1});
+              });
 
 
-                            $.ajaxSetup({
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-                               }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+               }
+            });
+            
+
+            //微博点赞
+            function point (id){
+
+                $.ajax({
+                    type: "post",
+                    url: "/home/point",
+                    data: {poid:id},
+                    
+                    beforeSend:function(){
+                         a = layer.load();
+                      },
+                    success: function(data) {
+
+                        layer.close(a);
+
+                        //判断是否重复点赞
+                        if(data == 0){
+                            layer.msg('您已赞过此微博:)', {icon:2 ,})
+                        }else{
+                            document.getElementById('pnum'+id).innerHTML = data;
+
+                            layer.msg('点赞成功:)', {icon: 1});
+
+                           $('#point'+id).off('click','point');
+                        }
+
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                      
+                        layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
+
+                    }
+                });
+              };
+
+
+            //微博举报
+            $('.report').on('click',function(){
+
+                var cid = $(this).find('.rep').val();
+
+                layer.msg('您确定举报此微博吗？', {
+                  time: 0 //不自动关闭
+                  ,btn: ['确定', '取消']
+                  ,yes: function(index){
+
+                    $.get('/home/blog/report', {cid:cid}, function (data) {
+                        if(data == 1){
+                            layer.close(index);
+                            layer.msg('我们收到了您的举报，感谢您的监督:)', {
+                              icon: 6
+                              ,btn: ['再见']
                             });
 
-                            //微博点赞
-                            function point (id){
-
-                                $.ajax({
-                                    type: "post",
-                                    url: "/home/point",
-                                    data: {poid:id},
-                                    
-                                    beforeSend:function(){
-                                         a = layer.load();
-                                      },
-                                    success: function(data) {
-
-                                        layer.close(a);
-
-                                        //判断是否重复点赞
-                                        if(data == 0){
-                                            layer.msg('您已赞过此微博:)', {icon:2 ,})
-                                        }else{
-                                            document.getElementById('pnum'+id).innerHTML = data;
-
-                                            layer.msg('点赞成功:)', {icon: 1});
-
-                                           $('#point'+id).off('click','point');
-                                        }
-   
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                      
-                                        layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
-
-                                    }
-                                });
-                              };
+                        }else{
+                            layer.msg('您已举报过此微博:)', {icon:2 ,})
+                        }
+                    });
+                   
+                  }
+                });    
+            });
 
 
-                            //微博举报
-                            $('.report').on('click',function(){
+            //微博删除
+            function destroy(id){
 
-                                var cid = $(this).find('.rep').val();
+                //获取要删除微博的id
+                did = $('#des'+id).children('input[name=destroy]').val();
 
-                                layer.msg('您确定举报此微博吗？', {
-                                  time: 0 //不自动关闭
-                                  ,btn: ['确定', '取消']
-                                  ,yes: function(index){
+                layer.confirm('您确定要删除此微博吗？', {
+                  btn: ['确定','取消'] //按钮
+                }, function(){
 
-                                    $.get('/home/blog/report', {cid:cid}, function (data) {
-                                        if(data == 1){
-                                            layer.close(index);
-                                            layer.msg('我们收到了您的举报，感谢您的监督:)', {
-                                              icon: 6
-                                              ,btn: ['再见']
-                                            });
+                    $.ajax({
+                    type: "get",
+                    url: "/home/blog/destroy",
+                    data: {did:did},
+                    
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
 
-                                        }else{
-                                            layer.msg('您已举报过此微博:)', {icon:2 ,})
-                                        }
-                                    });
-                                   
-                                  }
-                                });    
-                            });
+                        //关闭加载样式
+                        layer.close(a)
 
+                        //移除微博
+                        $('#destroy'+id).remove();
+                        
+                        //微博数量-1
+                        document.getElementById('cnum').innerHTML = data.cnum;
 
-                            //微博删除
-                            function destroy(id){
+                        //微博积分-5
+                        document.getElementById('socre').innerHTML = data.socre;
 
-                                //获取要删除微博的id
-                                did = $('#des'+id).children('input[name=destroy]').val();
+                        layer.msg('微博删除成功:)', {icon: 1});
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("微博删除失败，请检查网络后重试", {icon:2 ,})
+                        
+                        
+                    }
+                });
 
-                                layer.confirm('您确定要删除此微博吗？', {
-                                  btn: ['确定','取消'] //按钮
-                                }, function(){
+                }, function(){
 
-                                    $.ajax({
-                                    type: "get",
-                                    url: "/home/blog/destroy",
-                                    data: {did:did},
-                                    
-                                    beforeSend:function(){
-                                        //加载样式
-                                        a = layer.load(0, {shade: false});
-                                      },
-                                    success: function(data) {
+                });
 
-                                        //关闭加载样式
-                                        layer.close(a)
-
-                                        //移除微博
-                                        $('#destroy'+id).remove();
-                                        
-                                        //微博数量-1
-                                        document.getElementById('cnum').innerHTML = data.cnum;
-
-                                        //微博积分-5
-                                        document.getElementById('socre').innerHTML = data.socre;
-
-                                        layer.msg('微博删除成功:)', {icon: 1});
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                        layer.msg("微博删除失败，请检查网络后重试", {icon:2 ,})
-                                        
-                                        
-                                    }
-                                });
-
-                                }, function(){
-
-                                });
-
-                            };
+            };
 
 
-                            //系统公告
-                            function notice(id){
+            //系统公告
+            function notice(id){
 
-                                $.ajax({
-                                    type: "get",
-                                    url: "/home/notice",
-                                    data: {id:id},
-                                    
-                                    beforeSend:function(){
-                                        //加载样式
-                                        a = layer.load(0, {shade: false});
-                                      },
-                                    success: function(data) {
+                $.ajax({
+                    type: "get",
+                    url: "/home/notice",
+                    data: {id:id},
+                    
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
 
-                                        //关闭加载样式
-                                        layer.close(a)
+                        //关闭加载样式
+                        layer.close(a)
 
-                                        layer.open({
-                                          type: 1
-                                          ,title: data.title //不显示标题栏
-                                          ,closeBtn: false
-                                          ,area: '300px;'
-                                          ,shade: 0.8
-                                          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                                          ,resize: false
-                                          ,btn: ['知道了']
-                                          ,btnAlign: 'c'
-                                          ,moveType: 1 //拖拽模式，0或者1
-                                          ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
-                                          ,
-                                        });
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                        layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-                                        
-                                        
-                                    }
-                                });
-                            }
+                        layer.open({
+                          type: 1
+                          ,title: data.title //不显示标题栏
+                          ,closeBtn: false
+                          ,area: '300px;'
+                          ,shade: 0.8
+                          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                          ,resize: false
+                          ,btn: ['知道了']
+                          ,btnAlign: 'c'
+                          ,moveType: 1 //拖拽模式，0或者1
+                          ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                          ,
+                        });
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                        
+                        
+                    }
+                });
+            }
 
-                        </script>
-                    </body>
+        </script>
+    </body>
         
     </html>

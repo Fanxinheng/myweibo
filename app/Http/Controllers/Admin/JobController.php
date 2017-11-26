@@ -6,30 +6,23 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use App\Http\Model\user_info;
-use App\Http\Model\contents;
-use App\Http\Model\user;
-
-use session;
+use App\Http\Model\job;
 
 
-class UserController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        //获取用户详细信息
-        $res = user::join('user_info','user_info.uid','=','user.id')->where('nickName','like','%'.$request->input('search').'%')->paginate(10);
+        //查询职业内容
+        $job = job::get();
 
-        // var_dump($res);die;  
+        return view('admins/job/index',['job'=>$job]);
 
-        return view('admins/user/index',['res'=>$res,'request'=>$request]);
-        
     }
 
     /**
@@ -39,8 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        
-        // return view('admins/user/news');
+        return view('admins/job/add');
     }
 
     /**
@@ -51,7 +43,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        var_dump($request->input(job));
     }
 
     /**
@@ -62,15 +54,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-
-        //获取用户名
-        $nickName = user_info::where('uid',$id)->value('nickName');
-        // var_dump($nickName);die;
-        
-        //获取用户微博信息
-        $res = contents::where('uid','=',$id)->paginate(2);
-        // var_dump($res);die;
-        return view('admins/user/show',['nickName'=>$nickName,'res'=>$res]);
+        //
     }
 
     /**
@@ -81,7 +65,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        echo 'edit';
+        //
     }
 
     /**
@@ -93,16 +77,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //查询用户原来状态
-        $date = user::where('id',$id)->value('status');
-        // echo $date;
-        if($date){
-            $update = user::where('id',$id)->update(['status'=>0]);
-        } else {
-            $update = user::where('id',$id)->update(['status'=>1]);
-        }
-
-        return redirect('admin/index');
+        //
     }
 
     /**
@@ -113,6 +88,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        echo 'delete';
+        //
     }
 }

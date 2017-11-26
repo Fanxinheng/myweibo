@@ -26,7 +26,7 @@ class ForwardController extends Controller
     	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
 
     	//查询转发信息
-    	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(1);
+    	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
 
     	return view('homes/show/forward',['res'=>$res,'forward'=>$forward]);

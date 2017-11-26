@@ -83,12 +83,6 @@ class AdminController extends Controller
         //判断用户是否登陆
         $bool = Session('uid');
 
-        /*if($bool){
-           return view('homes/notice/notice',['index'=>$index]); 
-
-        }else{
-           return view('homes/notice/index',['index'=>$index]); 
-        }*/
 
         return $index;
 

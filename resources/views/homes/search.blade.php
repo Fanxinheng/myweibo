@@ -156,7 +156,7 @@
                                                             </div> 
                                                         </h3>
                                                         @if($v->image)
-                                                        <div id="image">
+                                                        <div id="image" >
                                                             <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
                                                         </div>
                                                         @else
@@ -164,12 +164,11 @@
                                                         @endif
                                                         </a>
                                                         <div class="subinfo_box clearfix">
-                                                            
-                                                                <span class="subinfo_face ">
+                                                                
+                                                                <span class="subinfo_face" style="cursor: pointer">
                                                                     <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}" alt="" width="20" height="20">
                                                                 </span>
-                                                            
-                                                            
+                                                                
                                                                 <span class="subinfo S_txt2">
                                                                     {{$v->nickName}} 
                                                                 </span>
@@ -297,16 +296,16 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                                                                <div style="width:340px; float:right;">
-                                             <!-- 公告专用 -->
-                                            <div class="UG_box_l" style="width:340px;height:220px;">
-                                                <div class="UG_contents">
+                                        <div style="width:340px; float:right;">
+                                            <!-- 公告专用 -->
+                                            <div class="UG_box_l" style="width:340px;">
+                                                <div class="UG_contents" style="padding-bottom:10px;">
                                                         <div style="font-size: 15px;padding-bottom: 10px">
                                                                 系统公告
                                                         </div>
                                                         @foreach($notice as $not)
-                                                        <a href="/home/notice/{{$not->id}}" class="UG_tag_list" title="公告标题">
-                                                            <div style="font-size: 14px">
+                                                        <a href="#" class="UG_tag_list" title="公告标题">
+                                                            <div style="font-size: 14px" onclick="notice({{$not->id}})">
                                                                 {{$not->title}}
                                                             </div>
                                                         </a>
@@ -383,6 +382,46 @@
             
             layer.msg('亲，您好像忘了登录呦:)');
           });
+
+         //系统公告
+        function notice(id){
+
+            $.ajax({
+                type: "get",
+                url: "/home/notice",
+                data: {id:id},
+                
+                beforeSend:function(){
+                    //加载样式
+                    a = layer.load(0, {shade: false});
+                  },
+                success: function(data) {
+
+                    //关闭加载样式
+                    layer.close(a)
+
+                    layer.open({
+                      type: 1
+                      ,title: data.title //不显示标题栏
+                      ,closeBtn: false
+                      ,area: '300px;'
+                      ,shade: 0.8
+                      ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                      ,resize: false
+                      ,btn: ['知道了']
+                      ,btnAlign: 'c'
+                      ,moveType: 1 //拖拽模式，0或者1
+                      ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                      ,
+                    });
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                    
+                    
+                }
+            });
+        }
     </script>
 
     

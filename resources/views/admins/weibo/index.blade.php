@@ -41,7 +41,7 @@
         <select aria-controls="DataTables_Table_0" name="select">
             <option
             name="select"
-            value="{{isset($_GET['content']) ? $_GET['content'] : '' }}">全部
+            value="">全部
             </option>
 
             @foreach($resa as $k => $v)
@@ -59,15 +59,11 @@
     <div class="dataTables_filter" id="DataTables_Table_1_filter">
         <label>
 
-            搜索<input
-            aria-controls="DataTables_Table_1"
-            type="text"
-            name="content"
-            value="{{isset($_GET['content']) ? $_GET['content'] : $v->id }}"/>
+            搜索<input aria-controls="DataTables_Table_1" type="text" name="content" value="{{isset($_GET['content']) ? $_GET['content'] : '' }}"/>
             {{ csrf_field()}}
 
         </label>
-        <button class="btn btn-default">提交</button>
+        <button class="btn btn-default">搜索</button>
     </div>
     </form>
 
@@ -101,9 +97,9 @@
                         {{$v -> hot == 0 ? ' 登上热门 ' : ' 取消热门 ' }}
                     </button>
                     </a>
-
-                    <form action="/admin/weibo/{{$v->cid}}" method='post'>
-                    <button id="delete" class="btn btn-default">删除微博</button>
+ 
+                    <form action="/admin/weibo/{{$v->cid}}" method='post' style="display: inline">
+                    <button id="delete" class="btn btn-default" >删除微博</button>
                         </form>
                     </td>
                 </tr>

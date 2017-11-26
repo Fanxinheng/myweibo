@@ -109,6 +109,9 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//热门微博列表
 	Route::get('/index/hot','LoginController@hot');
 
+	//我的关注微博列表
+	Route::get('/index/attention','LoginController@attention');
+
 	//微博标签列表
 	Route::get('/index/label/{id}','LoginController@label');
 
@@ -236,6 +239,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台管理员删除方法路由
 	Route::get('/password/delete/{id}','PwdController@delete');
+
+	//后台用户职业
+	Route::resource('/job','JobController');
 
 	//后台热门微博资源路由
 	Route::resource('/hot','HotController');

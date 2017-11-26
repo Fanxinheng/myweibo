@@ -24,6 +24,9 @@ class AttentController extends Controller
     	//获取登录用户id
     	$attent['uid'] = Session('uid');
 
+        //获取关注时间
+        $attent['time'] = time();
+
     	//判断用户是否相互关注
     	$bool = user_attention::where('gid',$attent['gid'])->where('uid',$attent['uid'])->value('id');
 

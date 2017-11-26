@@ -25,13 +25,8 @@ class WeiboController extends Controller
 
         // 通过contents表联查user_info表查询相应发博人用户名
         $resd = contents::join('user_info','contents.uid','=','user_info.uid')
-
-        // 通过模糊查询查询搜索框所搜索的数据
         ->where('content','like','%'.$request->input('content').'%')
-
-        // 通过模糊查询查询下拉框的ID点击搜索按钮搜索其ID所对应的微
-        // 博内容并遍历到模板页面
-        ->where('label','like','%'.$request->input('select').'%')
+        ->orWhere('label','like','%'.$request->input('select').'%')
         ->paginate(5); 
 
         // 返回视图页面并把查询到的值发送到模板遍历到相应位置

@@ -127,6 +127,12 @@
                             <li><a href="/admin/index">用户列表</a></li>
 
                         </ul>
+                        <a href="#"><i class="icon-briefcase"></i>职业管理</a>
+                        <ul class="closed">
+
+                            <li><a href="/admin/job/create">职业添加</a></li>
+                            <li><a href="/admin/job">职业列表</a></li>
+                        </ul>
                         <a href="#"><i class="icon-twitter-2"></i>微博管理</a>
                         <ul class="closed">
                             <li><a href="/admin/weibo">微博列表</a></li>

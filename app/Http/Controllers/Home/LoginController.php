@@ -154,12 +154,38 @@ class LoginController extends Controller
       $cnum = contents::where('uid',$uid)->count();
 
       //查询转发内容相关
-      $index = forward::with('contents.user_info','user_info')->orderBy('time','desc')->paginate(5);
+      $index = forward::with('contents.user_info','user_info')->orderBy('time','desc')->paginate(10);
       // dd($index);
       
 
       return view('homes/forward',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
+
+    //加载我的关注页面
+    public function attention ()
+    {
+      //获取用户ID
+      $uid = Session('uid');
+
+      //查询登录用户信息
+      $user = user_info::where('uid',$uid)->first();
+
+      //查询登录用户关注数量
+      $unum = user_attention::where('uid',$uid)->count();
+
+      //查询登录用户粉丝数量
+      $gnum = user_attention::where('gid',$uid)->count();
+
+      //查询登录用户微博数量
+      $cnum = contents::where('uid',$uid)->count();
+
+      //查询我的关注
+      $index = user_attention::with('contents','user_info')->where('uid',$uid)->orderBy('time','desc')->paginate(10);
+    
+      return view('homes/attent',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+    }
+
+
 
     //验证手机号是否已注册
     public function pho(Request $request)         

@@ -28,7 +28,7 @@ class ReplayController extends Controller
     	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
 
     	//查询评论信息
-    	$replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->get();
+    	$replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
     	return view('homes/show/replay',['label'=>$label,'res'=>$res,'replay'=>$replay]);
     }

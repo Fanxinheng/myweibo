@@ -157,7 +157,7 @@
                                                         </a>
                                                         <div class="subinfo_box clearfix">
 
-                                                                <span class="subinfo_face ">
+                                                                <span class="subinfo_face " style="cursor: pointer">
                                                                     <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}"
                                                                     alt="" width="20" height="20">
                                                                 </span>
@@ -277,15 +277,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <div style="width:340px; float:right;">
+                                            
                                              <!-- 公告专用 -->
-                                            <div class="UG_box_l" style="width:340px;height:220px;">
-                                                <div class="UG_contents">
+                                            <div class="UG_box_l" style="width:340px;">
+                                                <div class="UG_contents" style="padding-bottom:10px;">
                                                         <div style="font-size: 15px;padding-bottom: 10px">
                                                                 系统公告
                                                         </div>
                                                         @foreach($notice as $not)
-                                                        <a href="/home/notice/{{$not->id}}" class="UG_tag_list" title="公告标题">
+                                                        <a href="#" class="UG_tag_list" title="公告标题">
                                                             <div style="font-size: 14px" onclick="notice({{$not->id}})">
                                                                 {{$not->title}}
                                                             </div>
@@ -293,6 +293,7 @@
                                                         @endforeach
                                                 </div>
                                             </div>
+                                       
 
                                              <!-- 广告显示页面 -->
                                             @foreach($advert as $k=>$v)
