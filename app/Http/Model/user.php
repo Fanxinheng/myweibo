@@ -8,6 +8,8 @@ class user extends Model
 
 {	
 	public $table = 'user';
+
+	public $timestamps = false;
 	
     public function user_info()
     {

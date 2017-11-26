@@ -8,6 +8,8 @@ class forward extends Model
 {
     public $table = 'forward';
 
+    public $timestamps = false;
+
     public function user_info()
    {
    	return $this->hasOne('App\Http\Model\user_info','uid','fid');

@@ -19,30 +19,89 @@ Route::get('/', function () {
 //==========================前台路由===================================//
 //前台个人
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
+
+	//====================页面==========================//
 	
 	//个人主页
 	Route::get('user','UserController@index');
 
-	//个人相册
-	Route::get('photo','UserController@photo');
+	//系统消息
+	Route::get('message','UserController@message');
 
-	//个人的点赞
+	//个人相册页面
+	Route::resource('photo','UserController@photo');
+
+	//个人的点赞页面
 	Route::get('point','UserController@point');
 
 	//个人微博的评论
 	Route::get('replay','UserController@replay');
 
-	//个人的转发
+	//个人的转发页面
 	Route::get('forward','UserController@forward');
 
-	//删除微博
-	Route::post('delete/{id}','UserController@delete');
-
-	//关注
+	//关注页面
 	Route::resource('attention','AttentionController');
 
-	//粉丝
+	//粉丝页面
 	Route::resource('fans','FansController');
+
+	//======================功能=============================//
+
+	//删除微博
+	Route::get('delete/{id}','UserController@delete');
+
+	//删除评论
+	Route::get('replay/delete/{id}','UserController@replayDelete');
+
+	//点赞微博
+	Route::get('pointFun','UserController@pointFun');
+
+	//微博评论
+	Route::get('type','UserController@type');
+
+	//微博转发
+	Route::get('ward','UserController@ward');
+
+	//删除全部图片
+	Route::post('photo/delete','UserController@photoDelete');
+
+
+	
+});
+
+//前台他人个人
+Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
+
+	//======================页面===============================//
+	
+	//个人主页
+	Route::get('user/{id}','OtherUserController@index');
+
+	//个人相册
+	Route::resource('photo','OtherUserController@photo');
+
+	//微博评论
+	Route::get('type','OtherUserController@type');
+
+	//关注
+	Route::get('attention/{id}','OtherAttentionController@index');
+
+	//粉丝
+	Route::get('fans/{id}','OtherFansController@index');
+
+	//========================功能==================================//
+
+	//删除评论
+	Route::get('replay/delete/{id}','OtherUserController@replayDelete');
+
+	//微博转发
+	Route::get('ward','OtherUserController@ward');
+
+	//点赞微博
+	Route::get('pointFun','OtherUserController@pointFun');
+
+
 });
 
 //前台注册

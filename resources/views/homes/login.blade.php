@@ -81,7 +81,7 @@
                                                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                                     </em>
                                                     <em class="S_txt1">
-                                                        坏张筱
+                                                        <a href="/home/user">坏张筱</a>
                                                     </em>
                                                 </a>
                                             </li>

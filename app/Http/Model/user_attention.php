@@ -8,6 +8,8 @@ class user_attention extends Model
 {
     public $table = 'user_attention';
 
+    public $timestamps = false;
+
      
     public function info(){
 
