@@ -1,11 +1,11 @@
 #body{background: #9ECCEA}
 #logo{background: url('/homes/images/body_bg.jpg');}
-#bigbox{height:600px;background:white;border-radius:10px}
+#bigbox{height:450px;background:white;border-radius:10px}
 #tit{height:130px;}
 #content{height:360px;}
 #con{height:300px;margin-top: 30px}
 .nspan{color:red;margin-right: 5px;}
-#inp1{width: 700px;height:40px}
+#inp1{width: 700px;height:40px;margin-right:110px}
 #inp2{width: 700px;height:40px}
 #inp3{width: 700px;height:40px}
 .form-control{width: 345px;float: left;height:40px}
@@ -21,7 +21,7 @@
 .radio-inline{margin-left:15px}
 #wlabel{margin-right:15px}
 #but{margin-top:30px;}
-#btn1{background:#FFA00A;color: white;width:200px;height: 40px;font-size: 18px;border-radius: 6px}
+#btn1{background:#FFA00A;color: white;width:200px;height: 40px;font-size: 18px;border-radius: 6px;margin-top: 30px;margin-left:160px}
 #footer{height:50px;margin-top: 30px;text-align: center;}
 #fleft{width:550px;float:left;}
 #fright{width:400px;float:right;}

@@ -15,7 +15,7 @@
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="/homes/js/validate.js"></script>
-
+        <script type="text/javascript" src="{{asset('/layer/layer.js')}}"></script>
         <title>
             修改个人信息
         </title>
@@ -49,7 +49,7 @@
 	        			<img src="/homes/images/wb_logo-x2.png" alt="">
 	        		</div>
 	        	</div>
-	        	<div class="col-md-12" style="height:650px;background:white;border-radius:10px">
+	        	<div class="col-md-12" style="height:700px;background:white;border-radius:10px">
 	        		<div class="col-md-12" style="height:130px;">
 	        			<div id="redis">修改个人信息</div>
 	        			<div class="rr"></div>
@@ -57,8 +57,8 @@
 	        		</div>
 	        		<div class="col-md-12" style="height:360px;">
 						<div class="col-md-12" style="height:300px;margin-top: 30px">
-							<form class="form-horizontal" method="post" action="/home/details/update" enctype="multipart/form-data">
-                                
+							<form class="form-horizontal"  id="forms">
+                                <!-- action="/home/details/update" method="post" -->
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>昵称:</label>
 								    <div class="col-sm-4" style="width: 700px;height:40px">
@@ -108,22 +108,22 @@
 								  </div>
 
 								  <div class="form-group">
-								    <label for="inputPassword3" class="col-sm-2 control-label" style="margin-top:30px;"><span style="color:red;margin-right: 5px;margin-top:30px;">*</span>头像:</label>
+								    <label for="inputPassword3" class="col-sm-2 control-label" style="margin-top:20px;"><span style="color:red;margin-right: 5px;margin-top:30px;">*</span>头像:</label>
                                     
-                                    <img src="{{$res->photo}}" alt="" style="width:100px;height: 100px">
-								    <div class="col-sm-4" style="width:200px;margin-top:30px;">
-								      <input type="file" style="height: 45px" class="form-control" id="photo" name="photo" value=""  >
+                                    
+								    <div class="col-sm-4" style="width:150px;">
+								      <input type="file" style="width:100px;position:absolute;height:100px;opacity:0" class="form-control" id="photo" name="photo"   >
+                                      <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"   style="width:100px;height: 100px;border-radius:50%;border:solid 1px #ABB1BA" id="img">
 								    </div>
 								  </div>
-                                 
-                                
+          
 								  <div class="form-group" style="margin-top:30px">
 								    <div class="col-sm-offset-2 col-sm-10">
 								    	{{csrf_field()}}   
 								      <input type="submit" value="提交" style="background:#FFA00A;color: white;width:200px;height: 40px;font-size: 18px;border-radius: 6px" id="btn1">
 								    </div>
 								  </div>
-								</form>
+							</form>
 						</div>
 						
 					</div>
@@ -182,7 +182,7 @@
      	}
 
      	//昵称失去焦点事件
-     	uname.onchange = function(){
+     	uname.onblur = function(){
 
      		//获取昵称
      		var uname = this.value;
@@ -283,6 +283,63 @@
             }
      	}
      	
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+            }
+        });
+        $(function () {
+            $("#photo").change(function (){ 
+                uploadImage();
+            });
+        });
+        function uploadImage() {
+//                            判断是否有选择上传文件
+//                            input type file
+
+             var imgPath = $("#photo").val();
+
+            if (imgPath == "") {
+                alert("请选择上传图片！");
+                return;
+            }
+            //判断上传文件的后缀名
+            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+            if (strExtension != 'jpg' && strExtension != 'gif'
+                && strExtension != 'png' && strExtension != 'bmp') {
+                alert("请选择图片文件");
+                return;
+            }
+
+            var formData = new FormData($( "#forms" )[0]);
+            console.log(formData);
+            $.ajax({
+                type: "post",
+                url: "/home/details/update",
+                data: formData,
+                async: true,
+                cache: false,
+                contentType: false,
+                processData: false,
+               beforeSend:function(){
+                      // 菊花转转图
+                      // $('#img1').attr('src', 'http://img.lanrentuku.com/img/allimg/1212/5-121204193R0-50.gif');
+                      //
+                       a = layer.load();
+                  },
+                success: function(data) {
+                    console.log(data);
+                    layer.close(a);
+                    $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/homes/uploads/23831511619422.jpg');
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("上传失败，请检查网络后重试");
+                    $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/homes/uploads/96261511620891.jpg');
+                }
+            });
+        }
 
      	
      </script>

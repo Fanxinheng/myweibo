@@ -48,6 +48,7 @@ class LoginController extends Controller
       })->orderBy('time','desc')->get();
 
     	return view('homes/login',['label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+      
     }
 
     //加载热门微博页面
@@ -169,17 +170,20 @@ class LoginController extends Controller
       $res = user::where('phone',$req)->value('id');
 
       //在user_info表中根据user表中的id查出其uid
-      $nick = user_info::where('uid','=',$res)->value('uid');
-
+      $uid = user_info::where('uid','=',$res)->value('uid');
+      
+      
       //判断uid是否为空(因为上面传过来的是null)
-      if($nick==null){
+      if($uid==null){
 
           Session(['uid'=>$res]);
+
           return redirect('/home/details');
          
       }else{
 
-           Session(['uid'=>$res]);
+          Session(['uid'=>$res]);
+
           return redirect('/home/login');
 
       }

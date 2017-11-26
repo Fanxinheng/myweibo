@@ -129,8 +129,18 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//修改个人信息页面
 	Route::get('details/edit','DetailsController@edit');
 
+	//修改个人信息头像页面
+	Route::post('details/editphoto','DetailsController@editphoto');
+
 	//修改个人信息方法执行
 	Route::post('details/update','DetailsController@update');
+
+	//修改密码页面
+	Route::get('changepass','DetailsController@changepass');
+    
+    //修改密码判断旧密码是否与表中一致
+	Route::get('changepass/oldpass','DetailsController@oldpass');
+
 
 	//执行退出
 	Route::get('details/quit','DetailsController@quit');
