@@ -493,49 +493,24 @@
                             </div>
                         </div>
 
-                        <!-- 微博找人
+                        <!-- 微博找人 -->
                         <div style="background-color: #FFFFFF;border-radius: 5px;">
                             <div >
                                 <div  style="margin: 10px;padding:10px;line-height: 30px;">
                                     <div style="font-size: 15px;padding-bottom: 10px;">
                                             微博找人
                                     </div>
+                                    @foreach($job as $j)
+                                    <a href="/home/job/{{$j->id}}">
+                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
+                                            {{$j->job}}
+                                        </label>
+                                    </a>
                                     
-                                    <a href="#">
-                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
-                                            医生
-                                        </label>
-                                    </a>
-                                    <a href="#">
-                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:11px;border-radius: 10px;">
-                                            餐饮
-                                        </label>
-                                    </a>
-                                    <a href="#" >
-                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:13px;border-radius: 10px;">
-                                            销售
-                                        </label>
-                                    </a>
-                                    <br>
-                                    <a href="#" >
-                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
-                                            教师
-                                        </label>
-                                    </a>
-                                    <a href="#" >
-                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
-                                            IT  
-                                        </label>
-                                    </a>
-                                    <a href="#" >
-                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
-                                            其他
-                                        </label>
-                                    </a>   
-                                    
+                                    @endforeach
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <!-- 广告显示页面 -->
                         @foreach($advert as $k=>$v)
                             @if($v->status == 0)

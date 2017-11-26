@@ -7,6 +7,7 @@ use App\Http\Model\advert;
 use App\Http\Model\link;
 use App\Http\Model\notice;
 use App\Http\Model\label;
+use App\Http\Model\job;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
         //获取标签数据
         $label = label::get();
 
+        //获取用户职业数据
+        $job = job::get();
+
         //将值传递到所有页面
         view()->share('advert',$advert);
 
@@ -38,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share('notice',$notice);
 
         view()->share('label',$label);
+
+        view()->share('job',$job);
 
         
 

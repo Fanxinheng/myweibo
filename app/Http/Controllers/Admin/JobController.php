@@ -43,7 +43,16 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        var_dump($request->input(job));
+        $res['job'] = $request->input('job');
+        //插入数据
+        $bool = job::insert($res);
+
+        if($bool){
+            return redirect('admin/job')->with('create','用户职业添加成功！');
+        }else{
+            return back();
+
+        }
     }
 
     /**
@@ -65,7 +74,11 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        //
+        //查询职业信息
+        $job = job::where('id',$id)->first();
+
+        return view('admins/job/edit',['job'=>$job]);
+
     }
 
     /**
@@ -77,7 +90,17 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $res['job'] = $request->input('job');
+
+        //更新数据
+        $bool = job::where('id',$id)->update($res);
+
+        if($bool){
+            return redirect('admin/job')->with('edit','用户职业修改成功！');
+
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -88,6 +111,15 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // return $id;
+        //删除职业
+        $bool = job::where('id',$id)->delete();
+
+        if($bool){
+            return redirect('admin/job')->with('delete','用户职业删除成功！');
+        }else{
+            return back();
+
+        }
     }
 }

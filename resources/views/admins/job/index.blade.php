@@ -60,23 +60,24 @@
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 
                     @foreach($job as $k => $v)
-                        <tr class="@if ( $v->id % 2 == 0 ) odd @else even @endif">
+                        <tr class="@if ( $v->id % 2 == 0 ) odd @else even @endif" id="job{{$v->id}}">
                             <td >
                                 <center>{{$v->id }}</center>
                             </td>
-                            <td class=" ">
+                            <td >
                                 <center>{{$v->job}}</center>
                             </td>
-                            <td class=" ">
+                            <td >
                                 <center>
                                     <a href="/admin/job/{{$v->id}}/edit">
                                         <input type="submit" class="btn btn-default" value="修改">
                                     </a>
-                                        <form action="/admin/job/{{$v->id}}}" method="post" style="display:inline">
-                                            <button class="btn btn-default">删除</button>
-                                                {{csrf_field()}}
-                                                {{method_field('DELETE')}}
-                                        </form>
+                                    <form action="/admin/job/{{$v->id}}" method="post" style="display: inline">
+                                        {{csrf_field()}}
+                                        {{method_field('DELETE')}}
+                                        <button class="btn btn-default">删除</button>
+                                        
+                                    </form>            
                                 </center>
 
 
@@ -107,5 +108,55 @@
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
 
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+               }
+            });
+
+        //职业删除
+        function job_delete(id){
+
+            layer.confirm('您确定要删除此微博吗？', {
+                  btn: ['确定','取消'] //按钮
+                }, function(){
+
+                    $.ajax({
+                    type: "post",
+                    url: "/admin/job"+id,
+                    data: {id:id,_token:'{{csrf_token()}}',_method:'{{method_field("DELETE")}}'},
+                    
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
+
+                        //关闭加载样式
+                        layer.close(a)
+
+                        /*//移除微博
+                        $('#destroy'+id).remove();
+                        
+                        //微博数量-1
+                        document.getElementById('cnum').innerHTML = data.cnum;
+
+                        //微博积分-5
+                        document.getElementById('socre').innerHTML = data.socre;
+
+                        layer.msg('微博删除成功:)', {icon: 1});*/
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("微博删除失败，请检查网络后重试", {icon:2 ,})
+                        
+                        
+                    }
+                });
+
+                }, function(){
+
+                });
+        }
+        
     </script>
 @endsection

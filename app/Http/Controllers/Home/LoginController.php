@@ -12,6 +12,7 @@ use App\Http\Model\label;
 use App\Http\Model\contents;
 use App\Http\Model\user_attention;
 use App\Http\Model\forward;
+use App\Http\Model\job;
 
 
 use Hash;
@@ -183,6 +184,33 @@ class LoginController extends Controller
       $index = user_attention::with('contents','user_info')->where('uid',$uid)->orderBy('time','desc')->paginate(10);
     
       return view('homes/attent',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
+    }
+
+    //加载微博找人
+    public function job ($id)
+    {
+      //获取用户ID
+      $uid = Session('uid');
+
+      //查询登录用户信息
+      $user = user_info::where('uid',$uid)->first();
+
+      //查询登录用户关注数量
+      $unum = user_attention::where('uid',$uid)->count();
+
+      //查询登录用户粉丝数量
+      $gnum = user_attention::where('gid',$uid)->count();
+
+      //查询登录用户微博数量
+      $cnum = contents::where('uid',$uid)->count();
+
+      //获取相关职业
+      $job = job::where('id',$id)->first();
+
+      //查询用户
+      $index = user_info::where('work',$job->job)->paginate(10);
+    
+      return view('homes/job',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
 
 

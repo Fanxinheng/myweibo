@@ -154,6 +154,9 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//用户取消关注
 	Route::get('/noattent','AttentController@noattent');
 
+	//微博找人
+	Route::get('/job/{id}','LoginController@job');
+
 	
 
 
@@ -242,6 +245,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台用户职业
 	Route::resource('/job','JobController');
+
+	//删除用户职业
+	Route::get('/job/delete','JobsController@delete');
 
 	//后台热门微博资源路由
 	Route::resource('/hot','HotController');
