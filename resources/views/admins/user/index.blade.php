@@ -4,101 +4,67 @@
 
 @section('content')
 
-@if(session('create'))
+@if(session('msg'))
     <div class="mws-form-message success">
                                 
-        {{session('create')}}
+        {{session('msg')}}
 
     </div>
-@endif
-
-@if(session('delete'))
-    <div class="mws-form-message success">
-                                
-        {{session('delete')}}
-
-    </div>
-@endif
-
-
-@if(session('edit'))
-        <div class="mws-form-message success">
-                                    
-            {{session('edit')}}
-
-        </div>
 @endif
 <div class="mws-panel grid_8">
                     <div class="mws-panel-header">
                         <span><i class="icon-table"></i>用户列表</span>
                     </div>
                     <div class="mws-panel-body no-padding">
-                        <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper"><div id="DataTables_Table_1_length" class="dataTables_length"><label>Show <select name="DataTables_Table_1_length" size="1" aria-controls="DataTables_Table_1"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div class="dataTables_filter" id="DataTables_Table_1_filter"><label>Search: <input type="text" aria-controls="DataTables_Table_1"></label></div><table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
+                        <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
+                            <form action="/admin/index" method="get">
+                                
+                                <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                                    <label>用户名: <input type="text" aria-controls="DataTables_Table_1" name="search" value="{{$request['search']}}">
+                                   
+                                    <button type="submit" class="btn btn-default">搜索</button></label>
+                                    
+                                </div>
+                            </form>
+                        <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                             <thead>
-                                <tr role="row"><th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Rendering engine</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">Browser</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 316px;" aria-label="Platform(s): activate to sort column ascending">Platform(s)</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 221px;" aria-label="Engine version: activate to sort column ascending">Engine version</th><th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 166px;" aria-label="CSS grade: activate to sort column ascending">CSS grade</th></tr>
+                                <tr role="row"><th style="width: 100px;" aria-label="Browser: activate to sort column ascending">手机</th><th style="width: 180px;" aria-label="Browser: activate to sort column ascending">昵称</th><th  style="width: 50px;" aria-label="Platform(s): activate to sort column ascending">性别</th><th  style="width: 50px;" aria-label="Engine version: activate to sort column ascending">年龄</th><th style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">职业</th><th style="width: 250px;" aria-label="CSS grade: activate to sort column ascending">邮箱</th><th  style="width: 50px;" aria-label="CSS grade: activate to sort column ascending">头像</th><th = style="width: 100px;" aria-label="CSS grade: activate to sort column ascending">积分</th><th style="width: 80px;" aria-label="CSS grade: activate to sort column ascending">状态</th><th =style="width: 250px;" aria-label="CSS grade: activate to sort column ascending">操作</th></tr>
                             </thead>
                             
-                        <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="odd">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Firefox 1.0</td>
-                                    <td class=" ">Win 98+ / OSX.2+</td>
-                                    <td class=" ">1.7</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="even">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Firefox 1.5</td>
-                                    <td class=" ">Win 98+ / OSX.2+</td>
-                                    <td class=" ">1.8</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="odd">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Firefox 2.0</td>
-                                    <td class=" ">Win 98+ / OSX.2+</td>
-                                    <td class=" ">1.8</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="even">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Firefox 3.0</td>
-                                    <td class=" ">Win 2k+ / OSX.3+</td>
-                                    <td class=" ">1.9</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="odd">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Camino 1.0</td>
-                                    <td class=" ">OSX.2+</td>
-                                    <td class=" ">1.8</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="even">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Camino 1.5</td>
-                                    <td class=" ">OSX.3+</td>
-                                    <td class=" ">1.8</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="odd">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Netscape 7.2</td>
-                                    <td class=" ">Win 95+ / Mac OS 8.6-9.2</td>
-                                    <td class=" ">1.7</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="even">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Netscape Browser 8</td>
-                                    <td class=" ">Win 98SE+</td>
-                                    <td class=" ">1.7</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="odd">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Netscape Navigator 9</td>
-                                    <td class=" ">Win 98+ / OSX.2+</td>
-                                    <td class=" ">1.8</td>
-                                    <td class=" ">A</td>
-                                </tr><tr class="even">
-                                    <td class="  sorting_1">Gecko</td>
-                                    <td class=" ">Mozilla 1.0</td>
-                                    <td class=" ">Win 95+ / OSX.1+</td>
-                                    <td class=" ">1</td>
-                                    <td class=" ">A</td>
-                                </tr></tbody></table><div class="dataTables_info" id="DataTables_Table_1_info">Showing 1 to 10 of 57 entries</div><div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate"><a class="first paginate_button paginate_button_disabled" tabindex="0" id="DataTables_Table_1_first">First</a><a class="previous paginate_button paginate_button_disabled" tabindex="0" id="DataTables_Table_1_previous">Previous</a><span><a class="paginate_active" tabindex="0">1</a><a class="paginate_button" tabindex="0">2</a><a class="paginate_button" tabindex="0">3</a><a class="paginate_button" tabindex="0">4</a><a class="paginate_button" tabindex="0">5</a></span><a class="next paginate_button" tabindex="0" id="DataTables_Table_1_next">Next</a><a class="last paginate_button" tabindex="0" id="DataTables_Table_1_last">Last</a></div></div>
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                @foreach($res as $k => $v)
+                                <tr class="@if($k%2 == 0) odd @else even @endif" style="text-align: center;">
+                                    <td class=" ">{{$v->phone ? $v->phone : '未设置'}}</td>
+                                    <td class=" ">{{$v->nickName ? $v->nickName : '未设置'}}</td>
+                                    <td class=" ">{{$v->sex ? $v->sex : '未设置'}}</td>
+                                    <td class=" ">{{$v->age ? $v->age : '未设置'}}</td>
+                                    <td class=" ">{{$v->work ? $v->work : '未设置'}}</td>
+                                    <td class=" ">{{$v->email ? $v->email : '未设置'}}</td>
+                                    <td class=" "><img src="{{$v->photo ? $v->photo : '/homes/uploads/default.jpg'}}" style="width:50px;height:50px"></td>
+                                    <td class=" ">{{$v->socre}}</td>
+                                    <td class=" ">{{$v->status == 0 ? '正常' : '冻结'}}</td>
+                                    <td>
+                                        <a href="/admin/index/{{$v->id}}"><button class="btn btn-default">查看微博</button></a>
+                                        <form action="/admin/index/{{$v->id}}" method="post" style="display:inline">
+                                            {{csrf_field()}}
+                                            {{method_field('PUT')}}
+                                            <button class="btn btn-default">{{$v->status == 1 ? '恢复用户' : '冻结用户'}}</button>
+                                            
+                                        </form>
+                                        <a href="/admin/news/{{$v->uid}}"><button class="btn btn-default">系统消息</button></a>
+                                    </td>
+                                 </tr>
+                                @endforeach
+                        </tbody>
+                    </table>
+                    <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+                    <style type="text/css">
+                        .pagination li{background-color: #444444; border-left: 1px solid rgba(255, 255, 255, 0.15); border-right: 1px solid rgba(0, 0, 0, 0.5); box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.15) inset; color: #fff; cursor: pointer; display: block; float: left; font-size: 12px; height: 20px; line-height: 20px; outline: medium none; padding: 0 10px; text-align: center; text-decoration: none; } .pagination .disabled{color: #666666; cursor: default; } .pagination .active{background-image: none; border: medium none; box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) inset; color: #323232; background-color: #c5d52b; } 
+                        ul{margin:0px; }
+                    </style>
+                    {!! $res->appends($request->all())->render() !!}
+                    </div>
+                    </div>
                     </div>
                 </div>
 

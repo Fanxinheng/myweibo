@@ -8,6 +8,10 @@ class point extends Model
 {
     public $table = 'point';
 
+
+
+    protected $fillable = ['id','uid','tid','pid','time','status'];
+
     public $timestamps = false;
 
     public function content()
@@ -24,4 +28,5 @@ class point extends Model
     {
     	return $this->hasOne('App\Http\Model\user_info','uid','pid');
     }
+
 }

@@ -19,8 +19,8 @@
 	    </div>
 		@endif
 
-        
-        	<form action="/admin/users/" class="mws-form" method="post" enctype="multipart/form-data">
+
+        	<form action="/admin/advert/" class="mws-form" method="post" enctype="multipart/form-data">
         		<div class="mws-form-inline">
         			<div class="mws-form-row">
         				<label class="mws-form-label">商户名</label>
@@ -31,7 +31,7 @@
         			<div class="mws-form-row">
         				<label class="mws-form-label">链接地址</label>
         				<div class="mws-form-item">
-        					<input type="password" class="small" name="link" value="{{old('link')}}">
+        					<input type="text" class="small" name="link" value="{{old('link')}}">
         				</div>
         			</div>
         			<div class="mws-form-row">
@@ -40,25 +40,16 @@
         					<input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="No file selected..." name="pic">
         				</div>
         			</div>
-        			
-        			<div class="mws-form-row">
-        				<label class="mws-form-label">广告状态</label>
-        				<div class="mws-form-item clearfix">
-        					<ul class="mws-form-list inline">
-        						<li><input type="radio" name="status" value="1" checked> <label>上线</label></li>
-        						<li><input type="radio" name="status" value="0"> <label>下线</label></li>
-        					</ul>
-        				</div>
-        			</div>
+
         		</div>
         		<div class="mws-button-row">
 
         			{{csrf_field()}}
-        			<input type="submit" class="btn btn-danger" value="添加">
-        			
+
+                    <input type="submit" class="btn btn-default" value="添加">
         		</div>
         	</form>
-        </div>    	
+        </div>
     </div>
 
 @endsection
@@ -68,7 +59,7 @@
 
 <script type="text/javascript">
 	// alert($);
-	
+
 	$('.mws-form-message').delay(3000).slideUp(1000);
 </script>
 

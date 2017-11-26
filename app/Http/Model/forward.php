@@ -8,7 +8,9 @@ class forward extends Model
 {
     public $table = 'forward';
 
-    public $timestamps = false;
+
+
+    protected $fillable = ['id','uid','tid','pid','content','time','status'];
 
     public function user_info()
    {
@@ -19,4 +21,5 @@ class forward extends Model
    {
    	return $this->hasMany('App\Http\Model\contents','cid','tid');
    }
+
 }

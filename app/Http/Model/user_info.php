@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class user_info extends Model
 {
     public $table = 'user_info';
+	public $timestamps = false;
 
-    public $timestamps = false;
+    protected $fillable = ['id','nickName','sex','age','work','email','photo','socre'];
 
     //用户信息
     public function user()
@@ -21,7 +22,5 @@ class user_info extends Model
     {
     	return $this->hasOne('App\Http\Model\contents','uid','uid');
     }
-
-
 
 }

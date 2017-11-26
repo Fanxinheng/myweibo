@@ -8,6 +8,9 @@ class replay extends Model
 {
     public $table = 'replay';
 
+
+    protected $fillable = ['id','uid','tid','content','pid','time','status'];
+
     public $timestamps = false;
 
    public function user_info()

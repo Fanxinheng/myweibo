@@ -148,7 +148,7 @@
                                             {{$point}}
                                         </div>
                                         @else
-                                        <div id="pdiv">
+                                        <div id="pdiv" style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px;display: none ">
                                         </div>
                                         @endif
                                     </a>
@@ -173,7 +173,7 @@
                                             {{$forward}}
                                         </div>
                                         @else
-                                        <div id="fdiv">
+                                        <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px;display: none  "  id="fdiv">
                                         </div>
                                         @endif
                                     </a>
@@ -415,6 +415,8 @@
                     //改变消息框里的内容
                     document.getElementById('fdiv').innerHTML=data['news'];
 
+                    $('#fdiv').show();
+
                     //获取积分
                     document.getElementById('fsoc').innerHTML=data['socre'];
 
@@ -445,7 +447,9 @@
 
                        document.getElementById('spa'+ cid).innerHTML = "点赞" + data['pnum'];
 
-                        $('#pdiv').innerHTML = data['point'];
+                        document.getElementById('pdiv').innerHTML = data['point'];
+
+                        $('#pdiv').show();
 
                         layer.msg('点赞成功');
                     },

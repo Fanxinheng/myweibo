@@ -14,9 +14,9 @@ class RegisterController extends Controller
     public function index()
     {
         //
-        return view('homes.register');
+        return view('homes/register');
     }
-
+    
     public function verification(Request $request)
     {	
         

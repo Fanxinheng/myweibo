@@ -93,6 +93,23 @@ return [
             'access'    => 'public'  //空间访问控制 public 或 private
         ],
 
+            'qiniu' => [
+            'driver'  => 'qiniu',
+            'domains' => [
+                'default'   => 'ozsrs9z8f.bkt.clouddn.com', //你的七牛域名
+                'https'     => 'dn-yourdomain.qbox.me',         //你的HTTPS域名
+                'custom'    => 'static.abc.com',                //Useless 没啥用，请直接使用上面的 default 项
+             ],
+            'access_key'=> 'VaR7lLV-VPsNUkwSvWKGNnkfq7TrzOzWeN_lD7KH',  //AccessKey
+            'secret_key'=> 'a0mBsvltpvQv8jksvAqPJLQ-5hxFCPXpwWMHCJ02',  //SecretKey
+            'bucket'    => 'itfans',  //Bucket名字
+            'notify_url'=> 'ozsrs9z8f.bkt.clouddn.com',  //持久化处理回调地址
+            'access'    => 'public'  //空间访问控制 public 或 private
+        ],
+
     ],
+
+    
+
 
 ];
