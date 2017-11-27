@@ -177,7 +177,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台主页
 	Route::resource('/index','UserController');
-
 	//后台管理员资源路由
 	Route::resource('/admins','AdminsController');
 	//后台管理员修改普通路由
@@ -225,8 +224,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台执行发送系统消息功能路由
 	Route::post('/send/{id}','NewsController@send');
-
-
 
 
 });

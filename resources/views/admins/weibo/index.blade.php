@@ -103,8 +103,8 @@
                     </a>
 
                     <form action="/admin/weibo/{{$v->cid}}" method='post'>
-                    <button id="delete" class="btn btn-default">删除微博</button>
-                        </form>
+                        <button id="delete" class="btn btn-default">删除微博</button>
+                    </form>
                     </td>
                 </tr>
                 @endforeach

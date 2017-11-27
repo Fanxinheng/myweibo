@@ -14,7 +14,7 @@
 
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
-        <span>管理员密码修改</span>
+        <span>管理员个人信息</span>
     </div>
     <div class="mws-panel-body no-padding">
         @if (count($errors) > 0)
@@ -32,9 +32,9 @@
             <div class="mws-form-inline">
                 <div class="mws-form-inline">
                 <div class="mws-form-row">
-                    <label class="mws-form-label">用户名</label>
+                    <label class="mws-form-label">修改用户名</label>
                     <div class="mws-form-item">
-                        <input type="text" class="small" name="name" disabled="disabled" value="{{$res->name}}">
+                        <input type="text" class="small" name="name"  value="">
                     </div>
                 </div>
                 <div class="mws-form-row">
@@ -67,6 +67,7 @@
                 <div class="mws-button-row">
 
                     {{csrf_field()}}
+
 
                     <input type="submit" class="btn btn-default" value="修改">
 
