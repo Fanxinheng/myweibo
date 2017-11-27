@@ -346,7 +346,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 	Route::get('/password/delete/{id}','PwdController@delete');
 
 	//后台管理员修改个人信息
-	Route::post('/password/self','PwdController@self');
+	Route::post('/password/pic','PwdController@pic');
 
 	//后台用户职业
 	Route::resource('/job','JobController');

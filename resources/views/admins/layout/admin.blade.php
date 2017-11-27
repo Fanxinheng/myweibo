@@ -79,20 +79,18 @@
             	<!-- User Photo -->
                 	<div id="mws-user-photo">
 
-                    	<img src="http://ozsrs9z8f.bkt.clouddn.com/{{$result->pic}}" alt="User Photo">
-                    </div>
+                    	<img src="http://ozsrs9z8f.bkt.clouddn.com/{{$result->pic}}" alt="User Photo" id="admin-pic">
                     </div>
                     <!-- Username and Functions -->
                     <div id="mws-user-functions">
-                            <div id="mws-username">
-                                Hello:&nbsp;&nbsp;&nbsp;{{$result->name}}
-                            </div>
-                            <ul>
-                                <li><a href="/admin/admins/{{$result->id}}/edit"> 修改头像</a></li>
-                                <li><a href="/admin/password/{{$result->id}}"> 个人信息</a></li>
-                                <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
-                            </ul>
-
+                        <div id="mws-username">
+                            Hello:&nbsp;&nbsp;&nbsp;{{$result->name}}
+                        </div>
+                        <ul>
+                            <li><a href="/admin/admins/{{$result->id}}/edit"> 修改头像</a></li>
+                            <li><a href="/admin/password/{{$result->id}}"> 个人信息</a></li>
+                            <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
+                        </ul>
                     </div>
             </div>
 

@@ -202,12 +202,12 @@
                                                             <!-- 判断微博是否为登录用户发布 -->
                                                             @if($uid != $content->uid)
                                                                 @if($bool)
-                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 14px;" onclick="attent({{$content->uid}})" title="取消关注">√ 已关注
+                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 14px;" onclick="attent({{$content->uid}})" >√ 已关注
                                                                         <input type="hidden" name="attent" value="{{$content->uid}}">
                                                                     </a>
 
                                                                 @else
-                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 15px;" onclick="attent({{$content->uid}})" title="关注博主">关注
+                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 15px;" onclick="attent({{$content->uid}})" >关注
                                                                         <input type="hidden" name="attent" value="{{$content->uid}}">
                                                                     </a>
                                                                 @endif

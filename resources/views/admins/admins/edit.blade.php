@@ -26,26 +26,22 @@
         </div>
         @endif
 
-
-
-        <form action="/admin/admins/{{$res->id}}" class="mws-form"  method="post" enctype="multipart/form-data">
+        <form id="admin_form" class="mws-form"  method="post" enctype="multipart/form-data">
             <div class="mws-form-inline">
                 <div class="mws-form-row">
-                    <label class="mws-form-label">原图片</label>
+                    <label class="mws-form-label">原头像</label>
                     <div class="mws-form-item">
-                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->pic}}" style="width:100px;" id="img2">
                     </div>
                 </div>
                 <div class="mws-form-row">
-                    <label class="mws-form-label">上传头像</label>
-                    <div class="mws-form-item">
-                        <input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="No file selected..." name="pic" id="pic">
+                    <div style="padding-bottom: 10px;">上传头像</div>
+                    <div >
+                        <input type="file" name="pic" id="pic" onchange="admin_pic()">
 
                     </div>
                 </div>
                 <div class="mws-button-row">
-                    {{csrf_field()}}
-                    <input type="submit" class="btn btn-default" value="修改">
                 </div>
         </div>
         </form>
@@ -88,10 +84,10 @@
                 return;
             }
             var formData = new FormData($( "#admin_form" )[0]);
-            console.log(formData);
+
             $.ajax({
                 type: "post",
-                url: "/admin/password/self",
+                url: "/admin/password/pic",
                 data: formData,
                 async: true,
                 cache: false,
@@ -104,10 +100,10 @@
                 success: function(data) {
                     layer.close(a);
 
-                    console.log(data);
-
-                    /*$('#img2').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
-                    layer.msg("管理员头像修改成功！", {icon:1 ,})*/
+                    //改变样式
+                    $('#img2').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
+                    $('#admin-pic').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
+                    layer.msg("管理员头像修改成功！", {icon:1 ,})
 
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {

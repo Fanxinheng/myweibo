@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use zgldh\QiniuStorage\QiniuStorage;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use zgldh\QiniuStorage\QiniuStorage;
 
 use App\Http\Model\admin;
 

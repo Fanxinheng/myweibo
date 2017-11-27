@@ -20,6 +20,7 @@ class PwdController extends Controller
     {
         //获取数据库对应ID
         $res = admin::where('id',$id)->first();
+        
         //将获取到的值传入修改页面中
         return view('/admins/admins/pwd',['res'=>$res]);
     }
@@ -105,59 +106,40 @@ class PwdController extends Controller
     }
 
     //修改管理员头像
-    public function self (Request $request)
+    public function pic (Request $request)
     {
-        dd($request->except('_token'));
+        //初始化七牛云
+        $disk = QiniuStorage::disk('qiniu');
 
-        //修改管理员头像
-        if($request->hasFile('pic')){
+        //获取文件
+        $file = $request->file('pic');
 
-            //初始化七牛云
-            $disk = QiniuStorage::disk('qiniu');
+        //拼装文件名
+        $name = rand(1111,9999).time();
 
-            //获取文件
-            $file = $request->file('pic');
+        $suffix = $request->file('pic')->getClientOriginalExtension();
 
-            //拼装文件名
-            $name = rand(1111,9999).time();
+        $pic = 'admins/uploads/'.$name.'.'.$suffix;
 
-            $suffix = $request->file('pic')->getClientOriginalExtension();
+        //上传文件
+        $disk->put($pic,file_get_contents($file->getRealPath()));
 
-            $pic = 'admins/uploads/'.$name.'.'.$suffix;
+        $res['pic'] = $pic;
 
-            //上传文件
-            $disk->put($pic,file_get_contents($file->getRealPath()));
+        //删除旧的管理员头像
+        $old = admin::where('id',Session('pid'))->value('pic');
 
-            $res['pic'] = $pic;
-
-            //删除旧的管理员头像
-            $old = admin::where('id',Session('pid'))->value('pic');
-
-            $data = $disk->delete($old);
-
-            //更新数据库
-            admin::where('id',Session('pid'))->update($res);
-
-            return $res['pic'];
-        }
-
-        //修改其他信息
-        $res['name'] = $_POST['name'];
+        $data = $disk->delete($old);
 
         //更新数据库
-        $bool = admin::where('id',Session('pid'))->update($res);
+        admin::where('id',Session('pid'))->update($res);
 
-        if($bool){
-            return redirect('admin/admins')->with('msg','管理员信息修改成功！');
-        }else{
-            return back();
-        }
+        return $res['pic'];
     }
 
 
     public function delete(Request $request,$id)
     {
-
         //删除session内的信息
         $request->session()->forget('pid');
 
