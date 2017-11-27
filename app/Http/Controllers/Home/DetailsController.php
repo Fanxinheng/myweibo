@@ -88,14 +88,30 @@ class DetailsController extends Controller
 
 			//上传到七牛云
 			$bool = $disk->put($logo,file_get_contents($file->getRealPath()));
+            if($bool){
+            	//把uid存到res数组中
+			    $res['uid'] = session('uid');
 
+				//把res数组中的信息存到user_info表中
+				$data = user_info::insert($res);
+
+				//判断成功就跳转首页,否则返回当前页面并存闪存
+				if($data){
+		           
+		            return redirect('/home/login');
+					
+				}else{
+
+					echo "<script>slert('添加失败!');</script>";                        
+					return back()->withInput();
+				}
+            }else{
+            	echo "<script>alert('请检查网络是否畅通');wind</script>";
+            }
 			//移动图片
 			// $request->file('photo')->move('./homes/uploads',$name.'.'.$suffix);
-			if($bool){
-				
-			}else{
-
-			}
+		
+			
 			
 		}
 		   
@@ -160,25 +176,26 @@ class DetailsController extends Controller
 	public function update(Request $request)
 	{   
 		  //获取除了token以外的值
-			$res = $request->except('_token','imgPath');
-			dd($_POST);
-	   if($request->hasFile('imgPath')){
+			$res = $request->except('_token');
+			$file = $request->file();
 
+	   if($request->hasFile('photo')){
+           
 				//初始化七牛云
 				$disk = QiniuStorage::disk('qiniu');
 				
 				//获取文件内容
-				$file = $request->file('imgPath');
+				$file = $request->file('photo');
 				
 				//修改随机生成名字
 				$name = rand(1111,9999).time();
 
 				//获取上传文件后缀
-				$suffix = $request->file('imgPath')->getClientOriginalExtension();
+				$suffix = $request->file('photo')->getClientOriginalExtension();
 
 				//拼装文件名
 				$logo = 'homes/uploads/'.$name.'.'.$suffix;
-
+                
 				$res['photo'] = $logo;
 
 				//上传到七牛云
@@ -196,8 +213,8 @@ class DetailsController extends Controller
 				
 				//判断成功就跳转首页,否则返回当前页面并存闪存
 				if($data){
-					// return $logo;
-					echo "0";
+					 return $logo;
+					//echo "0";
 				}else{
 
 					 echo "1";

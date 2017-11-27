@@ -106,8 +106,9 @@
 
 								    </div>
 								  </div>
-                                  
-                                  <form  id="formPhoto">
+                                
+                                    <form id="formphoto">
+                                 
                                       <div class="form-group">
                                          <label for="inputPassword3" class="col-sm-2 control-label" style="margin-top:20px;"><span style="color:red;margin-right: 5px;margin-top:30px;">*</span>头像:</label>
                                     
@@ -117,7 +118,8 @@
                                           <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"   style="width:100px;height: 100px;border-radius:50%;border:solid 1px #ABB1BA" id="img">
                                          </div>
                                       </div>
-                                  </form>
+                                 
+                                    </form>
 								  
           
 								  <div class="form-group" style="margin-top:30px">
@@ -301,8 +303,8 @@
 //                            判断是否有选择上传文件
 //                            input type file
 
-             var imgPath = $("#photo").val();
-
+            var imgPath = $("#photo").val();
+      
             if (imgPath == "") {
                 alert("请选择上传图片！");
                 return;
@@ -315,8 +317,8 @@
                 return;
             }
 
-            var formData = new FormData($( "#formPhoto" )[0]);
-            console.log(formData);die();
+            var formData = new FormData($( "#formphoto" )[0]);
+            console.log(formData);
             $.ajax({
                 type: "post",
                 url: "/home/details/update",
@@ -334,7 +336,7 @@
                 success: function(data) {
                     console.log(data);
                     layer.close(a);
-                    $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/homes/uploads/23831511619422.jpg');
+                    $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
 
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -345,6 +347,13 @@
         }
 
      	
+        //提交单机事件跳首页
+        $('#btn1').click(function(){
+
+            
+            return  rediretc('/home/login');
+        })
+
      </script>
     
     </body>
