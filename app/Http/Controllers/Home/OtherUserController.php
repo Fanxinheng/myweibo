@@ -10,6 +10,7 @@ use App\Http\Model\point;
 use App\Http\Model\replay;
 use App\Http\Model\forward;
 use App\Http\Model\user_info;
+use App\Http\Model\user_attention;
 
 use App\Http\Controllers\Controller;
 
@@ -32,6 +33,15 @@ class OtherUserController extends Controller
 
         }
 
+        //查询用户的信息是否存在于数组中
+        $r = user_attention::where('uid',$sid)->where('gid',$id)->get();
+
+        if($r){
+            $re = 1;
+        }else{
+            $re = 0;
+        }
+
         //获取微博评论的消息
         $message = Session('message');
 
@@ -42,7 +52,7 @@ class OtherUserController extends Controller
         $res = contents::where('uid',$id)->with('replay.user_info')->get();
 
         //跳转页面
-        return view('homes/otherUser/index',['res'=>$res,'rev'=>$rev,'sid'=>$sid,'message'=>$message]);
+        return view('homes/otherUser/index',['res'=>$res,'rev'=>$rev,'sid'=>$sid,'message'=>$message,'re'=>$re]);
     }
 
      //照片
@@ -274,6 +284,16 @@ class OtherUserController extends Controller
         return $num;
 
     } 
+
+    //点击关注
+    public function attentionAction()
+    {
+
+    }
+
+    //点击取消关注
+
+
 
 
    

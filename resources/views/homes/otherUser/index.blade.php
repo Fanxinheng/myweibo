@@ -18,8 +18,7 @@
         </script>
     </head>
     
-    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';"
-    onclick="">
+    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
@@ -95,6 +94,11 @@
                                     <!-- 昵称 -->
                                     <div id="nickname">
                                         {{$rev->nickName}}
+                                        @if($re == 1)
+                                        <button id="abtn1" class="btn-defalut">关注</button>
+                                        @else
+                                        <button id="abtn2" class="btn-defalut">取消关注</button>
+                                        @endif
                                     </div>
                                     <div id="nickname">
                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
@@ -110,6 +114,19 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        $('#abtn1').on('click',function(){
+                            $.ajax({
+                                url:'',
+                                type:'',
+                                data:'',
+                                success:function(data){
+
+                                }
+                            });
+                        });
+
+                    </script>
                     <!-- 头像 及北京-->
                     <style>
                         #weibo #lanmu li { margin-top: 5px; font-size: 14px}

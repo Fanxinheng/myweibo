@@ -103,6 +103,12 @@ Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
 	//点赞微博
 	Route::get('pointFun','OtherUserController@pointFun');
 
+	//关注
+	Route::get('attention/act','OtherUserController@attentionAction');
+
+	//取消关注
+	Route::get('attention/del','OtherUserController@attentionDelete');
+
 
 });
 
