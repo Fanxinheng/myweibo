@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use zgldh\QiniuStorage\QiniuStorage;
+
 use App\Http\model\admin;
+
+use Session;
 use Hash;
 class PwdController extends Controller
 {
@@ -60,6 +64,7 @@ class PwdController extends Controller
 
         //将数据写入数据库
         $data = admin::where('id',$id)->update($arr);
+        
         if ($data) {
             $request->session()->forget('pid');
             return redirect('admin/login');
@@ -67,6 +72,55 @@ class PwdController extends Controller
             return back()->with('msg','管理员密码修改失败！');
         }
 
+    }
+
+    public function self (Request $request)
+    {
+        dd($request->except('_token'));
+
+        //修改管理员头像
+        if($request->hasFile('pic')){
+
+            //初始化七牛云
+            $disk = QiniuStorage::disk('qiniu');
+
+            //获取文件
+            $file = $request->file('pic');
+
+            //拼装文件名
+            $name = rand(1111,9999).time();
+
+            $suffix = $request->file('pic')->getClientOriginalExtension();
+
+            $pic = 'admins/uploads/'.$name.'.'.$suffix;
+
+            //上传文件
+            $disk->put($pic,file_get_contents($file->getRealPath()));
+
+            $res['pic'] = $pic;
+
+            //删除旧的管理员头像
+            $old = admin::where('id',Session('pid'))->value('pic');
+
+            $data = $disk->delete($old);
+
+            //更新数据库
+            admin::where('id',Session('pid'))->update($res);
+
+            return $res['pic'];
+        }
+
+        //修改其他信息
+        $res['name'] = $_POST['name'];
+
+        //更新数据库
+        $bool = admin::where('id',Session('pid'))->update($res);
+
+        if($bool){
+            return redirect('admin/admins')->with('msg','管理员信息修改成功！');
+        }else{
+            return back();
+        }
     }
 
     public function delete(Request $request,$id)

@@ -76,7 +76,7 @@
                 ?>
             	<!-- User Photo -->
                 	<div id="mws-user-photo">
-                    	<img src="{{$result->pic}}" alt="User Photo">
+                    	<img src="http://ozsrs9z8f.bkt.clouddn.com/{{$result->pic}}" alt="User Photo">
                     </div>
 
                     <!-- Username and Functions -->
@@ -84,7 +84,7 @@
 
 
                             <div id="mws-username">
-                               用户名:&nbsp;&nbsp;&nbsp;{{$result->name}}
+                                Hello:&nbsp;&nbsp;&nbsp;{{$result->name}}
                             </div>
                             <ul>
                                 <li><a href="/admin/admins/{{$result->id}}/edit"> 修改个人信息</a></li>

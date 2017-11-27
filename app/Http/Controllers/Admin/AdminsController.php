@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use zgldh\QiniuStorage\QiniuStorage;
+
 use App\Http\Model\admin;
+
 use Hash;
 
 class AdminsController extends Controller
@@ -18,7 +21,7 @@ class AdminsController extends Controller
      */
     public function index(Request $request)
     {
-        $admin = admin::paginate(2);
+        $admin = admin::paginate(10);
 
         return view('admins/admins/index',['admin'=>$admin,'request'=>$request]);
     }
@@ -192,23 +195,23 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
-        //获取数据库的id
-        $res = admin::where('id',$id)->first();
-        // 删除图片
-        $data = unlink('.'.$res->pic);
-        if ($data) {
-            //删除指定id的数据
-           $info = admin::where('id','=',$id)->delete();
-                //前台返回结果
-              if($info){
-                return redirect('/admin/admins')->with('msg','管理员删除成功！');
-            } else {
-                return back()->with('msg','管理员删除失败！');
-            }
+        //获取管理员头像
+        $pic = admin::where('id',$id)->value('pic');
+
+        //初始化七牛云
+        $disk = QiniuStorage::disk('qiniu');
+
+        //删除头像
+        $disk->delete($pic);
+
+        //删除数据库信息
+        $bool = admin::where('id',$id)->delete();
+
+        if($bool){
+            return 1;
+        }else{
+            return 0;
         }
-
-
-
 
     }
 }
