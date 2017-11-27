@@ -21,16 +21,16 @@
     </head>
     
     <body class="FRAME_login">
-        
         <div style="position: absolute; top: -9999px;">
             <div id="js_style_css_module_global_WB_outframe">
             </div>
+
         </div>
         <link media="all" href="/homes/css/index.css" type="text/css" rel="stylesheet">
-        <div class="B_unlog">
+        <div  class="B_unlog">
             <div class="WB_miniblog">
                 <div class="WB_miniblog_fb">
-                    <div id="weibo_top_public">
+                    <div id="weibo_top_public" >
                         <!--spec start-->
                         <!--顶部导航-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
@@ -52,6 +52,7 @@
                                     suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 
+
                                     </a>
                                     <!--搜索热词下拉-->
                                    <!--  <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
@@ -64,7 +65,7 @@
                                     </div> -->
                                     <!--/搜索热词下拉-->
                                 </div>
-                                <div class="gn_position">
+                                <div class="gn_position" >
                                     <div class="gn_nav">
                                         <ul class="gn_nav_list">
                                             <li>
@@ -317,6 +318,8 @@
                                                                         <a target="_top" href="/home/register">
                                                                             立即注册!
                                                                         </a>
+
+                                                                        <a href="/home/admin/find" style="float: right;margin-right:9px;">忘记密码</a>
                                                                     </div>
                                                                 </div>
                                                                
