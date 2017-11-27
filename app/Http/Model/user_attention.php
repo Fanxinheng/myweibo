@@ -13,14 +13,9 @@ class user_attention extends Model
     public $timestamps = false;
 
      
-    public function user_info(){
+    public function info(){
 
     	return $this->hasOne('App\Http\Model\user_info','uid','gid');
-    }
-
-    public function contents()
-    {
-        return $this->hasMany('App\Http\Model\contents','uid','gid');
     }
 
 }

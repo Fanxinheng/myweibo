@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Session;
+use session;
 
 class AdminMiddleware
 {
@@ -17,9 +17,7 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         //验证用户是否登录
-
-        if(Session('pid')){
-
+        if(session('uid')){
             return $next($request);
         } else {
             return redirect('/admin');

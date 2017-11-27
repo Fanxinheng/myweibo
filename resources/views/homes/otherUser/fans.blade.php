@@ -22,6 +22,7 @@
                     <div class="container">
                         <div class="navbar-header" id="navbar-header1" >
                             <img src="/homes/images/wb_logo.png" alt="">
+
                         </div>
                         <div class="navbar-header" id="navbar-header2">
                             <form class="navbar-form navbar-right">
@@ -81,7 +82,7 @@
                             <div class="col-md-4">
                                 <!-- 头像 -->
                                 <div id="jimg" >
-                                    <img width="100" height="100"  src="/homes/images/197.jpg" class="img-circle">
+                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
                                 </div>
                                 <div>
                                     <!-- 昵称  -->
@@ -140,14 +141,15 @@
 
 
                             <div class="col-lg-12" style="background-color: #fff;margin-left: 12px;width: 830px;padding-bottom: 10px " >
-                                
+                                @if($res ->isEmpty())
+                                <div style="margin-top: 10px;line-height: 40px;height: 40px">他还没有粉丝哟~~~</div>
+                            @else
                                @foreach($res as $k=>$v)
 
                                 <div class="col-lg-4" id="tiezi3" style="float: left;width: 250px;margin-left: 5px;background:#DEDEE5;margin-top: 10px;background-color: #F2F2F5;height: 65px;">
                                     <!-- 头像 -->
-                                    <div class="col-log-2" style="margin-top:10px;float: left; ">
-                                        <img width="35" height="35" src="/homes/images/2015.jpg"
-                                        class="img-circle" style="float: left ;margin-top:5px;">
+                                    <div class="col-log-2" style="margin-top:10px;float: left; ">  
+                                         <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/35/h/35/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"  id="img" class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
                                     <div class="col-log-8" style="margin-top: 15px;margin-left: 10px;float: left;" >
@@ -175,6 +177,7 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                @endif
                             <!-- 微博遍历结束 -->
                             </div>
                         <!-- 微博结束 -->

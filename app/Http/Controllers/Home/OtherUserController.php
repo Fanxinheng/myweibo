@@ -128,6 +128,12 @@ class OtherUserController extends Controller
         //将时间格式化
         $res['time'] = date('Y-m-d H:i:s',time());
 
+        //获取最后的id
+        $res['id'] = replay::max('id');
+
+        //获取图片
+        $res['photo'] = user_info::where('uid',$res['uid'])->value('photo');
+
         //将回帖数放入一个数组中
         $res['replay'] = $v;
 
@@ -138,8 +144,10 @@ class OtherUserController extends Controller
     } 
 
      //删除评论的微博
-    public function replayDelete($id)
+    public function replayDelete()
     {
+
+        $id=$_POST['id'];
         
         //查询回复的微博的id
         $tid = replay::where('id',$id)->value('tid');

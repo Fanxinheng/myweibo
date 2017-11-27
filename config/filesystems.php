@@ -79,8 +79,7 @@ return [
             'region'    => 'IAD',
             'url_type'  => 'publicURL',
         ],
-
-        'qiniu' => [
+            'qiniu' => [
             'driver'  => 'qiniu',
             'domains' => [
                 'default'   => 'ozsrs9z8f.bkt.clouddn.com', //你的七牛域名

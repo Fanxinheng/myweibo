@@ -52,7 +52,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	Route::get('delete/{id}','UserController@delete');
 
 	//删除评论
-	Route::get('replay/delete/{id}','UserController@replayDelete');
+	Route::post('replay/delete','UserController@replayDelete');
 
 	//点赞微博
 	Route::get('pointFun','UserController@pointFun');
@@ -65,8 +65,12 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
 	//删除全部图片
 	Route::post('photo/delete','UserController@photoDelete');
+
+	//删除一个图片
+	Route::post('photo/move','UserController@photomove');
 	
 });
+
 
 //前台他人个人
 Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
@@ -74,50 +78,44 @@ Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
 	//======================页面===============================//
 	
 	//个人主页
-	Route::get('/user/{id}','OtherUserController@index');
+	Route::get('user/{id}','OtherUserController@index');
 
 	//个人相册
-	Route::resource('/photo','OtherUserController@photo');
+	Route::resource('photo','OtherUserController@photo');
 
 	//微博评论
-	Route::get('/type','OtherUserController@type');
+	Route::get('type','OtherUserController@type');
 
 	//关注
-	Route::get('/attention/{id}','OtherAttentionController@index');
+	Route::get('attention/{id}','OtherAttentionController@index');
 
 	//粉丝
-	Route::get('/fans/{id}','OtherFansController@index');
+	Route::get('fans/{id}','OtherFansController@index');
 
 	//========================功能==================================//
 
 	//删除评论
-	Route::get('/replay/delete/{id}','OtherUserController@replayDelete');
+	Route::post('replay/delete','OtherUserController@replayDelete');
 
 	//微博转发
-	Route::get('/ward','OtherUserController@ward');
+	Route::get('ward','OtherUserController@ward');
 
 	//点赞微博
-	Route::get('/pointFun','OtherUserController@pointFun');
+	Route::get('pointFun','OtherUserController@pointFun');
 
 
 });
 
 
 
-//===========================前台未登录==============================//
-
+//==============前台未登录=====================//
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
-
-
 
 	//注册前首页全部微博
 	Route::get('/admin','AdminController@index');
 
 	//热门微博列表
 	Route::get('/hot','AdminController@hot');
-
-	//微博搜索
-	Route::get('/admin/search','AdminController@search');
 
 	//微博标签列表
 	Route::get('/label/{id}','AdminController@label');
@@ -127,10 +125,6 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
 	//微博评论页面
 	Route::get('/replay/{id}','ReplayController@create');
-
-
-	//系统公告
-	Route::get('/notice/','AdminController@notice');
 
 //============================注册=========================//
 
@@ -164,16 +158,15 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
 
 //=======================登录============================//
-
+//
 	//检测手机号是否已注册
-	Route::get('/pho','LoginController@pho');
+	Route::get('pho','LoginController@pho');
 
 	//检测密码是否与数据库一致
-	Route::get('/pass','LoginController@pass');
+	Route::get('pass','LoginController@pass');
 
 	//检测昵称是否存在,存在跳到首页,不存在跳到个人信息页
-	Route::post('/nick','LoginController@nick');
-
+	Route::post('nick','LoginController@nick');
 
 });
 
@@ -182,83 +175,40 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 //===============前台登录后页面===============//
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],function(){
 
-//=========================关于微博===============================//
 
-
-	//前台登录成功后进入首页
-	Route::get('/login','LoginController@index');
-
-	//微博内容搜索栏
-	Route::get('/search','LoginController@search');
-
-	//热门微博列表
-	Route::get('/index/hot','LoginController@hot');
-
-	//我的关注微博列表
-	Route::get('/index/attention','LoginController@attention');
-
-	//微博标签列表
-	Route::get('/index/label/{id}','LoginController@label');
-
-	//微博转发列表
-	Route::get('/index/forward','LoginController@forward');
-
-	//发布微博
-	Route::post('/release','ReleaseController@store');
-
-	//举报微博
-	Route::get('/blog/report/','BlogController@report');
-
-	//删除自己的微博
-	Route::get('/blog/destroy/','BlogController@destroy');
-
-	//加载微博转发页面
-	Route::get('/blog/forward/{id}','BlogController@forward');
-
-	//加载微博评论页面
-	Route::get('/blog/replay/{id}','BlogController@replay');
-	
 	//微博转发功能
 	Route::post('/forward/store/','ForwardController@store');
-
-	//删除微博转发
-	Route::get('/blog/delete/','BlogController@delete');
 
 	//微博评论功能
 	Route::post('/replay/store/','ReplayController@store');
 
-	//ajax判断微博评论是否为空
-	Route::post('/replay/empty/','ReplayController@empty');
-
 	//微博点赞功能
-	Route::post('/point/','PointController@point');
+	Route::get('/point/{id}','PointController@point');
 
-	//用户关注
-	Route::get('/attent','AttentController@attent');
+	//热门微博列表
+	Route::get('/index/hot','LoginController@hot');
 
-	//用户取消关注
-	Route::get('/noattent','AttentController@noattent');
-
-	//微博找人
-	Route::get('/job/{id}','LoginController@job');
-
-	
+	//微博标签列表
+	Route::get('/index/label/{id}','LoginController@label');
 
 
 
 //=======================完善个人中心===========================//
-
+	
 	//完善个人信息
 	Route::get('/details','DetailsController@index');
 
+	//前台登录成功后进入首页
+	Route::get('/login','LoginController@index');
+
 	//检验昵称是否存在
-	Route::get('/details/uname','DetailsController@uname');
+	Route::get('details/uname','DetailsController@uname');
 
 	//检验邮箱是否存在
-	Route::get('/details/email','DetailsController@email');
+	Route::get('details/email','DetailsController@email');
 
 	//把个人信息存入到数据库并跳转到首页
-	Route::post('/details/deposit','DetailsController@deposit');
+	Route::post('details/deposit','DetailsController@deposit');
 
 	//修改个人信息页面
 	Route::get('details/edit','DetailsController@edit');
@@ -283,30 +233,30 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 
 //===================前台个人中心=====================//
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],function(){
-
+	
 	//个人主页
-	Route::get('/user','UserController@index');
+	Route::get('user','UserController@index');
 
 	//个人相册
-	Route::get('/photo','UserController@photo');
+	Route::get('photo','UserController@photo');
 
 	//个人的点赞
-	Route::get('/point','UserController@point');
+	Route::get('point','UserController@point');
 
 	//个人微博的评论
-	Route::get('/replay','UserController@replay');
+	Route::get('replay','UserController@replay');
 
 	//个人的转发
-	Route::get('/forward','UserController@forward');
+	Route::get('forward','UserController@forward');
 
 	//删除微博
-	Route::post('/delete/{id}','UserController@delete');
+	Route::post('delete/{id}','UserController@delete');
 
 	//关注
-	Route::resource('/attention','AttentionController');
+	Route::resource('attention','AttentionController');
 
 	//粉丝
-	Route::resource('/fans','FansController');
+	Route::resource('fans','FansController');
 });
 
 
@@ -315,7 +265,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 //==========================后台路由===================================//
 
 //后台登录
-Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],function(){
 
 	//后台登录主页面
 	Route::get('/',"LoginController@index");
@@ -329,7 +279,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 
 //后台主页面
-Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 	//后台主页
 	Route::resource('/index','UserController');
@@ -337,32 +287,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 	//后台管理员资源路由
 	Route::resource('/admins','AdminsController');
 
-	//后台管理员修改普通路由
-	Route::get('/password/{id}','PwdController@edit');
-
-	//后台管理员修改方法路由
-	Route::post('/password/update/{id}','PwdController@update');
-
-	//后台管理员删除方法路由
-	Route::get('/password/delete/{id}','PwdController@delete');
-
-	//后台用户职业
-	Route::resource('/job','JobController');
-
-	//删除用户职业
-	Route::get('/job/delete','JobsController@delete');
-
 	//后台热门微博资源路由
 	Route::resource('/hot','HotController');
-
-	//后台微博管理资源路由
-	Route::resource('/weibo','WeiboController');
 
 	//后台举报管理资源路由
 	Route::resource('/report','ReportController');
 
 	//后台标签管理资源路由
-	Route::resource('/label','LabelController');
+	Route::resource('label','LabelController');
 
 	//后台广告管理资源路由
 	Route::resource('/advert','AdvertController');
@@ -390,6 +322,8 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台执行发送系统消息功能路由
 	Route::post('/send/{id}','NewsController@send');
+	
+
 
 
 });

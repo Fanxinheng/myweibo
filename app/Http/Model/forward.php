@@ -17,7 +17,7 @@ class forward extends Model
    	return $this->hasOne('App\Http\Model\user_info','uid','fid');
    }
 
-   public function contents()
+   public function content()
    {
    	return $this->hasMany('App\Http\Model\contents','cid','tid');
    }

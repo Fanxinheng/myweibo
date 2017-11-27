@@ -24,7 +24,9 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //获取用户详细信息
-        $res = user::join('user_info','user_info.uid','=','user.id')->where('nickName','like','%'.$request->input('search').'%')->paginate(10);
+        $res = user::join('user_info','user_info.uid','=','user.id')->where('nickName','like','%'.$request->input('search').'%')->paginate(2);
+
+        // var_dump($res);die;  
 
         return view('admins/user/index',['res'=>$res,'request'=>$request]);
         
@@ -63,10 +65,11 @@ class UserController extends Controller
 
         //获取用户名
         $nickName = user_info::where('uid',$id)->value('nickName');
+        // var_dump($nickName);die;
         
         //获取用户微博信息
-        $res = contents::where('uid','=',$id)->paginate(10);
-
+        $res = contents::where('uid','=',$id)->paginate(2);
+        // var_dump($res);die;
         return view('admins/user/show',['nickName'=>$nickName,'res'=>$res]);
     }
 
@@ -92,7 +95,7 @@ class UserController extends Controller
     {
         //查询用户原来状态
         $date = user::where('id',$id)->value('status');
-        
+        // echo $date;
         if($date){
             $update = user::where('id',$id)->update(['status'=>0]);
         } else {

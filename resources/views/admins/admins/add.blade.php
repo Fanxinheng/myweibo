@@ -21,14 +21,14 @@
 
         @if(session('msg'))
         <div class="mws-form-message error">
-
+                                    
             {{session('msg')}}
 
         </div>
         @endif
 
 
-
+    
         <form action="/admin/admins/" class="mws-form" method="post" enctype="multipart/form-data">
             <div class="mws-form-inline">
                 <div class="mws-form-row">
@@ -55,21 +55,15 @@
                         <input type="text" class="small" name="phone" >
                     </div>
                 </div>
-                <div class="mws-form-row">
-                    <label class="mws-form-label">上传头像</label>
-                    <div class="mws-form-item">
-                        <input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="No file selected..." name="pic">
-                    </div>
-                </div>
             <div class="mws-button-row">
 
                 {{csrf_field()}}
                 <input type="submit" class="btn" value="添加">
-
+                
             </div>
         </div>
         </form>
-    </div>
+    </div>      
 </div>
 
 @endsection
@@ -78,6 +72,6 @@
 @section('js')
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
-
+       
     </script>
 @endsection

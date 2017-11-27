@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -6,9 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Http\Model\report;
-use App\Http\Model\user_info;
-use App\Http\Model\contents;
 class ReportController extends Controller
 {
     /**
@@ -16,16 +14,10 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // 微博举报列表主页
-    public function index() 
+    public function index()
     {
-        //查询数据库report表数据
-        $res = report::with('user_info','contents.user_info')->paginate(5);
-
-        //返回到index页面视图中
-        return view('admins/report/index', ['res' => $res]); 
+        return view('admins/report/index');
     }
-       
 
     /**
      * Show the form for creating a new resource.
