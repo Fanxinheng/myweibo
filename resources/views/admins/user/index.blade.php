@@ -71,11 +71,11 @@
                                     <td class=" ">{{$v->age ? $v->age : '未设置'}}</td>
                                     <td class=" ">{{$v->work ? $v->work : '未设置'}}</td>
                                     <td class=" ">{{$v->email ? $v->email : '未设置'}}</td>
-                                    <td class=" "><img src="{{$v->photo ? $v->photo : '/homes/uploads/default.jpg'}}" style="width:50px;height:50px"></td>
+                                    <td class=" "><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}" style="width:50px;height:50px"></td>
                                     <td class=" ">{{$v->socre}}</td>
                                     <td class=" ">{{$v->status == 0 ? '正常' : '冻结'}}</td>
                                     <td>
-                                        <a href="/admin/index/{{$v->id}}"><button class="btn btn-default">查看微博</button></a>
+                                        <a href="/admin/index/{{$v->uid}}"><button class="btn btn-default">查看微博</button></a>
                                         <form action="/admin/index/{{$v->id}}" method="post" style="display:inline">
                                             {{csrf_field()}}
                                             {{method_field('PUT')}}

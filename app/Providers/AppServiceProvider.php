@@ -8,6 +8,7 @@ use App\Http\Model\link;
 use App\Http\Model\notice;
 use App\Http\Model\label;
 use App\Http\Model\job;
+use App\Http\Model\config;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
         //获取用户职业数据
         $job = job::get();
 
+        //获取网站配置
+        $config = config::get();
+
         //将值传递到所有页面
         view()->share('advert',$advert);
 
@@ -44,6 +48,8 @@ class AppServiceProvider extends ServiceProvider
         view()->share('label',$label);
 
         view()->share('job',$job);
+
+        view()->share('config',$config);
 
         
 

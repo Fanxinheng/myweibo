@@ -7,15 +7,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
-    
-        <!-- <link rel="stylesheet" href="/homes/css/login.css"> -->
+        <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
 
         <title>
             我的首页 微博-随时随地发现新鲜事
@@ -29,7 +32,7 @@
             <div class="WB_miniblog_fb">
                 <div id="plc_top">
                     <!--简易顶部导航拼页面用-->
-                                           <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
+                        <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
                             <div class="gn_header clearfix" style="width:1000px">
 
                                 <!-- logo -->
@@ -69,20 +72,17 @@
                                                     </em>
                                                 </a>
                                             </li>
-
-
-                                            <li>
-                                                <a href="/home/details"  title="修改个人信息">
-                                                    <em class="W_ficon ficon_user S_ficon">
-                                                        <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
-                                                    </em>
-                                                    <em class="S_txt1">
-                                                        {{$user->nickName}}
-                                                    </em>
-                                                </a>
+                                            <li class="dropdown">
+                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$user->nickName}}<span class="caret"></span></a>
+                                              <ul class="dropdown-menu">
+                                                <li><a href="/home/user">个人中心</a></li>
+                                                <li><a href="/home/details">个人信息</a></li>
+                                                <li><a href="/home/changepass">修改密码</a></li>
+                                                <li><a href="/home/message">系统消息</a></li>
+                                              </ul>
                                             </li>
                                             <li>
-                                                <a href="#"  title="退出登录">
+                                                <a href="/home/details/quit"  title="退出登录">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                                     </em>
@@ -94,9 +94,6 @@
 
                                         </ul>
                                     </div>
-                                        
-                                        
-                                    </ul>
                                 </div>
                                 
                             </div>
@@ -265,10 +262,10 @@
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
-                                                            href="/home/user" indepth="true">
+                                                            href="/home/other/user/{{$v->user_info->uid}}" indepth="true">
                                                                 <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->user_info->nickName}}"
-                                                                alt="" src="{{$v->user_info->photo == null ? '/homes/uploads/default.jpg' : $v->user_info->photo}}" class="W_face_radius"
-                                                                width="50" height="50">
+                                                                alt="" src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"
+                                                                width="50" height="50" class="W_face_radius">
                                                             </a>
                                                         </div>
 
@@ -277,7 +274,7 @@
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
                                                             target="_top" class="W_f14 W_fb S_txt1" title="{{$v->user_info->nickName}}" 
-                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/user">
+                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->user_info->uid}}">
                                                                 {{$v->user_info->nickName}}
                                                              
                                                             </a>
@@ -313,7 +310,7 @@
                                                         @foreach($v->contents as $con)
                                                            
                                                             <div class="WB_text W_f14" node-type="feed_list_content" title="微博内容" style="word-break:break-all;background-color: #F2F2F5;border-radius: 10px;padding:10px;margin:8px;">
-                                                                <a class="W_f14 W_fb S_txt1" title="{{$v->user_info->nickName}}"  href="/home/user">
+                                                                <a class="W_f14 W_fb S_txt1" title="{{$v->user_info->nickName}}"  href="/home/other/user/{{$v->user_info->uid}}">
                                                                 <div class="WB_text W_f14" node-type="feed_list_content" title="微博作者" style="word-break:break-all;"">
                                                                 {{$con->user_info->nickName}}  
                                                                 </div>
@@ -332,8 +329,8 @@
                                                                 </a>
 
                                                                 @if($con->image)
-                                                                <div id="image">
-                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$con->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                                                <div id="image" style="width:100px;">
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$con->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
                                                                 </div>
                                                                 @else
                                                              
@@ -371,8 +368,7 @@
                                                 <div class="cover" id="skin_cover_s" style="background-image: url('/homes/images/001_s.jpg');">
                                                     <div class="headpic">
                                                         <a bpfilter="page_frame" href="/home/user"  indepth="true">
-                                                            <img class="W_face_radius" src="{{$user->photo == null ? '/homes/uploads/default.jpg' : $user->photo}}"
-                                                             width="60" height="60">
+                                                            <img class="W_face_radius" width="60" height="60"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$user->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -521,7 +517,7 @@
         </div>
         </div>
         <script type="text/javascript">
-
+       
         //微博发布
         $('#release').on('click', function(){
 

@@ -111,15 +111,9 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
-        // return $id;
+
         //删除职业
-        $bool = job::where('id',$id)->delete();
+        job::where('id',$id)->delete();
 
-        if($bool){
-            return redirect('admin/job')->with('delete','用户职业删除成功！');
-        }else{
-            return back();
-
-        }
     }
 }

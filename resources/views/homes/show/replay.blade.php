@@ -6,13 +6,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
             微博-随时随地发现新鲜事
         </title>
@@ -121,9 +126,6 @@
                                                 </li>
                                             </div>
                                             @endforeach
-
-
-
                                         </ul>
                                     </div>
                                 </div>
@@ -135,16 +137,9 @@
 
                                     <div class="WB_frame_c">
                                         <div id="pl_unlogin_home_feed">
-                                            <!--榜单栏位置-->
-
-
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
-
-                                                    <!--article feed-->
-
-                                                    <!--广告模块-->
                                                     <div mid="4171968871140682" action-type="feed_list_item"
                                                     href="//weibo.com/5187664653/FuceP4MK6?ref=feedsdk" suda="key=nologin_home&amp;value=nologin_card_weibo:4171968871140682"
                                                     suda-uatrack="key=www_unlogin_home&amp;value=recommend_feed">
@@ -161,9 +156,9 @@
                                                             </h3>
 
                                                             @if($res->image)
-                                                            <div id="image">
-                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"" style="width:100px;" id="img">
-                                                            </div>
+                                                            <div id="image" style="width:200px;">
+                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
+                                                        </div>
                                                             @else
 
                                                             @endif
@@ -171,7 +166,7 @@
                                                             <div class="subinfo_box clearfix">
 
                                                                     <span class="subinfo_face ">
-                                                                        <img src="{{$res->photo == NULL ? '/homes/uploads/default.jpg' : $res->photo}}" alt="" width="20" height="20">
+                                                                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}" alt="" width="20" height="20">
                                                                     </span>
 
 
@@ -210,7 +205,7 @@
                                                     <div class="subinfo_box clearfix" >
 
                                                             <span class="subinfo_face ">
-                                                                <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}" alt="" width="20" height="20">
+                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}" alt="" width="20" height="20">
                                                             </span>
 
                                                             <span class="subinfo S_txt2">
@@ -276,16 +271,18 @@
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
+                                                                        <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
                                                                     </form>
                                                                 </div>
-                                                                    <div class="info_list register">
+                                                                    <div class="info_list register" style="font-size:14px">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
                                                                         </span>
-                                                                        <a target="_top" href="register">
+                                                                        <a target="_top" href="/home/register">
                                                                             立即注册!
                                                                         </a>
+                                                                        <a href="/home/admin/find" style="float: right;">忘记密码</a>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -368,6 +365,11 @@
         </div>
         </div>
         <script type="text/javascript">
+
+        //加载照片
+        $('.list_des img').zoomify();
+
+        
          $('#replay').on('click', function(){
             layer.msg('亲，您好像忘了登录呦:)', {
               time: 20000, //20s后自动关闭

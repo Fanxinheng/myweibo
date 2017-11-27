@@ -8,14 +8,18 @@
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！"
         name="description">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/homes/js/validate.js">
-        </script>
+        <script type="text/javascript" src="/homes/js/validate.js"></script>
+        <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
             微博-随时随地发现新鲜事
         </title>
@@ -143,18 +147,19 @@
                                                                 {{$v->content}}
                                                             </div> 
                                                         </h3>
+                                                        </a>
                                                         @if($v->image)
-                                                        <div id="image">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                                        <div id="image" style="width:200px;">
+                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
                                                         </div>
                                                         @else
 
                                                         @endif
-                                                        </a>
+                                                        
                                                         <div class="subinfo_box clearfix">
 
                                                                 <span class="subinfo_face " style="cursor: pointer">
-                                                                    <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}"
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}"
                                                                     alt="" width="20" height="20">
                                                                 </span>
                                                                 <span class="subinfo S_txt2">
@@ -267,9 +272,7 @@
                                                                             立即注册!
                                                                         </a>
                                                                         <a href="/home/admin/find" style="float: right;">忘记密码</a>
-
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -356,6 +359,11 @@
         </div>
         </div>
         <script type="text/javascript">
+
+            //加载照片
+            $('.list_des img').zoomify();
+
+            //发布微博
             $('.glyphicon-thumbs-up').on('click',function() {
                 alert($);
                 layer.msg('亲，您好像忘了登录呦:)');
@@ -430,7 +438,7 @@
               return;
            
             }
-            $.get("pho",{pho:pho},function(data){
+            $.get("/home/pho",{pho:pho},function(data){
 
               if(data=='1'){
                 $('#e1').css('display','none');
@@ -466,7 +474,7 @@
                   ch3 = 100;
             
                 }
-                $.get("pass",{pas:pas,pho:pho},function(data){
+                $.get("/home/pass",{pas:pas,pho:pho},function(data){
                   if(data=='1'){
                     $('#e2').css('display','none');
                     ch3 = 100;

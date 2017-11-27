@@ -19,7 +19,7 @@ class AdminsController extends Controller
     public function index(Request $request)
     {
         $admin = admin::paginate(2);
-        // var_dump($admin);
+
         return view('admins/admins/index',['admin'=>$admin,'request'=>$request]);
     }
 
@@ -131,7 +131,7 @@ class AdminsController extends Controller
     {
         //获取修改管理员信息
         $res = admin::where('id','=',$id)->first();
-        // var_dump($res);
+        
         return view('admins/admins/edit',['res'=>$res]);
     }
 

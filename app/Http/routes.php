@@ -74,30 +74,30 @@ Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
 	//======================页面===============================//
 	
 	//个人主页
-	Route::get('user/{id}','OtherUserController@index');
+	Route::get('/user/{id}','OtherUserController@index');
 
 	//个人相册
-	Route::resource('photo','OtherUserController@photo');
+	Route::resource('/photo','OtherUserController@photo');
 
 	//微博评论
-	Route::get('type','OtherUserController@type');
+	Route::get('/type','OtherUserController@type');
 
 	//关注
-	Route::get('attention/{id}','OtherAttentionController@index');
+	Route::get('/attention/{id}','OtherAttentionController@index');
 
 	//粉丝
-	Route::get('fans/{id}','OtherFansController@index');
+	Route::get('/fans/{id}','OtherFansController@index');
 
 	//========================功能==================================//
 
 	//删除评论
-	Route::get('replay/delete/{id}','OtherUserController@replayDelete');
+	Route::get('/replay/delete/{id}','OtherUserController@replayDelete');
 
 	//微博转发
-	Route::get('ward','OtherUserController@ward');
+	Route::get('/ward','OtherUserController@ward');
 
 	//点赞微博
-	Route::get('pointFun','OtherUserController@pointFun');
+	Route::get('/pointFun','OtherUserController@pointFun');
 
 
 });
@@ -166,13 +166,13 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 //=======================登录============================//
 
 	//检测手机号是否已注册
-	Route::get('pho','LoginController@pho');
+	Route::get('/pho','LoginController@pho');
 
 	//检测密码是否与数据库一致
-	Route::get('pass','LoginController@pass');
+	Route::get('/pass','LoginController@pass');
 
 	//检测昵称是否存在,存在跳到首页,不存在跳到个人信息页
-	Route::post('nick','LoginController@nick');
+	Route::post('/nick','LoginController@nick');
 
 
 });

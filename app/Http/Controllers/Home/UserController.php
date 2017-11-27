@@ -57,7 +57,7 @@ class UserController extends Controller
         $res = contents::where('uid',$id)->with('replay.user_info')->paginate(1);
 
         //跳转页面
-        return view('homes.user.index',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
+        return view('homes/user/index',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
     }
 
     //照片页面
@@ -85,7 +85,7 @@ class UserController extends Controller
         $point = Session('point');
 
         //跳转到相册管理页面
-        return view('homes.user.photo',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
+        return view('homes/user/photo',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
 
     }
 

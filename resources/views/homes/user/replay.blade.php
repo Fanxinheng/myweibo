@@ -21,7 +21,9 @@
                 <nav class="navbar navbar-fixed-top" id="navbar">
                     <div class="container">
                         <div class="navbar-header" id="navbar-header1">
+                            <a href="/home/login">
                             <img src="/homes/images/wb_logo.png" alt="">
+                            </a>
                         </div>
                         <div class="navbar-header" id="navbar-header2">
                             <form class="navbar-form navbar-right">
@@ -58,7 +60,7 @@
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-                            <a href="/home/admin">
+                            <a href="/home/login">
                                 首页
                             </a>
                         </div>

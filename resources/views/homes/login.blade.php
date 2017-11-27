@@ -9,12 +9,17 @@
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta name="csrf_token" content="{{ csrf_token() }}"/>
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
-        <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
+        <link title="MYWEIBO" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
+        <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
             我的首页 微博-随时随地发现新鲜事
         </title>
@@ -28,6 +33,7 @@
                     <!--简易顶部导航拼页面用-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
                             <div class="gn_header clearfix" style="width:1000px">
+
                                 <!-- logo -->
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
                                     <a href="/home/login" class="box" title=""
@@ -38,14 +44,9 @@
                                         </span>
                                     </a>
                                 </div>
-
-                                <div class=" gn_search_v2" style="width:450px">
-                                    
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input" name="15102240605332" type="text" style="height:25px">
-                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
-                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-
+                                
+                                <!-- 搜索 -->
+                                <div class=" gn_search_v2">
 
                                     <form action="/home/search" method="get">
                                         <input node-type="searchInput" autocomplete="off" value="" class="W_input"
@@ -70,26 +71,14 @@
                                                     </em>
                                                 </a>
                                             </li>
-                                            <li>
-
-                                                <a href="/home/details/edit"  title="修改个人信息">
-                                                    <em class="W_ficon ficon_user S_ficon">
-                                                        <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
-                                                    </em>
-                                                    <em class="S_txt1">
-                                                        {{$user->nickName}}
-                                                    </em>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/home/changepass"  title="修改密码">
-                                                    <em class="W_ficon ficon_home S_ficon">
-                                                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                                                    </em>
-                                                    <em class="S_txt1">
-                                                        修改密码
-                                                    </em>
-                                                </a>
+                                            <li class="dropdown">
+                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$user->nickName}}<span class="caret"></span></a>
+                                              <ul class="dropdown-menu">
+                                                <li><a href="/home/user">个人中心</a></li>
+                                                <li><a href="/home/details">个人信息</a></li>
+                                                <li><a href="/home/changepass">修改密码</a></li>
+                                                <li><a href="/home/message">系统消息</a></li>
+                                              </ul>
                                             </li>
                                             <li>
                                                 <a href="/home/details/quit"  title="退出登录">
@@ -101,13 +90,11 @@
                                                     </em>
                                                 </a>
                                             </li>
+
                                         </ul>
                                     </div>
-
-
-                                    </ul>
                                 </div>
-
+                                
                             </div>
                         </div>
                     </div>
@@ -224,12 +211,8 @@
                                                             <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
                                                              multiple="multiple" type="file">
                                                     </div>  
-
                                                 </a>
-
                                                 <span>
-                                                    
-
                                                     @foreach($label as $val)
 
                                                     <label class="checkbox-inline" style="margin-bottom: 15px">
@@ -244,12 +227,8 @@
                                                 {{csrf_field()}}
                                                 <button id="release" style="width:100px;height:40px;border-radius:5px;background:orange;color:white;font-size: 16px">发布</button>
                                                 
-                                            </div>
-
-                                            
+                                            </div> 
                                     </form>
-
-
                                     </div>
                                 </div>
 
@@ -275,8 +254,8 @@
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
                                                             href="/home/user" title="{{$v->nickName}}" indepth="true">
                                                                 <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->nickName}}"
-                                                                alt="" src="{{$v->photo == null ? '/homes/uploads/default.jpg' : $v->photo}}" class="W_face_radius"
-                                                                width="50" height="50">
+                                                                alt="" src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"
+                                                                width="50" height="50" class="W_face_radius">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -290,7 +269,6 @@
                                                             </a>
                                                             <!-- 判断微博是否为登录用户自己发布 -->
                                                             @if($uid == $v->uid)
-                                                                <!-- <a href="/home/blog/destory/{{$v->cid}}"></a> -->
                                                                 <a class="glyphicon glyphicon-remove destroy" onclick="destroy({{$v->cid}})" style="float: right;cursor: pointer;" title="删除微博" id="des{{$v->cid}}">
                                                                     <input type="hidden" name="destroy" value="{{$v->cid}}">
                                                                 </a>
@@ -312,8 +290,8 @@
                                                             </div>
                                                         </a>
                                                         @if($v->image)
-                                                        <div id="image">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                                        <div id="image" style="width:200px;">
+                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
                                                         </div>
 
                                                         @else
@@ -434,7 +412,7 @@
                                             <div class="W_person_info" style="height:190px">
                                                 <div class="cover" id="skin_cover_s" style="background-image: url('/homes/images/001_s.jpg');">
                                                     <div class="headpic">
-                                                        <a indepth="true"  href="profile_001.html" bpfilter="page_frame">
+                                                        <a indepth="true"  href="/home/user" bpfilter="page_frame">
                                                             <img class="W_face_radius" width="60" height="60"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$user->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                         </a>
                                                     </div>
@@ -578,6 +556,9 @@
             
         </div>
         <script type="text/javascript">
+
+            //加载照片
+            $('.WB_detail img').zoomify();
 
             //微博发布
             $('#release').on('click', function(){

@@ -121,15 +121,9 @@ class LabelController extends Controller
      */
     public function destroy($id)
     {
-        //获取要删除的id
-        // var_dump($id);
+        
         //执行删除方法
-        $data = label::where('id',$id)->delete();
-        //判断如果成功回到列表页面,如果失败返回当前页面
-        if ($data) {
-            return redirect('/admin/label/')->with('create','删除标签成功');
-        }else{
-            return back();
-        }
+        label::where('id',$id)->delete();
+        
     }
 }

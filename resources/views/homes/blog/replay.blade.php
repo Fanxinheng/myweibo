@@ -8,16 +8,19 @@
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta name="csrf_token" content="{{ csrf_token() }}"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
     
-        <!-- <link rel="stylesheet" href="/homes/css/login.css"> -->
-
         <title>
             我的首页 微博-随时随地发现新鲜事
         </title>
@@ -64,18 +67,17 @@
                                                     </em>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="/home/details"  title="修改个人信息">
-                                                    <em class="W_ficon ficon_user S_ficon">
-                                                        <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
-                                                    </em>
-                                                    <em class="S_txt1">
-                                                        {{$user->nickName}}
-                                                    </em>
-                                                </a>
+                                            <li class="dropdown">
+                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$user->nickName}}<span class="caret"></span></a>
+                                              <ul class="dropdown-menu">
+                                                <li><a href="/home/user">个人中心</a></li>
+                                                <li><a href="/home/details">个人信息</a></li>
+                                                <li><a href="/home/changepass">修改密码</a></li>
+                                                <li><a href="/home/message">系统消息</a></li>
+                                              </ul>
                                             </li>
                                             <li>
-                                                <a href="#"  title="退出登录">
+                                                <a href="/home/details/quit"  title="退出登录">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                                     </em>
@@ -84,11 +86,9 @@
                                                     </em>
                                                 </a>
                                             </li>
+
                                         </ul>
                                     </div>
-                                        
-                                        
-                                    </ul>
                                 </div>
                                 
                             </div>
@@ -187,9 +187,7 @@
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a title="{{$content->nickName}}" indepth="true">
-                                                                <img title="{{$content->nickName}}"
-                                                                src="{{$content->photo == null ? '/homes/uploads/default.jpg' : $content->photo}}" class="W_face_radius"
-                                                                width="50" height="50">
+                                                                <img class="W_face_radius" width="50" height="50"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$content->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -234,8 +232,8 @@
                                                     
 
                                                         @if($content->image)
-                                                        <div id="image">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$content->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"" style="width:100px;" id="img">
+                                                        <div id="image" style="width:200px;">
+                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$content->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
                                                         </div>
                                                         @else
 
@@ -314,9 +312,7 @@
                                         <div class="WB_face W_fl">
                                             <div class="face">
                                                 <a title="{{$v->nickName}}" indepth="true">
-                                                    <img title="{{$v->nickName}}"
-                                                    src="{{$v->photo == null ? '/homes/uploads/default.jpg' : $v->photo}}" class="W_face_radius"
-                                                    width="50" height="50">
+                                                    <img class="W_face_radius" width="50" height="50"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                 </a>
                                             </div>
                                         </div>
@@ -368,8 +364,7 @@
                                                 <div class="cover" id="skin_cover_s" style="background-image: url('/homes/images/001_s.jpg');">
                                                     <div class="headpic">
                                                         <a bpfilter="page_frame" href="/home/user"  indepth="true">
-                                                            <img class="W_face_radius" src="{{$user->photo == null ? '/homes/uploads/default.jpg' : $user->photo}}"
-                                                             width="60" height="60">
+                                                            <img class="W_face_radius" width="60" height="60"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$user->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -420,7 +415,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                    <!-- 系统公告 -->
                                     <div style="background-color: #FFFFFF;border-radius: 5px;">
                                         <div >
                                             <div  style="margin: 10px;padding:10px;">
@@ -437,7 +432,25 @@
                                             </div>
                                         </div>
                                     </div>
-                                       <!-- 广告显示页面 -->
+                                    <!-- 微博找人 -->
+                                    <div style="background-color: #FFFFFF;border-radius: 5px;">
+                                        <div >
+                                            <div  style="margin: 10px;padding:10px;line-height: 30px;">
+                                                <div style="font-size: 15px;padding-bottom: 10px;">
+                                                        微博找人
+                                                </div>
+                                                @foreach($job as $j)
+                                                <a href="/home/job/{{$j->id}}">
+                                                    <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
+                                                        {{$j->job}}
+                                                    </label>
+                                                </a>
+                                                
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 广告显示页面 -->
                                     @foreach($advert as $k=>$v)
                                         @if($v->status == 0)
                                          <div class="WB_cardwrap S_bg2">
@@ -489,123 +502,126 @@
                         </div>
 
                         </div>
-                        <script type="text/javascript">
+            <script type="text/javascript">
+
+                //加载照片
+                $('.WB_detail img').zoomify();
+                
+                //判断评论内容是否为空
+                $('#replay').mouseover(function() {
+                 
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                       }
+                    });
+
+                    //获取评论内容
+                     content = $(this).siblings('textarea').val();
+                    
+                    $.post('/home/replay/empty', {content:content}, function(data){
+                        if(data == 0){
+                            layer.alert('微博评论内容不能为空！', {
+                              icon:2 ,
+                            })
                             
-                            //判断评论内容是否为空
-                            $('#replay').mouseover(function() {
-                             
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-                                   }
-                                });
-
-                                //获取评论内容
-                                 content = $(this).siblings('textarea').val();
-                                
-                                $.post('/home/replay/empty', {content:content}, function(data){
-                                    if(data == 0){
-                                        layer.alert('微博评论内容不能为空！', {
-                                          icon:2 ,
-                                        })
-                                        
-                                        return false;
-                                        
-                                    }else{
-                                        
-                                    }
-                                });
-                                
-                                
-                            }); 
+                            return false;
+                            
+                        }else{
+                            
+                        }
+                    });
+                    
+                    
+                }); 
 
 
 
-                            //微博评论
-                            $('#replay').click(function() {
+                //微博评论
+                $('#replay').click(function() {
 
-                                layer.msg('微博评论成功:)', {
-                                          icon:1 ,
-                                        })
+                    layer.msg('微博评论成功:)', {
+                              icon:1 ,
+                            })
+                });
+
+
+                //关注博主
+                function attent(id){
+                    $.ajax({
+                        type: "get",
+                        url: "/home/attent",
+                        data: {gid:id},
+                        
+                        beforeSend:function(){
+                             a = layer.load();
+                          },
+                        success: function(data) {
+
+                            layer.close(a);
+
+                            if(data.a == 0){
+                                layer.msg('已取消关注', {icon: 1});
+                                document.getElementById('attent').innerHTML = '关注';
+                                document.getElementById('attention').innerHTML = data.gnum;
+
+                            }else{
+                                layer.msg('已关注', {icon: 1});
+                                document.getElementById('attent').innerHTML = '√ 已关注';
+                                document.getElementById('attention').innerHTML = data.gnum;
+
+                            }
+
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                      
+                            layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
+
+                        }
+                    });
+                }
+
+                //系统公告
+                function notice(id){
+
+                    $.ajax({
+                        type: "get",
+                        url: "/home/notice",
+                        data: {id:id},
+                        
+                        beforeSend:function(){
+                            //加载样式
+                            a = layer.load(0, {shade: false});
+                          },
+                        success: function(data) {
+
+                            //关闭加载样式
+                            layer.close(a)
+
+                            layer.open({
+                              type: 1
+                              ,title: data.title //不显示标题栏
+                              ,closeBtn: false
+                              ,area: '300px;'
+                              ,shade: 0.8
+                              ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                              ,resize: false
+                              ,btn: ['知道了']
+                              ,btnAlign: 'c'
+                              ,moveType: 1 //拖拽模式，0或者1
+                              ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                              ,
                             });
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                            layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                            
+                            
+                        }
+                    });
+                }
 
+            </script>
+        </body>
 
-                            //关注博主
-                            function attent(id){
-                                $.ajax({
-                                    type: "get",
-                                    url: "/home/attent",
-                                    data: {gid:id},
-                                    
-                                    beforeSend:function(){
-                                         a = layer.load();
-                                      },
-                                    success: function(data) {
-
-                                        layer.close(a);
-
-                                        if(data.a == 0){
-                                            layer.msg('已取消关注', {icon: 1});
-                                            document.getElementById('attent').innerHTML = '关注';
-                                            document.getElementById('attention').innerHTML = data.gnum;
-
-                                        }else{
-                                            layer.msg('已关注', {icon: 1});
-                                            document.getElementById('attent').innerHTML = '√ 已关注';
-                                            document.getElementById('attention').innerHTML = data.gnum;
-
-                                        }
-   
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                  
-                                        layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
-
-                                    }
-                                });
-                            }
-
-                            //系统公告
-                            function notice(id){
-
-                                $.ajax({
-                                    type: "get",
-                                    url: "/home/notice",
-                                    data: {id:id},
-                                    
-                                    beforeSend:function(){
-                                        //加载样式
-                                        a = layer.load(0, {shade: false});
-                                      },
-                                    success: function(data) {
-
-                                        //关闭加载样式
-                                        layer.close(a)
-
-                                        layer.open({
-                                          type: 1
-                                          ,title: data.title //不显示标题栏
-                                          ,closeBtn: false
-                                          ,area: '300px;'
-                                          ,shade: 0.8
-                                          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                                          ,resize: false
-                                          ,btn: ['知道了']
-                                          ,btnAlign: 'c'
-                                          ,moveType: 1 //拖拽模式，0或者1
-                                          ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
-                                          ,
-                                        });
-                                    },
-                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                        layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-                                        
-                                        
-                                    }
-                                });
-                            }
-
-                        </script>
-                    </body>
-
-                </html>
+    </html>

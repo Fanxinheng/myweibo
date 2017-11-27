@@ -229,22 +229,12 @@ class AdvertController extends Controller
 
         //初始化七牛云
         $disk = QiniuStorage::disk('qiniu');
-        // 删除图片
-        // $data = unlink('.'.$res->pic);
+
         //删除七牛云信息
         $data = $disk->delete($res);
 
-        if ($data) {
-            //删除数据库指定id的信息
-            $info = advert::where('id',$id)->delete();
-            //如果成功返回列表页面，失败回到当前页面
-            if ($info) {
-                return redirect('/admin/advert')->with('create','删除广告成功！');
-            } else {
-                return back();
+        //删除数据库指定id的信息
+        $info = advert::where('id',$id)->delete();
 
-
-            }
-        }
     }
 }

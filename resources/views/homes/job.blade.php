@@ -64,18 +64,17 @@
                                                     </em>
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="/home/details"  title="修改个人信息">
-                                                    <em class="W_ficon ficon_user S_ficon">
-                                                        <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
-                                                    </em>
-                                                    <em class="S_txt1">
-                                                        {{$user->nickName}}
-                                                    </em>
-                                                </a>
+                                            <li class="dropdown">
+                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$user->nickName}}<span class="caret"></span></a>
+                                              <ul class="dropdown-menu">
+                                                <li><a href="/home/user">个人中心</a></li>
+                                                <li><a href="/home/details">个人信息</a></li>
+                                                <li><a href="/home/changepass">修改密码</a></li>
+                                                <li><a href="/home/message">系统消息</a></li>
+                                              </ul>
                                             </li>
                                             <li>
-                                                <a href="#"  title="退出登录">
+                                                <a href="/home/details/quit"  title="退出登录">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                                     </em>
@@ -84,11 +83,9 @@
                                                     </em>
                                                 </a>
                                             </li>
+
                                         </ul>
                                     </div>
-
-
-                                    </ul>
                                 </div>
 
                             </div>
@@ -281,10 +278,8 @@
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
-                                                            href="/home/user" title="{{$v->nickName}}" indepth="true">
-                                                                <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->nickName}}"
-                                                                alt="" src="{{$v->photo == null ? '/homes/uploads/default.jpg' : $v->photo}}" class="W_face_radius"
-                                                                width="50" height="50">
+                                                            href="/home/other/user/{{$v->uid}}" title="{{$v->nickName}}" indepth="true">
+                                                                <img class="W_face_radius" width="50" height="50"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                             </a>
                                                         </div>
                                                     </div>
@@ -293,14 +288,25 @@
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
 
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
-                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/user">
+                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->uid}}">
                                                                 {{$v->nickName}}
                                                             </a>
-                                                            <a href="#">
+                                                            <a href="/home/other/user/{{$v->uid}}">
                                                             <span style="float: right;">
                                                                 查看主页
                                                             </span>
                                                             </a>
+                                                        </div>
+                                                        <div>
+                                                            <span style="padding-right: 10px;">
+                                                                性别：{{$v->sex == 'w' ? '女' : '男'}}
+                                                            </span>
+                                                            <span style="padding-right: 10px;">
+                                                                年龄：{{$v->age}}
+                                                            </span>
+                                                            <span style="padding-right: 10px;">
+                                                                职业：{{$v->work}}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -322,8 +328,7 @@
                                                 <div class="cover" id="skin_cover_s" style="background-image: url('/homes/images/001_s.jpg');">
                                                     <div class="headpic">
                                                         <a bpfilter="page_frame" href="/home/user"  indepth="true">
-                                                            <img class="W_face_radius" src="{{$user->photo == null ? '/homes/uploads/default.jpg' : $user->photo}}"
-                                                             width="60" height="60">
+                                                            <img class="W_face_radius" width="60" height="60"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$user->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                         </a>
                                                     </div>
                                                 </div>
@@ -392,7 +397,7 @@
                             </div>
                         </div>
 
-                        微博找人
+                        <!-- 微博找人 -->
                         <div style="background-color: #FFFFFF;border-radius: 5px;">
                             <div >
                                 <div  style="margin: 10px;padding:10px;line-height: 30px;">
@@ -482,119 +487,6 @@
                }
             });
             
-
-            //微博点赞
-            function point (id){
-
-                $.ajax({
-                    type: "post",
-                    url: "/home/point",
-                    data: {poid:id},
-                    
-                    beforeSend:function(){
-                         a = layer.load();
-                      },
-                    success: function(data) {
-
-                        layer.close(a);
-
-                        //判断是否重复点赞
-                        if(data == 0){
-                            layer.msg('您已赞过此微博:)', {icon:2 ,})
-                        }else{
-                            document.getElementById('pnum'+id).innerHTML = data;
-
-                            layer.msg('点赞成功:)', {icon: 1});
-
-                           $('#point'+id).off('click','point');
-                        }
-
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                      
-                        layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
-
-                    }
-                });
-              };
-
-
-            //微博举报
-            $('.report').on('click',function(){
-
-                var cid = $(this).find('.rep').val();
-
-                layer.msg('您确定举报此微博吗？', {
-                  time: 0 //不自动关闭
-                  ,btn: ['确定', '取消']
-                  ,yes: function(index){
-
-                    $.get('/home/blog/report', {cid:cid}, function (data) {
-                        if(data == 1){
-                            layer.close(index);
-                            layer.msg('我们收到了您的举报，感谢您的监督:)', {
-                              icon: 6
-                              ,btn: ['再见']
-                            });
-
-                        }else{
-                            layer.msg('您已举报过此微博:)', {icon:2 ,})
-                        }
-                    });
-                   
-                  }
-                });    
-            });
-
-
-            //微博删除
-            function destroy(id){
-
-                //获取要删除微博的id
-                did = $('#des'+id).children('input[name=destroy]').val();
-
-                layer.confirm('您确定要删除此微博吗？', {
-                  btn: ['确定','取消'] //按钮
-                }, function(){
-
-                    $.ajax({
-                    type: "get",
-                    url: "/home/blog/destroy",
-                    data: {did:did},
-                    
-                    beforeSend:function(){
-                        //加载样式
-                        a = layer.load(0, {shade: false});
-                      },
-                    success: function(data) {
-
-                        //关闭加载样式
-                        layer.close(a)
-
-                        //移除微博
-                        $('#destroy'+id).remove();
-                        
-                        //微博数量-1
-                        document.getElementById('cnum').innerHTML = data.cnum;
-
-                        //微博积分-5
-                        document.getElementById('socre').innerHTML = data.socre;
-
-                        layer.msg('微博删除成功:)', {icon: 1});
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        layer.msg("微博删除失败，请检查网络后重试", {icon:2 ,})
-                        
-                        
-                    }
-                });
-
-                }, function(){
-
-                });
-
-            };
-
 
             //系统公告
             function notice(id){

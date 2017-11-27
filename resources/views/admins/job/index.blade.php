@@ -71,13 +71,8 @@
                                 <center>
                                     <a href="/admin/job/{{$v->id}}/edit">
                                         <input type="submit" class="btn btn-default" value="修改">
-                                    </a>
-                                    <form action="/admin/job/{{$v->id}}" method="post" style="display: inline">
-                                        {{csrf_field()}}
-                                        {{method_field('DELETE')}}
-                                        <button class="btn btn-default">删除</button>
-                                        
-                                    </form>            
+                                    </a> 
+                                    <button class="btn btn-default" onclick="job_delete({{$v->id}})">删除</button>             
                                 </center>
 
 
@@ -117,14 +112,14 @@
         //职业删除
         function job_delete(id){
 
-            layer.confirm('您确定要删除此微博吗？', {
+            layer.confirm('您确定要删除此职业吗？', {
                   btn: ['确定','取消'] //按钮
                 }, function(){
 
                     $.ajax({
                     type: "post",
-                    url: "/admin/job"+id,
-                    data: {id:id,_token:'{{csrf_token()}}',_method:'{{method_field("DELETE")}}'},
+                    url: "/admin/job/"+id,
+                    data: {id:id,_token:'{{csrf_token()}}',_method:'delete'},
                     
                     beforeSend:function(){
                         //加载样式
@@ -135,26 +130,18 @@
                         //关闭加载样式
                         layer.close(a)
 
-                        /*//移除微博
-                        $('#destroy'+id).remove();
-                        
-                        //微博数量-1
-                        document.getElementById('cnum').innerHTML = data.cnum;
+                        //移除微博
+                        $('#job'+id).remove();
 
-                        //微博积分-5
-                        document.getElementById('socre').innerHTML = data.socre;
-
-                        layer.msg('微博删除成功:)', {icon: 1});*/
+                        layer.msg('职业删除成功:)', {icon: 1});
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        layer.msg("微博删除失败，请检查网络后重试", {icon:2 ,})
-                        
-                        
+                        layer.msg("职业删除失败，请检查网络后重试", {icon:2 ,})  
                     }
                 });
 
                 }, function(){
-
+                        
                 });
         }
         
