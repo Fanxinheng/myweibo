@@ -19,7 +19,13 @@
                     <div class="mws-panel-body no-padding">
                         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper"><table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                             <thead>
-                                <tr role="row"><th  style="width: 150px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th><th  style="width: 220px;" aria-label="Browser: activate to sort column ascending">用户名</th><th  style="width: 220px;" aria-label="Platform(s): activate to sort column ascending">手机</th><th  style="width: 220px;" aria-label="Platform(s): activate to sort column ascending">头像</th><th  style="width: 210px;" aria-label="Engine version: activate to sort column ascending">操作</th></tr>
+                                <tr role="row">
+                                    <th  style="width: 150px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
+                                    <th  style="width: 220px;" aria-label="Browser: activate to sort column ascending">用户名</th>
+                                    <th  style="width: 220px;" aria-label="Platform(s): activate to sort column ascending">手机</th>
+                                    <th  style="width: 220px;" aria-label="Platform(s): activate to sort column ascending">头像</th>
+                                    <th  style="width: 210px;" aria-label="Engine version: activate to sort column ascending">操作</th>
+                                </tr>
                             </thead>
 
                         <tbody role="alert" aria-live="polite" aria-relevant="all" style="text-align: center;">
@@ -28,7 +34,9 @@
                                 <td class=" ">{{$v->id}}</td>
                                 <td class=" ">{{$v->name}}</td>
                                 <td class=" ">{{$v->phone}}</td>
+
                                 <td class=" "><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}" alt="" style="width:50px;height:50px"/></td>
+
                                 <td>
                                     <button class="btn btn-default" onclick="admins_delete({{$v->id}})">删除</button>
 

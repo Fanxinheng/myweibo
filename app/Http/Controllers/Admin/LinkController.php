@@ -26,7 +26,7 @@ class LinkController extends Controller
 
         orderBy('user','asc')->
         //默认搜索5条数据
-        paginate($request->input('paging',5));
+        paginate($request->input('paging',1));
         //echo "<pre>";
         // var_dump($res);
 
@@ -160,6 +160,7 @@ class LinkController extends Controller
      */
     public function destroy($id)
     {
+
         //打印获取到的id
         // var_dump($id);
         // 获取id对数据库进行删除

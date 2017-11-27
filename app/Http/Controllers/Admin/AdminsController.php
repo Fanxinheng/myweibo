@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
+use zgldh\QiniuStorage\QiniuStorage;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use zgldh\QiniuStorage\QiniuStorage;
@@ -21,6 +21,7 @@ class AdminsController extends Controller
      */
     public function index(Request $request)
     {
+
         $admin = admin::paginate(10);
 
         return view('admins/admins/index',['admin'=>$admin,'request'=>$request]);
@@ -68,20 +69,36 @@ class AdminsController extends Controller
          //判断是否有文件上传
         if ($request->hasFile('pic')) {
 
+            //初始化七牛云
+            $disk = QiniuStorage::disk('qiniu');
+            //获取文件内容
+            $file = $request->file('pic');
+
             //修改名字已时间戳生成文件命
             $name = 'Advert'.rand(1111,9999).time();
 
             //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
             //移动图片到
-            $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
-            //修改所上传文件的名称
-            $res['pic'] = '/admins/Uploads/'.$name.'.'.$suffix;
-        }
+            // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
+            //拼装文件的名称
+            $prind = 'admins/Uploads/'.$name.'.'.$suffix;
+            //上传到七牛云
+            $bool = $disk->put($prind,file_get_contents($file->getRealPath()));
 
+            //判断是否上传到七牛云
+            if (!$bool) {
+                //如果上传失败，回到广告添加页面提示用户
+                 return back()->with('msg','用户头像添加失败！');
+
+            }
+            //获取头像信息
+            $res['pic'] = $prind;
+        }
             //获取用户名
             $res['name'] = $request->input('name');
 
+            //添加到数据库
             $name = admin::where('name','=',$res['name'])->first();
 
             //判断用户名是否存在
@@ -101,6 +118,7 @@ class AdminsController extends Controller
             $res['password'] = Hash::make($request->input('password'));
 
             //将数据插入数据库
+
             $admin = admin::insert($res);
 
         // 判断管理员是否添加成功
@@ -140,49 +158,55 @@ class AdminsController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
+     *修改头像信息
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-         $this->validate($request, [
-            'name' => 'required|regex:/^\w{6,12}$/',
-        ],[
-            'name.required' => '*用户名不能为空*',
-            'name.regex' => '*请输入6~12位用户名*',
-        ]);
-
          //判断是否有文件上传
         if ($request->hasFile('pic')) {
 
+             //初始化七牛云
+            $disk = QiniuStorage::disk('qiniu');
+
+            //获取文件内容
+            $file = $request->file('pic');
+
             //修改名字已时间戳生成文件命
-            $name = 'Advert'.rand(1111,9999).time();
+            $name = 'admins'.rand(1111,9999).time();
 
             // //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
             //移动图片到
-            $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
+            // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
             //修改所上传文件的名称
-            $res['pic'] = '/admins/Uploads/'.$name.'.'.$suffix;
-        }
+            $print = 'admins/Uploads/'.$name.'.'.$suffix;
 
-            //获取用户名
-            $res['name'] = $request->input('name');
+            //上传到七牛云
+             $bool = $disk->put($print,file_get_contents($file->getRealPath()));
 
-            //获取数据库的信息
-            $name = admin::where('name','=',$res['name'])->first();
+            //去数据库获取图片信息
+            $pic = admin::where('id',$id)->value('pic');
 
-            $res['password'] = Hash::make($request->input('password'));
+            //删除七牛云信息
+            $disk->delete($pic);
+
+            //获取图片信息
+            $res['pic'] = $print;
 
             //对数据库进行修改
             $date = admin::where('id','=',$id)->update($res);
             if($date){
-                return redirect('/admin/admins')->with('msg','管理员修改成功！');
-            } else {
-                return back()->with('msg','管理员修改失败！');
+                return redirect('/admin/admins')->with('msg','头像修改成功！');
             }
+
+       }
+
+        return back()->with('msg','您的头像还未修改');
+
+
 
 
     }
@@ -195,6 +219,7 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
+
         //获取管理员头像
         $pic = admin::where('id',$id)->value('pic');
 

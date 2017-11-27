@@ -85,27 +85,28 @@ class AdvertController extends Controller
             // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
 
             //拼装文件名
-            $prind = '/admins/Uploads/'.$name.'.'.$suffix;
+            $prind = 'admins/Uploads/'.$name.'.'.$suffix;
 
             //上传到七牛云
-             $bool = $disk->put($prind,file_get_contents($file->getRealPath()));
-
-        }
-            //获取广告用户
-            $res['user'] = $request->input('user');
-            //获取广告链接
-            $res['link'] = $request->input('link');
-            //获取上传的文件名
-            $res['pic'] = $prind;
-            //获取当前时间戳
-            $res['time'] = time();
+            $bool = $disk->put($prind,file_get_contents($file->getRealPath()));
 
             //判断是否上传到七牛云
             if (!$bool) {
                 //如果上传失败，回到广告添加页面提示用户
-                 return redirect('/admin/advert/')->with('create','广告图片添加失败！');
+                return redirect('/admin/advert/')->with('create','广告图片添加失败！');
 
             }
+        }
+            //获取上传的文件名
+            $res['pic'] = $prind;
+            //获取广告用户
+            $res['user'] = $request->input('user');
+            //获取广告链接
+            $res['link'] = $request->input('link');
+
+            //获取当前时间戳
+            $res['time'] = time();
+
 
             //添加至数据库
             $data = advert::insert($res);
@@ -174,11 +175,11 @@ class AdvertController extends Controller
             // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
 
             //拼装图片信息
-            $print = '/admins/Uploads/'.$name.'.'.$suffix;
+            $print = 'admins/Uploads/'.$name.'.'.$suffix;
 
             //上传到七牛云
             $bool = $disk->put($print,file_get_contents($file->getRealPath()));
-        }
+
 
             //判断是否上传到七牛云
             if (!$bool) {
@@ -194,6 +195,11 @@ class AdvertController extends Controller
 
             //获取图片信息
             $res['pic'] = $print;
+
+
+        }
+
+
             //获取当前时间戳
             $res['time'] = time();
             //获取商户名字
@@ -224,7 +230,7 @@ class AdvertController extends Controller
      */
     public function destroy($id)
     {
-        //获取信息
+        //获取数据库图片信息
         $res = advert::where('id',$id)->value('pic');
 
         //初始化七牛云

@@ -56,9 +56,11 @@
                     </div>
                 </div>
                 <div class="mws-form-row">
+
                     <div style="padding-bottom: 10px;">上传头像</div>
                     <div >
                         <input type="file" readonly="readonly" class="fileinput-preview" placeholder="No file selected..." name="pic">
+
                     </div>
                 </div>
             <div class="mws-button-row">

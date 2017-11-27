@@ -97,10 +97,10 @@
                         {{$v -> hot == 0 ? ' 登上热门 ' : ' 取消热门 ' }}
                     </button>
                     </a>
- 
                     <form action="/admin/weibo/{{$v->cid}}" method='post' style="display: inline">
                     <button id="delete" class="btn btn-default" >删除微博</button>
                         </form>
+
                     </td>
                 </tr>
                 @endforeach

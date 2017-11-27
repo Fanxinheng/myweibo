@@ -333,7 +333,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台主页
 	Route::resource('/index','UserController');
-
 	//后台管理员资源路由
 	Route::resource('/admins','AdminsController');
 

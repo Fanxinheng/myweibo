@@ -10,6 +10,7 @@
 <!-- Viewport Metatag -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
+
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/admins/plugins/colorpicker/colorpicker.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/admins/custom-plugins/wizard/wizard.css" media="screen">
@@ -34,7 +35,7 @@
 <link rel="stylesheet" type="text/css" href="/admins/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/admins/css/themer.css" media="screen">
 
-
+<!-- layer -->
 <link rel="stylesheet" href="/admins/layer/skin/layer.css">
 
 <!-- 分页样式 -->
@@ -42,6 +43,7 @@
 
 
 <title>@yield('title')</title>
+
 
 </head>
 
@@ -76,19 +78,18 @@
                 ?>
             	<!-- User Photo -->
                 	<div id="mws-user-photo">
+
                     	<img src="http://ozsrs9z8f.bkt.clouddn.com/{{$result->pic}}" alt="User Photo">
                     </div>
-
+                    </div>
                     <!-- Username and Functions -->
                     <div id="mws-user-functions">
-
-
                             <div id="mws-username">
                                 Hello:&nbsp;&nbsp;&nbsp;{{$result->name}}
                             </div>
                             <ul>
-                                <li><a href="/admin/admins/{{$result->id}}/edit"> 修改个人信息</a></li>
-                                <li><a href="/admin/password/{{$result->id}}"> 修改密码</a></li>
+                                <li><a href="/admin/admins/{{$result->id}}/edit"> 修改头像</a></li>
+                                <li><a href="/admin/password/{{$result->id}}"> 个人信息</a></li>
                                 <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
                             </ul>
 
@@ -97,6 +98,7 @@
 
         </div>
     </div>
+
 
     <!-- Start Main Wrapper -->
     <div id="mws-wrapper">
@@ -185,6 +187,7 @@
             Copyright Your Website 2012. All Rights Reserved.
             </div>
         </div>
+
 
         <!-- Main Container End -->
     </div>
