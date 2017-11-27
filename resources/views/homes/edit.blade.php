@@ -15,7 +15,7 @@
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="/homes/js/validate.js"></script>
-        <script type="text/javascript" src="{{asset('/layer/layer.js')}}"></script>
+        <script type="text/javascript" src="{{asset('/homes/layer/layer.js')}}"></script>
         <title>
             修改个人信息
         </title>
@@ -106,16 +106,19 @@
 
 								    </div>
 								  </div>
-
-								  <div class="form-group">
-								    <label for="inputPassword3" class="col-sm-2 control-label" style="margin-top:20px;"><span style="color:red;margin-right: 5px;margin-top:30px;">*</span>头像:</label>
+                                  
+                                  <form  id="formPhoto">
+                                      <div class="form-group">
+                                         <label for="inputPassword3" class="col-sm-2 control-label" style="margin-top:20px;"><span style="color:red;margin-right: 5px;margin-top:30px;">*</span>头像:</label>
                                     
                                     
-								    <div class="col-sm-4" style="width:150px;">
-								      <input type="file" style="width:100px;position:absolute;height:100px;opacity:0" class="form-control" id="photo" name="photo"   >
-                                      <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"   style="width:100px;height: 100px;border-radius:50%;border:solid 1px #ABB1BA" id="img">
-								    </div>
-								  </div>
+                                         <div class="col-sm-4" style="width:150px;">
+                                         <input type="file" style="width:100px;position:absolute;height:100px;opacity:0" class="form-control" id="photo" name="photo"   >
+                                          <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"   style="width:100px;height: 100px;border-radius:50%;border:solid 1px #ABB1BA" id="img">
+                                         </div>
+                                      </div>
+                                  </form>
+								  
           
 								  <div class="form-group" style="margin-top:30px">
 								    <div class="col-sm-offset-2 col-sm-10">
@@ -265,23 +268,23 @@
             
         })
 
-        //头像失去焦点事件
-     	photo.onblur = function(){
-     		//获取头像的值
-     		var photo = this.value;
+      //   //头像失去焦点事件
+     	// photo.onblur = function(){
+     	// 	//获取头像的值
+     	// 	var photo = this.value;
 
-     		//判断为空
-     		if(photo== ""){
-     			PH = 0;
-     		}else{
-     			PH = 1;
-     		}
-     		console.log(PH);
-     		//判断
-     		if(PH==0){
-            	return false;
-            }
-     	}
+     	// 	//判断为空
+     	// 	if(photo== ""){
+     	// 		PH = 0;
+     	// 	}else{
+     	// 		PH = 1;
+     	// 	}
+     	// 	console.log(PH);
+     	// 	//判断
+     	// 	if(PH==0){
+      //       	return false;
+      //       }
+     	// }
      	
 
         $.ajaxSetup({
@@ -312,8 +315,8 @@
                 return;
             }
 
-            var formData = new FormData($( "#forms" )[0]);
-            console.log(formData);
+            var formData = new FormData($( "#formPhoto" )[0]);
+            console.log(formData);die();
             $.ajax({
                 type: "post",
                 url: "/home/details/update",

@@ -65,14 +65,14 @@ class DetailsController extends Controller
 		//获取除了token以外的值
 		$res = $request->except('_token');
 
-        //文件上传
+		//文件上传
 		if($request->hasFile('photo')){
 
 			//初始化七牛云
 			$disk = QiniuStorage::disk('qiniu');
 
 			//获取文件内容
-		    $file = $request->file('photo');
+			$file = $request->file('photo');
 
 			//修改随机生成名字
 			$name = rand(1111,9999).time();
@@ -80,34 +80,23 @@ class DetailsController extends Controller
 			//获取上传文件后缀
 			$suffix = $request->file('photo')->getClientOriginalExtension();
 
-            //拼装文件名
-            $logo = 'homes/uploads/'.$name.'.'.$suffix;
+			//拼装文件名
+			$logo = 'homes/uploads/'.$name.'.'.$suffix;
 
-            $res['photo'] = $logo;
+			$res['photo'] = $logo;
 
 
-            //上传到七牛云
-            $bool = $disk->put($logo,file_get_contents($file->getRealPath()));
+			//上传到七牛云
+			$bool = $disk->put($logo,file_get_contents($file->getRealPath()));
 
 			//移动图片
 			// $request->file('photo')->move('./homes/uploads',$name.'.'.$suffix);
-			
-			//把uid存到res数组中
-		    $res['uid'] = session('uid');
-
-			//把res数组中的信息存到user_info表中
-			$data = user_info::insert($res);
-
-			//判断成功就跳转首页,否则返回当前页面并存闪存
-			if($data){
-                
-                return redirect('/home/login');
+			if($bool){
 				
 			}else{
 
-				echo "<script>slert('添加失败!');</script>";                        
-				return back()->withInput();
 			}
+			
 		}
 		   
 		
@@ -126,20 +115,20 @@ class DetailsController extends Controller
 
  //    public function editphoto(Request $request)
 	// {   
-	// 	$img = $request->input('imgPath');
+	//  $img = $request->input('imgPath');
 
-	// 	 if($request->hasFile('imgPath')){
-	// 			//初始化七牛云
-	// 		    $disk = QiniuStorage::disk('qiniu');
-                
-	// 		    //获取文件内容
-	// 	        $file = $request->file('imgPath');
+	//   if($request->hasFile('imgPath')){
+	//          //初始化七牛云
+	//          $disk = QiniuStorage::disk('qiniu');
+				
+	//          //获取文件内容
+	//          $file = $request->file('imgPath');
 
-	// 		    //修改随机生成名字
-	// 		    $name = rand(1111,9999).time();
+	//          //修改随机生成名字
+	//          $name = rand(1111,9999).time();
 
-	// 			//获取上传文件后缀
-	// 		    $suffix = $request->file('imgPath')->getClientOriginalExtension();
+	//          //获取上传文件后缀
+	//          $suffix = $request->file('imgPath')->getClientOriginalExtension();
 
  //                //拼装文件名
  //                 $logo = 'homes/uploads/'.$name.'.'.$suffix;
@@ -148,23 +137,23 @@ class DetailsController extends Controller
 
  //                //上传到七牛云
  //                $bool = $disk->put($logo,file_get_contents($file->getRealPath()));
-                
+				
  //                //获取session中当前用户的uid
-	// 			$uid = $request->session()->get('uid');
+	//          $uid = $request->session()->get('uid');
 
-	// 			//把res数组中的信息按照uid修改到user_info表中
-	// 			$data = user_info::where('uid',$uid)->update($res);
+	//          //把res数组中的信息按照uid修改到user_info表中
+	//          $data = user_info::where('uid',$uid)->update($res);
 			
 		
-	// 			//判断成功就跳转首页,否则返回当前页面并存闪存
-	// 			if($data){
+	//          //判断成功就跳转首页,否则返回当前页面并存闪存
+	//          if($data){
  //                    // return $logo;
  //                    echo "0";
-	// 			}else{
+	//          }else{
 
  //                     echo "1";
-	// 			}
-	// 	}
+	//          }
+	//  }
 	// }
 
 	//执行修改个人信息方法
@@ -172,30 +161,30 @@ class DetailsController extends Controller
 	{   
 		  //获取除了token以外的值
 			$res = $request->except('_token','imgPath');
-            dd($_POST);
+			dd($_POST);
 	   if($request->hasFile('imgPath')){
 
 				//初始化七牛云
-			    $disk = QiniuStorage::disk('qiniu');
-                
-			    //获取文件内容
-		        $file = $request->file('imgPath');
-                
-			    //修改随机生成名字
-			    $name = rand(1111,9999).time();
+				$disk = QiniuStorage::disk('qiniu');
+				
+				//获取文件内容
+				$file = $request->file('imgPath');
+				
+				//修改随机生成名字
+				$name = rand(1111,9999).time();
 
 				//获取上传文件后缀
-			    $suffix = $request->file('imgPath')->getClientOriginalExtension();
+				$suffix = $request->file('imgPath')->getClientOriginalExtension();
 
-                //拼装文件名
-                $logo = 'homes/uploads/'.$name.'.'.$suffix;
+				//拼装文件名
+				$logo = 'homes/uploads/'.$name.'.'.$suffix;
 
-                $res['photo'] = $logo;
+				$res['photo'] = $logo;
 
-                //上传到七牛云
-                $bool = $disk->put($logo,file_get_contents($file->getRealPath()));
-                
-                
+				//上传到七牛云
+				$bool = $disk->put($logo,file_get_contents($file->getRealPath()));
+				
+				
 		}       
 
 
@@ -207,11 +196,11 @@ class DetailsController extends Controller
 				
 				//判断成功就跳转首页,否则返回当前页面并存闪存
 				if($data){
-                    // return $logo;
-                    echo "0";
+					// return $logo;
+					echo "0";
 				}else{
 
-                     echo "1";
+					 echo "1";
 				}
 
 	}
@@ -228,10 +217,65 @@ class DetailsController extends Controller
 	   //获取session中的uid
 	   $uid = $request->session()->get('uid');
 
-       //获取input表中的旧密码
+	   //获取input表中的旧密码
 	   $oldpass = $request->input('oldpass');
-       dd($oldpass);
+	   
+	   //根据uid查询他的密码
+	   $res = user::where('id',$uid)->value('password');
+	   
+	   //比较两个密码是否一致
+	   if (Hash::check($oldpass,$res)){
+		  echo "1";
+		}else{
+		  echo "0";
+		}
 
+	}
+
+	//判断新密码与表中密码是否一致
+	public function newpass(Request $request)
+	{   
+	   //获取session中的uid
+	   $uid = $request->session()->get('uid');
+
+	   //获取input表中的旧密码
+	   $newpass = $request->input('newpass');
+	   
+	   //根据uid查询他的密码
+	   $res = user::where('id',$uid)->value('password');
+	   
+	   //比较两个密码是否一致
+	   if (Hash::check($newpass,$res)){
+		  echo "1";
+		}else{
+		  echo "0";
+		}
+
+	}
+	
+
+	//执行忘记密码把新密码存到数据库
+	public function changepassword(Request $request)
+	{   
+
+		//获取session中的uid
+		$uid = $request->session()->get('uid');
+
+		//获取token以外的值
+		$res['password'] = $request->except('_token','oldpass');
+
+		//密码用哈希加密
+		$res['password']=Hash::make($request->input('newpass'));
+
+		//根据uid更新user表中的password
+		$data = user::where('id',$uid)->update($res);
+		if($data){
+
+		   echo "<script>alert('修改成功');window.location.href='/home/admin';</script>";
+		   
+		}else{
+			echo "0";
+		}
 	}
 
 	//执行退出

@@ -140,7 +140,12 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
     
     //修改密码判断旧密码是否与表中一致
 	Route::get('changepass/oldpass','DetailsController@oldpass');
+    
+    //修改密码判断旧新密码是否与旧密码中一致
+	Route::get('changepass/newpass','DetailsController@newpass');
 
+	//执行修改密码存到数据库
+	Route::post('details/changepassword','DetailsController@changepassword');
 
 	//执行退出
 	Route::get('details/quit','DetailsController@quit');
