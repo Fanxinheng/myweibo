@@ -20,7 +20,7 @@ class DetailsController extends Controller
 	public function index(Request $request)
 	{   
 
-		return view('homes.details');
+		return view('/homes/details');
 	
 	}
 
@@ -122,9 +122,9 @@ class DetailsController extends Controller
 	public function edit(Request $request)
 	{   
 		$uid = $request->session()->get('uid');
+
 		$res = user_info::where('uid',$uid)->first();
-		 // echo "<pre>";
-		// var_dump($res);
+		
 		return view('homes/edit',['res'=>$res]);
 	}
 
@@ -175,6 +175,7 @@ class DetailsController extends Controller
 	//执行修改个人信息方法
 	public function update(Request $request)
 	{   
+
 		  //获取除了token以外的值
 			$res = $request->except('_token');
 			$file = $request->file();
@@ -201,24 +202,24 @@ class DetailsController extends Controller
 				//上传到七牛云
 				$bool = $disk->put($logo,file_get_contents($file->getRealPath()));
 				
-				
 		}       
 
 
-				//获取session中当前用户的uid
-				$uid = $request->session()->get('uid');
+		//获取session中当前用户的uid
+		$uid = $request->session()->get('uid');
 
-				//把res数组中的信息按照uid修改到user_info表中
-				$data = user_info::where('uid',$uid)->update($res);
-				
-				//判断成功就跳转首页,否则返回当前页面并存闪存
-				if($data){
-					 return $logo;
-					//echo "0";
-				}else{
 
-					 echo "1";
-				}
+			//把res数组中的信息按照uid修改到user_info表中
+			$data = user_info::where('uid',$uid)->update($res);
+			
+			//判断成功就跳转首页,否则返回当前页面并存闪存
+			if($data){
+				 return $logo;
+				//echo "0";
+			}else{
+
+				 echo "1";
+			}
 
 	}
 	

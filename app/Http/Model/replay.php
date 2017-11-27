@@ -23,4 +23,9 @@ class replay extends Model
    	return $this->hasMany('App\Http\Model\contents','cid','tid');
    }
 
+   public function contents()
+   {
+   	return $this->hasOne('App\Http\Model\contents','cid','tid');
+   }
+
 }

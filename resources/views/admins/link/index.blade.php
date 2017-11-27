@@ -133,9 +133,7 @@
 
                 </tbody>
                 </table>
-                    <div class="dataTables_info" id="DataTables_Table_1_info">
-                    显示 1 条 10 of   57 entries
-                </div>
+
 
                 <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
 

@@ -29,12 +29,13 @@
             <h1>登录</h1>
             <div class="mws-login-lock"><i class="icon-lock"></i></div>
             <div id="mws-login-form">
-                
-                    @if(session('msg'))
-                        <div class="mws-form-message error">
-                        {{session('msg')}}
-                    @endif
+
+            @if(session('msg'))
+                <div class="mws-form-message error">
+                    {{session('msg')}}
                 </div>
+            @endif
+
                 <form class="mws-form" action="/admin/login" method="post">
                     <div class="mws-form-row">
                         <div class="mws-form-item">
@@ -45,7 +46,7 @@
                         <div class="mws-form-item">
                             <input type="password" name="password" class="mws-login-password required" placeholder="请输入密码">
                         </div>
-                    </div> 
+                    </div>
                     <div class="mws-form-row">
                         <div class="mws-form-item">
                             <input type="text" name="code" class=" required" placeholder="请输入验证码" style="width:120px;height:35px">
@@ -54,11 +55,11 @@
                         <?php
                         session()->all();
                         ?>
-                    </div> 
+                    </div>
                     <div class="mws-form-row">
                         {{csrf_field()}}
                         <input type="submit" value="登录" class="btn btn-success mws-login-button">
-                        
+
                     </div>
                 </form>
             </div>
@@ -69,7 +70,7 @@
     <script src="/admins/js/libs/jquery-1.8.3.min.js"></script>
     <script src="/admins/js/libs/jquery.placeholder.min.js"></script>
     <script src="/admins/custom-plugins/fileinput.js"></script>
-    
+
     <!-- jQuery-UI Dependent Scripts -->
     <script src="/admins/jui/js/jquery-ui-effects.min.js"></script>
 
@@ -84,5 +85,5 @@
 
 <script type="text/javascript">
     $('.mws-form-message').delay(3000).slideUp(1000);
-   
+
 </script>

@@ -1,16 +1,16 @@
-      #b{ background-color: #B3D9F0; } 
-            #navbar{background-color: #fff}
-            #navbar #navbar-header1{margin-top: 13px;}
-            #navbar #navbar-header2{ margin-left:100px;}
-            #navbar #navbar-header2 input{ width: 500px;}
-            #navbar #nav-1{margin-top: 5px;float: right;}
-            #navbar #nav-1 button{ width:70px;height: 40px;} 
-            #weibo { width:auto;margin-bottom: 50px ;margin-top: 60px} 
-            #weibo #backg{background:url('/homes/images/197.jpg');height: 300px}
-            #weibo #backg #jimg{margin-top: 10px;margin-left: 100px}
-            #weibo #backg #nickname{text-align: center;margin-top: 15px}
-            #weibo #lanmu { background-color: #fff; height:500px;}
-            #weibo #lanmu li { margin-top: 5px; font-size: 20px; }
+#b{ background-color: #B3D9F0; } 
+#navbar{background-color: #fff}
+#navbar #navbar-header1{margin-top: 13px;}
+#navbar #navbar-header2{ margin-left:100px;}
+#navbar #navbar-header2 input{ width: 500px;}
+#navbar #nav-1{margin-top: 5px;float: right;}
+#navbar #nav-1 button{ width:70px;height: 40px;} 
+#weibo { width:auto;margin-bottom: 50px ;margin-top: 60px} 
+#weibo #backg{background:url('/homes/images/197.jpg');height: 300px}
+#weibo #backg #jimg{margin-top: 10px;margin-left: 100px}
+#weibo #backg #nickname{text-align: center;margin-top: 15px}
+#weibo #lanmu { background-color: #fff; height:500px;}
+#weibo #lanmu li { margin-top: 5px; font-size: 14px}
 
 		
 
