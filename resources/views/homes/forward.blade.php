@@ -84,8 +84,14 @@
                                     <div class="gn_login">
                                         <ul class="gn_login_list">
                                             <li>
-                                                <a href="register" class="S_txt1" target="_top">
-                                                    注册
+
+                                                <a href="/home/details/quit"  title="退出登录">
+                                                    <em class="W_ficon ficon_home S_ficon">
+                                                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                                    </em>
+                                                    <em class="S_txt1">
+                                                        退出
+                                                    </em>
                                                 </a>
                                             </li>
                                             

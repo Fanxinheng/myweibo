@@ -73,14 +73,10 @@ class ConfigController extends Controller
         if($data){
 
             //更新数据库
-            $data1 = config::where('id',1)->update($res);
 
-            //判断是否更新成功
-            if($data1){
-                return redirect('admin/logo/')->with('msg','网站LOGO上传成功！');
-            } else {
-                return redirect('admin/logo/')->with('msg','网站LOGO上传失败！');
-            }
+            config::where('id',1)->update($res);
+
+            return $res['logo'];
         }
 
         

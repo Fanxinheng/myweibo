@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\user_info;
 use App\Http\Model\contents;
 use App\Http\Model\user;
+use App\Http\Model\message;
 
 use session;
 
@@ -97,12 +98,16 @@ class UserController extends Controller
         $date = user::where('id',$id)->value('status');
         // echo $date;
         if($date){
-            $update = user::where('id',$id)->update(['status'=>0]);
-        } else {
-            $update = user::where('id',$id)->update(['status'=>1]);
-        }
 
-        return redirect('admin/index');
+            //更新数据库
+            $update = user::where('id',$id)->update(['status'=>0]);
+            return 0;
+        } else {
+
+            //更新数据库
+            $update = user::where('id',$id)->update(['status'=>1]);
+            return 1;
+        }
     }
 
     /**

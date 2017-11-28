@@ -291,10 +291,27 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 
 	//后台主页
 	Route::resource('/index','UserController');
-
 	//后台管理员资源路由
 	Route::resource('/admins','AdminsController');
 
+	//后台管理员修改密码普通路由
+	Route::get('/password/{id}','PwdController@edit');
+
+	//后台管理员修改方法路由
+	Route::post('/password/update/{id}','PwdController@update');
+
+	//后台管理员退出路由
+	Route::get('/password/delete/{id}','PwdController@delete');
+
+	//后台管理员修改个人信息
+	Route::post('/password/pic','PwdController@pic');
+
+	//后台用户职业
+	Route::resource('/job','JobController');
+
+	//删除用户职业
+	Route::get('/job/delete','JobsController@delete');
+	
 	//后台热门微博资源路由
 	Route::resource('/hot','HotController');
 
