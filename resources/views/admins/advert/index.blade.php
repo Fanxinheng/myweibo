@@ -120,7 +120,7 @@
                                         </center>
                                     </td>
                                     <td class=" ">
-                                        <center> {{date("Y年m月d日 H:i:s",$v->time+8*60*60)}}</center>
+                                        <center> {{date("Y年m月d日 H:i:s",$v->time)}}</center>
                                     </td>
                                     <td class=" ">
                                         <center> {{$v->status == 0 ? '开启' : '关闭'}}</center>

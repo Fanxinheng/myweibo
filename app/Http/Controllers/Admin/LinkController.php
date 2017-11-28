@@ -137,12 +137,6 @@ class LinkController extends Controller
     {
         // 获取id对数据库进行删除
         $date = link::where('id',$id)->delete();
-        //判断如果成功去列表页，如果失败回到当前页面
-        if ($date) {
-            return redirect('/admin/link')->with('create','删除链接成功！');
-        } else {
-            return back();
-        }
 
     }
 }

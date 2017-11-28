@@ -29,8 +29,6 @@
         </div>
 @endif
 
-
-<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
         <span>
@@ -42,7 +40,7 @@
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
 
-            <form action="/admin/link" method="get" class="">
+            <form action="/admin/link" method="get" >
 
                 <div id="DataTables_Table_1_length" class="dataTables_length">
                     <label>
@@ -104,7 +102,7 @@
 
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
                 @foreach ($res as $k => $v)
-                        <tr class="odd">
+                        <tr class="@if($k % 2 == 0 ) odd @else even @endif" id="link{{$v->id}}"">
                             <td class=" ">
                                 <center>{{$v->user}}</center>
                             </td>
@@ -112,7 +110,7 @@
                                 <center>{{$v->link}}</center>
                             </td>
                             <td class=" ">
-                                <center>{{date('Y年m月d日 H:i:s',$v->time+8*60*60)}}</center>
+                                <center>{{date('Y年m月d日 H:i:s',$v->time)}}</center>
                             </td>
                             <td class=" ">
                                 <center>{{$v->status == 0 ? "上线" : "下线"}} </center>
@@ -120,19 +118,9 @@
                             <td class=" ">
                                 <center>
                                     <a href="/admin/link/{{$v->id}}/edit">
-                                        <input type="submit" class="btn btn-default" value="修改">
+                                        <input type="submit" class="btn btn-default" value="修改"/>
                                     </a>
-                                        <form action="/admin/link/{{$v->id}}" method="post" style="display:inline">
-                                                <button class="btn btn-default">删除</button>
-                                                    {{csrf_field()}}
-                                                    {{method_field('DELETE')}}
-                                        </form>
-
-
-
-
-
-
+                                        <button class="btn btn-default" onclick="link_delete({{$v->id}})">删除</button>
                                 </center>
 
 
@@ -163,6 +151,44 @@
             $('.mws-form-message').delay(3000).slideUp(1000);
 
     </script>
+
+     <script type="text/javascript">
+
+            function link_delete(id){
+
+                layer.confirm('您确定要删除此广告吗？', {
+                  btn: ['确定','取消'] //按钮
+              },function(){
+                 $.ajax({
+                    type: "post",
+                    url: "/admin/link/"+id,
+                    data: {id:id,_token:'{{csrf_token()}}',_method:'delete'},
+
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
+
+                        //关闭加载样式
+                        layer.close(a)
+
+                        //移除标签
+                        $('#link'+id).remove();
+
+                        layer.msg('广告删除成功:)', {icon: 1});
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("广告删除失败，请检查网络后重试", {icon:2 ,})
+                    }
+                });
+
+                },function(){
+
+                });
+        }
+
+            </script>
 
 @endsection
 
