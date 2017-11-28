@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use zgldh\QiniuStorage\QiniuStorage;
+
 
 use App\Http\Model\config;
 
@@ -50,37 +52,42 @@ class ConfigController extends Controller
     //执行LOGO修改功能
     public function dologo (Request $request)
     {
+        $file = $request->file('logo');
 
         //文件上传
         if($request->hasFile('logo')){
 
+            //初始化七牛云
+            $disk = QiniuStorage::disk('qiniu');
+
+            //获取文件
+            $file = $request->file('logo');
+
+            //拼装文件名
             $name = rand(1111,9999).time();
 
             $suffix = $request->file('logo')->getClientOriginalExtension();
 
-            $request->file('logo')->move('./homes/uploads/',$name.'.'.$suffix);
+            $logo = 'admins/config/'.$name.'.'.$suffix;
 
-            $logo = '/homes/uploads/'.$name.'.'.$suffix;
+            //上传文件
+            $disk->put($logo,file_get_contents($file->getRealPath()));
         }
 
         $res['logo'] = $logo;
+
         //删除旧logo
         $old = config::where('id',1)->value('logo');
 
-        $data = unlink('.'.$old);
+        $data = $disk->delete($old);
 
         //判断是否删除成功
         if($data){
 
             //更新数据库
-            $data1 = config::where('id',1)->update($res);
+            config::where('id',1)->update($res);
 
-            //判断是否更新成功
-            if($data1){
-                return redirect('admin/logo/')->with('msg','网站LOGO上传成功！');
-            } else {
-                return redirect('admin/logo/')->with('msg','网站LOGO上传失败！');
-            }
+            return $res['logo'];
         }
 
         

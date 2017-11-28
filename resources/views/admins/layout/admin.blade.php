@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
+<meta name="csrf_token" content="{{ csrf_token() }}"/>
 
 <!-- Viewport Metatag -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -77,22 +78,19 @@
                 ?>
             	<!-- User Photo -->
                 	<div id="mws-user-photo">
-                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$result->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
 
+                    	<img src="http://ozsrs9z8f.bkt.clouddn.com/{{$result->pic}}" alt="User Photo" id="admin-pic">
                     </div>
                     <!-- Username and Functions -->
                     <div id="mws-user-functions">
-
-
-                            <div id="mws-username">
-                               用户名:&nbsp;&nbsp;&nbsp;{{$result->name}}
-                            </div>
-                            <ul>
-                                <li><a href="/admin/admins/{{$result->id}}/edit"> 修改头像</a></li>
-                                <li><a href="/admin/password/{{$result->id}}"> 个人信息</a></li>
-                                <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
-                            </ul>
-
+                        <div id="mws-username">
+                            Hello:&nbsp;&nbsp;&nbsp;{{$result->name}}
+                        </div>
+                        <ul>
+                            <li><a href="/admin/admins/{{$result->id}}/edit"> 修改头像</a></li>
+                            <li><a href="/admin/password/{{$result->id}}"> 个人信息</a></li>
+                            <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
+                        </ul>
                     </div>
             </div>
 
@@ -129,6 +127,12 @@
                             <li><a href="/admin/admins">管理员列表</a></li>
                             <li><a href="/admin/index">用户列表</a></li>
 
+                        </ul>
+                        <a href="#"><i class="icon-briefcase"></i>职业管理</a>
+                        <ul class="closed">
+
+                            <li><a href="/admin/job/create">职业添加</a></li>
+                            <li><a href="/admin/job">职业列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-twitter-2"></i>微博管理</a>
                         <ul class="closed">

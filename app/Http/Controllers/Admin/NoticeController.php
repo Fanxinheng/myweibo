@@ -19,7 +19,8 @@ class NoticeController extends Controller
     public function index()
     {
         //查询数据库notice表所有内容
-        $res = notice::paginate(4);
+        $res = notice::paginate(5);
+
         //返回到index页面视图中
         return view('admins/notice/index', ['res' => $res]);
     }

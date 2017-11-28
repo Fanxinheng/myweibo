@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="mws-form-row">
-                    <label class="mws-form-label">您的原密码</label>
+                    <label class="mws-form-label">您的旧密码</label>
                     <div class="mws-form-item">
                         <input type="password" class="small" name="oldpwd" value="">
                     </div>

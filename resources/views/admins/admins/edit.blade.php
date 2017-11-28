@@ -26,28 +26,23 @@
         </div>
         @endif
 
-
-        <form action="/admin/admins/{{$res->id}}" class="mws-form"  method="post" enctype="multipart/form-data">
+        <form id="admin_form" class="mws-form"  method="post" enctype="multipart/form-data">
             <div class="mws-form-inline">
                 <div class="mws-form-row">
-                    <label class="mws-form-label">原图片</label>
+                    <label class="mws-form-label">原头像</label>
                     <div class="mws-form-item">
-                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->pic}}" style="width:100px;" id="img2">
                     </div>
                 </div>
                 <div class="mws-form-row">
-                    <label class="mws-form-label">上传头像</label>
-                    <div class="mws-form-item">
-                        <input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="No file selected..." name="pic" id="pic">
+                    <div style="padding-bottom: 10px;">上传头像</div>
+                    <div >
+                        <input type="file" name="pic" id="pic" onchange="admin_pic()">
+
                     </div>
                 </div>
-            <div class="mws-button-row">
-
-                {{csrf_field()}}
-                {{method_field('PUT')}}
-                <input type="submit" class="btn btn-default" value="修改">
-
-            </div>
+                <div class="mws-button-row">
+                </div>
         </div>
         </form>
     </div>
@@ -59,5 +54,62 @@
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
 
+
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+               }
+            });
+
+
+        //修改管理员头像
+        function admin_pic()
+        {
+           uploadImage(); 
+        }
+
+        function uploadImage() {
+        //判断是否有选择上传文件
+        //input type file
+            var imgPath = $("#pic").val();
+            if (imgPath == "") {
+                alert("请选择上传图片！");
+                return;
+            }
+            //判断上传文件的后缀名
+            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+            if (strExtension != 'jpg' && strExtension != 'gif'
+                && strExtension != 'png' && strExtension != 'bmp') {
+                alert("请选择图片文件");
+                return;
+            }
+            var formData = new FormData($( "#admin_form" )[0]);
+
+            $.ajax({
+                type: "post",
+                url: "/admin/password/pic",
+                data: formData,
+                async: true,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend:function(){
+                      // 菊花转转图
+                       a = layer.load();
+                  },
+                success: function(data) {
+                    layer.close(a);
+
+                    //改变样式
+                    $('#img2').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
+                    $('#admin-pic').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
+                    layer.msg("管理员头像修改成功！", {icon:1 ,})
+
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("管理员头像修改失败，请检查网络后重试", {icon:2 ,})
+                }
+            });
+        }
     </script>
 @endsection

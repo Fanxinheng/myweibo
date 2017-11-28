@@ -30,19 +30,16 @@
 
                         <tbody role="alert" aria-live="polite" aria-relevant="all" style="text-align: center;">
                             @foreach($admin as $k => $v)
-                            <tr class="@if($k%2 == 0) odd @else even @endif">
+                            <tr class="@if($k%2 == 0) odd @else even @endif" id="admin{{$v->id}}">
                                 <td class=" ">{{$v->id}}</td>
                                 <td class=" ">{{$v->name}}</td>
                                 <td class=" ">{{$v->phone}}</td>
-                                <td class=" "><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img"></td>
-                                <td>
-                                    <a href="/admin/admins/{{$v->id}}/edit"><button class="btn btn-default" role="button">修改</button></a>
-                                    <form action="/admin/admins/{{$v->id}}" method="post" style="display:inline">
-                                        {{csrf_field()}}
-                                        {{method_field('DELETE')}}
-                                        <button class="btn btn-default" >删除</button>
 
-                                    </form>
+                                <td class=" "><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}" alt="" style="width:50px;height:50px"/></td>
+
+                                <td>
+                                    <button class="btn btn-default" onclick="admins_delete({{$v->id}})">删除</button>
+
                                 </td>
                              </tr>
                             @endforeach
@@ -68,5 +65,46 @@
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
 
+        //删除管理员
+        function admins_delete(id){
+
+            layer.confirm('您确定要删除此管理员吗？', {
+                  btn: ['确定','取消'] //按钮
+                }, function(){
+
+                    $.ajax({
+                    type: "post",
+                    url: "/admin/admins/"+id,
+                    data: {id:id,_token:'{{csrf_token()}}',_method:'delete'},
+                    
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
+
+                        //关闭加载样式
+                        layer.close(a)
+
+                        if(data==1){
+
+                            //移除标签
+                             $('#admin'+id).remove();
+                             layer.msg('管理员删除成功: )', {icon: 1});
+                        }else{
+                             layer.msg('管理员删除失败: (', {icon: 2});
+
+                        }
+                        
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("管理员删除失败，请检查网络后重试", {icon:2 ,})  
+                    }
+                });
+
+                }, function(){
+                        
+                });
+        }
     </script>
 @endsection
