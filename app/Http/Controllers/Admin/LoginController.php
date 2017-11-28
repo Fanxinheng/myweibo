@@ -32,11 +32,10 @@ class LoginController extends Controller
         $request->flashExcept('_token');
 
         //验证验证码
-        if(session('code') != $res['code']){
+        if(Session('code') != $res['code']){
             return redirect('/admin')->with('msg','验证码不正确！');
         }
-        // var_dump($request->session()->get('code'));die;
-        
+
         //查询登录人信息
         $login = admin::where('phone','=',$res['phone'])->first();
 
@@ -47,16 +46,16 @@ class LoginController extends Controller
 
         //判断密码是否正确
         if(!Hash::check($res['password'],$login->password)){
-        // if($login->password != $res['password']){
+        
             return redirect('/admin')->with('msg','用户名或密码不正确！');
         }
 
         //将登录成功后的用户ID存入缓存以便验证登录
-        session(['uid' => $login->id]);
+
+        Session(['pid' => $login->id]);
         
         return redirect('/admin/index');
 
-    	// var_dump($res);
     }
 
 
@@ -69,7 +68,6 @@ class LoginController extends Controller
         session(['code' => $builder->getPhrase()]);
         header('Content-type: image/jpeg');
         $builder->output();
-        // var_dump(session()->all());
 
     }
 }

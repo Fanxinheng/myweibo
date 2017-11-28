@@ -21,8 +21,8 @@ class AdminsController extends Controller
     public function index(Request $request)
     {
 
-
         $admin = admin::paginate(10);
+
         return view('admins/admins/index',['admin'=>$admin,'request'=>$request]);
     }
 
@@ -47,40 +47,41 @@ class AdminsController extends Controller
         //正则验证
         $this->validate($request, [
             'name' => 'required|regex:/^\w{6,12}$/',
-            'password' => 'required|regex:/^\w{6,12}$/', 
+            'password' => 'required|regex:/^\w{6,12}$/',
+            'repass' => 'required|regex:/^\w{6,12}$/',
             'repass' => 'same:password',
             'phone' => 'required|regex:/^1[34578]\d{9}$/',
+            'pic' => 'required'
 
 
-            
         ],[
-            'name.required' => '*用户名不能为空*', 
+            'name.required' => '*用户名不能为空*',
             'name.regex' => '*请输入6~12位用户名*',
-            'password.required' => '*密码不能为空*', 
+            'password.required' => '*密码不能为空*',
             'password.regex' => '*请输入6~12位密码*',
             'repass.same' => '*两次密码不一致*',
-            'phone.required' => '*手机号码不能为空*', 
-            'phone.regex' => '*手机号码合适不正确*',
+            'phone.required' => '*手机号码不能为空*',
+            'phone.regex' => '*手机号码格式不正确*',
+            'pic.required' => '*头像不能为空'
         ]);
 
-        //获取用户名
-        $res['name'] = $request->input('name');
+         //判断是否有文件上传
+        if ($request->hasFile('pic')) {
 
             //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
-
             //获取文件内容
             $file = $request->file('pic');
 
-            //修改名字已时间戳生成文件名
-            $name = rand(1111,9999).time();
+            //修改名字已时间戳生成文件命
+            $name = 'Advert'.rand(1111,9999).time();
 
-            //获取文件名的后缀
+            //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
-
+            //移动图片到
+            // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
             //拼装文件的名称
             $prind = 'admins/Uploads/'.$name.'.'.$suffix;
-
             //上传到七牛云
             $bool = $disk->put($prind,file_get_contents($file->getRealPath()));
 
@@ -104,37 +105,27 @@ class AdminsController extends Controller
                 return back()->with('msg','抱歉，此用户名已存在！');
             }
 
+            $res['phone'] = $request->input('phone');
 
-        $phone = admin::where('phone','=',$res['phone'])->first();
+            $phone = admin::where('phone','=',$res['phone'])->first();
 
-        //判断手机号是否存在
-        if(isset($phone)){
-            return back()->with('msg','抱歉，此手机号已存在！');
-        }
+            //判断手机号是否存在
+            if(isset($phone)){
+                return back()->with('msg','抱歉，此手机号已存在！');
+            }
 
-        $res['password'] = Hash::make($request->input('password'));
-
+            $res['password'] = Hash::make($request->input('password'));
 
             //将数据插入数据库
+
             $admin = admin::insert($res);
 
-<<<<<<< HEAD
-
-        // var_dump($admin);
         // 判断管理员是否添加成功
-        if($admin){
-            return redirect('/admin/admins')->with('msg','管理员添加成功！');
-        } else {
-            return back()->with('msg','管理员添加失败！');
-        }
-=======
-            //判断管理员是否添加成功
             if($admin){
                 return redirect('/admin/admins')->with('msg','管理员添加成功！');
             } else {
                 return back()->with('msg','管理员添加失败！');
             }
->>>>>>> 0fd0e0d16b18b9b1fa45a92f8195351da9cb1638
 
 
     }
@@ -160,7 +151,7 @@ class AdminsController extends Controller
     {
         //获取修改管理员信息
         $res = admin::where('id','=',$id)->first();
-        // var_dump($res);
+        
         return view('admins/admins/edit',['res'=>$res]);
     }
 
@@ -173,7 +164,6 @@ class AdminsController extends Controller
      */
     public function update(Request $request, $id)
     {
-
          //判断是否有文件上传
         if ($request->hasFile('pic')) {
 
@@ -183,19 +173,20 @@ class AdminsController extends Controller
             //获取文件内容
             $file = $request->file('pic');
 
-            //修改名字已时间戳生成文件名
+            //修改名字已时间戳生成文件命
             $name = 'admins'.rand(1111,9999).time();
 
-            // //获取文件名的后缀
+            // //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
-
+            //移动图片到
+            // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
             //修改所上传文件的名称
             $print = 'admins/Uploads/'.$name.'.'.$suffix;
 
             //上传到七牛云
              $bool = $disk->put($print,file_get_contents($file->getRealPath()));
 
-            //获取管理员原头像
+            //去数据库获取图片信息
             $pic = admin::where('id',$id)->value('pic');
 
             //删除七牛云信息
@@ -217,7 +208,6 @@ class AdminsController extends Controller
 
 
 
-
     }
 
     /**
@@ -228,7 +218,6 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
-
 
         //获取管理员头像
         $pic = admin::where('id',$id)->value('pic');
@@ -248,11 +237,5 @@ class AdminsController extends Controller
             return 0;
         }
 
-
-        if($date){
-            return redirect('/admin/admins')->with('msg','管理员删除成功！');
-        } else {
-            return back()->with('msg','管理员删除失败！');
-        }
     }
 }

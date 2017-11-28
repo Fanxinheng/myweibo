@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Model\job;
 
-use App\Http\Model\notice;
 
-class NoticeController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,11 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        //查询数据库notice表所有内容
-        $res = notice::paginate(5);
+        //查询职业内容
+        $job = job::get();
 
-        //返回到index页面视图中
-        return view('admins/notice/index', ['res' => $res]);
+        return view('admins/job/index',['job'=>$job]);
+
     }
 
     /**
@@ -32,7 +32,7 @@ class NoticeController extends Controller
      */
     public function create()
     {
-        return view('admins/notice/add');
+        return view('admins/job/add');
     }
 
     /**
@@ -43,15 +43,16 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
+        $res['job'] = $request->input('job');
+        //插入数据
+        $bool = job::insert($res);
 
-        $res = $request->except('_token');
-        $res['time']=time();
-        $data = notice::insert($res);
-         if($data){
-             return redirect('admin/notice');
-         } else {
-             return back();
-         }
+        if($bool){
+            return redirect('admin/job')->with('create','用户职业添加成功！');
+        }else{
+            return back();
+
+        }
     }
 
     /**
@@ -73,7 +74,11 @@ class NoticeController extends Controller
      */
     public function edit($id)
     {
-        //
+        //查询职业信息
+        $job = job::where('id',$id)->first();
+
+        return view('admins/job/edit',['job'=>$job]);
+
     }
 
     /**
@@ -85,7 +90,17 @@ class NoticeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $res['job'] = $request->input('job');
+
+        //更新数据
+        $bool = job::where('id',$id)->update($res);
+
+        if($bool){
+            return redirect('admin/job')->with('edit','用户职业修改成功！');
+
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -96,7 +111,9 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        //删除职业
+        job::where('id',$id)->delete();
 
     }
 }

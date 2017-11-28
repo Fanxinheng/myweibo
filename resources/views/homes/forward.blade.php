@@ -1,42 +1,43 @@
-
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
-        <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
+        <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
+
         <title>
-            微博-随时随地发现新鲜事
+            我的首页 微博-随时随地发现新鲜事
         </title>
+        <link media="all" href="/homes/css/login.css" type="text/css" rel="stylesheet">
     </head>
+
     
-    <body class="FRAME_login">
-        
-        <div style="position: absolute; top: -9999px;">
-            <div id="js_style_css_module_global_WB_outframe">
-            </div>
-        </div>
-        <link media="all" href="/homes/css/index.css" type="text/css" rel="stylesheet">
-        <div class="B_unlog">
-            <div class="WB_miniblog">
-                <div class="WB_miniblog_fb">
-                    <div id="weibo_top_public">
-                        <!--spec start-->
-                        <!--顶部导航-->
+    <body class="FRAME_main B_index">
+        <div class="WB_miniblog">
+            <div class="WB_miniblog_fb">
+                <div id="plc_top">
+                    <!--简易顶部导航拼页面用-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
-                            <div class="gn_header clearfix" style="width:1200px">
+                            <div class="gn_header clearfix" style="width:1000px">
+
                                 <!-- logo -->
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
-                                    <a href="/home/admin" class="box" title=""
+                                    <a href="/home/login" class="box" title=""
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
@@ -44,31 +45,25 @@
                                         </span>
                                     </a>
                                 </div>
+                                
+                                <!-- 搜索 -->
                                 <div class=" gn_search_v2">
-                                    
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input" name="15102240605332" type="text" style="height:25px" placeholder="搜索你想要的">
-                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
-                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 
-                                    </a>
-                                    <!--搜索热词下拉-->
-                                   <!--  <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
-                                        <div class="gn_topmenulist">
-                                            <div node-type="basic">
-                                            </div>
-                                            <div node-type="plus">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!--/搜索热词下拉-->
+                                    <form action="/home/search" method="get">
+                                        <input node-type="searchInput" autocomplete="off" value="" class="W_input"
+                                        name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
+
+
+                                        {{csrf_field()}}
+                                        <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+                                    </form> 
                                 </div>
-                                <div class="gn_position">
-                                    <div class="gn_nav">
+                           
+                            <div class="gn_position">
+                                <div class="gn_nav">
                                         <ul class="gn_nav_list">
                                             <li>
-                                                <a href="/home/admin" class="home S_txt1" suda-uatrack="key=topnav_tab&amp;value=homepage"
-                                                target="_top">
+                                                <a href="/home/login"  title="微博首页">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                                     </em>
@@ -77,14 +72,16 @@
                                                     </em>
                                                 </a>
                                             </li>
-                                           
-                                           
-                                        </ul>
-                                    </div>
-                                    <div class="gn_login">
-                                        <ul class="gn_login_list">
+                                            <li class="dropdown">
+                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$user->nickName}}<span class="caret"></span></a>
+                                              <ul class="dropdown-menu">
+                                                <li><a href="/home/user">个人中心</a></li>
+                                                <li><a href="/home/details">个人信息</a></li>
+                                                <li><a href="/home/changepass">修改密码</a></li>
+                                                <li><a href="/home/message">系统消息</a></li>
+                                              </ul>
+                                            </li>
                                             <li>
-
                                                 <a href="/home/details/quit"  title="退出登录">
                                                     <em class="W_ficon ficon_home S_ficon">
                                                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
@@ -94,101 +91,110 @@
                                                     </em>
                                                 </a>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
-                        <!--spec end-->
                     </div>
-                    <div class="WB_main clearfix" id="plc_frame">
-                        <div class="WB_frame">
-                            <!-- 左导 -->
-                            <div class="WB_main_l">
-                                <div id="pl_unlogin_home_leftnav">
-                                    <div class="UG_left_nav" node-type="UG_fixed_nav" style="position: absolute; top: 66px; bottom: auto;">
-                                        <ul >
-                                            <div category_id="0" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:0"
-                                            suda-uatrack="key=www_unlogin_home&amp;value=recommend">
-                                                <li >
-                                                    <a href="/home/admin/" class="nav_item">
-                                                        全部
-                                                    </a>
-                                                </li>
-                                            </div>
-                                            <div category_id="2" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:2"
-                                            suda-uatrack="key=www_unlogin_home&amp;value=star">
-                                                <li>
-                                                    <a href="/home/hot/" class="nav_item">
-                                                        热门
-                                                    </a>
-                                                </li>
-                                            </div>
-                                             @foreach($label as $v)
-
-                                             <div category_id="99991" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:99991"
-                                            suda-uatrack="key=www_unlogin_home&amp;value=billboard">
-                                                <li>
-                                                    <a href="/home/label/{{$v->id}}" class="nav_item">
-                                                          {{$v->lcontent}}
-                                                    </a>
-                                                </li>
-                                            </div>
-                                            @endforeach
-                                          
-                                            
-                                          
-                                        </ul>
+                    <!--/简易顶部导航拼页面用-->
+                </div>
+                <div class="WB_main clearfix" id="plc_frame">
+                    <div id="v6_pl_guide_bubbletip">
+                    </div>
+                    <div id="v6_pl_content_hometip">
+                    </div>
+                    <div class="WB_frame">
+                        <div class="WB_main_l" fixed-box="true">
+                            <div id="v6_pl_leftnav_group">
+                                <div class="WB_left_nav WB_left_nav_Atest" node-type="groupList" fixed-item="true">
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a href="/home/login" class="S_txt1" node-type="item" bpfilter="main"
+                                            nm="status" suda-uatrack="key=V6update_leftnavigate&amp;value=homepage"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    首页
+                                                </span>
+                                            </a>
+                                        </h3>
                                     </div>
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/hot" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    热门微博
+                                                </span>
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/forward" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    微博转发
+                                                </span>
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <div class="lev_Box lev_Box_noborder">
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e09c8ae74" href="/home/index/attention" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    我的关注
+                                                </span>
+                                            </a>
+                                        </h3>
+                                    </div>
+
+                                    @foreach($label as $v)
+                                    <div class="lev_Box lev_Box_noborder" >
+                                        <h3 class="lev">
+                                            <a dot="pos55b9e0b0ca122" href="/home/index/label/{{$v->id}}" class="S_txt1" node-type="item"
+                                            bpfilter="main" suda-uatrack="key=V6update_leftnavigate&amp;value=collect"
+                                            indepth="true">
+                                                <span class="levtxt">
+                                                    {{$v->lcontent}}
+                                                </span>
+                                                <i class="W_new" like-dot="likeDot" style="display: none;">
+                                                </i>
+                                            </a>
+                                        </h3>
+
+                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
-                            <!-- ／左导 -->
-                            <div id="plc_main">
-                                <div id="plc_unlogin_home_main">
 
-
-
-                                    
-                                    <div class="WB_frame_c">
-                                        <div id="pl_unlogin_home_feed">
-                                            <!--榜单栏位置-->
-                                         
-                                           
-                                            <div class="UG_contents" id="PCD_pictext_i_v5">
-                                                <!--feed内容-->
-                                                <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
+                        </div>
+                        <div id="plc_main" style="width:490px">
+                            <div class="WB_main_c">
+                                <div id="v6_pl_content_publishertop" >
+                                    <div class="send_weibo S_bg2 clearfix send_weibo_long" node-type="wrap">
+                                        <div class="title_area clearfix">
+                                            <div class="title" node-type="publishTitle">
+                                                <span class="txt">
+                                                    What’s new with you?
+                                                </span>
+                                                <p class="W_swficon ficon_swtxt">
+                                                    <em class="spac1">
+                                                        有什么新鲜事想告诉大家?
+                                                    </em>
                                                     
-                                                    <!--article feed-->
-                                                     
-                                                    <!--广告模块-->
-                                                    <div class="UG_list_b" mid="4171968871140682" action-type="feed_list_item"
-                                                    href="//weibo.com/5187664653/FuceP4MK6?ref=feedsdk" suda="key=nologin_home&amp;value=nologin_card_weibo:4171968871140682"
-                                                    suda-uatrack="key=www_unlogin_home&amp;value=recommend_feed">
+                                                </p>
+                                            </div>
+                                            
+                                            
+                                        </div>
 
-
-                                                        <div class="list_des">
-                                                            
-                                                            <h3 class="list_title_s">
-                                                                <div>
-                                                                    {{$res->content}}
-                                                                </div>
-                                                            </h3>
-                                                            
-                                                            <div class="subinfo_box clearfix">
-                                                                
-                                                                    <span class="subinfo_face ">
-                                                                        <img src="{{$res->photo == NULL ? '/homes/uploads/default.jpg' : $res->photo}}" alt="" width="20" height="20">
-                                                                    </span>
-                                                                
-                                                                
-                                                                    <span class="subinfo S_txt2">
-                                                                        {{$res->nickName}} 
-                                                                    </span>
-                                                               
-                                                                <span class="subinfo S_txt2">
-                                                                    {{date('Y-m-d H:i:s',$res->time)}} 
-                                                                </span>
 
 
                                     <form action="/home/release" method="post" enctype="multipart/form-data">
@@ -215,247 +221,397 @@
                                                 </a>
                                                 
                                                 <span>
+                                                    
 
-                                                        <form action="/home/forward/store/" method="post">
-                                                            <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
-                                                            <input type="hidden" name="uid" value="{{$res->uid}}">
-                                                            <input type="hidden" name="tid" value="{{$res->cid}}">
-                                                            {{csrf_field()}}
-                                                            <button id="forward" style="margin:5px 0 5px 605px;" class="btn btn-default">转发</button>
+                                                    @foreach($label as $val)
 
-                                                        </form>
-
-                                                    <!-- 转发内容 -->
-
-                                                    <div class="list_des" style="height:60px;border-radius:10px;padding-left:10px;background-color: #F2F2F5;">
-
-                                                    @if($res->fnum == 0)
-                                                    <h3 class="list_title_s">
-                                                        <div>
-                                                          亲，微博还没有转发，快去试试吧:)
-                                                        </div>
-                                                    </h3>
-                                                    @endif
-
-                                                    @foreach($forward as $k=>$v) 
-                                                    <div class="subinfo_box clearfix" >
-                                                           
-                                                            <span class="subinfo_face ">
-                                                                <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}" alt="" width="20" height="20">
-                                                            </span>
-                                                        
-                                                            <span class="subinfo S_txt2">
-                                                            {{$v->nickName}}
-                                                            </span>
-                                                        
-                                                        <span class="subinfo S_txt2">
-                                                            {{date('Y-m-d H:i:s',$v->time)}} 
-                                                        </span>
-                                                      
-                                                    </div>
-                                                    <h3 class="list_title_s">
-                                                        <div>
-                                                          {{$v->fcontent}}
-                                                        </div>
-                                                    </h3>
+                                                    <label class="checkbox-inline" style="margin-bottom: 15px">
+                                                      <input type="checkbox" id="inlineCheckbox1" name="label[]" value="{{$val->id}}">{{$val->lcontent}}
+                                                    </label>
+                                                    
                                                     @endforeach
-                                                    </div>
-                                                     </div> 
-                                                    <!-- read_pos -->
-                                                    <!--/read_pos-->
-                                                </ul>
-                                                <!--/feed内容-->
+                                               </span> 
+                                                
                                             </div>
-                                        </div>
+                                            <div style="float: right;margin-top: 6px;">
+                                                {{csrf_field()}}
+                                                <button id="release" style="width:100px;height:40px;border-radius:5px;background:orange;color:white;font-size: 16px">发布</button>
+                                                
+                                            </div>
+                                            
+                                    </form>
+
                                     </div>
+                                </div>
+                                
 
-
-
-
-
-
-
-                                    <div class="WB_main_r" fixed-box="true">
-                                        <div id="pl_unlogin_home_login">
-                                            <div style="visibility: hidden;">
-                                            </div>
-                                            <div style="z-index: 10; transform: translateZ(0px); position: relative; width: 340px;">
-                                                <div class="UG_box" fixed-inbox="true" fixed-id="2">
-                                                    <div class="W_unlogin_v4">
-                                                        <div class="login_box" id="pl_login_form">
-                                                            <div class="login_innerwrap">
-                                                                <div class="info_header">
-                                                                    <div class="tab clearfix">
-                                                                        <a href="javascript:void(0);" node-type="normal_tab" action-type="switchTab"
-                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login"
-                                                                        >
-                                                                            <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
-                                                                            帐号登录
-                                                                        </a>
-                                    
-                                                                    </div>
-                                                                 
-                                                                </div>
-                                                               
-                                                                <!-- /result end -->
-                                                                <div class="W_login_form" node-type="normal_form">
-                                                                    <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
-                                                                    <form action="/home/login" method="get">
-                                                                        
-                                                                        <div class="form-group">
-                                                                            <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入手机号" style="width:250px;">
-                                                                        </div>
-
-                                                                        <div class="form-group">
-                                                                            <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
-                                                                        </div>
-
-                                                                        
-                                                                </div>
-                                                                
-                                                                    
-                                                                    <div class="info_list auto_login clearfix">
-                                                                        
-                                                                        <label for="login_form_savestate" class="W_fl W_label" title="建议在网吧或公共电脑上取消该选项。"
-                                                                        action-data="content=建议在网吧或公共电脑上取消该选项。" action-type="customTip">
-                                                                            <input id="login_form_savestate" checked="checked" node-type="savestate"
-                                                                            tabindex="5" class="W_checkbox" type="checkbox">
-                                                                            <span class="S_txt2">
-                                                                                记住我
-                                                                            </span>
-                                                                        </label>
-                                                                    </div>
-                                                                  
-                                                                    <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
-                                                                    <div class="info_list register">
-                                                                        <span class="S_txt2">
-                                                                            还没有微博？
-                                                                        </span>
-                                                                        <a target="_top" href="register">
-                                                                            立即注册!
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                               
-                                                                
-                                                            </div>
+                                @foreach($index as $v)
+                                <div id="v6_pl_content_homefeed" class="blog">
+                                    <div node-type="homefeed">
+                                        
+                                        <!--feed list-->
+                                        <div class="WB_feed WB_feed_v3 WB_feed_v4" pagenum="1" node-type="feed_list"
+                                        unread_mode="1">
+                                           
+                                            <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
+                                            class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
+                                            action-type="feed_list_item">
+                                                <div class="WB_feed_detail clearfix" node-type="feed_content" ">
+                                                    
+                                                    
+                                                    <div class="WB_face W_fl">
+                                                        <div class="face">
+                                                            <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
+                                                            href="/home/other/user/{{$v->user_info->uid}}" indepth="true">
+                                                                <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->user_info->nickName}}"
+                                                                alt="" src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"
+                                                                width="50" height="50" class="W_face_radius">
+                                                            </a>
                                                         </div>
+
                                                     </div>
-                                                </div>
-                                                <div style="height: 1px; margin-top: -1px; visibility: hidden;">
-                                                </div>
-                                            </div>
-                                            <div class="bg" node-type="qr_help" style="position: absolute; top: 2px; left: -220px; width: 264px; height: 372px; background-position: -300px -150px; background-repeat: no-repeat; z-index: 999; background-image: url('sprite_login.png'); display: none;">
-                                            </div>
-                                        </div>
-                                        <div id="pl_unlogin_home_hotpersoncategory">
-                                            <div class="UG_box_l" style="width:340px;float: right;">
-                                                <h2 class="UG_box_title">
-                                                    微博找人
-                                                </h2>
-                                                <div class="UG_contents">
-                                                    <div class="UG_tag_list">
-                                                        <h3 class="tag_title">
-                                                            名人
-                                                        </h3>
-                                                        <ul class="clearfix">
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_1003_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1003_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        明星
-                                                                    </span>
+                                                    <div class="WB_detail">
+                                                        <div class="WB_info">
+                                                            <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
+                                                            target="_top" class="W_f14 W_fb S_txt1" title="{{$v->user_info->nickName}}" 
+                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->user_info->uid}}">
+                                                                {{$v->user_info->nickName}}
+                                                             
+                                                            </a>
+                                                            <!-- 判断微博是否为登录用户自己转发 -->
+                                                            @if($uid == $v->fid)
+                                                                
+                                                                <a class="glyphicon glyphicon-remove destroy" style="float: right;cursor: pointer;" title="删除微博">
+                                                                    <input type="hidden" name="destroy" value="{{$v->id}}">
                                                                 </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_1001_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1001_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        商界
-                                                                    </span>
+                                                            @endif
+                                                            
+                                                           
+                                                        </div>
+                                                        
+                                                        <div class="WB_from S_txt2" node-type="feed_list_content">
+                                                            <!-- minzheng add part 2 -->
+                                                            
+                                                                {{date('Y-m-d H:i:s',$v->time)}}
+                                                            
+                                                            <!-- minzheng add part 2 -->
+                                                        </div>
+                                                        
+                                                        @if($v->fcontent)
+                                                        <div class="WB_text W_f14" title="转发内容">
+                                                            {{$v->fcontent}}
+                                                        </div>
+                                                        @else
+                                                        <div class="WB_text W_f14" title="转发内容">
+                                                            转发微博
+                                                        </div>
+                                                        @endif
+                                                        
+                                                        @foreach($v->contents as $con)
+                                                           
+                                                            <div class="WB_text W_f14" node-type="feed_list_content" title="微博内容" style="word-break:break-all;background-color: #F2F2F5;border-radius: 10px;padding:10px;margin:8px;">
+                                                                <a class="W_f14 W_fb S_txt1" title="{{$v->user_info->nickName}}"  href="/home/other/user/{{$v->user_info->uid}}">
+                                                                <div class="WB_text W_f14" node-type="feed_list_content" title="微博作者" style="word-break:break-all;"">
+                                                                {{$con->user_info->nickName}}  
+                                                                </div>
                                                                 </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_5007_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1007_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        媒体精英
-                                                                    </span>
+
+
+                                                                <div class="WB_from S_txt2" node-type="feed_list_content" title="发布时间" style="word-break:break-all;"">
+                                                                {{date('Y-m-d H:i:s',$con->time)}}
+                                                                </div>
+
+
+                                                                <a href="/home/blog/forward/{{$con->cid}}">
+                                                                <div class="WB_text W_f14" node-type="feed_list_content" title="微博内容" style="word-break:break-all;"">
+                                                                {{$con->content}}
+                                                                </div>
                                                                 </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_2003_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1005_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        作家
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                                href="https://d.weibo.com/1087030002_2975_7002_0">
-                                                                    <i class="item_icon">
-                                                                        <img src="/homes/images/1087030002_892_1004_0.png" class="pic">
-                                                                    </i>
-                                                                    <span class="text width_fix W_autocut">
-                                                                        政府官员
-                                                                    </span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
+
+                                                                @if($con->image)
+                                                                <div id="image" style="width:100px;">
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$con->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
+                                                                </div>
+                                                                @else
+                                                             
+                                                                @endif
+
+                                                            </div>
+                                                      @endforeach
+                                                        
+                                                        
                                                     </div>
-                                                  
-                                                 
                                                    
                                                 </div>
+                                                
                                             </div>
+                                           
                                         </div>
+
                                     </div>
+                                </div>
+                                @endforeach
+                                <div style="float: right">
+                                    <nav aria-label="...">
+                                      <ul class="pager">
+                                        <li class="previous"><a href="{{$index->previousPageUrl()}}"><span aria-hidden="true">&larr;</span> Older</a></li>
+                                        <li class="next"><a href="{{$index->nextPageUrl()}}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+                                      </ul>
+                                    </nav>
+                                </div>
+                              </div>                     
+                               
+                              </div>
+                                   <div id="v6_pl_rightmod_myinfo" style="float: right;width:245px">
+                                        <div class="WB_cardwrap S_bg2">
+                                            <div class="W_person_info" style="height:190px">
+                                                <div class="cover" id="skin_cover_s" style="background-image: url('/homes/images/001_s.jpg');">
+                                                    <div class="headpic">
+                                                        <a bpfilter="page_frame" href="/home/user"  indepth="true">
+                                                            <img class="W_face_radius" width="60" height="60"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$user->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="WB_innerwrap" >
+                                                    <div class="nameBox" style="height:38px;">
+                                                        <a href="/home/user" class="name S_txt1" title="积分" style="padding-top: 10px">
+                                                            {{$user->nickName}}  
+                                                        <em class="W_ficon ficon_favorite S_ficon">
+                                                            <span class="glyphicon glyphicon-tint" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
+                                                        </em>
+                                                        <em style="font-size: 14px">
+                                                            {{$user->socre}}
+                                                        </em>
+                                                        </a>
+                                                    </div>
+                                                    <ul class="user_atten clearfix W_f18" style="padding-left: 10px">
+                                                        <li class="S_line1">
+                                                            <a bpfilter="page_frame" href="/home/attention" class="S_txt1" indepth="true">
+                                                                <strong node-type="follow">
+                                                                    {{$unum}}
+                                                                </strong>
+                                                                <span class="S_txt2">
+                                                                    关注
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="S_line1">
+                                                            <a bpfilter="page_frame" href="/home/fans" class="S_txt1" indepth="true">
+                                                                <strong node-type="fans">
+                                                                    {{$gnum}}
+                                                                </strong>
+                                                                <span class="S_txt2">
+                                                                    粉丝
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="S_line1">
+                                                            <a bpfilter="page_frame" href="/home/user" class="S_txt1" indepth="true">
+                                                                <strong node-type="weibo">
+                                                                    {{$cnum}}
+                                                                </strong>
+                                                                <span class="S_txt2">
+                                                                    微博
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                           </div>
+                                        </div>
+
+                                    </div>
+
+                        
+                        <!-- 系统公告 -->
+                        <div style="background-color: #FFFFFF;border-radius: 5px;">
+                            <div >
+                                <div  style="margin: 10px;padding:10px;">
+                                    <div style="font-size: 15px;padding-bottom: 10px;">
+                                            系统公告
+                                    </div>
+                                    @foreach($notice as $not)
+                                    <a href="#" class="UG_tag_list" title="公告标题">
+                                        <div style="font-size: 14px" onclick="notice({{$not->id}})">
+                                            {{$not->title}}
+                                        </div>
+                                    </a>
+                                    @endforeach
+                                </div>
+                            </div>
+                       </div>
+                       <!-- 微博找人 -->
+                        <div style="background-color: #FFFFFF;border-radius: 5px;">
+                            <div >
+                                <div  style="margin: 10px;padding:10px;line-height: 30px;">
+                                    <div style="font-size: 15px;padding-bottom: 10px;">
+                                            微博找人
+                                    </div>
+                                    @foreach($job as $j)
+                                    <a href="/home/job/{{$j->id}}">
+                                        <laebl style="font-size: 14px;background-color: #F2F2F5;padding:5px;margin:10px;border-radius: 10px;">
+                                            {{$j->job}}
+                                        </label>
+                                    </a>
+                                    
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
-                       
-                      
+                    <!-- 广告显示页面 -->
+                    @foreach($advert as $k=>$v)
+                        @if($v->status == 0)
+                         <div class="WB_cardwrap S_bg2">
+                            <div class="W_person_info" style="height:190px">
+                                <div class="UG_contents">
+                                    <div class="UG_tag_list">
+                                        <span>
+                                            <a target="_blank" class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous" href="//{{($v->link)}}">
+                                                <i class="item_icon">
+                                                   <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" alt="" style="padding:10px;width: 243px;height:187px"/>
+                                                </i>
+                                            </a>
+
+                                        </span>
+                                    </div>
+                                </div>
+                          </div>
+                       </div>
+
+                        @endif
+                    @endforeach
+                </div>
                     </div>
                 </div>
-              <div id="plc_bot">
-
-            <!--footer-->
-             <!--  <div class="WB_footer S_bg2">
-              
-               <div class="other_link S_bg1 clearfix T_add_ser">
-                 
-                   <p class="copy_v2">
-                       <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                       <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                       <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                       <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                       <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                       <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
-                   </p>
-                   <p class="company"></p>
-               </div>
-             </div> -->
-
-        
-        <!--/footer-->
-        </div>
             </div>
         </div>
+        </div>
+
+        <div id="plc_bot">
+            <!--footer-->
+            <div class="WB_footer S_bg2">
+                <!-- 友情链接 -->
+                <div class="other_link S_bg1 clearfix T_add_ser">
+                    <p class="copy_v2">
+                        @foreach($link as $k=>$v)
+                            @if($v->status==0)
+                                <a href="//{{$v->link}}" target="_blank" class="S_txt2">{{$v->user}}</a>
+                            @endif
+                        @endforeach
+                    </p>
+                    <p class="copy_v2">
+                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
+                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
+                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
+                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
+                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
+                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                    </p>
+                <p class="company"></p>
+                </div>
+            </div>
+            <!--/footer-->
+        </div>
+
+
+
+        </div>
+        </div>
+        <script type="text/javascript">
+       
+        //微博发布
+        $('#release').on('click', function(){
+
+            var a = layer.load(0, {shade: false});
+            
+            layer.msg('微博发布成功:)', {icon: 1});
+            
+          });
+
+
+        //删除转发
+        $('.destroy').on('click',function(){
+
+            //获取要删除转发的id
+            did = $(this).children('input[name=destroy]').val();
+
+            layer.confirm('您确定要删除此转发吗？', {
+              btn: ['确定','取消'] //按钮
+            }, function(){
+
+                $.ajax({
+                type: "get",
+                url: "/home/blog/delete",
+                data: {did:did},
+                
+                beforeSend:function(){
+                    //加载样式
+                    a = layer.load(0, {shade: false});
+                  },
+                success: function(data) {
+
+                    //关闭加载样式
+                    layer.close(a)
+
+                    //移除微博
+                    $('.blog:first').remove();
+
+                    layer.msg('转发删除成功:)', {icon: 1});
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("转发删除失败，请检查网络后重试", {icon:2 ,})
+                                                            
+                }
+            });
+
+            }, function(){
+
+            });
+
+        });
+
+        //系统公告
+        function notice(id){
+
+            $.ajax({
+                type: "get",
+                url: "/home/notice",
+                data: {id:id},
+                
+                beforeSend:function(){
+                    //加载样式
+                    a = layer.load(0, {shade: false});
+                  },
+                success: function(data) {
+
+                    //关闭加载样式
+                    layer.close(a)
+
+                    layer.open({
+                      type: 1
+                      ,title: data.title //不显示标题栏
+                      ,closeBtn: false
+                      ,area: '300px;'
+                      ,shade: 0.8
+                      ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                      ,resize: false
+                      ,btn: ['知道了']
+                      ,btnAlign: 'c'
+                      ,moveType: 1 //拖拽模式，0或者1
+                      ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                      ,
+                    });
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                    
+                    
+                }
+            });
+        }
+
+        
+
+    </script>
     <script type="text/javascript">
          $('#forward').on('click', function(){
             layer.msg('亲，您好像忘了登录呦:)', {
@@ -465,4 +621,4 @@
     </script>
     </body>
 
-</html>
+    </html>

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
         <meta name="csrf_token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
-        <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！"
-        name="description">
+        <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
-        <link rel="stylesheet" type="text/css" href="/homes/css//iconfont.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
@@ -25,31 +24,33 @@
             微博-随时随地发现新鲜事
         </title>
     </head>
-
+    
     <body class="FRAME_login">
         
-        <div id="js_style_css_module_global_WB_outframe">
+        <div style="position: absolute; top: -9999px;">
+            <div id="js_style_css_module_global_WB_outframe">
+            </div>
         </div>
         <link media="all" href="/homes/css/index.css" type="text/css" rel="stylesheet">
-        <div  class="B_unlog">
+        <div class="B_unlog">
             <div class="WB_miniblog">
                 <div class="WB_miniblog_fb">
-                    <div id="weibo_top_public" >
+                    <div id="weibo_top_public">
                         <!--spec start-->
                         <!--顶部导航-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
                             <div class="gn_header clearfix" style="width:1200px">
                                 <!-- logo -->
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
-                                    <a href="/home/admin" class="box" title="" node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
+                                    <a href="/home/admin" class="box" title=""
+                                    node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
                                             <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
                                         </span>
                                     </a>
                                 </div>
-                                <div class=" gn_search_v2" >
-
+                                <div class=" gn_search_v2">
                                     <form action="/home/admin/search" method="get">
                                         <input node-type="searchInput" autocomplete="off" value="" class="W_input"
                                         name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
@@ -57,24 +58,23 @@
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
                                     </form> 
-
                                 </div>
-                                <div class="gn_position" >
+                                <div class="gn_position">
                                     <div class="gn_nav">
                                         <ul class="gn_nav_list">
                                             <li>
                                                 <a href="/home/admin" class="home S_txt1" suda-uatrack="key=topnav_tab&amp;value=homepage"
                                                 target="_top">
                                                     <em class="W_ficon ficon_home S_ficon">
-                                                        <span class="glyphicon glyphicon-home" aria-hidden="true">
-                                                        </span>
+                                                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                                                     </em>
-                                                    <!-- <i class="lock_fill icon-lock_fill">asdasdasd</i> -->
                                                     <em class="S_txt1">
                                                         首页
                                                     </em>
                                                 </a>
                                             </li>
+                                           
+                                           
                                         </ul>
                                     </div>
                                     <div class="gn_login">
@@ -84,6 +84,7 @@
                                                     注册
                                                 </a>
                                             </li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -97,10 +98,10 @@
                             <div class="WB_main_l">
                                 <div id="pl_unlogin_home_leftnav">
                                     <div class="UG_left_nav" node-type="UG_fixed_nav" style="position: absolute; top: 66px; bottom: auto;">
-                                        <ul>
+                                        <ul >
                                             <div category_id="0" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:0"
                                             suda-uatrack="key=www_unlogin_home&amp;value=recommend">
-                                                <li>
+                                                <li >
                                                     <a href="/home/admin/" class="nav_item">
                                                         全部
                                                     </a>
@@ -114,16 +115,19 @@
                                                     </a>
                                                 </li>
                                             </div>
+
                                             @foreach($label as $v)
-                                            <div category_id="99991" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:99991"
+
+                                             <div category_id="99991" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:99991"
                                             suda-uatrack="key=www_unlogin_home&amp;value=billboard">
                                                 <li>
                                                     <a href="/home/label/{{$v->id}}" class="nav_item">
-                                                        {{$v->lcontent}}
+                                                          {{$v->lcontent}}
                                                     </a>
                                                 </li>
                                             </div>
-                                            @endforeach
+                                          @endforeach
+    
                                         </ul>
                                     </div>
                                 </div>
@@ -131,13 +135,21 @@
                             <!-- ／左导 -->
                             <div id="plc_main">
                                 <div id="plc_unlogin_home_main">
+                                    
                                     <div class="WB_frame_c">
                                         <div id="pl_unlogin_home_feed">
                                             <!--榜单栏位置-->
+                                         
+                                           
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
                                                     
+                                                @if($index->isEmpty())
+                                                    <div style="text-align: center">
+                                                    抱歉，我们没有找到您想要的内容:(
+                                                    </div>
+                                                @endif
 
                                                 @foreach($index as $k=>$v)
                                                 
@@ -158,58 +170,63 @@
                                                         @endif
                                                         
                                                         <div class="subinfo_box clearfix">
+                                                                
+                                                                <span class="subinfo_face" style="cursor: pointer">
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}" alt="" width="20" height="20">
+                                                                </span>
+                                                                
+                                                                <span class="subinfo S_txt2">
+                                                                    {{$v->nickName}} 
+                                                                </span>
+                                                           
+                                                            <span class="subinfo S_txt2">
+                                                                {{date('Y-m-d H:i:s',$v->time)}} 
+                                                            </span>
 
-                                                                <span class="subinfo_face " style="cursor: pointer">
-                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}"
-                                                                    alt="" width="20" height="20">
-                                                                </span>
-                                                                <span class="subinfo S_txt2">
-                                                                    {{$v->nickName}}
-                                                                </span>
-                                                                <span class="subinfo S_txt2">
-                                                                    {{date('Y-m-d H:i:s',$v->time)}}
-                                                                </span>
-                                                                <a>
-                                                                <span class="subinfo_rgt S_txt2" class="point">
-                                                                    <em class="W_ficon ficon_praised S_ficon W_f16">
-                                                                        <span class="glyphicon glyphicon-thumbs-up" id="point" aria-hidden="true">
-                                                                        </span>
-                                                                    </em>
-                                                                    <em>
-                                                                        {{$v->pnum}}
-                                                                    </em>
-                                                                </span>
-                                                                </a>
-                                                                <a href="/home/replay/{{$v->cid}}">
-                                                                    <span class="rgt_line W_fr">
-                                                                    </span>
-                                                                    <span class="subinfo_rgt S_txt2">
-                                                                        <em class="W_ficon ficon_repeat S_ficon W_f16">
-                                                                            <span class="glyphicon glyphicon-comment" aria-hidden="true">
-                                                                            </span>
-                                                                        </em>
-                                                                        <em>
-                                                                            {{$v->rnum}}
-                                                                        </em>
-                                                                    </span>
-                                                                </a>
-                                                                <a href="/home/forward/{{$v->cid}}">
-                                                                    <span class="rgt_line W_fr">
-                                                                    </span>
-                                                                    <span class="subinfo_rgt S_txt2">
-                                                                        <em class="W_ficon ficon_forward S_ficon W_f16">
-                                                                            <span class="glyphicon glyphicon-share" aria-hidden="true">
-                                                                            </span>
-                                                                        </em>
-                                                                        <em>
-                                                                            {{$v->fnum}}
-                                                                        </em>
-                                                                    </span>
-                                                                </a>
-                                                            </div>
+                                                            
+                                                            <span class="subinfo_rgt S_txt2" class="point">
+                                                                <em class="W_ficon ficon_praised S_ficon W_f16">
+                                                                    <span class="glyphicon glyphicon-thumbs-up" id="point" aria-hidden="true" ></span>
+                                                                </em>
+                                                                <em>
+                                                                    {{$v->pnum}} 
+                                                                </em>
+                                                            </span>
+                                                            
+
+                                                            <a href="/home/replay/{{$v->cid}}">
+                                                            <span class="rgt_line W_fr">
+                                                            </span>
+                                                            <span class="subinfo_rgt S_txt2" >
+                                                                <em class="W_ficon ficon_repeat S_ficon W_f16">
+                                                                   <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                                                </em>
+                                                                <em>
+                                                                    {{$v->rnum}} 
+                                                                </em>
+                                                            </span>
+                                                            </a>
+
+                                                            <a href="/home/forward/{{$v->cid}}">
+                                                            <span class="rgt_line W_fr">
+                                                            </span>
+                                                            <span class="subinfo_rgt S_txt2">
+                                                                <em class="W_ficon ficon_forward S_ficon W_f16">
+                                                                    <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                                                                </em>
+                                                                <em>
+                                                                    {{$v->fnum}} 
+                                                                </em>
+                                                            </span>
+                                                            </a>
                                                         </div>
+                                                        </div>
+
                                                         <hr>
-                                                    @endforeach  
+
+                                                    @endforeach 
+
+                                                    
                                                     <div style="float: right">
                                                         <nav aria-label="...">
                                                           <ul class="pager">
@@ -218,15 +235,21 @@
                                                           </ul>
                                                         </nav>
                                                     </div>
+                                                    <div style="float: right">
+                                                        {!! $index->appends($request->all())->render() !!}
+                                                    </div>
                                                 </ul>
+                                                <!--/feed内容-->
                                             </div>
+
                                         </div>
+
                                     </div>
+
                                     <div class="WB_main_r" fixed-box="true">
                                         <div id="pl_unlogin_home_login">
                                             <div style="visibility: hidden;">
                                             </div>
-
                                             <div style="z-index: 10; transform: translateZ(0px); position: relative; width: 340px;">
                                                 <div class="UG_box" fixed-inbox="true" fixed-id="2">
                                                     <div class="W_unlogin_v4">
@@ -236,35 +259,35 @@
                                                                     <div class="tab clearfix">
                                                                         <a href="javascript:void(0);" node-type="normal_tab" action-type="switchTab"
                                                                         action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login">
+                                                                            <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
                                                                             帐号登录
                                                                         </a>
+                                    
                                                                     </div>
+                                                                 
                                                                 </div>
+                                                               
+                                                                <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
+                                                                    <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
                                                                     <form action="/home/nick" method="post">
+                                                                        
                                                                         <div class="form-group">
-                                                                            <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px">
-                                                                            </span>
-                                                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号"
-                                                                            style="width:250px; ">
+                                                                            <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
+                                                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号" style="width:250px; ">
                                                                         </div>
-                                                                        <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
-                                                                        </div>
+                                                                        <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"></div>
 
-                                                                        <div class="form-group" style="margin-top:10px">
+                                                                        <div class="form-group">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
+                                                                        </div>
+                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"> 
+                                                                        </div>
 
-                                                                        </div>
-                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
-                                                                        </div>
                                                                         {{csrf_field()}}
                                                                         <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
-
-                                                                    </form>
-
-                                                                </div>
-                                                                    
+                                                                </div> 
                                                                     <div class="info_list register" style="font-size:14px">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
@@ -272,15 +295,14 @@
                                                                         <a target="_top" href="/home/register">
                                                                             立即注册!
                                                                         </a>
-                                                                        <a href="/home/admin/find" style="float: right;margin-right:9px;">忘记密码</a>
+                                                                        <a href="/home/admin/find" style="float: right;">忘记密码</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            
-                                             <!-- 公告专用 -->
+                                        <div style="width:340px; float:right;">
+                                            <!-- 公告专用 -->
                                             <div class="UG_box_l" style="width:340px;">
                                                 <div class="UG_contents" style="padding-bottom:10px;">
                                                         <div style="font-size: 15px;padding-bottom: 10px">
@@ -295,7 +317,6 @@
                                                         @endforeach
                                                 </div>
                                             </div>
-                                       
 
                                              <!-- 广告显示页面 -->
                                             @foreach($advert as $k=>$v)
@@ -318,20 +339,17 @@
                                             @endforeach
 
                                         </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        </div>
-                                        
                                     </div>
-                                
                                 </div>
                             </div>
-
+                        </div>
+                       
+                      
+                    </div>
                 </div>
-               
-            </div>
-        </div>
-
-
         <div id="plc_bot">
             <!--footer-->
             <div class="WB_footer S_bg2">
@@ -356,149 +374,137 @@
                 </div>
             </div>
         </div>
-
+            </div>
         </div>
-        </div>
-        <script type="text/javascript">
 
-            //加载照片
-            $('.list_des #image').zoomify();
+    <script type="text/javascript">
 
-            //发布微博
-            $('.glyphicon-thumbs-up').on('click',function() {
-                layer.msg('亲，您好像忘了登录呦:)');
-            });
+        //加载照片
+        $('.list_des img').zoomify();
 
-            $('.subinfo_face').on('click', function(){
+
+         $('.glyphicon-thumbs-up').on('click', function(){
             
             layer.msg('亲，您好像忘了登录呦:)');
           });
 
+         $('.subinfo_face').on('click', function(){
+            
+            layer.msg('亲，您好像忘了登录呦:)');
+          });
 
-            //系统公告
-            function notice(id){
+         //加载照片
+        $('.WB_detail img').zoomify();
 
-                $.ajax({
-                    type: "get",
-                    url: "/home/notice",
-                    data: {id:id},
+         //系统公告
+        function notice(id){
+
+            $.ajax({
+                type: "get",
+                url: "/home/notice",
+                data: {id:id},
+                
+                beforeSend:function(){
+                    //加载样式
+                    a = layer.load(0, {shade: false});
+                  },
+                success: function(data) {
+
+                    //关闭加载样式
+                    layer.close(a)
+
+                    layer.open({
+                      type: 1
+                      ,title: data.title //不显示标题栏
+                      ,closeBtn: false
+                      ,area: '300px;'
+                      ,shade: 0.8
+                      ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                      ,resize: false
+                      ,btn: ['知道了']
+                      ,btnAlign: 'c'
+                      ,moveType: 1 //拖拽模式，0或者1
+                      ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                      ,
+                    });
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
                     
-                    beforeSend:function(){
-                        //加载样式
-                        a = layer.load(0, {shade: false});
-                      },
-                    success: function(data) {
-
-                        //关闭加载样式
-                        layer.close(a)
-
-                        layer.open({
-                          type: 1
-                          ,title: data.title //不显示标题栏
-                          ,closeBtn: false
-                          ,area: '300px;'
-                          ,shade: 0.8
-                          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                          ,resize: false
-                          ,btn: ['知道了']
-                          ,btnAlign: 'c'
-                          ,moveType: 1 //拖拽模式，0或者1
-                          ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
-                          ,
-                        });
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-                        
-                        
-                    }
-                });
-            }
-        </script>
+                    
+                }
+            });
+        }
+    </script>
 
     
-        <script type="text/javascript">
-         var ch2 ;
-         var ch3 ;
-         var aaa=0;
-         var bbb=0;
+    <script type="text/javascript">
+         var ch2;
+         var ch3;
 
         //手机号失去焦点事件
         $('#phone').blur(function(){
            
             var pho  = $(this).val();
+            
             ch2 = checkTel($('#phone'),$('#e1'));
-
-            if(ch2==100){
-              $('#e1').css('display','none');
-              ch2 = 100;
-              
-            }else{
+            if(ch2!=100){
+              $('#phone').css('border','solid 2px red');
               $('#e1').css('display','block');
               return;
-           
+            }else{
+              $('#e1').css('display','none');
+              ch2 = 100;
             }
-            $.get("/home/pho",{pho:pho},function(data){
-
-              if(data=='1'){
+            $.get("pho",{pho:pho},function(data){
+              if(data.length>0){
+                $('#phone').css('border','solid 2px green');
                 $('#e1').css('display','none');
                 ch2 = 100;
-           
-                aaa=1;
+                return;
               }else{
-
-                ch2 = 0;
-                $("#e1").html("该手机号还未注册,请先去注册");
+                $('#phone').css('border','solid 1px red');
+                 $("#e1").html("该手机号还未注册,请先去注册");
                 $('#e1').css('display','block');
-                aaa=0;
-       
+                ch2 = 0;
               }
             },'json')
-            });
+                
+            })
 
+            
             //密码失去焦点事件
-            $('input[name="password"]').blur(function() {
-
+            $('input[name="password"]').blur(function(){
+            
                 var pas = $(this).val();
                 var pho = $('#phone').val();
 
-
                 ch3 = checkPassword($('#password'),$('#e2'),6);
-
                 if(ch3!=100){
+                  $('#password').css('border','solid 2px red');
                   $('#e2').css('display','block');
-                   ch3 = 0;
-
                 }else{
+                  $('#password').css('border','solid 1px green');
                   $('#e2').css('display','none');
                   ch3 = 100;
-            
                 }
-                $.get("/home/pass",{pas:pas,pho:pho},function(data){
-                  if(data=='1'){
+                $.get("pass",{pas:pas,pho:pho},function(data){
+                  if(data==1){
+                    $('#phone').css('border','solid 2px green');
                     $('#e2').css('display','none');
-                    ch3 = 100;
-                    bbb=1;
-                  
+                    ch2 = 100;
+                    return;
                   }else{
-                    $("#e2").html("密码不正确");
+                    $('#password').css('border','solid 1px red');
+                     $("#e2").html("密码不正确");
                     $('#e2').css('display','block');
-                    ch3 = 0;
-                    bbb=0;            
+                    ch2 = 0;
                   }
                 },'json')
+            })
 
-                // console.log(ch3);
-                if (aaa==1 && bbb==1 ) {
-                    next();
-                }else{
-                    return false;
-                }
-            });
-
-            
-        </script>
-
+    </script>
     </body>
+        
 
 </html>
