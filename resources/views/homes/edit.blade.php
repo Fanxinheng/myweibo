@@ -90,7 +90,7 @@
 									
 									<select class="form-control" style="width:345px;font-size: 18px" name="work" >
 									  <option value="医生" @if($res->work == '医生') selected @endif >医生</option>
-									  <option value="IT程序员" @if($res->work == 'IT程序员') selected @endif >IT程序员</option>
+									  <option value="IT程序员" @if($res->work == 'IT') selected @endif >IT</option>
 									  <option value="销售" @if($res->work == '销售') selected @endif >销售</option>
 									  <option value="教师" @if($res->work == '教师') selected @endif >教师</option>
 									  <option value="餐饮" @if($res->work == '餐饮') selected @endif >餐饮</option>
@@ -123,9 +123,12 @@
 								  
           
 								  <div class="form-group" style="margin-top:30px">
-								    <div class="col-sm-offset-2 col-sm-10">
-								    	{{csrf_field()}}   
-								      <input type="submit" value="提交" style="background:#FFA00A;color: white;width:200px;height: 40px;font-size: 18px;border-radius: 6px" id="btn1">
+								    <div class="col-sm-offset-2 col-sm-10" >
+								    	{{csrf_field()}}
+                                        <a href="/home/login" style="line-height:40px;">
+                                             <button style="background:#FFA00A;color: white;width:200px;height: 40px;font-size: 18px;border-radius: 6px;" id="btn1">修改</button>
+                                        </a>
+								      
 								    </div>
 								  </div>
 							</form>
@@ -317,7 +320,7 @@
                 return;
             }
 
-            var formData = new FormData($( "#formphoto" )[0]);
+            var formData = new FormData($( "#forms" )[0]);
             console.log(formData);
             $.ajax({
                 type: "post",
@@ -331,7 +334,9 @@
                       // 菊花转转图
                       // $('#img1').attr('src', 'http://img.lanrentuku.com/img/allimg/1212/5-121204193R0-50.gif');
                       //
-                       a = layer.load();
+
+                    a = layer.load();
+                      
                   },
                 success: function(data) {
                     console.log(data);
@@ -346,14 +351,7 @@
             });
         }
 
-     	
-        //提交单机事件跳首页
-        $('#btn1').click(function(){
-
-            
-            return  rediretc('/home/login');
-        })
-
+     
      </script>
     
     </body>

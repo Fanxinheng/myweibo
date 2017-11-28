@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\user;
 use App\Http\Model\user_info;
+use App\Http\Model\job;
 use Hash;
 use session;
 
@@ -20,7 +21,8 @@ class DetailsController extends Controller
 	public function index(Request $request)
 	{   
 
-		return view('/homes/details');
+        $res = job::get();
+		return view('/homes/details',['res'=>$res]);
 	
 	}
 
@@ -124,7 +126,7 @@ class DetailsController extends Controller
 		$uid = $request->session()->get('uid');
 
 		$res = user_info::where('uid',$uid)->first();
-		
+
 		return view('homes/edit',['res'=>$res]);
 	}
 
@@ -172,13 +174,12 @@ class DetailsController extends Controller
 	//  }
 	// }
 
-	//执行修改个人信息方法
+	//照片传送Ajax执行修改个人信息方法
 	public function update(Request $request)
 	{   
 
 		  //获取除了token以外的值
 			$res = $request->except('_token');
-			$file = $request->file();
 
 	   if($request->hasFile('photo')){
            
@@ -201,25 +202,24 @@ class DetailsController extends Controller
 
 				//上传到七牛云
 				$bool = $disk->put($logo,file_get_contents($file->getRealPath()));
-				
+
 		}       
 
 
 		//获取session中当前用户的uid
-		$uid = $request->session()->get('uid');
-
-
-			//把res数组中的信息按照uid修改到user_info表中
-			$data = user_info::where('uid',$uid)->update($res);
+		$uid= $request->session()->get('uid');
+        
+		//把res数组中的信息按照uid修改到user_info表中
+		$data = user_info::where('uid',$uid)->update($res);
 			
-			//判断成功就跳转首页,否则返回当前页面并存闪存
-			if($data){
-				 return $logo;
+		//判断成功就跳转首页,否则返回当前页面并存闪存
+		if($data){
+			return $logo;
 				//echo "0";
-			}else{
+		}else{
 
-				 echo "1";
-			}
+			echo "1";
+		}
 
 	}
 	
