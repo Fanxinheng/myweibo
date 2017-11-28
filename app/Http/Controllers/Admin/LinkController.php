@@ -17,26 +17,12 @@ class LinkController extends Controller
      */
     public function index(Request $request)
     {
-        //获取分页信息
-        //获取搜索全部信息
-        // var_dump($request->all());
 
         //对数据库进行模糊查询
-        $res = link::where('user','like','%'.$request->input('search').'%')->
-
-        orderBy('user','asc')->
-        //默认搜索5条数据
-        paginate($request->input('paging',5));
-        //echo "<pre>";
-        // var_dump($res);
-
-       /* $count = advert::count('id');
-        $request['count'] = $coi
-        var_dump($count);*/
+        $res = link::where('user','like','%'.$request->input('search').'%')->orderBy('user','asc')->paginate($request->input('paging',1));
 
         //将数据传递到页面中
         return view('admins/link/index',['res'=>$res,'request'=>$request]);
-
 
     }
 
@@ -160,10 +146,9 @@ class LinkController extends Controller
      */
     public function destroy($id)
     {
-        //打印获取到的id
-        // var_dump($id);
         // 获取id对数据库进行删除
         $date = link::where('id',$id)->delete();
+        
         //判断如果成功去列表页，如果失败回到当前页面
         if ($date) {
             return redirect('/admin/link')->with('create','删除链接成功！');

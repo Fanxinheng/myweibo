@@ -76,7 +76,6 @@
             return;
         }
         var formData = new FormData($( "#logo_form" )[0]);
-        console.log(formData);
         $.ajax({
             type: "post",
             url: "/admin/logo/dologo",

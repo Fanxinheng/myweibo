@@ -83,9 +83,9 @@
                                             <li>
                                                 <a href="/home/details/quit"  title="退出登录">
                                                     <em class="W_ficon ficon_home S_ficon">
-                                                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                                                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                                                     </em>
-                                                    <em class="S_txt1">
+                                                    <em class="S_txt1 ">
                                                         退出
                                                     </em>
                                                 </a>

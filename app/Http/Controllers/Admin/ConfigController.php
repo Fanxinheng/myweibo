@@ -88,13 +88,6 @@ class ConfigController extends Controller
             config::where('id',1)->update($res);
 
             return $res['logo'];
-
-            /*//判断是否更新成功
-            if($data1){
-                return redirect('admin/logo/')->with('msg','网站LOGO上传成功！');
-            } else {
-                return redirect('admin/logo/')->with('msg','网站LOGO上传失败！');
-            }*/
         }
 
         

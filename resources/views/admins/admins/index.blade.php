@@ -19,24 +19,27 @@
                     <div class="mws-panel-body no-padding">
                         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper"><table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                             <thead>
-                                <tr role="row"><th  style="width: 150px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th><th  style="width: 220px;" aria-label="Browser: activate to sort column ascending">用户名</th><th  style="width: 220px;" aria-label="Platform(s): activate to sort column ascending">手机</th><th  style="width: 220px;" aria-label="Platform(s): activate to sort column ascending">头像</th><th  style="width: 210px;" aria-label="Engine version: activate to sort column ascending">操作</th></tr>
+                                <tr role="row">
+                                    <th  style="width: 150px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
+                                    <th  style="width: 220px;" aria-label="Browser: activate to sort column ascending">用户名</th>
+                                    <th  style="width: 220px;" aria-label="Platform(s): activate to sort column ascending">手机</th>
+                                    <th  style="width: 220px;" aria-label="Platform(s): activate to sort column ascending">头像</th>
+                                    <th  style="width: 210px;" aria-label="Engine version: activate to sort column ascending">操作</th>
+                                </tr>
                             </thead>
 
                         <tbody role="alert" aria-live="polite" aria-relevant="all" style="text-align: center;">
                             @foreach($admin as $k => $v)
-                            <tr class="@if($k%2 == 0) odd @else even @endif">
+                            <tr class="@if($k%2 == 0) odd @else even @endif" id="admin{{$v->id}}">
                                 <td class=" ">{{$v->id}}</td>
                                 <td class=" ">{{$v->name}}</td>
                                 <td class=" ">{{$v->phone}}</td>
-                                <td class=" "><img src="{{$v->pic}}" alt="" style="width:50px;height:50px"/></td>
-                                <td>
-                                    <a href="/admin/admins/{{$v->id}}/edit"><button class="btn btn-default" role="button">修改</button></a>
-                                    <form action="/admin/admins/{{$v->id}}" method="post" style="display:inline">
-                                        {{csrf_field()}}
-                                        {{method_field('DELETE')}}
-                                        <button class="btn btn-default" >删除</button>
 
-                                    </form>
+                                <td class=" "><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}" alt="" style="width:50px;height:50px"/></td>
+
+                                <td>
+                                    <button class="btn btn-default" onclick="admins_delete({{$v->id}})">删除</button>
+
                                 </td>
                              </tr>
                             @endforeach
@@ -62,5 +65,46 @@
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
 
+        //删除管理员
+        function admins_delete(id){
+
+            layer.confirm('您确定要删除此管理员吗？', {
+                  btn: ['确定','取消'] //按钮
+                }, function(){
+
+                    $.ajax({
+                    type: "post",
+                    url: "/admin/admins/"+id,
+                    data: {id:id,_token:'{{csrf_token()}}',_method:'delete'},
+                    
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
+
+                        //关闭加载样式
+                        layer.close(a)
+
+                        if(data==1){
+
+                            //移除标签
+                             $('#admin'+id).remove();
+                             layer.msg('管理员删除成功: )', {icon: 1});
+                        }else{
+                             layer.msg('管理员删除失败: (', {icon: 2});
+
+                        }
+                        
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("管理员删除失败，请检查网络后重试", {icon:2 ,})  
+                    }
+                });
+
+                }, function(){
+                        
+                });
+        }
     </script>
 @endsection

@@ -338,18 +338,20 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台主页
 	Route::resource('/index','UserController');
-
 	//后台管理员资源路由
 	Route::resource('/admins','AdminsController');
 
-	//后台管理员修改普通路由
+	//后台管理员修改密码普通路由
 	Route::get('/password/{id}','PwdController@edit');
 
 	//后台管理员修改方法路由
 	Route::post('/password/update/{id}','PwdController@update');
 
-	//后台管理员删除方法路由
+	//后台管理员退出路由
 	Route::get('/password/delete/{id}','PwdController@delete');
+
+	//后台管理员修改个人信息
+	Route::post('/password/pic','PwdController@pic');
 
 	//后台用户职业
 	Route::resource('/job','JobController');

@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
+        <link rel="stylesheet" type="text/css" href="/homes/css//iconfont.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
@@ -68,6 +69,7 @@
                                                         <span class="glyphicon glyphicon-home" aria-hidden="true">
                                                         </span>
                                                     </em>
+                                                    <!-- <i class="lock_fill icon-lock_fill">asdasdasd</i> -->
                                                     <em class="S_txt1">
                                                         首页
                                                     </em>
@@ -364,7 +366,6 @@
 
             //发布微博
             $('.glyphicon-thumbs-up').on('click',function() {
-                alert($);
                 layer.msg('亲，您好像忘了登录呦:)');
             });
 

@@ -73,15 +73,10 @@
                                     <td class=" ">{{$v->email ? $v->email : '未设置'}}</td>
                                     <td class=" "><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}" style="width:50px;height:50px"></td>
                                     <td class=" ">{{$v->socre}}</td>
-                                    <td class=" ">{{$v->status == 0 ? '正常' : '冻结'}}</td>
+                                    <td id="status{{$v->uid}}">{{$v->status == 0 ? '正常' : '冻结'}}</td>
                                     <td>
                                         <a href="/admin/index/{{$v->uid}}"><button class="btn btn-default">查看微博</button></a>
-                                        <form action="/admin/index/{{$v->id}}" method="post" style="display:inline">
-                                            {{csrf_field()}}
-                                            {{method_field('PUT')}}
-                                            <button class="btn btn-default">{{$v->status == 1 ? '恢复用户' : '冻结用户'}}</button>
-
-                                        </form>
+                                            <button class="btn btn-default" onclick="user_edit({{$v->uid}})" id="user{{$v->uid}}">{{$v->status == 1 ? '恢复用户' : '冻结用户'}}</button>
                                         <a href="/admin/news/{{$v->uid}}"><button class="btn btn-default">系统消息</button></a>
                                     </td>
                                  </tr>
@@ -101,7 +96,56 @@
 
 @section('js')
     <script type="text/javascript">
+
         $('.mws-form-message').delay(3000).slideUp(1000);
+
+        //冻结用户
+        function user_edit(id){
+
+            layer.confirm('您确定要修改此用户状态吗？', {
+                  btn: ['确定','取消'] //按钮
+                }, function(){
+
+                    $.ajax({
+                    type: "post",
+                    url: "/admin/index/"+id,
+                    data: {id:id,_token:'{{csrf_token()}}',_method:'put'},
+                    
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
+
+                        //关闭加载样式
+                        layer.close(a)
+
+                        //改变用户状态
+                        if(data==1){
+                            layer.msg('用户已冻结！', {icon: 1});
+                            document.getElementById('status'+id).innerHTML = '冻结';
+                            document.getElementById('user'+id).innerHTML = '恢复用户';
+                        }else{
+                            layer.msg('用户已恢复！', {icon: 1});
+                            document.getElementById('status'+id).innerHTML = '正常';
+                            document.getElementById('user'+id).innerHTML = '冻结用户';
+                        }
+
+                        
+
+                        
+                        
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("标签删除失败，请检查网络后重试", {icon:2 ,})  
+                    }
+                });
+
+                }, function(){
+                        
+                });
+        }
+
 
     </script>
 @endsection

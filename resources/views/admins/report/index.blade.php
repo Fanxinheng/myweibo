@@ -61,7 +61,7 @@
             <tr class="odd" align="center">
 
                     <!-- 举报微博序号 -->
-                    <td class="  sorting_1">{{$v->id}}</td>
+                    <td class=" ">{{$v->id}}</td>
 
                     <!-- 被举报者 -->
                     <td class=" ">{{$v->user_info->nickName}}</td>
@@ -84,50 +84,7 @@
             </tbody>
         </table>
         <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
-        <style>
-        .pagination li
-        {
-            background-color: #444444;
-            border-left: 1px solid rgba(255, 255, 255, 0.15);
-            border-right: 1px solid rgba(0, 0, 0, 0.5);
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
-            cursor: pointer;
-            display: block;
-            float: left;
-            font-size: 12px;
-            height: 20px;
-            line-height: 20px;
-            outline: medium none;
-            padding: 0 10px;
-            text-align: center;
-            text-decoration: none;
-        }
 
-        .pagination a
-        {
-            color: #fff;
-        }
-
-        .pagination .active
-        {
-            background-color: #88a9eb;
-            background-image: none;
-            border: medium none;
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) inset;
-            color: #323232;
-        }
-
-        .pagination .disabled
-        {
-            color: #666666;
-            cursor: default;
-        }
-
-        .pagination
-        {
-            margin:0px;
-        }
-        </style>
             {!! $res->render() !!}
         </div>
     </div>
