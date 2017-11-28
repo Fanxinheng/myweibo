@@ -27,15 +27,14 @@
     </head>
 
     <body class="FRAME_login">
-        <div style="position: absolute; top: -9999px;">
-            <div id="js_style_css_module_global_WB_outframe">
-            </div>
+        
+        <div id="js_style_css_module_global_WB_outframe">
         </div>
         <link media="all" href="/homes/css/index.css" type="text/css" rel="stylesheet">
-        <div class="B_unlog">
+        <div  class="B_unlog">
             <div class="WB_miniblog">
                 <div class="WB_miniblog_fb">
-                    <div id="weibo_top_public">
+                    <div id="weibo_top_public" >
                         <!--spec start-->
                         <!--顶部导航-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
@@ -49,7 +48,7 @@
                                         </span>
                                     </a>
                                 </div>
-                                <div class=" gn_search_v2">
+                                <div class=" gn_search_v2" >
 
                                     <form action="/home/admin/search" method="get">
                                         <input node-type="searchInput" autocomplete="off" value="" class="W_input"
@@ -60,7 +59,7 @@
                                     </form> 
 
                                 </div>
-                                <div class="gn_position">
+                                <div class="gn_position" >
                                     <div class="gn_nav">
                                         <ul class="gn_nav_list">
                                             <li>
@@ -273,7 +272,7 @@
                                                                         <a target="_top" href="/home/register">
                                                                             立即注册!
                                                                         </a>
-                                                                        <a href="/home/admin/find" style="float: right;">忘记密码</a>
+                                                                        <a href="/home/admin/find" style="float: right;margin-right:9px;">忘记密码</a>
                                                                     </div>
                                                                 </div>
                                                             </div>

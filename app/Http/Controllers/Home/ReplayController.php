@@ -21,6 +21,8 @@ class ReplayController extends Controller
     public function create ($id)
     {
 
+        dd($id);
+
         //查询标签内容
         $label = label::get();
 
