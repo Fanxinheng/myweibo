@@ -362,7 +362,7 @@
         <script type="text/javascript">
 
             //加载照片
-            $('.list_des img').zoomify();
+            $('.list_des #image').zoomify();
 
             //发布微博
             $('.glyphicon-thumbs-up').on('click',function() {
