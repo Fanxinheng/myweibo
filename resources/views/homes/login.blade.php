@@ -72,26 +72,15 @@
                                                     </em>
                                                 </a>
                                             </li>
-                                            <li>
 
-                                                <a href="/home/details/edit"  title="修改个人信息">
-                                                    <em class="W_ficon ficon_user S_ficon">
-                                                        <span class="glyphicon glyphicon-user" aria-hidden="true" ></span>
-                                                    </em>
-                                                    <em class="S_txt1">
-                                                        {{$user->nickName}}
-                                                    </em>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/home/changepass"  title="修改密码">
-                                                    <em class="W_ficon ficon_home S_ficon">
-                                                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                                                    </em>
-                                                    <em class="S_txt1">
-                                                        修改密码
-                                                    </em>
-                                                </a>
+                                            <li class="dropdown">
+                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$user->nickName}}<span class="caret"></span></a>
+                                              <ul class="dropdown-menu">
+                                                <li><a href="/home/user">个人中心</a></li>
+                                                <li><a href="/home/details/edit">个人信息</a></li>
+                                                <li><a href="/home/changepass">修改密码</a></li>
+                                                <li><a href="/home/message">系统消息</a></li>
+                                              </ul>
                                             </li>
                                             <li>
                                                 <a href="/home/details/quit"  title="退出登录">
@@ -185,10 +174,8 @@
                                             </div>
                                             
                                         </div>
-
                                     <form action="/home/release" method="post" enctype="multipart/form-data">
-                                            <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
-                                    
+                                  
 
                                             <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容"></textarea>
                                         
