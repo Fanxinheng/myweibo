@@ -44,7 +44,7 @@
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
+                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
                                         </span>
                                     </a>
                                 </div>
@@ -349,12 +349,8 @@
                         @endforeach
                     </p>
                     <p class="copy_v2">
-                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                        <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+                        
                     </p>
                 <p class="company"></p>
                 </div>

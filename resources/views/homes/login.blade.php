@@ -40,7 +40,7 @@
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
+                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
                                         </span>
                                     </a>
                                 </div>
@@ -252,7 +252,7 @@
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
-                                                            href="/home/user" title="{{$v->nickName}}" indepth="true">
+                                                            href="/home/other/user/{{$v->uid}}" title="{{$v->nickName}}" indepth="true">
                                                                 <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->nickName}}"
                                                                 alt="" src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"
                                                                 width="50" height="50" class="W_face_radius">
@@ -264,7 +264,7 @@
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
 
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
-                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/user">
+                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->uid}}">
                                                                 {{$v->nickName}}
                                                             </a>
                                                             <!-- 判断微博是否为登录用户自己发布 -->
@@ -543,12 +543,8 @@
                         @endforeach
                     </p>
                     <p class="copy_v2">
-                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                        <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+                        
                     </p>
                 
                 </div>
