@@ -104,10 +104,7 @@ Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
 	Route::get('pointFun','OtherUserController@pointFun');
 
 	//关注
-	Route::get('attention/act','OtherUserController@attentionAction');
-
-	//取消关注
-	Route::get('attention/del','OtherUserController@attentionDelete');
+	Route::get('act/{id}','OtherUserController@attentionAction');
 
 
 });

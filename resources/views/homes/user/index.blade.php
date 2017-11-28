@@ -346,6 +346,7 @@
                     url:'/home/replay/delete',
                     type:'POST',
                     data:{id:id},
+
                     success:function(data){
                       
                     //改变转发那里的转发量
@@ -358,7 +359,7 @@
                     $('#rediv').hide();
 
                     $('#he'+id).hide();
-                }
+                    }
                
                 });
             }
@@ -452,6 +453,7 @@
                         cid: cid
                     },
                     type: 'GET',
+                    
                     success: function(data) {
 
                        document.getElementById('spa'+ cid).innerHTML = "点赞" + data['pnum'];

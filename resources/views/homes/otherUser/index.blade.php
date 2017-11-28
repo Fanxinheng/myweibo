@@ -95,9 +95,9 @@
                                     <div id="nickname">
                                         {{$rev->nickName}}
                                         @if($re == 1)
-                                        <button id="abtn1" class="btn-defalut">关注</button>
+                                        <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut">取消关注</button>
                                         @else
-                                        <button id="abtn2" class="btn-defalut">取消关注</button>
+                                        <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" class="btn-defalut">关注</button>
                                         @endif
                                     </div>
                                     <div id="nickname">
@@ -114,19 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        $('#abtn1').on('click',function(){
-                            $.ajax({
-                                url:'',
-                                type:'',
-                                data:'',
-                                success:function(data){
-
-                                }
-                            });
-                        });
-
-                    </script>
+                   
                     <!-- 头像 及北京-->
                     <style>
                         #weibo #lanmu li { margin-top: 5px; font-size: 14px}
@@ -314,6 +302,26 @@
         </div>
         <script>
 
+                       function abtn1 (id){
+                            $.ajax({
+                                url:'/home/other/act/'+id,
+                                type:'GET',
+                                data:{},
+                                success:function(data){
+                                if(data == 1){
+                                    document.getElementById('abtn1').innerHTML="关注";
+                                    layer.msg('取消成功');
+                                }else{
+                                    document.getElementById('abtn1').innerHTML="取消关注";
+                                    layer.msg('关注成功');
+                                }
+
+                               
+                                }
+                            });
+                        };
+
+                  
 
             //回复点击事件
             function fun(id) {

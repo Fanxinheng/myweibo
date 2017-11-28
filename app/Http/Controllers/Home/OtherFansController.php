@@ -32,8 +32,24 @@ class OtherFansController extends Controller
             $join->on('user_attention.uid','=','user_info.uid');
         })->where('user_attention.gid',$uid)->get();
 
+         //获取登录用户的信息
+        $id = Session('uid');
+
+        //查询用户的信息是否存在于数组中
+        $r = user_attention::where('uid',$id)->where('gid',$id)->get();
+
+        if($r){
+
+            $re = 1;
+
+        }else{
+
+            $re = 0;
+
+        }
+
         //页面跳转
-        return view('homes/otherUser/fans',['res'=>$res,'rev'=>$rev,'message'=>$message]);
+        return view('homes/otherUser/fans',['res'=>$res,'rev'=>$rev,'message'=>$message,'re'=>$re]);
     }
 
     /**

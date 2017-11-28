@@ -51,19 +51,7 @@
                                     <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
                                     suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
                                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-
-
                                     </a>
-                                    <!--搜索热词下拉-->
-                                   <!--  <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
-                                        <div class="gn_topmenulist">
-                                            <div node-type="basic">
-                                            </div>
-                                            <div node-type="plus">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!--/搜索热词下拉-->
                                 </div>
                                 <div class="gn_position" >
                                     <div class="gn_nav">
@@ -237,13 +225,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-
-
-
                                     <div class="WB_main_r" fixed-box="true">
                                         <div id="pl_unlogin_home_login">
                                             <div style="visibility: hidden;">
@@ -258,7 +239,6 @@
                                                                         <a href="javascript:void(0);" node-type="normal_tab" action-type="switchTab"
                                                                         action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login"
                                                                         >
-                                                                            <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
                                                                             帐号登录
                                                                         </a>
                                     
@@ -285,14 +265,6 @@
                                                                         </div>
                                                                         <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"> 
                                                                         </div>
-                                                                        <!-- <style>
-                                                                            #pas{color:red;font-size: 15px;margin-bottom:10px;margin-left:12px}
-                                                                        </style>  
-
-                                                                        <div id="pas">
-                                                                            
-                                                                        </div>
- -->
                                                                         
                                                                 </div>
                                                                 

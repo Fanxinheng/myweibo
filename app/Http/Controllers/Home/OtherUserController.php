@@ -37,9 +37,13 @@ class OtherUserController extends Controller
         $r = user_attention::where('uid',$sid)->where('gid',$id)->get();
 
         if($r){
+
             $re = 1;
+
         }else{
+
             $re = 0;
+
         }
 
         //获取微博评论的消息
@@ -67,9 +71,24 @@ class OtherUserController extends Controller
         //获取微博评论的消息
         $message = Session('message');
 
+        //获取登录用户的信息
+        $uid = Session('uid');
+
+        //查询用户的信息是否存在于数组中
+        $r = user_attention::where('uid',$uid)->where('gid',$id)->get();
+
+        if($r){
+
+            $re = 1;
+
+        }else{
+
+            $re = 0;
+
+        }
 
         //页面跳转
-        return view('homes/otherUser/photo',['res'=>$res,'rev'=>$rev,'message'=>$message]);
+        return view('homes/otherUser/photo',['res'=>$res,'rev'=>$rev,'message'=>$message,'re'=>$re]);
     }
 //=================================功能===================================================================//
 
@@ -286,16 +305,32 @@ class OtherUserController extends Controller
     } 
 
     //点击关注
-    public function attentionAction()
+    public function attentionAction($id)
     {
+        //获取缓存的id
+        $res['uid'] = Session('uid');
 
-    }
+        //获取关注人的id
+        $res['gid'] = $id;
 
-    //点击取消关注
+        //
+        $re = user_attention::where('uid',$res['uid'])->where('gid',$res['gid'])->count();
 
+        if($re>0){
 
+            //填到数据库
+            $rev = user_attention::where('uid',$res['uid'])->where('gid',$res['gid'])->delete();
 
+            //返回参数 
+            return 1;
 
-   
+        }else{
+
+            $rev = user_attention::insert($res);
+
+            return 0;
+        }
+
+    }   
 
 }
