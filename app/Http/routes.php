@@ -180,16 +180,19 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台管理员资源路由
 	Route::resource('/admins','AdminsController');
+
 	//后台管理员修改普通路由
 	Route::get('/password/{id}','PwdController@edit');
+
 	//后台管理员修改方法路由
 	Route::post('/password/update/{id}','PwdController@update');
+
 	//后台管理员删除方法路由
 	Route::get('/password/delete/{id}','PwdController@delete');
 
 	//后台热门微博资源路由
-
 	Route::resource('hot','HotController');
+
 	//后台微博管理资源路由
 	Route::resource('weibo','WeiboController');
 
@@ -225,9 +228,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 	//后台执行发送系统消息功能路由
 	Route::post('/send/{id}','NewsController@send');
-
-
-
 
 });
 

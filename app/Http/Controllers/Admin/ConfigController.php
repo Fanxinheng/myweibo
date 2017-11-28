@@ -31,8 +31,11 @@ class ConfigController extends Controller
         $data = config::where('id',1)->update($config);
 
         if($data){
+
             return redirect('/admin/config/')->with('msg','网站配置修改成功！');
+
         } else {
+
             return redirect('/admin/config/')->with('msg','网站配置修改失败！');
 
         }  
@@ -64,6 +67,7 @@ class ConfigController extends Controller
         }
 
         $res['logo'] = $logo;
+
         //删除旧logo
         $old = config::where('id',1)->value('logo');
 
@@ -77,8 +81,11 @@ class ConfigController extends Controller
 
             //判断是否更新成功
             if($data1){
+
                 return redirect('admin/logo/')->with('msg','网站LOGO上传成功！');
+
             } else {
+                
                 return redirect('admin/logo/')->with('msg','网站LOGO上传失败！');
             }
         }

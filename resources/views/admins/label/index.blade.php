@@ -37,13 +37,8 @@
     </div>
     <div class="mws-panel-body no-padding">
         <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
-
             <form action="/admin/label" method="get" class="">
-
-
-
             </form>
-
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
             aria-describedby="DataTables_Table_1_info">
                 <thead>
@@ -80,7 +75,7 @@
                                         <input type="submit" class="btn btn-default" value="修改">
                                     </a>
                                         <form action="/admin/label/{{$v->id}}}" method="post" style="display:inline">
-                                            <button class="btn btn-default">删除</button>
+                                            <button onclick="del(this)" class="btn btn-default">删除</button>
                                                 {{csrf_field()}}
                                                 {{method_field('DELETE')}}
                                         </form>
@@ -113,6 +108,9 @@
 @section('js')
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
-
+        function del()
+        {
+            layer.msg('标签已删除')
+        }
     </script>
 @endsection

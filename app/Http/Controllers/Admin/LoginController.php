@@ -35,7 +35,6 @@ class LoginController extends Controller
         if(session('code') != $res['code']){
             return redirect('/admin')->with('msg','验证码不正确！');
         }
-        // var_dump($request->session()->get('code'));die;
 
         //查询登录人信息
         $login = admin::where('phone','=',$res['phone'])->first();
@@ -47,7 +46,7 @@ class LoginController extends Controller
 
         //判断密码是否正确
         if(!Hash::check($res['password'],$login->password)){
-        // if($login->password != $res['password']){
+            
             return redirect('/admin')->with('msg','用户名或密码不正确！');
         }
 

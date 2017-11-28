@@ -38,20 +38,15 @@
     <form action='/admin/weibo' method='get'>
      <div id="DataTables_Table_0_length" class="dataTables_length">
         <label>
-        <select aria-controls="DataTables_Table_0" name="select">
-            <option
-            name="select"
-            value="{{isset($_GET['content']) ? $_GET['content'] : '' }}">全部
-            </option>
-
+        <select aria-controls="DataTables_Table_0" name="select"> 
+            <option name="select" value="">全部</option>
             @foreach($resa as $k => $v)
-
             <option
+
             name="select"
             value="{{isset($_GET['id']) ? $_GET['id'] : $v->id }}">
             {{$v->lcontent}}
             </option>
-
             @endforeach
         </select>
         </label>
@@ -62,7 +57,9 @@
             aria-controls="DataTables_Table_1" 
             type="text"  
             name="content" 
-            value="{{isset($_GET['content']) ? $_GET['content'] : '' }}"/>
+            value="{{isset($_GET['content']) ? $_GET['content'] : '' }}"
+            selected='selected'
+            />
             {{ csrf_field()}}
         </label>
         <button class="btn btn-default">提交</button>
@@ -82,35 +79,28 @@
         <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 550px;" aria-label="CSS grade: activate to sort column ascending">操作</th>
     </tr>
     </thead>
-           <tbody role="alert" aria-live="polite" aria-relevant="all">
-             @foreach($resd as $k => $v)
-                <tr class="odd" align="center">
-                    <td class=" ">{{$v->nickName}}</td>
-                    <td class=" ">{{$v->content}}</td>
-                    <td class=" ">{{$v->rnum}}</td>
-                    <td class=" ">{{$v->fnum}}</td>
-                    <td class=" ">{{$v->pnum}}</td>
-                    <td class=" ">{{$v->hot == 0 ? '否' : '是'}}</td>
-                    <td class=" ">{{$v->report == 0 ? '正常' : '被举报'}}</td>
-                    <td class=" ">
-
-                     <a href="/admin/weibo/{{$v->cid}}/edit">
-                    <button id="status" class="btn btn-default">
-                        {{$v -> hot == 0 ? ' 登上热门 ' : ' 取消热门 ' }}
+       <tbody role="alert" aria-live="polite" aria-relevant="all">
+         @foreach($resd as $k => $v)
+            <tr class="@if ( $v->id % 2 == 0 ) odd @else even @endif" align="center" id="wei{{$v->cid}}">
+                <td class="">{{$v->nickName}}</td>
+                <td class="">{{$v->content}}</td>
+                <td class="">{{$v->rnum}}</td>
+                <td class="">{{$v->fnum}}</td>
+                <td class="">{{$v->pnum}}</td>
+                <td id="{{$v->cid}}">{{$v->hot == 0 ? '否' : '是'}}</td>
+                <td class="">{{$v->report == 0 ? '正常' : '被举报'}}</td>
+                <td class="">
+                    <button id="status{{$v->cid}}" onclick="fun({{$v->cid}})" class="btn btn-default">
+                         {{$v -> hot == 0 ? ' 登上热门 ' : ' 取消热门 ' }}
                     </button>
-                    </a>
-
-                    <form action="/admin/weibo/{{$v->cid}}" method='post'>
-                    <button id="delete" class="btn btn-default">删除微博</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
+                <button id="djksh" class="btn btn-default" onclick="shan({{$v->cid}})">删除微博</button> 
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
             </table>
-
             <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
-                 {!! $resd->render() !!}
+                {!! $resd->render() !!}
             </div>
         </div>
     </div>
@@ -118,8 +108,57 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript">
-        $('.mws-form-message').delay(3000).slideUp(1000);
-    </script>
-@endsection
+    <script type="text/javascript">$('.mws-form-message').delay(3000).slideUp(1000);</script>
+    <script type="text/javascript">                          
+        //微博热门状态修改
+           function fun(cid)
+           {
+            $.ajax({
+                url:'/admin/weibo/'+cid+'/edit',
+                type:'GET',
+                data:'',
+                success:function(data){
+                    if(data['hot'] == 1){
+                        document.getElementById('status'+cid).innerHTML="取消热门";
+                        document.getElementById(cid).innerHTML="是";
+                        layer.msg('登上热门');
+                    }else{
+                        document.getElementById('status'+cid).innerHTML="登上热门";
+                        document.getElementById(cid).innerHTML="否";
+                        layer.msg('取消热门');
+                        }
+                    }
+                }
+            );
+        };
 
+        //微博删除
+   function shan(cid){
+    //获取要删除微博的id
+    layer.confirm('您确定要删除此微博吗？', {
+      btn: ['确定','取消'] //按钮
+        }, 
+        function(){
+        $.ajax({
+        type: "post",
+        url: '/admin/weibo/'+cid,
+        data: {cid:cid,_token:'{{csrf_token()}}',_method:'delete'},
+
+        beforeSend:function(){
+        //加载样式
+        a = layer.load(0, {shade: false});},
+
+        success: function(data) {
+            //关闭加载样式
+            layer.close(a)
+            console.log(data);
+            //移除微博
+            $('#wei'+cid).remove();
+            layer.msg('微博删除成功!', {icon: 1});
+            },
+        })
+    });
+}
+
+</script>
+@endsection

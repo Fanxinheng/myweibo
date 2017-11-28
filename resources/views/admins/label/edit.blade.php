@@ -37,7 +37,7 @@
 
                     {{method_field('PUT')}}
 
-                    <input type="submit" class="btn btn-default" value="修改">
+                    <input onclick="edit(this)" type="submit" class="btn btn-default" value="修改">
 
                 </div>
             </form>
@@ -50,9 +50,11 @@
 @section('js')
 
 <script type="text/javascript">
-    // alert($);
-
     $('.mws-form-message').delay(3000).slideUp(1000);
+    function edit(id)
+    {   
+        layer.msg('标签已修改');
+    }
 </script>
 
 @endsection

@@ -218,10 +218,11 @@
 
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
-<<<<<<< HEAD
-=======
-
->>>>>>> db293e86662de6b243ad55a406fd24b0089c1ea2
+    
+    <!-- layer  -->
+    <script src="/admins/layer/extend/layer.ext.js"></script>
+    <script src="/admins/layer/jquery.js"></script>
+    <script src="/admins/layer/layer.js"></script>
     @section('js')
 
 

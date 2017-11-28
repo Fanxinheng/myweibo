@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"on",
+				"onclick\tAttr"
+			],
+			[
+				"var",
+				"timers.setInterval(callback, repeat, arg1, arg2, arg3);"
+			],
+			[
+				"con",
+				"console.log();"
+			],
+			[
+				"r",
+				"res"
+			],
+			[
 				"l",
 				"left"
 			],
@@ -18,10 +34,6 @@
 			[
 				"res",
 				"res"
-			],
-			[
-				"con",
-				"constant"
 			],
 			[
 				"content",
@@ -236,10 +248,6 @@
 				"removeAttr"
 			],
 			[
-				"var",
-				"var_dump"
-			],
-			[
 				"arr",
 				"array_key_exists"
 			],
@@ -279,6 +287,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/D/ruanjian/vagrant_new/myweibo/resources/views/admins/weibo/index.blade.php",
+			"settings":
+			{
+				"buffer_size": 5741,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -324,21 +341,27 @@
 	],
 	"file_history":
 	[
-		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/HotController.php",
+		"/D/ruanjian/feiqiu/feiq/Recv Files/login.blade.php",
 		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/WeiboController.php",
 		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/weibo/index.blade.php",
-		"/D/ruanjian/vagrant_new/myweibo/app/Http/routes.php",
-		"/D/ruanjian/feiqiu/feiq/Recv Files/login.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/notice/index.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/public/admins/css/form.css",
+		"/D/ruanjian/wamp/www/KeCheng/lesson57_Jquery_01/jquery/04_bak.html",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/notice/add.blade.php",
 		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/layout/admin.blade.php",
-		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/ReportController.php",
-		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/report/index.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/NoticeController.php",
 		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/hot/index.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/routes.php",
+		"/D/ruanjian/vagrant_new/myweibo/storage/framework/views/f9633db9bc0316efe6a7d486fe9f5005",
+		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/report/index.blade.php",
+		"/D/ruanjian/vagrant_new/myweibo/readme.md",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/HotController.php",
+		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/ReportController.php",
 		"/D/ruanjian/wamp/www/myapp/resources/views/admins/user/index.blade.php",
 		"/D/ruanjian/vagrant_new/myweibo/storage/framework/views/341e20eb5b8544e104f96eba5ea0ebb4",
 		"/D/ruanjian/wamp/www/myapp/app/Http/Controllers/UserController.php",
 		"/D/ruanjian/vagrant_new/myweibo/app/Http/Model/report.php",
 		"/D/ruanjian/vagrant_new/myweibo/app/Http/Model/contents.php",
-		"/D/ruanjian/vagrant_new/myweibo/storage/framework/views/f9633db9bc0316efe6a7d486fe9f5005",
 		"/C/Users/Administrator/Desktop/welcome.blade.php",
 		"/D/ruanjian/wamp/www/KeCheng/lesson49_Javascript_04/01_array-bianli.html",
 		"/D/ruanjian/wamp/www/KeCheng/lesson33_OOP_PDO/4.PDO_YCL.php",
@@ -355,14 +378,11 @@
 		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/README.md",
 		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/LESS/README.md",
 		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/D/ruanjian/vagrant_new/myweibo/app/Http/Controllers/Admin/NoticeController.php",
 		"/D/ruanjian/vagrant_new/myweibo/public/admins/css/table.css",
 		"/D/ruanjian/vagrant_new/laravel_5.1/app/Http/Controllers/Controller.php",
 		"/D/ruanjian/vagrant_new/laravel_5.1/config/app.php",
 		"/D/ruanjian/vagrant_new/laravel_5.1/resources/views/homes/login.blade.php",
 		"/D/ruanjian/wamp/www/myapp/resources/views/admins/user/edit.blade.php",
-		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/notice/add.blade.php",
-		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/notice/index.blade.php",
 		"/D/ruanjian/wamp/www/xiangmu/laravel/resources/views/admin/extends/add.blade.php",
 		"/D/ruanjian/feiqiu/feiq/Recv Files/myapp/resources/views/admins/user/index.blade.php",
 		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/hot/weibo.blade.php",
@@ -378,7 +398,6 @@
 		"/D/ruanjian/wamp/www/KeCheng/lesson55_Javascript_10/03_bak.html",
 		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/hot/show.blade.php",
 		"/D/ruanjian/wamp/www/KeCheng/lesson46_Javascript_01/01_use-script.html",
-		"/D/ruanjian/vagrant_new/myweibo/public/admins/css/form.css",
 		"/D/ruanjian/wamp/www/KeCheng/lesson76_laravel_04/HTML_b/form_layouts.html",
 		"/D/ruanjian/vagrant_new/myweibo/storage/framework/views/0f25bcae3b7c0e90ac454c48834ad6d0",
 		"/D/ruanjian/vagrant_new/myweibo/resources/views/admins/admins/add.blade.php",
@@ -449,13 +468,11 @@
 		"/D/ruanjian/wamp/www/KeCheng/lesson60_Bootstrap_01/bootstrap/04_zujian.html",
 		"/D/ruanjian/wamp/www/KeCheng/lesson60_Bootstrap_01/bootstrap/02_peizhi.html",
 		"/D/ruanjian/wamp/www/test/主页.html",
-		"/C/Users/Administrator/.ssh/id_rsa.pub",
-		"/C/Users/Administrator/Desktop/1.html",
-		"/C/Users/Administrator/Desktop/git_test/3.html"
+		"/C/Users/Administrator/.ssh/id_rsa.pub"
 	],
 	"find":
 	{
-		"height": 43.0
+		"height": 65.0
 	},
 	"find_in_files":
 	{
@@ -469,6 +486,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"}});\n",
+			"report",
+			"get",
+			">\n",
+			" f9633db9bc0316efe6a7d486fe9f5005",
 			"rep",
 			"release",
 			"jquery",
@@ -496,8 +518,190 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/D/ruanjian/vagrant_new/myweibo/resources/views/admins/weibo/index.blade.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 5741,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1034,
+								1034
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 594.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -558,12 +762,12 @@
 		"selected_items":
 		[
 			[
-				"341e20eb5b8544e104f96eba5ea0ebb4",
-				"myweibo\\storage\\framework\\views\\341e20eb5b8544e104f96eba5ea0ebb4"
-			],
-			[
 				"f9633db9bc0316efe6a7d486fe9f5005",
 				"storage\\framework\\views\\f9633db9bc0316efe6a7d486fe9f5005"
+			],
+			[
+				"341e20eb5b8544e104f96eba5ea0ebb4",
+				"myweibo\\storage\\framework\\views\\341e20eb5b8544e104f96eba5ea0ebb4"
 			],
 			[
 				"0f25bcae3b7c0e90ac454c48834ad6d0",
@@ -602,7 +806,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 206.0,
+	"side_bar_width": 204.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -18,8 +18,8 @@ class AdminsController extends Controller
      */
     public function index(Request $request)
     {
-        $admin = admin::paginate(2);
-        // var_dump($admin);
+        $admin = admin::paginate(10);
+        
         return view('admins/admins/index',['admin'=>$admin,'request'=>$request]);
     }
 
@@ -50,7 +50,6 @@ class AdminsController extends Controller
             'phone' => 'required|regex:/^1[34578]\d{9}$/',
             'pic' => 'required'
 
-
         ],[
             'name.required' => '*用户名不能为空*',
             'name.regex' => '*请输入6~12位用户名*',
@@ -70,8 +69,10 @@ class AdminsController extends Controller
 
             //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
+
             //移动图片到
             $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
+
             //修改所上传文件的名称
             $res['pic'] = '/admins/Uploads/'.$name.'.'.$suffix;
         }
@@ -102,8 +103,11 @@ class AdminsController extends Controller
 
         // 判断管理员是否添加成功
             if($admin){
+
                 return redirect('/admin/admins')->with('msg','管理员添加成功！');
+
             } else {
+
                 return back()->with('msg','管理员添加失败！');
             }
 
@@ -131,7 +135,8 @@ class AdminsController extends Controller
     {
         //获取修改管理员信息
         $res = admin::where('id','=',$id)->first();
-        // var_dump($res);
+
+    
         return view('admins/admins/edit',['res'=>$res]);
     }
 
@@ -145,9 +150,11 @@ class AdminsController extends Controller
     public function update(Request $request, $id)
     {
          $this->validate($request, [
+
             'name' => 'required|regex:/^\w{6,12}$/',
         ],[
             'name.required' => '*用户名不能为空*',
+
             'name.regex' => '*请输入6~12位用户名*',
         ]);
 
@@ -159,8 +166,10 @@ class AdminsController extends Controller
 
             // //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
+
             //移动图片到
             $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
+
             //修改所上传文件的名称
             $res['pic'] = '/admins/Uploads/'.$name.'.'.$suffix;
         }
@@ -175,6 +184,7 @@ class AdminsController extends Controller
 
             //对数据库进行修改
             $date = admin::where('id','=',$id)->update($res);
+
             if($date){
                 return redirect('/admin/admins')->with('msg','管理员修改成功！');
             } else {
@@ -194,11 +204,15 @@ class AdminsController extends Controller
     {
         //获取数据库的id
         $res = admin::where('id',$id)->first();
+
         // 删除图片
         $data = unlink('.'.$res->pic);
+
         if ($data) {
+
             //删除指定id的数据
            $info = admin::where('id','=',$id)->delete();
+
                 //前台返回结果
               if($info){
                 return redirect('/admin/admins')->with('msg','管理员删除成功！');
@@ -206,9 +220,5 @@ class AdminsController extends Controller
                 return back()->with('msg','管理员删除失败！');
             }
         }
-
-
-
-
     }
 }

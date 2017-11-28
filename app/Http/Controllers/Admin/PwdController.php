@@ -15,6 +15,7 @@ class PwdController extends Controller
     {
         //获取数据库对应ID
         $res = admin::where('id',$id)->first();
+
         //将获取到的值传入修改页面中
         return view('/admins/admins/pwd',['res'=>$res]);
     }
@@ -44,6 +45,7 @@ class PwdController extends Controller
 
         //获取原密码的值
         $requests = $request->except('_token');
+
         $pass = $request->input('oldpwd');
 
         // 将页面密码于数据库密码进行验证
@@ -55,13 +57,16 @@ class PwdController extends Controller
 
         //哈希加密
         $hashpwd = Hash::make($requests['password']);
+
         //转换为数组
         $arr = array('password'=>$hashpwd );
 
         //将数据写入数据库
         $data = admin::where('id',$id)->update($arr);
+
         if ($data) {
             $request->session()->forget('pid');
+            
             return redirect('admin/login');
         }else {
             return back()->with('msg','管理员密码修改失败！');

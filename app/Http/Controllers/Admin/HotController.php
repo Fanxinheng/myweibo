@@ -21,8 +21,11 @@ class HotController extends Controller
     {   
         //查询数据库contents表与user_info表所需字段
         $res = contents::join('user_info','contents.uid','=','user_info.uid')
+
         ->where('hot','1')
+
         ->paginate(8);
+        
         //返回到index页面视图中
         return view('admins/hot/index', ['res' => $res]);
 

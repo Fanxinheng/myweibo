@@ -39,7 +39,7 @@
                 <div class="mws-button-row">
 
                     {{csrf_field()}}
-                    <input type="submit" class="btn btn-danger" value="添加">
+                    <input onclick="add(this)" type="submit" class="btn btn-danger" value="添加">
 
                 </div>
             </form>
@@ -51,9 +51,11 @@
 @section('js')
 
 <script type="text/javascript">
-	// alert($);
-
 	$('.mws-form-message').delay(3000).slideUp(1000);
+    function add(id)
+    {
+        layer.msg('友情链接已添加')
+    } 
 </script>
 
 @endsection

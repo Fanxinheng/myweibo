@@ -46,7 +46,7 @@
 
         			{{csrf_field()}}
 
-                    <input type="submit" class="btn btn-default" value="添加">
+                    <input onclick="tian(this)" type="submit" class="btn btn-default" value="添加">
         		</div>
         	</form>
         </div>
@@ -58,9 +58,12 @@
 @section('js')
 
 <script type="text/javascript">
-	// alert($);
 
 	$('.mws-form-message').delay(3000).slideUp(1000);
+    function tian(id)
+    {
+        layer.msg('广告已添加')
+    }
 </script>
 
 @endsection

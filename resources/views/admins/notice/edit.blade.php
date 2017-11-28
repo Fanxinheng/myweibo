@@ -1,12 +1,12 @@
 @extends('admins/layout/admin')
 
-@section('title','公告添加')
+@section('title','公告修改')
 
 @section('content')
 
 <div class="mws-panel grid_8">
 	<div class="mws-panel-header">
-    	<span>公告添加</span>
+    	<span>公告修改</span>
     </div>
 
 	<div class="mws-panel-body no-padding">
@@ -27,22 +27,24 @@
     </div>
 
 	@endif
-    	<form action="/admin/notice" method="post" class="mws-form" enctype="multipart/form-data">
+    	<form action="/admin/notice/{{$res->id}}" method="post" class="mws-form" enctype="multipart/form-data">
     		<div class="mws-form-inline">
 			<div class="mws-form-row">
-                <label class="mws-form-label" style="width:125px;">系统公告</label>
+                <label class="mws-form-label" style="width:125px;">系统公告修改</label>
                     <div class="mws-form-item">
-                    标题:<input type="text" class="large" name="title" value="">
+                    标题:<input type="text" class="large" name="title" value="{{$res->title}}">
                     </div>
                 <div class="mws-form-item">
-                    内容：<textarea class="large" cols="" rows="" name="content"></textarea>
+                    内容:<textarea class="large" name="content">{!!$res->content!!}</textarea>
                 </div>
             </div>
     		</div>
     		<div class="mws-button-row">
-    			{{csrf_field()}}
-    			<input type="submit" onclick="changetext(this)" class="btn btn-default" value="添加">
+    		<input type="submit" onclick="changetext(this)" class="btn btn-default" value="保存">
+    		{{csrf_field()}}
+            {{ method_field('PUT') }}
     		</div>
+            </form>
     	</form>
     </div>
 </div>
@@ -56,7 +58,7 @@
 
         function changetext(id)
         {
-            layer.msg('公告已添加');
+            layer.msg('公告已修改');
         }
 </script>
 @endsection

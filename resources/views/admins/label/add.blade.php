@@ -32,7 +32,7 @@
                 <div class="mws-button-row">
 
                     {{csrf_field()}}
-                    <input type="submit" class="btn btn-default" value="添加">
+                    <input onclick="add(this)" type="submit" class="btn btn-default" value="添加">
 
                 </div>
             </form>
@@ -44,9 +44,11 @@
 @section('js')
 
 <script type="text/javascript">
-    // alert($);
-
     $('.mws-form-message').delay(3000).slideUp(1000);
+    function add(id)
+    {   
+        layer.msg('标签已添加')
+    }
 </script>
 
 @endsection
