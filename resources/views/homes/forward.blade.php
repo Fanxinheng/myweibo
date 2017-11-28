@@ -190,10 +190,31 @@
                                                                     {{date('Y-m-d H:i:s',$res->time)}} 
                                                                 </span>
 
-                                                            </div>
-                                                        </div>
-                                                            
-                                                        <hr>
+
+                                    <form action="/home/release" method="post" enctype="multipart/form-data">
+                                            <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
+                                        
+                                            
+                                            <div class="kind" style="height: 35px;margin-top: 3px;">
+                                               <a class="S_txt1" href="javascript:void(0);" action-type="face" action-data="type=500&amp;action=1&amp;log=face&amp;cate=1"
+                                               title="表情" node-type="smileyBtn" suda-uatrack="key=tblog_home_edit&amp;value=phiz_button">
+                                                   <em class="W_ficon ficon_face">
+                                                       <img src="/homes/images/bq.png" alt="" style="width: 15px;height: 15px;margin-bottom: 5px">
+                                                   </em>
+                                                   表情
+                                               </a>
+                                                <a class="S_txt1" title="图片" style="position: relative;">
+                                                    <em class="W_ficon ficon_image" style="font-size:16px">
+                                                        <span class="glyphicon glyphicon-picture" aria-hidden="true" ></span>
+                                                    </em>
+                                                    图片
+                                                    <div style="position: absolute; left: 0px; top: 0px; display: block; overflow: hidden; background-color: rgb(0, 0, 0); opacity: 0; width: 49px; height: 24px;">
+                                                            <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
+                                                             multiple="multiple" type="file">
+                                                    </div>  
+                                                </a>
+                                                
+                                                <span>
 
                                                         <form action="/home/forward/store/" method="post">
                                                             <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>

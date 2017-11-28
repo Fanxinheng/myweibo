@@ -20,7 +20,6 @@ class LabelController extends Controller
         //获取数据库信息
         $res = label::get();
 
-        // dd($res);
         //把值传到列表页面
         return view('/admins/label/index',['res'=>$res]);
     }
@@ -50,11 +49,12 @@ class LabelController extends Controller
         ],[
             'lcontent.required' => '标签名不能为空',
         ]);
+
         //打印添加页面获取到的信息
-        // var_dump($request->all());
         $res = $request->except('_token');
-        // var_dump($res);
+
         $data = Label::insert($res);
+
         //判断如果添加成功前往列表页，如果失败回到当前页
         if ($data) {
             return redirect('/admin/label/')->with('create','添加标签成功！');
@@ -85,7 +85,6 @@ class LabelController extends Controller
         //通过id获取到相应的单条信息
         $res = label::where('id',$id)->first();
 
-        // var_dump($res);
         //跳转到标签修改页面,将值一并传入
         return view('admins/label/edit',['res'=>$res]);
     }
@@ -101,9 +100,10 @@ class LabelController extends Controller
     {
         //获取修改页面的信息
         $res = $request->except('_token','_method');
-        // var_dump($res);
+
         // 对数据库进行修改
         $data = label::where('id',$id)->update($res);
+        
         //判断如果修改成功就跳转到列表页面,失败返回当前页面
         if ($data) {
             return redirect('/admin/label/')->with('create','添加标签成功！');
