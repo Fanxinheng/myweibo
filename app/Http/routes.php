@@ -65,6 +65,10 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
 	//删除全部图片
 	Route::post('photo/delete','UserController@photoDelete');
+
+	//删除单个图片
+	Route::post('photo/move','UserController@photomove');
+	
 	
 });
 
@@ -103,9 +107,7 @@ Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
 	Route::get('/act/{id}','OtherUserController@attentionAction');
 
 
-
 });
-
 
 
 //===========================前台未登录==============================//
@@ -245,6 +247,13 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 
 	//微博找人
 	Route::get('/job/{id}','LoginController@job');
+
+	//多图上传加载页面
+	Route::get('/pics',function(){
+		return view('homes/blog/pic');
+	});
+
+	Route::post('/blog/pics',"BlogController@pics");
 
 	
 
@@ -404,6 +413,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 
 });
+
+
+
+
 
 
 

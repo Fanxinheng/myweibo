@@ -70,18 +70,19 @@ class AdminsController extends Controller
 
             //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
+
             //获取文件内容
             $file = $request->file('pic');
 
-            //修改名字已时间戳生成文件命
-            $name = 'Advert'.rand(1111,9999).time();
+            //修改名字已时间戳生成文件名
+            $name = rand(1111,9999).time();
 
-            //获取文件命的后缀
+            //获取文件名的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
-            //移动图片到
-            // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
+
             //拼装文件的名称
             $prind = 'admins/Uploads/'.$name.'.'.$suffix;
+
             //上传到七牛云
             $bool = $disk->put($prind,file_get_contents($file->getRealPath()));
 
@@ -117,10 +118,9 @@ class AdminsController extends Controller
             $res['password'] = Hash::make($request->input('password'));
 
             //将数据插入数据库
-
             $admin = admin::insert($res);
 
-        // 判断管理员是否添加成功
+            //判断管理员是否添加成功
             if($admin){
                 return redirect('/admin/admins')->with('msg','管理员添加成功！');
             } else {
@@ -173,20 +173,19 @@ class AdminsController extends Controller
             //获取文件内容
             $file = $request->file('pic');
 
-            //修改名字已时间戳生成文件命
+            //修改名字已时间戳生成文件名
             $name = 'admins'.rand(1111,9999).time();
 
-            // //获取文件命的后缀
+            // //获取文件名的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
-            //移动图片到
-            // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
+
             //修改所上传文件的名称
             $print = 'admins/Uploads/'.$name.'.'.$suffix;
 
             //上传到七牛云
              $bool = $disk->put($print,file_get_contents($file->getRealPath()));
 
-            //去数据库获取图片信息
+            //获取管理员原头像
             $pic = admin::where('id',$id)->value('pic');
 
             //删除七牛云信息

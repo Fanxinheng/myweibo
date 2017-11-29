@@ -18,7 +18,7 @@
 
     </head>
     
-    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';">
+    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
     
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
@@ -85,11 +85,20 @@
                                      <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="img" class="img-circle">
                                 </div>
                                 <div>
-                                    <!-- 昵称 -->
-                                    <div id="nickname">
-                                    {{$rev->nickName}}
+                                   <!-- 昵称 -->
+                                    <div id="nickname" >
+                                        {{$rev->nickName}}&nbsp;&nbsp;
+                                        
                                     </div>
-                                    <!-- 签名 -->
+                                    <div id="nickName" style="margin-left: 20px;margin-top:10px;">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
+                                        @if($rev->sex=='w')
+                                        <em>女</em>
+                                        @else
+                                        <em>男</em>
+                                        @endif
+                                        
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -121,7 +130,7 @@
                                 </li>
                                 <li>
                                     <a href="/home/photo">
-                                        相册管理
+                                        相册
                                     </a>
                                 </li>
                                 <li>
@@ -174,19 +183,23 @@
                             </div>
                             <div class="col-lg-12" style="background-color: #fff;margin-left: 30px;width: 820px;padding-bottom: 20px;margin-top: 10px" >
                                 <!-- 图像遍历的地方 -->
-
-                                @if($res == '')
-
-                                <div style="line-height: 20px;padding:10px;">你还没有上传图片哟!@~@</div>
-
-                                @else
                                 <!-- 头像 -->
                                 @foreach($res as $k=>$v)
                                  @if($v->image)
                                                             
-                                <div id="weiimg" class="cl{{$v->cid}}" onmouseover="imgov({{$v->cid}})" style="margin-top: 20px;margin-left: 20px;float: left;">
-                                    <div id="x{{$v->cid}}" onclick="xm({{$v->cid}})" style="position: absolute;margin-left: 85px;font-size: 18px;display: none">x</div>
-                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img">
+                                <div id="weiimg" class="cl{{$v->cid}}" onmouseover="imgov({{$v->cid}})" style="margin-top: 20px;margin-left: 20px;float: left;display:inline">
+                                    <div id="x{{$v->cid}}" onclick="xm({{$v->cid}})" style="position: absolute;margin-left: 85px;font-size: 18px;display: none;display:inline">x</div>
+
+                                   <?php
+                                    $img = rtrim($v->image,'##');
+
+                                    $imgs = explode('##',$img);
+                                    
+                                ?>
+                                    @foreach($imgs as $i)
+
+                                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;display:inline" id="img">
+                                    @endforeach
                                 </div>
                                  @else  
                                  @endif
@@ -194,7 +207,7 @@
                                  @endforeach
                                 
                                 
-                                 @endif
+                                
                                 <!-- 图像遍历结束 -->
                             </div>
                             <!-- 关注栏结束 -->
@@ -253,14 +266,23 @@
                 $.ajax({
                     url:'/home/photo/move',
                     type:'POST',
-                    data:{cid:cid},
-                     beforeSend:function(){
-                        a = layer.load();                      
-                    },  
+                    data:{cid:cid}, 
                     success:function(data){
                        $('.cl'+cid).remove();
                        
                     }
+                });
+            };
+
+             //页面加载事件
+            window.onload = function() {
+
+                //文章双击事件
+                $(document).dblclick(function() {
+
+                    //回复框显示
+                    $('.disd1').hide();
+
                 });
             };
 

@@ -17,8 +17,7 @@
         </script>
     </head>
     
-    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';"
-    onclick="">
+    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
@@ -91,7 +90,7 @@
                                         {{$rev->nickName}}&nbsp;&nbsp;
                                         
                                     </div>
-                                    <div id="nickName">
+                                    <div id="nickName" style="margin-left: 20px;margin-top:10px;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
                                         @if($rev->sex=='w')
                                         <em>女</em>
@@ -132,7 +131,7 @@
                                 </li>
                                 <li>
                                     <a href="/home/photo">
-                                        相册管理
+                                        相册
                                     </a>
                                 </li>
                                 <li>
@@ -177,7 +176,7 @@
                         <!-- 栏目结束 -->
                         <!-- 微博 -->
                         <div class="col-md-8 sidebar">
-                            <div class="col-lg-12" style="margin-left: 12px;background-color: #fff;margin-bottom: 10px;width: 830px; ">
+                            <div class="col-lg-12" style="margin-left: 12px;background-color: #fff;width: 830px; ">
                                 <h3>
                                     微博
                                 </h3>
@@ -190,7 +189,8 @@
                                 @else
                             <!-- 微博遍历的地方 -->
                             @foreach($res as $k=>$v)
-                            <div class="col-lg-12" id="tiezi" style="width: 830px;overflow: hidden; background-color: #fff;margin-left: 12px">
+                        <div id="wei{{$v->cid}}" >
+                            <div class="col-lg-12" id="tiezi" style="width: 830px;overflow: hidden; background-color: #fff;margin-left: 12px;margin-top: 20px">
                                 <div class="col-lg-12" id="buhuo" class="layer_notice">
                                     <!-- 头像 -->
                                     <div class="col-log-2" id="tieimg" style="margin-top: 20px;float: left">
@@ -208,7 +208,16 @@
                                         <div id="nei" style="margin-top: 20px; word-break:break-all;width:600px;margin-left: 10px">{{$v->content}} </div><br>
                                         @if($v->image)
                                         <div style="margin-top: 10px" id="fimg">
-                                             <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" >
+
+                                             <?php
+                                            $img = rtrim($v->image,'##');
+
+                                            $imgs = explode('##',$img);
+                                            
+                                        ?>
+                                            @foreach($imgs as $i)
+                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                            @endforeach
                                         </div>
                                         @else
                                         <div></div>
@@ -260,7 +269,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/home/delete/{{$v->cid}}">
+                                            <a href="javascript:;" onclick="del({{$v->cid}})">
                                                 <span>
                                                     <em>
                                                         删除&nbsp;&nbsp;|
@@ -314,18 +323,33 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                             @endforeach                           
                             <!-- 微博遍历结束 -->
                             @endif
+                            <div style="float: right">{!! $res->render() !!}</div>
                         </div>
                         <!-- 微博结束 -->
-                         <div style="float: right">{!! $res->render() !!}</div>
+                         
                     </div>
                 </div>
             </div>
             <!-- 中间结束 -->
         </div>
         <script>
+
+            //删除微博
+            function del(cid) {
+                $.ajax({
+                    url:'/home/delete/'+cid,
+                    type:'GET',
+                    success:function (data){
+                    $('#wei'+cid).remove();
+                    layer.msg('删除成功');
+
+                    }
+                });
+            }
             //评论点击事件
             function fun(id) {
 
@@ -346,9 +370,6 @@
                     url:'/home/replay/delete',
                     type:'POST',
                     data:{id:id},
-                    beforeSend:function(){
-                        a = layer.load();                      
-                    },
                     success:function(data){
                       
                     //改变转发那里的转发量
@@ -361,8 +382,6 @@
                         //隐藏未读消息框
                         $('#rediv').hide();
                     }
-
-                 
 
                     $('#he'+id).remove();
 
@@ -436,6 +455,8 @@
 
                     $('#fdiv').show();
 
+                    console.log(data['socre']);
+
                     //获取积分
                     document.getElementById('fsoc').innerHTML=data['socre'];
 
@@ -467,13 +488,17 @@
                     },
                     success: function(data) {
 
+                        if(data == 0){
+                            layer.msg('您已赞过此微博:)', {icon:2 ,});
+                        }
+
                        document.getElementById('spa'+ cid).innerHTML = "点赞" + data['pnum'];
 
                         document.getElementById('pdiv').innerHTML = data['point'];
 
                         $('#pdiv').show();
 
-                        layer.msg('点赞成功');
+                       layer.msg('点赞成功:)', {icon: 1});
                     },
                     asycn: true
                 });

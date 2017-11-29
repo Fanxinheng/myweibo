@@ -18,7 +18,8 @@
         </script>
     </head>
     
-    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';">
+
+    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
@@ -84,8 +85,8 @@
                             </div>
                             <div class="col-md-4">
                                 <!-- 头像 -->
-                                <div id="jimg">
-                                   
+
+                                <div id="jimg" style="margin-left: 100px">
                                    
                                      <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
                                    
@@ -122,7 +123,7 @@
                     <!-- 栏目及遍历 -->
                     <div class="container">
                         <!-- 栏目 -->
-                        <div class="col-md-3 sidebar" id="lanmu">
+                        <div class="col-md-3 sidebar" id="lanmu" style="height:500px">
                             <ul class="nav nav-sidebar">
                                 <li class="active">
                                     <a href="/home/other/user/{{$rev->uid}}">
@@ -141,7 +142,7 @@
                                 </li>
                                 <li>
                                     <a href="/home/other/photo/{{$rev->uid}}">
-                                        相册管理
+                                        相册
                                     </a>
                                 </li>
                             </ul>
@@ -154,32 +155,46 @@
                                     微博
                                 </h3>
                             </div>
-                            
+
+                           @if($res ->isEmpty())
+                                <div style="margin-top: 70px;line-height: 40px;height: 40px;background-color: #fff;width
+                                :830px;margin-left: 14px">&nbsp;他还没有发微博哟~~~
+                                </div>
+                                @else
                             <!-- 微博遍历的地方 -->
                             @foreach($res as $k=>$v)
-                            <div class="col-lg-12" id="tiezi" style="width: 830px;overflow: hidden;">
+                            <div class="col-lg-12" id="tiezi" style="width: 830px;overflow: hidden;background-color: #fff;margin-left: 12px;margin-top: 20px">
                                 <div class="col-lg-12">
                                     <!-- 头像 -->
-                                    <div class="col-log-2" id="tieimg" style="margin-top: 20px">
-                                         <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/50/h/50/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
+
+                                    <div class="col-log-2" id="tieimg" style="margin-top: 20px;float: left">
+                                         <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/50/h/50/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"  id="img" class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
-                                    <div class="col-log-6" id="tiename" style="margin-top: 25px;margin-left: 10px;">
+                                    <div class="col-log-6" id="tiename" style="margin-top: 25px;margin-left: 50px;">
                                         <div>
-                                            <b id="xing">
+                                            <b id="xing" style="margin-left: 10px">
                                                 {{$rev->nickName}}
                                             </b>
                                         </div>
-                                        <div style="margin-top: 5px;font-size: 12px;color: #808080;">
+                                        <div style="margin-top: 5px;font-size: 12px;color: #808080;margin-left: 10px">
                                             <em style="color:#676462"> {{date('Y-m-d H:i:s',$v->time)}}   </em>
                                         </div>
-                                        <div id="nei" style="margin-top: 20px; word-break:break-all;width:600px">
+                                        <div id="nei" style="margin-top: 20px; word-break:break-all;width:600px;margin-left: 10px">
                                             {{$v->content}} 
                                             
                                         </div><br>
                                         @if($v->image)
                                         <div style="margin-top: 10px">
-                                             <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                              <?php
+                                            $img = rtrim($v->image,'##');
+
+                                            $imgs = explode('##',$img);
+                                            
+                                        ?>
+                                            @foreach($imgs as $i)
+                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                            @endforeach
                                         </div>
                                         @else
                                         <div></div>
@@ -230,11 +245,9 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="">
-                                                <span>
-                                                    <em>
+                                            <a href="javascript:;" onclick="jubao({{$v->cid}})">
+                                                <span id="spa{{$v->cid}}">
                                                         举报&nbsp;&nbsp;|
-                                                    </em>
                                                 </span>
                                             </a>
                                         </li>
@@ -292,6 +305,7 @@
                                 </div>
                             </div>
                             @endforeach
+                            @endif
                             <!-- 微博遍历结束 -->
                         </div>
                         <!-- 微博结束 -->
@@ -302,14 +316,38 @@
         </div>
         <script>
 
+            //举报
+              //微博举报
+            function jubao(cid){
+                layer.msg('您确定举报此微博吗？', {
+                  time: 0 //不自动关闭
+                  ,btn: ['确定', '取消']
+                  ,yes: function(index){
+
+                    $.get('/home/blog/report', {cid:cid}, function (data) {
+                        if(data == 1){
+                            layer.close(index);
+                            layer.msg('我们收到了您的举报，感谢您的监督:)', {
+                              icon: 6
+                              ,btn: ['再见']
+                            });
+
+                        }else{
+                            layer.msg('您已举报过此微博:)', {icon:2 ,})
+                        }
+                    });
+                   
+                  }
+                });    
+            };
+
+
+            //关注
            function abtn1 (id){
                 $.ajax({
                     url:'/home/other/act/'+id,
                     type:'GET',
                     data:{},
-                    beforeSend:function(){
-                        a = layer.load();                      
-                    },
                     success:function(data){
                     if(data == 1){
                         document.getElementById('abtn1').innerHTML="关注";

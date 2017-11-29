@@ -54,7 +54,7 @@ class UserController extends Controller
         $rev = user_info::where('uid','=',$id)->first();
 
         //查询用户的帖子和评论
-        $res = contents::where('uid',$id)->with('replay.user_info')->paginate(1);
+        $res = contents::where('uid',$id)->with('replay.user_info')->paginate(5);
 
         //跳转页面
         return view('homes.user.index',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
@@ -247,7 +247,6 @@ class UserController extends Controller
     //删除微博
     public function delete($id)
     {
-        
         //删除评论
         replay::where('tid',$id)->delete();
 
@@ -277,7 +276,7 @@ class UserController extends Controller
         contents::where('cid',$id)->delete();
 
         //页面跳转
-        return redirect('/home/user');
+        return 1;
 
     }
 
@@ -413,13 +412,24 @@ class UserController extends Controller
         //获取发帖人的id
         $res1['uid'] = contents::where('cid',$_GET['cid'])->value('uid');
 
+        //判断是否点赞过
+        $bool = point::where('pid',$res1['pid'])->where('tid',$res1['tid'])->value('id');
+
+
+        //判断用户id是否等于点赞人id
+        if($bool){
+            //返回
+            return 0;
+
+        }
+
         //获取点赞时间
         $res1['ptime'] = time();
 
         //将数组存入数据库中
         point::insert($res1);
 
-        //获取传过来的帖子id
+        //获取点赞数量
         $pnum = contents::where('cid',$_GET['cid'])->value('pnum');
 
         //点赞加一
@@ -551,13 +561,20 @@ class UserController extends Controller
         //删除七牛云的照片
         $image = contents::where('cid',$cid)->value('image');
 
-        if($image){
+        $img = rtrim($image,'##');
+
+        $imgs = explode('##',$img);
+
+        if($imgs){
+
 
             //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
 
             //删除云中图片
-            $disk->delete($image);
+
+            $disk->delete($imgs);
+
 
         }
 
@@ -567,7 +584,6 @@ class UserController extends Controller
         return 1;
 
     }
-
 
 
    
