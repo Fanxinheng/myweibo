@@ -42,7 +42,6 @@
                     </div>
                     <div class="col-md-12" id='content'>
                         <div class="col-md-12" id='con'>
-
                             <form class="form-horizontal" method="post" action="/home/details/changepassword" enctype="multipart/form-data" id="forms">
                                   <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-2 control-label"><span class="nspan">*</span>旧密码:</label>
@@ -50,7 +49,6 @@
                                       <input type="password" class="form-control" id="oldpass" maxlength="12" name="oldpass">
                                       <div id="spa" class='msg' >
                                     </div>
-
                                   </div>
                                  <div class="form-group" style="margin-top: 60px">
                                     <label for="inputPassword3" class="col-sm-2 control-label" style="margin-left:9px"><span class="nspan">*</span>新密码:</label>
@@ -58,7 +56,6 @@
                                       <input type="password" class="form-control" id="newpass" maxlength="12" name="newpass">
                                       <div id="spa1" class='msg' >
                                     </div>
-
                                   </div>
 
                                   <div class="form-group" id='but' style="width: 300px">
@@ -69,7 +66,6 @@
                                   </div>
                                 </form>
                         </div>
-
                     </div>
 
                 </div>
@@ -90,7 +86,6 @@
                     </div>
             </div>
         </div>
-
      <script>
         var ch2;
         var ch3;
@@ -119,7 +114,6 @@
                 // console.log(data);
               if(data==1){
 
-
               }else{
                 $('#spa').css('display','block');
                 $("#spa").html("与旧密码不一致");
@@ -127,7 +121,6 @@
               }
             })
 
-            // console.log(ch2);
         })
 
          //新密码获取焦点事件
@@ -161,24 +154,10 @@
               }
             })
 
-            // $.get("/home/changepass/newpass",{newpass:newpass},function(data){
-            //     // console.log(data);
-            //   if(data==1){
-
-            //   }else{
-            //     $('#spa1').css('display','block');
-            //     $("#spa1").html("与旧密码不一致");
-            //     $('#spa1').css('color','red');
-            //   }
-            // })
 
             console.log(ch2);
         })
 
-
-        // if (PH==1&&NI==1&&AG==1&&EM==1) {
-        //  next();
-        // }
 
      </script>
 

@@ -61,6 +61,7 @@ class PwdController extends Controller
              //获取页面的原密码
             $pass = $request->input('oldpwd');
 
+
             // 将页面密码与数据库密码进行验证
             if (!Hash::check($pass,$res['password'])) {
 
@@ -76,7 +77,8 @@ class PwdController extends Controller
             if ($data) {
                     //消除session里面的pid弹回登录页面
                     $request->session()->forget('pid');
-                    return redirect('admin/')->with('msg','修改成功,请再次登录！');
+
+                    return redirect('admin/')->with('edit','修改成功,请再次登录！');
             }else {
                     return back()->with('msg','个人信息修改失败！');
             }
@@ -91,6 +93,7 @@ class PwdController extends Controller
                 $data = admin::where('id',$id)->update($arr);
 
                 if ($data) {
+
                     return redirect('/admin/admins/')->with('msg','用户名修改成功！');
                 } else {
                     return back()->with('msg','个人信息修改失败！');
@@ -142,6 +145,6 @@ class PwdController extends Controller
         //删除session内的信息
         $request->session()->forget('pid');
 
-        return redirect('/admin/');
+        return redirect('/admin/')->with('out','退出成功！');
     }
 }

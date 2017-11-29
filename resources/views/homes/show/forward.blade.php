@@ -6,6 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
@@ -56,6 +57,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+
                                     </form>
 
                                 </div>
@@ -127,8 +129,6 @@
                                             </div>
                                             @endforeach
 
-
-
                                         </ul>
                                     </div>
                                 </div>
@@ -146,6 +146,7 @@
 
 
                                                         <div class="list_des">
+
 
                                                             <h3 class="list_title_s" style="padding-bottom:10px">
                                                                 <div>
@@ -182,11 +183,11 @@
                                                                 <span class="subinfo S_txt2">
                                                                     {{date('Y-m-d H:i:s',$res->time)}}
                                                                 </span>
+
                                                             </div>
                                                         </div>
 
                                                         <hr>
-
 
                                                     <a href="#">
                                                         <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
@@ -231,6 +232,7 @@
                                                             </div>
                                                         </h3>
                                                         @else
+
 
                                                         @endif
                                                     @endforeach
@@ -282,7 +284,6 @@
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-
                                                                         <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
                                                                     </form>
                                                                 </div>
@@ -297,6 +298,7 @@
 
                                                                     </div>
                                                             </div>
+
 
 
                                                         </div>
@@ -392,12 +394,12 @@
                 type: "get",
                 url: "/home/notice",
                 data: {id:id},
-
                 beforeSend:function(){
                     //加载样式
                     a = layer.load(0, {shade: false});
                   },
                 success: function(data) {
+
 
                     //关闭加载样式
                     layer.close(a)

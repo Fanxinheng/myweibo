@@ -3,6 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
+
         <title>
         </title>
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
@@ -39,6 +40,7 @@
                                 系统消息 @if($message>0)
                                 <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px  ">
                                     {{$message}}
+
                                 </div>
                                 @else
                                 <div>
@@ -46,19 +48,17 @@
                                 @endif
                             </a>
                         </div>
-
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-                            <a href="/home/user">
 
+                            <a href="/home/user">
                                 {{$rev->nickName}}
                             </a>
                         </div>
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-
                             <a href="/home/admin">
                                 首页
                             </a>
@@ -98,6 +98,7 @@
                                         @else
                                         <em>男</em>
                                         @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -165,8 +166,8 @@
                                 </li>
                                 <li>
 
-                                             <a href="/home/forward">
-                             微博转发 @if($forward>0)
+                                    <a href="/home/forward">
+                                        微博转发 @if($forward>0)
                                         <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px  " id="fdiv">
                                             {{$forward}}
                                         </div>
@@ -182,6 +183,7 @@
                         <!-- 栏目结束 -->
 
                         <!-- 微博 -->
+
                         <div class="col-md-8 sidebar" >
 
 
@@ -193,11 +195,11 @@
                             <div class="col-lg-12" id="tiezi" style="width: 830px;margin-top: 10px;height: 40px;line-height: 40px;background-color: #fff;margin-left: 14px">你还没有任何回复哟~~~</div>
                             @else
                             <div class="col-lg-12" >
+
                                 @foreach($res as $k=>$v)
                                 <div class="col-lg-12" style="width: 830px;background-color: #fff;margin-left: -2px;margin-top: 10px;padding-bottom: 10px" >
                                     <!-- 头像 -->
                                     <div class="col-log-2" style="float: left;margin-top: 10px;margin-right: 10px">
-
 
                                          <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/30/h/30/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="img" class="img-circle">
                                     </div>
@@ -210,6 +212,7 @@
                                     <div class="col-log-10" style="word-break:break-all;margin-left: 40px;margin-top:10px;background-color:#F2F2F5;line-height: 40px;border-radius: 10px ">
 
                                         @foreach($v->content as $res)
+
                                         &nbsp;&nbsp;&nbsp;<b>@张筱:</b>{{$res->content}}
                                         @endforeach
 
@@ -219,6 +222,7 @@
                                  @endforeach
                              </div>
                              @endif
+
 
                             <!-- 微博遍历结束 -->
                         <!-- 微博结束 -->

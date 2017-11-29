@@ -92,7 +92,7 @@ class BlogController extends Controller
         $bool = user_attention::where('uid',$uid)->where('gid',$content->uid)->value('id');
 
     	return view('homes/blog/forward',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'content'=>$content,'forward'=>$forward,'bool'=>$bool]);
-    	
+
     }
 
 
@@ -127,7 +127,7 @@ class BlogController extends Controller
         $bool = user_attention::where('uid',$uid)->where('gid',$content->uid)->value('id');
 
         return view('homes/blog/replay',['uid'=>$uid,'label'=>$label,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'content'=>$content,'replay'=>$replay,'bool'=>$bool]);
-        
+
     }
 
 
@@ -157,8 +157,15 @@ class BlogController extends Controller
             //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
 
-            //删除云中图片
-            $disk->delete($image);
+
+            $img = rtrim($image,'##');
+
+            $imgs = explode('##',$img);
+
+            foreach($imgs as $i){
+                //删除云中图片
+                $disk->delete($i);
+            }
 
         }
 
@@ -174,7 +181,7 @@ class BlogController extends Controller
 
         //查询登录用户微博数量
         $num['cnum'] = contents::where('uid',Session('uid'))->count();
-        
+
         return $num;
 
     }
@@ -203,8 +210,35 @@ class BlogController extends Controller
         if($bool && $bool1) {
             return 1;
         }
-        
-        
+
+
     }
-    
+
+
+    //多图上传
+    public function pics (Request $request)
+    {
+        //初始化七牛云
+        $disk = QiniuStorage::disk('qiniu');
+
+        //获取文件内容
+        $file = $request->file('file');
+
+        //随机生成文件名
+        $name = rand(1111,9999).time();
+
+        //获取上传文件后缀
+        $suffix = $request->file('file')->getClientOriginalExtension();
+
+        //拼装文件名
+        $logo = 'homes/c_images/'.$name.'.'.$suffix;
+
+        // $res['image'] = $logo;
+
+        //上传到七牛云
+        $bool = $disk->put($logo,file_get_contents($file->getRealPath()));
+
+        return $logo;
+    }
+
 }

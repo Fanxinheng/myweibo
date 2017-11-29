@@ -114,7 +114,21 @@ class AdvertController extends Controller
      */
     public function show($id)
     {
-        //
+                //查询用户原来状态
+
+        $date = advert::where('id',$id)->value('status');
+
+        if($date){
+
+            //更新数据库
+            $update = advert::where('id',$id)->update(['status'=>0]);
+            return 0;
+        } else {
+
+            //更新数据库
+            $update = advert::where('id',$id)->update(['status'=>1]);
+            return 1;
+        }
     }
 
     /**
@@ -182,6 +196,7 @@ class AdvertController extends Controller
             $res['status'] = $request->status;
             //修改数据库里面的信息
             $data = advert::where('id',$id)->update($res);
+
             //判断如果成功去列表页，如果失败回到当前页面
             if ($data) {
                 return redirect('/admin/advert/')->with('create','修改广告成功！');
@@ -203,8 +218,12 @@ class AdvertController extends Controller
         $res = advert::where('id',$id)->value('pic');
         //初始化七牛云
         $disk = QiniuStorage::disk('qiniu');
+
         //删除七牛云信息
         $data = $disk->delete($res);
+        //删除数据库指定id的信息
+        $info = advert::where('id',$id)->delete();
+
         //删除数据库指定id的信息
         $info = advert::where('id',$id)->delete();
 

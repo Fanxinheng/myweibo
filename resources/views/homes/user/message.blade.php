@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="/homes/css/user.replay.css">
     </head>
 
-
     <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
 
         <div id="b">
@@ -54,13 +53,13 @@
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
                             <a href="/home/user">
+
                              {{$rev->nickName}}
                             </a>
                         </div>
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-
                             <a href="/home/admin">
                                 首页
                             </a>
@@ -201,12 +200,13 @@
                                 <!-- 内容 -->
                                 <div class="col-lg-10" style="margin-left: 70px">
 
-                                </div>
 
+                                </div>
                                 <div class="col-lg-10" style="background-color: #ccc;padding:5px;margin-left: 85px;margin-top: 5px;margin-bottom: 10px">
                                     <i>
                                         亲爱的用户:{{$v->content}}
                                     </i>
+
 
                                 </div>
 

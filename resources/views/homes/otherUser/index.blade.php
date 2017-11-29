@@ -13,10 +13,10 @@
         </script>
         <link rel="stylesheet" href="/homes/css/user.index.css">
         <meta name="csrf_token" content="{{ csrf_token() }}"/>
+
         <script type="text/javascript" src="/homes/layer/layer.js">
         </script>
     </head>
-
 
     <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
@@ -95,7 +95,6 @@
                                     <!-- 昵称 -->
                                     <div id="nickname">
                                         {{$rev->nickName}}
-
                                         @if($re == 1)
                                         <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut">取消关注</button>
                                         @else
@@ -116,6 +115,7 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- 头像 及北京-->
                     <style>
                         #weibo #lanmu li { margin-top: 5px; font-size: 14px}
@@ -143,7 +143,6 @@
                                 </li>
                                 <li>
                                     <a href="/home/other/photo/{{$rev->uid}}">
-
                                         相册
                                     </a>
                                 </li>
@@ -182,6 +181,7 @@
                                             <em style="color:#676462"> {{date('Y-m-d H:i:s',$v->time)}}   </em>
                                         </div>
                                         <div id="nei" style="margin-top: 20px; word-break:break-all;width:600px;margin-left: 10px">
+
                                             {{$v->content}}
 
                                         </div><br>
@@ -213,6 +213,7 @@
                                     #weibo #tiezi #v .disd1{display:none;padding:5px;}
                                     #weibo #tiezi #v .disd1 #tex{margin-left: 64px;float:left; } #weibo #tiezi
                                     #v .disd1 #tex #conn{resize:none;line-height: 20px;height: 28px;margin-right:
+
                                     10px}
 
                                     #weibo #tiezi #v #rimg{float:left;margin-left: 18px;margin-top: 10px}
@@ -247,7 +248,6 @@
                                             </a>
                                         </li>
                                         <li>
-
                                             <a href="javascript:;" onclick="jubao({{$v->cid}})">
                                                 <span id="spa{{$v->cid}}">
                                                         举报&nbsp;&nbsp;|
@@ -266,6 +266,7 @@
                                             id="butt" onclick="rebut({{$v->cid}})">
                                                 回复
                                             </button>
+
 
                                     </div>
                                     <div id="sdf{{$v->cid}}">
@@ -312,7 +313,6 @@
                             @endforeach
 
                             @endif
-
                             <!-- 微博遍历结束 -->
                         </div>
                         <!-- 微博结束 -->
@@ -344,6 +344,7 @@
                         }
                     });
 
+
                   }
                 });
             };
@@ -370,6 +371,7 @@
             };
 
 
+
             //回复点击事件
             function fun(id) {
 
@@ -392,6 +394,7 @@
                     type:'POST',
                     data:{id:id},
                     beforeSend:function(){
+
                         a = layer.load();
                     },
                     success:function(data){
@@ -411,11 +414,11 @@
                 //改变转发那里的转发量
                 document.getElementById('rspa').innerHTML="评论"+data['replay'];
 
+
                 hejiu = document.getElementById('hejiu'+cid);
 
                 //添加回复消息
                 var newDiv = document.createElement('div');
-
                 var str = "<div id='he"+data['id']+"' style='dispaly:block;'><div class='col-lg-12'><div class='col-log-2' id='rimg'><img src='http://ozsrs9z8f.bkt.clouddn.com/"+data['photo']+"?imageView2/1/w/30/h/30/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim' id='img' class='img-circle'></div><div class='col-log-8' id='cont'><div id='div1'><a href='/home/other/user/"+data['nickName']+"'>"+data['nickName']+"</a>&nbsp;回复:&nbsp; "+data['rcontent']+"</div><div id='div2'><em style='color:#676462'>"+data['time']+"</em><a href='javascript:;'' onclick='rdel("+data['id']+")'><span style='float: right;margin-right:140px;'> 删除</span></a></div></div></div></div>";
                 //添加div里内容
                 newDiv.innerHTML=str;
@@ -441,6 +444,7 @@
                     },
                     type: 'GET',
                      beforeSend:function(){
+
                         a = layer.load();
                     },
                     success: function(data) {

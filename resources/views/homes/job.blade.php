@@ -48,6 +48,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+
                                     </form>
                                 </div>
 
@@ -181,9 +182,16 @@
 
                                                 </p>
                                             </div>
+
+
+
+
                                         </div>
+
+
                                     <form action="/home/release" method="post" enctype="multipart/form-data">
                                         <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
+
 
 
                                         <div class="kind" style="height: 35px;margin-top: 3px;">
@@ -203,6 +211,7 @@
 
                                                         <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
                                                          multiple="multiple" type="file">
+
                                                 </div>
 
                                             </a>
@@ -244,6 +253,7 @@
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
 
+
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}"
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/user">
                                                                 抱歉，我们没有找到您要找的人:(
@@ -282,6 +292,7 @@
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
 
+
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}"
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->uid}}">
                                                                 {{$v->nickName}}
@@ -314,6 +325,7 @@
                                 <div style="float: right">
                                     {!! $index->render() !!}
                                 </div>
+
                               </div>
 
                               </div>
@@ -405,7 +417,6 @@
                                             {{$j->job}}
                                         </label>
                                     </a>
-
                                     @endforeach
                                 </div>
                             </div>
@@ -440,6 +451,7 @@
                             </div>
                         </div>
 
+
         <div id="plc_bot">
 
             <div class="WB_footer S_bg2">
@@ -454,6 +466,8 @@
                     </p>
                     <p class="copy_v2">
                         <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+
+
                     </p>
 
                 </div>
@@ -513,12 +527,10 @@
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
 
-
                     }
                 });
             }
 
         </script>
     </body>
-
     </html>

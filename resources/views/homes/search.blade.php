@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
@@ -24,6 +25,7 @@
             微博-随时随地发现新鲜事
         </title>
     </head>
+
 
     <body class="FRAME_login">
 
@@ -57,6 +59,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+
                                     </form>
                                 </div>
                                 <div class="gn_position">
@@ -73,6 +76,7 @@
                                                     </em>
                                                 </a>
                                             </li>
+
 
 
                                         </ul>
@@ -136,6 +140,7 @@
                             <div id="plc_main">
                                 <div id="plc_unlogin_home_main">
 
+
                                     <div class="WB_frame_c">
                                         <div id="pl_unlogin_home_feed">
                                             <!--榜单栏位置-->
@@ -144,6 +149,7 @@
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
+
 
                                                 @if($index->isEmpty())
                                                     <div style="text-align: center">
@@ -158,12 +164,12 @@
                                                         <h3 class="list_title_s">
                                                             <div style="word-break:break-all;padding-bottom:10px;">
                                                                 {{$v->content}}
+
                                                             </div>
+
                                                         </h3>
                                                         </a>
                                                         @if($v->image)
-
-
 
                                                             <?php
                                                                 $img = rtrim($v->image,'##');
@@ -178,6 +184,7 @@
                                                             @else
 
                                                             @endif
+
 
                                                         <div class="subinfo_box clearfix">
 
@@ -199,9 +206,11 @@
                                                                     <span class="glyphicon glyphicon-thumbs-up" id="point" aria-hidden="true" ></span>
                                                                 </em>
                                                                 <em>
+
                                                                     {{$v->pnum}}
                                                                 </em>
                                                             </span>
+
 
 
                                                             <a href="/home/replay/{{$v->cid}}">
@@ -212,6 +221,7 @@
                                                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                                                 </em>
                                                                 <em>
+
                                                                     {{$v->rnum}}
                                                                 </em>
                                                             </span>
@@ -225,7 +235,9 @@
                                                                     <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
                                                                 </em>
                                                                 <em>
+
                                                                     {{$v->fnum}}
+
                                                                 </em>
                                                             </span>
                                                             </a>
@@ -233,6 +245,7 @@
                                                         </div>
 
                                                         <hr>
+
 
                                                     @endforeach
 
@@ -273,9 +286,11 @@
                                                                             帐号登录
                                                                         </a>
 
+
                                                                     </div>
 
                                                                 </div>
+
 
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
@@ -292,12 +307,15 @@
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
+
+                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size:
                                                                         </div>
 
                                                                         {{csrf_field()}}
                                                                         <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
+
                                                                 </div>
+
                                                                     <div class="info_list register" style="font-size:14px">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
@@ -357,7 +375,6 @@
                             </div>
                         </div>
 
-
                     </div>
                 </div>
         <div id="plc_bot">
@@ -374,6 +391,7 @@
                     </p>
                     <p class="copy_v2">
                         <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+
                     </p>
                 <p class="company"></p>
                 </div>
@@ -408,7 +426,6 @@
                 type: "get",
                 url: "/home/notice",
                 data: {id:id},
-
                 beforeSend:function(){
                     //加载样式
                     a = layer.load(0, {shade: false});
@@ -436,12 +453,10 @@
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
 
-
                 }
             });
         }
     </script>
-
 
     <script type="text/javascript">
          var ch2;
@@ -450,8 +465,8 @@
         //手机号失去焦点事件
         $('#phone').blur(function(){
 
-            var pho  = $(this).val();
 
+            var pho  = $(this).val();
             ch2 = checkTel($('#phone'),$('#e1'));
             if(ch2!=100){
               $('#phone').css('border','solid 2px red');
@@ -474,6 +489,7 @@
                 ch2 = 0;
               }
             },'json')
+
 
             })
 
@@ -510,6 +526,5 @@
 
     </script>
     </body>
-
 
 </html>

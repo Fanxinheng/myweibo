@@ -52,7 +52,8 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	Route::get('delete/{id}','UserController@delete');
 
 	//删除评论
-	Route::get('replay/delete/{id}','UserController@replayDelete');
+
+	Route::post('replay/delete','UserController@replayDelete');
 
 	//点赞微博
 	Route::get('pointFun','UserController@pointFun');
@@ -60,11 +61,16 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	//微博评论
 	Route::get('type','UserController@type');
 
+
 	//微博转发
 	Route::get('ward','UserController@ward');
 
 	//删除全部图片
 	Route::post('photo/delete','UserController@photoDelete');
+
+	//删除单个图片
+	Route::post('photo/move','UserController@photomove');
+
 
 });
 
@@ -98,6 +104,10 @@ Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
 
 	//点赞微博
 	Route::get('/pointFun','OtherUserController@pointFun');
+
+	//关注他人
+	Route::get('/act/{id}','OtherUserController@attentionAction');
+
 
 
 });
@@ -242,7 +252,12 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	//微博找人
 	Route::get('/job/{id}','LoginController@job');
 
+	//多图上传加载页面
+	Route::get('/pics',function(){
+		return view('homes/blog/pic');
+	});
 
+	Route::post('/blog/pics',"BlogController@pics");
 
 
 
@@ -275,6 +290,11 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
     //修改密码判断旧密码是否与表中一致
 	Route::get('changepass/oldpass','DetailsController@oldpass');
 
+    //修改密码判断旧新密码是否与旧密码中一致
+	Route::get('changepass/newpass','DetailsController@newpass');
+
+	//执行修改密码存到数据库
+	Route::post('details/changepassword','DetailsController@changepassword');
 
 	//执行退出
 	Route::get('details/quit','DetailsController@quit');
@@ -395,6 +415,10 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'admin'],func
 
 
 });
+
+
+
+
 
 
 

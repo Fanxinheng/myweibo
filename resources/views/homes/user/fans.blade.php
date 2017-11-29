@@ -53,6 +53,7 @@
                                 </a>
                             </div>
                             <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
+
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true">
                                 </span>
                                 <a href="/home/user">
@@ -62,7 +63,6 @@
                             <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true">
                                 </span>
-
                                 <a href="/home/admin">
                                     首页
                                 </a>
@@ -111,6 +111,7 @@
                         </div>
                     </div>
                     <!-- 头像 及北京-->
+
                     <style>
                     #weibo #lanmu li { margin-top: 5px; font-size: 14px}
                     #weibo #tiezi #tiezi3 button{margin-top: 10px;}
@@ -195,8 +196,8 @@
                                 <div style="margin-top: 10px;line-height: 40px;height: 40px">你还没有粉丝哟~~~</div>
                                 @else
 
-                               @foreach($res as $k=>$v)
 
+                               @foreach($res as $k=>$v)
 
                                 <div class="col-lg-4" id="tiezi3" style="float: left;width: 244px;margin-left: 5px;background:#DEDEE5;margin-top: 10px;background-color: #F2F2F5">
                                     <!-- 头像 -->
@@ -209,7 +210,6 @@
                                     <div class="col-log-8" style="margin-top: 15px;margin-left: 8px;float: left;" >
 
                                             <a href="/home/other/user/{{$v->uid}}">{{$v->nickName}}</a><br>
-
 
                                             <div style="float: left;font-size: 12px;color: #808080;">
                                                 年龄:{{$v->age}}&nbsp;|&nbsp;性别:
@@ -225,6 +225,7 @@
                                                 @else
                                                 暂无
                                                 @endif
+
 
                                             </div>
 
@@ -243,6 +244,7 @@
                                         <div style="float: left">
                                             <button class="btn">
                                                 关注
+
                                             </button>
                                         </div>
                                     </div>
@@ -258,8 +260,6 @@
                 </div>
             </div>
             <!-- 中间结束 -->
-
-
         <!-- footer结束 -->
         </div>
 

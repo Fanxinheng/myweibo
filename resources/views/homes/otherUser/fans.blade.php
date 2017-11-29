@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
     <head>
         <meta charset="UTF-8">
         <title>
@@ -16,7 +17,6 @@
         <link rel="stylesheet" href="/homes/css/user.fans.css">
     </head>
    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
-
             <div>
                 <nav class="navbar navbar-fixed-top" id = "navbar">
                     <div class="container">
@@ -53,6 +53,7 @@
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true">
                                 </span>
                                 <a href="/home/user">
+
                                  {{$rev->nickName}}
                                 </a>
                             </div>
@@ -100,6 +101,7 @@
                                         @else
                                         <em>男</em>
                                         @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -108,6 +110,7 @@
                         </div>
                     </div>
                     <!-- 头像 及北京-->
+
                     <style>
                     #weibo #lanmu li { margin-top: 5px; font-size: 14px}
                     #weibo #tiezi #tiezi3 button{margin-top: 10px;}
@@ -143,11 +146,13 @@
                         <!-- 栏目结束 -->
 
                         <!-- 微博 -->
+
                         <div class="col-md-8 sidebar" id="tiezi">
 
                             <!-- 微博遍历的地方 -->
                             <div class="col-lg-12" style="margin-left: 12px;background-color: #fff;margin-bottom: 10px;width: 830px; ">
                                 <h3>粉丝</h3>
+
                             </div>
                             @if($res ->isEmpty())
                                 <div style="margin-top: 100px;line-height: 40px;height: 40px;background-color: #fff;width
@@ -157,18 +162,20 @@
 
                             <div class="col-lg-12" style="background-color: #fff;margin-left: 12px;width: 830px;padding-bottom: 10px " >
 
+
                                @foreach($res as $k=>$v)
 
                                 <div class="col-lg-4" id="tiezi3" style="float: left;width: 250px;margin-left: 5px;background:#DEDEE5;margin-top: 10px;background-color: #F2F2F5;height: 65px;">
                                     <!-- 头像 -->
                                     <div class="col-log-2" style="margin-top:10px;float: left; ">
+
                                         <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/35/h/35/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"  id="img" class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
                                     <div class="col-log-8" style="margin-top: 15px;margin-left: 10px;float: left;" >
 
-                                            <a href="/home/other/user/{{$v->uid}}">{{$v->nickName}}</a><br>
 
+                                            <a href="/home/other/user/{{$v->uid}}">{{$v->nickName}}</a><br>
 
                                             <div style="float: left;font-size: 12px;color: #808080;">
                                                 年龄:{{$v->age}}&nbsp;|&nbsp;性别:
@@ -184,6 +191,7 @@
                                                 @else
                                                 暂无
                                                 @endif
+
 
                                             </div>
 
@@ -202,9 +210,9 @@
             <!-- 中间结束 -->
 
 
+
         <!-- footer结束 -->
         </div>
-
         <script type="text/javascript">
 
 

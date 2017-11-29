@@ -55,6 +55,7 @@
                             </a>
                         </div>
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
+
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
                             <a href="/home/user">
@@ -64,7 +65,6 @@
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-
                             <a href="/home/admin">
                                 首页
                             </a>
@@ -102,7 +102,6 @@
                                         @else
                                         <em>男</em>
                                         @endif
-
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +111,6 @@
                     </div>
                     <!-- 头像 及北京-->
                     <style> #weibo #lanmu li { margin-top: 5px; font-size: 14px}</style>
-
                     <!-- 栏目及遍历 -->
                     <div class="container">
                         <!-- 栏目 -->
@@ -135,7 +133,6 @@
                                 </li>
                                 <li>
                                     <a href="/home/photo">
-
                                         相册
                                     </a>
                                 </li>
@@ -207,10 +204,12 @@
                                         <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
                                     @endforeach
                                 </div>
+
                                  @else
                                  @endif
 
                                  @endforeach
+
 
                                 <!-- 图像遍历结束 -->
                             </div>
@@ -241,6 +240,7 @@
 
                          beforeSend:function(){
                         a = layer.load();
+
                         },
                         success:function(data){
 
@@ -252,6 +252,7 @@
                         },
                         async:false,
                     });
+
 
 
                 }, function(){
@@ -271,6 +272,7 @@
                 $.ajax({
                     url:'/home/photo/move',
                     type:'POST',
+
                     data:{cid:cid},
                     success:function(data){
                        $('.cl'+cid).remove();

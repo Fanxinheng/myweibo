@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
@@ -38,7 +37,6 @@
 		.form-control{height:40px}
 		.btn {height:40px}
 	</style>
-
     <body style="background: #9ECCEA">
     	<div id="a"></div>
 
@@ -53,7 +51,6 @@
 	        		<div class="col-md-12" style="height:130px;">
 	        			<div id="redis">修改个人信息</div>
 	        			<div class="rr"></div>
-
 	        		</div>
 	        		<div class="col-md-12" style="height:360px;">
 						<div class="col-md-12" style="height:300px;margin-top: 30px">
@@ -68,6 +65,7 @@
 								  </div>
 								  <div class="form-group" >
 								  	<label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>性别:</label>
+
 
                                         <label class="radio-inline" style="margin-left:15px">
 
@@ -86,6 +84,7 @@
 								    </div>
 								  </div>
 								  <div class="form-group">
+
 								    <label for="inputcode3" class="col-sm-2 control-label" style="margin-right:15px"><span style="color:red;margin-right: 5px;">*</span>工作:</label>
 
 									<select class="form-control" style="width:345px;font-size: 18px" name="work" >
@@ -106,6 +105,8 @@
 
 								    </div>
 								  </div>
+
+
                                     <form id="formphoto">
 
                                       <div class="form-group">
@@ -117,6 +118,7 @@
                                           <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"   style="width:100px;height: 100px;border-radius:50%;border:solid 1px #ABB1BA" id="img">
                                          </div>
                                       </div>
+
 
                                     </form>
 
@@ -131,6 +133,7 @@
 								  </div>
 							</form>
 						</div>
+
 
 					</div>
 
@@ -152,6 +155,7 @@
 					</div>
        		</div>
     	</div>
+
 
      <script>
 
@@ -230,8 +234,6 @@
      	};
 
 
-
-
      	//邮箱获取焦点事件
      	email.onfocus = function(){
      		spa1.innerHTML = '请输入邮箱';
@@ -259,6 +261,7 @@
 
               }else{
               	$('#spa1').css('display','block');
+
               	$("#spa1").html("该邮箱已被注册!");
                 $('#spa1').css('color','red');
                 data = 0;
@@ -269,13 +272,17 @@
             console.log(EM);
 
 
+
         })
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
             }
         });
         $(function () {
+
             $("#photo").change(function (){
                 uploadImage();
             });
@@ -283,7 +290,10 @@
         function uploadImage() {
 //                            判断是否有选择上传文件
 //                            input type file
+
+
             var imgPath = $("#photo").val();
+
             if (imgPath == "") {
                 alert("请选择上传图片！");
                 return;
@@ -309,7 +319,11 @@
                beforeSend:function(){
                       // 菊花转转图
                       // $('#img1').attr('src', 'http://img.lanrentuku.com/img/allimg/1212/5-121204193R0-50.gif');
+
+                      //
+
                     a = layer.load();
+
                   },
                 success: function(data) {
                     console.log(data);
@@ -323,6 +337,9 @@
                 }
             });
         }
+
+
+
      </script>
 
     </body>

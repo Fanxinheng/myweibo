@@ -41,7 +41,6 @@
                                         <span class="logo">
 
                                             <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
-
                                         </span>
                                     </a>
                                 </div>
@@ -187,11 +186,10 @@
                                                     </em>
 
                                                 </p>
+
                                             </div>
                                         </div>
-
                                     <form action="/home/release" method="post" enctype="multipart/form-data">
-
                                             <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
 
 
@@ -212,11 +210,14 @@
 
                                                             <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
                                                              multiple="multiple" type="file">
+
                                                     </div>
+
 
                                                 </a>
 
                                                 <span>
+
 
 
                                                     @foreach($label as $val)
@@ -234,7 +235,6 @@
                                                 <button id="release" style="width:100px;height:40px;border-radius:5px;background:orange;color:white;font-size: 16px">发布</button>
 
                                             </div>
-
 
                                     </form>
 
@@ -257,7 +257,6 @@
 
                                                 <div class="WB_feed_detail clearfix" node-type="feed_content" ">
 
-
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
@@ -271,6 +270,7 @@
                                                     <div class="WB_detail">
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
+
 
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}"
 
@@ -289,7 +289,6 @@
                                                                {{$val->content}}
                                                             </div>
                                                         </a>
-
                                                             @if($val->image)
 
 
@@ -297,7 +296,6 @@
                                                                 $img = rtrim($val->image,'##');
 
                                                                 $imgs = explode('##',$img);
-
                                                             ?>
                                                                 @foreach($imgs as $i)
                                                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
@@ -306,7 +304,6 @@
                                                             @else
 
                                                             @endif
-
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -323,14 +320,12 @@
                                                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px">
-
                                                                                     举报
                                                                                 </em>
                                                                             </span>
                                                                         </span>
                                                                     </span>
                                                                 </a>
-
                                                             </li>
                                                             <li>
                                                                 <a href="/home/blog/forward/{{$val->cid}}" class="S_txt2" title="转发">
@@ -374,6 +369,7 @@
                                                             </li>
                                                             <li>
                                                                 <!-- <a href="/home/point/{{$v->cid}}"></a> -->
+
                                                                 <a class="S_txt2"
                                                                 title="点赞">
                                                                     <span class="point">
@@ -384,7 +380,6 @@
                                                                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px" id="pnum{{$val->cid}}">
-
                                                                                     {{$val->pnum}}
                                                                                 </em>
                                                                             </span>
@@ -401,7 +396,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 @endforeach
 
@@ -504,7 +498,6 @@
                                             {{$j->job}}
                                         </label>
                                     </a>
-
                                     @endforeach
                                 </div>
                             </div>
@@ -541,7 +534,6 @@
                         </div>
 
                 <div id="plc_bot">
-
                     <div class="WB_footer S_bg2">
                         <!-- 友情链接 -->
                         <div class="other_link S_bg1 clearfix T_add_ser">
@@ -555,6 +547,7 @@
                             <p class="copy_v2">
 
                                 <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+
                             </p>
 
                         </div>
@@ -608,7 +601,6 @@
 
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-
                         layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
 
                     }
@@ -652,7 +644,6 @@
                     type: "get",
                     url: "/home/notice",
                     data: {id:id},
-
                     beforeSend:function(){
                         //加载样式
                         a = layer.load(0, {shade: false});
@@ -679,13 +670,10 @@
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-
-
                     }
                 });
             }
 
             </script>
         </body>
-
     </html>

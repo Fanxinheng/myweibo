@@ -15,6 +15,7 @@
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
@@ -44,7 +45,6 @@
                                         </span>
                                     </a>
                                 </div>
-
                                 <!-- 搜索 -->
                                 <div class=" gn_search_v2">
 
@@ -55,6 +55,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+
                                     </form>
                                 </div>
 
@@ -187,6 +188,7 @@
                                                     </em>
 
                                                 </p>
+
                                             </div>
                                         </div>
                                     <form action="/home/release" method="post" enctype="multipart/form-data">
@@ -227,6 +229,7 @@
                                                 {{csrf_field()}}
                                                 <button id="release" style="width:100px;height:40px;border-radius:5px;background:orange;color:white;font-size: 16px">发布</button>
 
+
                                             </div>
                                     </form>
                                     </div>
@@ -263,10 +266,9 @@
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
 
+
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}"
-
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->uid}}">
-
                                                                 {{$v->nickName}}
                                                             </a>
                                                             <!-- 判断微博是否为登录用户自己发布 -->
@@ -292,7 +294,6 @@
                                                             </div>
                                                         </a>
                                                         @if($v->image)
-
 
 
                                                         <?php
@@ -335,7 +336,6 @@
                                                                         </span>
                                                                     </span>
                                                                 </a>
-
                                                             </li>
                                                             <li>
                                                                 <a href="/home/blog/forward/{{$v->cid}}" class="S_txt2" title="转发">
@@ -378,8 +378,9 @@
                                                                 </span>
                                                             </li>
                                                             <li>
-                                                                <!-- <a href="/home/point/{{$v->cid}}"></a> -->
+
                                                                 <a class="S_txt2"
+
                                                                 title="点赞">
                                                                     <span class="point">
                                                                         <input type="hidden" name="point" value="{{$v->cid}}">
@@ -416,6 +417,7 @@
                                       </ul>
                                     </nav>
                                 </div>
+
                               </div>
 
                               </div>
@@ -507,7 +509,6 @@
                                             {{$j->job}}
                                         </label>
                                     </a>
-
                                     @endforeach
                                 </div>
                             </div>
@@ -542,6 +543,7 @@
                             </div>
                         </div>
 
+
         <div id="plc_bot">
 
             <div class="WB_footer S_bg2">
@@ -565,8 +567,6 @@
         </div>
         <script type="text/javascript">
 
-            //加载照片
-            $('.WB_detail img').zoomify();
 
             //微博发布
             $('#release').on('click', function(){
@@ -582,7 +582,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
                }
             });
-
 
             //微博点赞
             function point (id){
@@ -643,6 +642,7 @@
                         }
                     });
 
+
                   }
                 });
             });
@@ -685,7 +685,6 @@
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         layer.msg("微博删除失败，请检查网络后重试", {icon:2 ,})
-
 
                     }
                 });
@@ -733,9 +732,12 @@
                         layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
 
 
+
                     }
                 });
             }
+
+
             //多图上传
             function pic_upload()
             {
@@ -746,6 +748,7 @@
                   shade: 0.8,
                   area: ['50%', '300px'],
                   content: '/home/pics/' //iframe的url
+
                 });
             }
 

@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="/homes/css/user.replay.css">
     </head>
 
-
      <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
@@ -54,7 +53,6 @@
                                 {{$rev->nickName}}
                             </a>
                         </div>
-
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
@@ -87,7 +85,6 @@
                                     <!-- 昵称 -->
                                     <div id="nickname" >
                                         {{$rev->nickName}}&nbsp;&nbsp;
-
                                     </div>
                                     <div id="nickName" style="margin-left: 20px;margin-top:10px;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
@@ -96,7 +93,6 @@
                                         @else
                                         <em>男</em>
                                         @endif
-
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +101,6 @@
                         </div>
                     </div>
                     <!-- 头像 及北京-->
-
                     <style>
                         #weibo #lanmu li { margin-top: 5px; font-size: 14px}
                     </style>
@@ -131,13 +126,11 @@
                                 </li>
                                 <li>
                                     <a href="/home/photo">
-
                                         相册
                                     </a>
                                 </li>
                                 <li>
                                     <a href="/home/point">
-
                                         我微博的赞 @if($point>0)
                                         <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px " id="pdiv">
                                             {{$point}}
@@ -150,7 +143,6 @@
                                 </li>
                                 <li>
                                     <a href="/home/replay">
-
                                         微博评论 @if($replay>0)
                                         <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px " id="rediv">
                                             {{$replay}}
@@ -164,7 +156,6 @@
                                 </li>
                                 <li>
                                     <a href="/home/forward">
-
                                         微博转发 @if($forward>0)
                                         <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px  " id="fdiv">
                                             {{$forward}}
@@ -194,12 +185,12 @@
                                 <div class="col-lg-12" >
                                     <!-- 头像 -->
                                     <div class="col-log-2" id="tieimg">
-
                                          <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/50/h/50/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="img" class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
                                     <div class="col-log-8" id="tiename" style="margin-top: 20px">
                                         <b>
+
                                            <a href="/home/other/user/{{$v->user_info->uid}}">{{$v->user_info->nickName}}</a>
                                         </b>
                                         <br/>
@@ -212,7 +203,6 @@
                                 </div>
                                 <!-- 内容 -->
                                 <div class="col-lg-10" style="margin-left: 70px;margin-top: 10px">
-
                                     {{$v->fcontents}}
                                 </div>
                                 @foreach($v->contents as $re)

@@ -8,6 +8,7 @@
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！"
         name="description">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
@@ -27,7 +28,6 @@
     </head>
 
     <body class="FRAME_login">
-
         <div id="js_style_css_module_global_WB_outframe">
         </div>
         <link media="all" href="/homes/css/index.css" type="text/css" rel="stylesheet">
@@ -55,7 +55,9 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+
                                     </form>
+
                                 </div>
                                 <div class="gn_position" >
                                     <div class="gn_nav">
@@ -135,12 +137,17 @@
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
+
+
+
                                                 @foreach($index as $k=>$v)
+
                                                     <div class="list_des">
                                                         <a href="/home/replay/{{$v->cid}}">
                                                         <h3 class="list_title_s">
                                                             <div style="word-break:break-all;padding-bottom:10px;">
                                                                 {{$v->content}}
+
                                                             </div>
                                                         </h3>
                                                         </a>
@@ -160,6 +167,7 @@
                                                         @else
 
                                                         @endif
+
                                                         <div class="subinfo_box clearfix">
 
                                                                 <span class="subinfo_face " style="cursor: pointer">
@@ -212,6 +220,7 @@
                                                             </div>
                                                         </div>
                                                         <hr>
+
                                                     @endforeach
                                                     <div style="float: right">
                                                         <nav aria-label="...">
@@ -327,6 +336,7 @@
                             </div>
 
                 </div>
+
             </div>
         </div>
 
@@ -345,7 +355,6 @@
                     </p>
                     <p class="copy_v2">
                         <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
-
                     </p>
                 <p class="company"></p>
                 </div>
@@ -372,10 +381,12 @@
 
             //系统公告
             function notice(id){
+
                 $.ajax({
                     type: "get",
                     url: "/home/notice",
                     data: {id:id},
+
                     beforeSend:function(){
                         //加载样式
                         a = layer.load(0, {shade: false});
@@ -402,15 +413,19 @@
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+
                     }
                 });
             }
         </script>
+
+
         <script type="text/javascript">
          var ch2 ;
          var ch3 ;
          var aaa=0;
          var bbb=0;
+
         //手机号失去焦点事件
         $('#phone').blur(function(){
 
@@ -425,12 +440,14 @@
               $('#e1').css('display','block');
               return;
 
+
             }
             $.get("/home/pho",{pho:pho},function(data){
 
               if(data=='1'){
                 $('#e1').css('display','none');
                 ch2 = 100;
+
                 aaa=1;
               }else{
 
@@ -438,6 +455,7 @@
                 $("#e1").html("该手机号还未注册,请先去注册");
                 $('#e1').css('display','block');
                 aaa=0;
+
               }
             },'json')
             });
@@ -464,10 +482,12 @@
                     $('#e2').css('display','none');
                     ch3 = 100;
                     bbb=1;
+
                   }else{
                     $("#e2").html("密码不正确");
                     $('#e2').css('display','block');
                     ch3 = 0;
+
                     bbb=0;
                   }
                 },'json')
@@ -479,6 +499,8 @@
                     return false;
                 }
             });
+
+
         </script>
 
     </body>

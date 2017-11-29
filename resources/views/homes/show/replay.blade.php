@@ -6,6 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
@@ -56,6 +57,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+
                                     </form>
 
                                 </div>
@@ -147,7 +149,6 @@
 
                                                         <div class="list_des">
 
-
                                                             <h3 class="list_title_s" style="padding-bottom: 10px">
 
                                                                 <div>
@@ -162,6 +163,7 @@
                                                                 $img = rtrim($res->image,'##');
 
                                                                 $imgs = explode('##',$img);
+
 
                                                             ?>
                                                                 @foreach($imgs as $i)
@@ -373,7 +375,6 @@
         //加载照片
         $('.list_des img').zoomify();
 
-
          $('#replay').on('click', function(){
             layer.msg('亲，您好像忘了登录呦:)', {
               time: 20000, //20s后自动关闭
@@ -387,7 +388,6 @@
                 type: "get",
                 url: "/home/notice",
                 data: {id:id},
-
                 beforeSend:function(){
                     //加载样式
                     a = layer.load(0, {shade: false});
@@ -414,7 +414,6 @@
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-
 
                 }
             });

@@ -177,7 +177,6 @@
         </div>
         <script type="text/javascript">
 
-
            function abtn1 (id){
                 $.ajax({
                     url:'/home/other/act/'+id,
@@ -191,7 +190,6 @@
                         document.getElementById('abtn1').innerHTML="取消关注";
                         layer.msg('关注成功');
                     }
-
 
                     }
                 });

@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
@@ -26,7 +27,6 @@
         <link media="all" href="/homes/css/login.css" type="text/css" rel="stylesheet">
     </head>
 
-
     <body class="FRAME_main B_index">
         <div class="WB_miniblog">
             <div class="WB_miniblog_fb">
@@ -45,7 +45,6 @@
                                         </span>
                                     </a>
                                 </div>
-
                                 <!-- 搜索 -->
                                 <div class=" gn_search_v2">
 
@@ -56,6 +55,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+
                                     </form>
                                 </div>
 
@@ -95,7 +95,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -173,6 +172,8 @@
                                     @endforeach
                                 </div>
                             </div>
+
+
                         </div>
                         <div id="plc_main" style="width:490px">
                             <div class="WB_main_c">
@@ -190,7 +191,12 @@
 
                                                 </p>
                                             </div>
+
+
                                         </div>
+
+
+
                                     <form action="/home/release" method="post" enctype="multipart/form-data">
                                             <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
 
@@ -291,6 +297,7 @@
                                                             <!-- minzheng add part 2 -->
                                                         </div>
 
+
                                                         @if($v->fcontent)
                                                         <div class="WB_text W_f14" title="转发内容">
                                                             {{$v->fcontent}}
@@ -300,6 +307,7 @@
                                                             转发微博
                                                         </div>
                                                         @endif
+
 
                                                         @foreach($v->contents as $con)
 
@@ -313,7 +321,10 @@
 
                                                                 <div class="WB_from S_txt2" node-type="feed_list_content" title="发布时间" style="word-break:break-all;"">
                                                                 {{date('Y-m-d H:i:s',$con->time)}}
+
                                                                 </div>
+                                                                </a>
+
 
 
                                                                 <a href="/home/blog/forward/{{$con->cid}}">
@@ -333,9 +344,22 @@
                                                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
                                                                 @endforeach
 
+
+                                                            <?php
+                                                                $img = rtrim($con->image,'##');
+
+                                                                $imgs = explode('##',$img);
+
+                                                            ?>
+                                                                @foreach($imgs as $i)
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                                @endforeach
+
                                                             @else
 
+
                                                             @endif
+
 
                                                             </div>
                                                       @endforeach
@@ -360,6 +384,7 @@
                                       </ul>
                                     </nav>
                                 </div>
+
                               </div>
 
                               </div>
@@ -376,7 +401,9 @@
                                                 <div class="WB_innerwrap" >
                                                     <div class="nameBox" style="height:38px;">
                                                         <a href="/home/user" class="name S_txt1" title="积分" style="padding-top: 10px">
+
                                                             {{$user->nickName}}
+
                                                         <em class="W_ficon ficon_favorite S_ficon">
                                                             <span class="glyphicon glyphicon-tint" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                         </em>
@@ -422,7 +449,6 @@
 
                                     </div>
 
-
                         <!-- 系统公告 -->
                         <div style="background-color: #FFFFFF;border-radius: 5px;">
                             <div >
@@ -453,7 +479,6 @@
                                             {{$j->job}}
                                         </label>
                                     </a>
-
                                     @endforeach
                                 </div>
                             </div>
@@ -501,7 +526,6 @@
                     </p>
                     <p class="copy_v2">
                         <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
-
                     </p>
                 <p class="company"></p>
                 </div>
@@ -519,6 +543,7 @@
         $('#release').on('click', function(){
 
             var a = layer.load(0, {shade: false});
+
 
             layer.msg('微博发布成功:)', {icon: 1});
 
@@ -601,11 +626,9 @@
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
 
-
                 }
             });
         }
-
 
 
     </script>

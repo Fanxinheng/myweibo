@@ -23,6 +23,7 @@
             个人信息
         </title>
     </head>
+
     <body id='body'>
     	<div id="a"></div>
 
@@ -75,7 +76,6 @@
 									  <option value="{{$v->job}}" >{{$v->job}}</option>
 									   @endforeach
 									</select>
-
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span class="nspan">*</span>邮箱:</label>
@@ -98,6 +98,7 @@
 
 								  <div class="form-group" id='but'>
 								    <div class="col-sm-offset-2 col-sm-10">
+
 								    	{{csrf_field()}}
 								      <input type="submit" value="提交"  id="btn1">
 								    </div>
@@ -198,7 +199,6 @@
                 // console.log(NI);
         })
 
-
         //邮箱获取焦点事件
         $('#email').focus(function(){
             $('#spa1').html('请输入邮箱');
@@ -226,6 +226,7 @@
 
               }else{
                 $('#spa1').css('display','block');
+
                 $("#spa1").html("该邮箱已被注册!");
                 $('#spa1').css('color','red');
                 data = 0;

@@ -48,16 +48,17 @@ class UserController extends Controller
         $forward = forward::where('uid',$id)->where('status',0)->count();
 
         //将消息放入缓存
-        Session(['forward'=>$forward]); 
+        Session(['forward'=>$forward]);
 
         //查询用户的所有信息
         $rev = user_info::where('uid','=',$id)->first();
 
         //查询用户的帖子和评论
-        $res = contents::where('uid',$id)->with('replay.user_info')->paginate(1);
+
+        $res = contents::where('uid',$id)->with('replay.user_info')->paginate(5);
 
         //跳转页面
-        return view('homes/user/index',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
+        return view('homes.user.index',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
     }
 
     //照片页面
@@ -67,7 +68,8 @@ class UserController extends Controller
         $uid = Session('uid');
 
         //查询用户的帖子所有信息
-        $res = contents::where('uid',$uid)->value('image');
+
+        $res = contents::where('uid',$uid)->get();
 
         //查询用户的所有的信息
         $rev = user_info::where('uid',$uid)->first();
@@ -85,7 +87,8 @@ class UserController extends Controller
         $point = Session('point');
 
         //跳转到相册管理页面
-        return view('homes/user/photo',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
+
+        return view('homes.user.photo',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
 
     }
 
@@ -93,10 +96,10 @@ class UserController extends Controller
     public function point()
     {
         //获取缓存的用户id
-        $uid=Session('uid'); 
+        $uid=Session('uid');
 
         //定义一个数组
-        $status['status'] = 1; 
+        $status['status'] = 1;
 
         //将所有的消息设为已读
         DB::table('point')->where('uid',$uid)->update($status);
@@ -134,7 +137,7 @@ class UserController extends Controller
         $rev = user_info::where('uid',$uid)->first();
 
         //定义一个数组
-        $status['status'] = 1; 
+        $status['status'] = 1;
 
         //将所有的消息设为已读
         DB::table('replay')->where('uid',$uid)->update($status);
@@ -151,7 +154,7 @@ class UserController extends Controller
         //获取微博评论的消息
         $message = Session('message');
 
-        //根据用户uid获取帖子的内容回复及个人信息       
+        //根据用户uid获取帖子的内容回复及个人信息
         $res = replay::where(['uid'=>$uid])->with(['content','user_info'])->get();
 
         //页面跳转
@@ -187,10 +190,11 @@ class UserController extends Controller
         $message = Session('message');
 
         //查询信息
-        $res = forward::where(['uid'=>$uid])->with(['content','user_info'])->get();
+        $res = forward::where(['uid'=>$uid])->with(['contents','user_info'])->get();
 
         //页面跳转
         return view('homes/user/forward',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
+
 
     }
 
@@ -247,12 +251,11 @@ class UserController extends Controller
     //删除微博
     public function delete($id)
     {
-        
         //删除评论
         replay::where('tid',$id)->delete();
 
         //删除点赞
-        point::where('tid',$id)->delete();        
+        point::where('tid',$id)->delete();
 
         //删除转发
         forward::where('tid',$id)->delete();
@@ -277,14 +280,17 @@ class UserController extends Controller
         contents::where('cid',$id)->delete();
 
         //页面跳转
-        return redirect('/home/user');
+        return 1;
 
     }
 
     //删除评论的微博
-    public function replayDelete($id)
+    public function replayDelete()
     {
-        
+
+        //获取回复帖子的id
+        $id=$_POST['id'];
+
         //查询回复的微博的id
         $tid = replay::where('id',$id)->value('tid');
 
@@ -300,16 +306,25 @@ class UserController extends Controller
         //删除微博评论
         replay::where('id',$id)->delete();
 
+        //获取登录用户的id
+        $uid = Session('uid');
+
+        //查询用户未读的回复消息
+        $status = replay::where('uid',$uid)->where('status',0)->count();
+
+        //将数据存入数组
+        $res1['status'] = $status;
+
         //页面跳转
-        return redirect('/home/user');
+        return $res1;
 
     }
 
-   
+
     //评论微博
     public function type()
     {
-        
+
         //获取缓存的id
         $res['rid'] = Session('uid');
 
@@ -367,10 +382,15 @@ class UserController extends Controller
 
         }
         //将用户名添加在数组中
-        $res['nickName'] = user_info::where('uid',$res['rid'])->value('nickName'); 
+        $res['nickName'] = user_info::where('uid',$res['rid'])->value('nickName');
 
-        //将未读数加入    
+        //将未读数加入
         $res['status'] = replay::where('uid',$res['rid'])->where('status','0')->count();
+
+        //将回复的帖子id放入数组中
+        $res['id'] = replay::max('id');
+
+        $res['photo'] = user_info::where('uid',$res['uid'])->value('photo');
 
         $res['time'] = date('Y-m-d H:i:s',time());
 
@@ -381,7 +401,7 @@ class UserController extends Controller
         $res['socre'] = $soc['socre'];
 
         return $res;
-    } 
+    }
 
 
     //点赞功能的实现
@@ -392,7 +412,7 @@ class UserController extends Controller
 
         //获取帖子id
         $res1['tid'] = $_GET['cid'];
-        
+
         //获取发帖人的id
         $res1['uid'] = contents::where('cid',$_GET['cid'])->value('uid');
 
@@ -419,7 +439,7 @@ class UserController extends Controller
     }
 
     //转发功能的实现
-    public  function  ward () 
+    public  function  ward ()
     {
 
         //获取缓存的id
@@ -468,7 +488,7 @@ class UserController extends Controller
         }
 
         //获取回帖内容
-        $res['fcontent'] = $_GET['rcon'];       
+        $res['fcontent'] = $_GET['rcon'];
 
         //获取时间
         $res['time']=time();
@@ -493,6 +513,7 @@ class UserController extends Controller
 
     }
 
+    //删除微博全部图片
     public function photoDelete()
     {
         //获取用户的id
@@ -517,10 +538,43 @@ class UserController extends Controller
          //删除所有微博图片
         $res = contents::where('uid',$uid)->update($re);
 
-       
+
+    }
+
+    //删除一个图片
+    public function photomove()
+    {
+
+        //获取帖子id
+        $cid = $_POST['cid'];
+
+        //定义一个空数组
+        $re['image'] = Null;
+
+        //删除七牛云的照片
+        $image = contents::where('cid',$cid)->value('image');
+
+        $img = rtrim($image,'##');
+
+        $imgs = explode('##',$img);
+
+        if($imgs){
+
+            //初始化七牛云
+            $disk = QiniuStorage::disk('qiniu');
+
+            //删除云中图片
+            $disk->delete($imgs);
+
+        }
+
+         //删除所有微博图片
+        $res = contents::where('cid',$cid)->update($re);
+
+        return 1;
+
     }
 
 
 
-   
 }

@@ -12,9 +12,9 @@
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js">
         </script>
         <link rel="stylesheet" href="/homes/css/user.replay.css">
+
     </head>
     <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
-
 
         <div>
             <div>
@@ -23,8 +23,6 @@
                         <div class="navbar-header" id="navbar-header1">
                             <a href="/home/login">
                             <img src="/homes/images/wb_logo.png" alt="">
-
-
                         </div>
                         <div class="navbar-header" id="navbar-header2">
                             <form class="navbar-form navbar-right">
@@ -61,7 +59,6 @@
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-
                             <a href="/home/admin">
                                 首页
                             </a>
@@ -99,6 +96,7 @@
                                         @else
                                         <em>男</em>
                                         @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +188,6 @@
                                     <!-- 头像 -->
                                     <div class="col-log-2" id="tieimg">
                                          <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/50/h/50/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"  id="img" class="img-circle">
-
                                     </div>
                                     <!-- 名称和时间 -->
                                     <div class="col-log-8" id="tiename" style="margin-top: 20px">

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
     <head>
         <meta charset="UTF-8">
         <title>
@@ -16,7 +17,6 @@
         <link rel="stylesheet" href="/homes/css/user.attention.css">
     </head>
     <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
-
             <div>
                 <nav class="navbar navbar-fixed-top" id = "navbar">
                     <div class="container">
@@ -53,6 +53,7 @@
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
                             <a href="/home/user">
+
                               {{$rev->nickName}}
                             </a>
                         </div>
@@ -82,7 +83,6 @@
                             <div class="col-md-4">
                                 <!-- 头像 -->
                                 <div id="jimg" >
-
                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
                                 </div>
                                 <div>
@@ -134,7 +134,6 @@
                                 </li>
                                 <li>
                                     <a href="/home/other/photo/{{$rev->uid}}">
-
                                         相册
                                     </a>
                                 </li>
@@ -143,6 +142,7 @@
                         <!-- 栏目结束 -->
 
                         <!-- 关注 -->
+
                         <div class="col-md-8 sidebar" id="tiezi">
 
                             <div class="col-lg-12" style="margin-left: 12px;background-color: #fff;margin-bottom: 10px;width: 830px; ">
@@ -174,10 +174,10 @@
                                         </em></div>
                                         </div>
 
+
                                     </div>
                             </div>
                          @endforeach
-
                         @endif
                             <!-- 微博遍历结束 -->
 
@@ -215,7 +215,6 @@
                 });
             };
         </script>
-
     </body>
 
 </html>

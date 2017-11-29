@@ -16,8 +16,6 @@
         <script type="text/javascript" src="/homes/layer/layer.js">
         </script>
     </head>
-
-
     <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
@@ -79,7 +77,6 @@
                 <!-- 头像 及北京-->
                 <div class="container">
 
-
                         <div class="jumbotron" id="backg" style="background:url('/homes/images/197.jpg');">
                             <div class="col-md-4">
                             </div>
@@ -94,8 +91,8 @@
                                     <div id="nickname" >
                                         {{$rev->nickName}}&nbsp;&nbsp;
 
-                                    </div>
 
+                                    </div>
                                     <div id="nickName" style="margin-left: 20px;margin-top:10px;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
                                         @if($rev->sex=='w')
@@ -103,7 +100,6 @@
                                         @else
                                         <em>男</em>
                                         @endif
-
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +114,6 @@
                     <!-- 栏目及遍历 -->
                     <div class="container">
                         <!-- 栏目 -->
-
                         <div class="col-md-3 sidebar" id="lanmu" style="height: 500px">
                             <ul class="nav nav-sidebar">
                                 <li class="active">
@@ -138,7 +133,6 @@
                                 </li>
                                 <li>
                                     <a href="/home/photo">
-
                                         相册
                                     </a>
                                 </li>
@@ -159,6 +153,7 @@
                                         微博评论 @if($replay>0)
                                         <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px " id="rediv">
                                             {{$replay}}
+
                                         </div>
                                         @else
                                         <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px;display: none" id="rediv">
@@ -198,7 +193,6 @@
                                 @else
                             <!-- 微博遍历的地方 -->
                             @foreach($res as $k=>$v)
-
                         <div id="wei{{$v->cid}}" >
                             <div class="col-lg-12" id="tiezi" style="width: 830px;overflow: hidden; background-color: #fff;margin-left: 12px;margin-top: 20px">
                                 <div class="col-lg-12" id="buhuo" class="layer_notice">
@@ -210,6 +204,7 @@
                                     <div class="col-log-6" id="tiename" style="margin-top: 25px;margin-left: 50px;">
                                         <div style="margin-left: 10px">
                                             <b id="xing">{{$rev->nickName}}</b>
+
                                         </div>
 
                                         <div style="margin-top: 5px;font-size: 12px;color: #808080;margin-left: 10px">
@@ -243,6 +238,7 @@
                                     #weibo #tiezi #v .disd1{display:none;padding:5px;}
                                     #weibo #tiezi #v .disd1 #tex{margin-left: 64px;float:left; } #weibo #tiezi
                                     #v .disd1 #tex #conn{resize:none;line-height: 20px;height: 28px;margin-right:
+
                                     10px}
 
                                     #weibo #tiezi #v #rimg{float:left;margin-left: 18px;margin-top: 10px}
@@ -273,12 +269,12 @@
                                             <a href="javascript:;" onclick="poin({{$v->cid}})">
                                                 <span class="glyphicon glyphicon-thumbs-up" id="spa{{$v->cid}}">
 
+
                                                     点赞{{$v->pnum}}&nbsp;&nbsp;|
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
-
                                             <a href="javascript:;" onclick="del({{$v->cid}})">
                                                 <span>
                                                     <em>
@@ -290,6 +286,7 @@
                                     </ul>
                                 </div>
                                 <div id="v" >
+
                                     <div class="col-lg-12 disd1" id="disd1{{$v->cid}}">
                                             <div id="tex">
                                                 <textarea name="connb" id="conn" cols="70" rows="1"></textarea>
@@ -301,7 +298,6 @@
                                     </div>
                                     <div id="sdf{{$v->cid}}">
                                         @foreach($v->replay as $key=>$val)
-
                                         <div id="he{{$val->id}}" style="dispaly:block;">
 
                                         <div class="col-lg-12" id="hejiu{{$v->cid}}" >
@@ -310,6 +306,7 @@
                                                 <!-- <img width="30" height="30" src="/homes/images/2015.jpg"> -->
                                                   <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/40/h/40/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="img" class="img-circle">
                                             </div>
+
                                             <!-- 名称和时间 -->
                                       <div class="col-log-8" id="cont">
                                                 <div id="div1">
@@ -328,7 +325,6 @@
                                                     </a>
                                                 </div>
                                             </div>
-
                                         </div>
                                         </div>
                                         @endforeach
@@ -348,6 +344,12 @@
 
                             <!-- 微博遍历结束 -->
                             @endif
+                        </div>
+
+                            @endforeach
+                            <!-- 微博遍历结束 -->
+                            @endif
+                            <div style="float: right">{!! $res->render() !!}</div>
                         </div>
 
                             @endforeach
@@ -386,6 +388,7 @@
             };
 
             //删除微博评论
+
             function rdel (id){
                     $.ajaxSetup({
                         headers: {
@@ -398,6 +401,7 @@
                     type:'POST',
                     data:{id:id},
                     success:function(data){
+
 
                     //改变转发那里的转发量
                     document.getElementById('rspa').innerHTML="评论"+data['rnum'];
@@ -475,7 +479,7 @@
                     //发送ajax
                     $.get('/home/ward',{tid:cid,rcon:te},function(data){
 
-                    //改变内容
+
                     document.getElementById('fspan').innerHTML="转发"+data['fnum'];
 
                     //改变消息框里的内容

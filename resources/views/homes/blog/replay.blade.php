@@ -20,13 +20,11 @@
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
-
         <title>
             我的首页 微博-随时随地发现新鲜事
         </title>
         <link media="all" href="/homes/css/login.css" type="text/css" rel="stylesheet">
     </head>
-
     <body class="FRAME_main B_index">
         <div class="WB_miniblog">
             <div class="WB_miniblog_fb">
@@ -90,7 +88,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -177,13 +174,10 @@
                                         <!--feed list-->
                                         <div class="WB_feed WB_feed_v3 WB_feed_v4" pagenum="1" node-type="feed_list"
                                         unread_mode="1">
-
                                             <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                             class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
                                             action-type="feed_list_item">
                                                 <div class="WB_feed_detail clearfix" node-type="feed_content" ">
-
-
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a title="{{$content->nickName}}" indepth="true">
@@ -194,6 +188,7 @@
                                                     <div class="WB_detail">
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
+
                                                             target="_top" class="W_f14 W_fb S_txt1" title="{{$content->nickName}}"
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
                                                                 {{$content->nickName}}
@@ -213,7 +208,7 @@
                                                                 @endif
 
                                                             @endif
-
+d
                                                         </div>
                                                         <div class="WB_from S_txt2">
                                                             <!-- minzheng add part 2 -->
@@ -222,7 +217,6 @@
                                                             indepth="true">
                                                                 {{date('Y-m-d H:i:s',$content->time)}}
                                                             </a>
-
                                                             <!-- minzheng add part 2 -->
                                                         </div>
 
@@ -230,11 +224,7 @@
                                                             {{$content->content}} ​​​​
                                                         </div>
 
-
                                                         @if($content->image)
-
-
-
                                                             <?php
                                                                 $img = rtrim($content->image,'##');
 
@@ -279,13 +269,13 @@
                                                     {{csrf_field()}}
                                                     <button class="btn btn-default btn-sm" id="replay" style="float: right;margin:5px 0 5px 0">评论</button>
 
+
                                                 </div>
                                             </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 @if($content->rnum == 0)
                                 <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                 class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
@@ -311,14 +301,11 @@
                                 @endif
 
 
-
                                 @foreach($replay as $v)
                                 <div mrid="rid=1_0_8_3071587196499772427" tbinfo="ouid=3305085281" diss-data="group_source=group_all&amp;rid=1_0_8_3071587196499772427"
                                 class="WB_cardwrap WB_feed_type S_bg2 WB_feed_vipcover WB_feed_like" mid="4172237139817031"
                                 action-type="feed_list_item">
                                     <div class="WB_feed_detail clearfix" node-type="feed_content" ">
-
-
                                         <div class="WB_face W_fl">
                                             <div class="face">
                                                 <a title="{{$v->nickName}}" indepth="true">
@@ -329,6 +316,7 @@
                                         <div class="WB_detail">
                                             <div class="WB_info">
                                                 <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
+
                                                 target="_top" class="W_f14 W_fb S_txt1" title="{{$v->nickName}}"
                                                 usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
                                                     {{$v->nickName}}
@@ -342,6 +330,7 @@
                                                 indepth="true">
                                                     {{date('Y-m-d H:i:s',$v->time)}}
                                                 </a>
+
 
                                                 <!-- minzheng add part 2 -->
                                             </div>
@@ -365,8 +354,6 @@
                                 </div>
 
                                 </div>
-
-
                               </div>
                                    <div id="v6_pl_rightmod_myinfo" style="float: right;width:245px">
                                         <div class="WB_cardwrap S_bg2">
@@ -381,6 +368,7 @@
                                                 <div class="WB_innerwrap" >
                                                     <div class="nameBox" style="height:38px;">
                                                         <a href="/home/user" class="name S_txt1" title="积分" style="padding-top: 10px">
+
                                                             {{$user->nickName}}
                                                         <em class="W_ficon ficon_favorite S_ficon">
                                                             <span class="glyphicon glyphicon-tint" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
@@ -455,7 +443,6 @@
                                                         {{$j->job}}
                                                     </label>
                                                 </a>
-
                                                 @endforeach
                                             </div>
                                         </div>
@@ -514,6 +501,7 @@
                 //加载照片
                 $('.WB_detail img').zoomify();
 
+
                 //判断评论内容是否为空
                 $('#replay').mouseover(function() {
 
@@ -525,12 +513,12 @@
 
                     //获取评论内容
                      content = $(this).siblings('textarea').val();
-
                     $.post('/home/replay/empty', {content:content}, function(data){
                         if(data == 0){
                             layer.alert('微博评论内容不能为空！', {
                               icon:2 ,
                             })
+
 
                             return false;
 
@@ -559,7 +547,6 @@
                         type: "get",
                         url: "/home/attent",
                         data: {gid:id},
-
                         beforeSend:function(){
                              a = layer.load();
                           },
@@ -581,7 +568,6 @@
 
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
-
                             layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
 
                         }
@@ -595,7 +581,6 @@
                         type: "get",
                         url: "/home/notice",
                         data: {id:id},
-
                         beforeSend:function(){
                             //加载样式
                             a = layer.load(0, {shade: false});
@@ -622,8 +607,6 @@
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                             layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-
-
                         }
                     });
                 }

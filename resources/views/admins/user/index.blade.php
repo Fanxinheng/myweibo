@@ -110,7 +110,7 @@
                     type: "post",
                     url: "/admin/index/"+id,
                     data: {id:id,_token:'{{csrf_token()}}',_method:'put'},
-                    
+
                     beforeSend:function(){
                         //加载样式
                         a = layer.load(0, {shade: false});
@@ -131,18 +131,18 @@
                             document.getElementById('user'+id).innerHTML = '冻结用户';
                         }
 
-                        
 
-                        
-                        
+
+
+
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        layer.msg("标签删除失败，请检查网络后重试", {icon:2 ,})  
+                        layer.msg("标签删除失败，请检查网络后重试", {icon:2 ,})
                     }
                 });
 
                 }, function(){
-                        
+
                 });
         }
 
