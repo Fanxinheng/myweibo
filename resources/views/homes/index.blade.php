@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
-        <link rel="stylesheet" type="text/css" href="/homes/css//iconfont.css">
+        <link rel="stylesheet" type="text/css" href="/homes/css/iconfont.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
@@ -43,8 +43,10 @@
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
                                     <a href="/home/admin" class="box" title="" node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
+                                        
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" id="wblogo" >
+                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
+
                                         </span>
                                     </a>
                                 </div>
@@ -150,9 +152,17 @@
                                                         </h3>
                                                         </a>
                                                         @if($v->image)
-                                                        <div id="image">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"  id="img">
-                                                        </div>
+
+                                                        <?php
+                                                            $img = rtrim($v->image,'##');
+
+                                                            $imgs = explode('##',$img);
+                                                            
+                                                        ?>
+                                                            @foreach($imgs as $i)
+                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                            @endforeach
+
                                                         @else
 
                                                         @endif
@@ -245,16 +255,15 @@
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" id="gly">
                                                                             </span>
-                                                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号"
-                                                                             id="inppho">
+                                                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号" id="inppho">
+
                                                                         </div>
                                                                         <div id="e1">
                                                                         </div>
 
                                                                         <div class="form-group" id="pasdiv">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true"  id="glyspa"></span>
-                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
-
+                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password" maxlength="12">
                                                                         </div>
                                                                         <div id="e2">
                                                                         </div>
@@ -345,12 +354,8 @@
                         @endforeach
                     </p>
                     <p class="copy_v2">
-                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                        <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+                        
                     </p>
                 <p class="company"></p>
                 </div>
@@ -362,7 +367,7 @@
         <script type="text/javascript">
 
             //加载照片
-            $('.list_des #image').zoomify();
+            $('.list_des #img').zoomify();
 
             //发布微博
             $('.glyphicon-thumbs-up').on('click',function() {

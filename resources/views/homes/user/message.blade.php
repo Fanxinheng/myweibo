@@ -14,16 +14,14 @@
         <link rel="stylesheet" href="/homes/css/user.replay.css">
     </head>
     
-    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';">
+    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
     
         <div id="b">
             <div>
                 <nav class="navbar navbar-fixed-top" id="navbar">
                     <div class="container">
                         <div class="navbar-header" id="navbar-header1">
-                            <a href="/home/login">
                             <img src="/homes/images/wb_logo.png" alt="">
-                            </a>
                         </div>
                         <div class="navbar-header" id="navbar-header2">
                             <form class="navbar-form navbar-right">
@@ -60,7 +58,7 @@
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-                            <a href="/home/login">
+                            <a href="/home/admin">
                                 首页
                             </a>
                         </div>
@@ -84,11 +82,20 @@
                                     <img width="100" height="100" src="/homes/images/197.jpg" class="img-circle">
                                 </div>
                                 <div>
-                                    <!-- 昵称 -->
-                                    <div id="nickname">
-                                        {{$rev->nickName}}
+                                  <!-- 昵称 -->
+                                    <div id="nickname" >
+                                        {{$rev->nickName}}&nbsp;&nbsp;
+                                        
                                     </div>
-                                    <!-- 签名 -->
+                                    <div id="nickName" style="margin-left: 20px;margin-top:10px;">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
+                                        @if($rev->sex=='w')
+                                        <em>女</em>
+                                        @else
+                                        <em>男</em>
+                                        @endif
+                                        
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">

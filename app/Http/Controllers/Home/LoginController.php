@@ -265,45 +265,48 @@ class LoginController extends Controller
     public function nick(Request $request)
     {   
 
-      //获取form中的手机号和密码
-      $req = $request->input('phone');
-     
+      //获取form中的手机号
+      $phone = $request->input('phone');
       
-      //$date = user::where('phone',$phone)->value('id');
-      //if($data){
+      //在User表中根据手机号获取其id 
+      $id = user::where('phone',$phone)->value('id');
 
-      //}
-      //获取form中的密码
-      //$pass = $request->input('pass');
-      
-      //在user表中根据手机号查询出其密码
-      //$password = user::where('phone',$phone)->value('password');
-      
-      //判断密码是否正确
-      //if(Hash::check($password,$pass){
+      if($id){
 
-      //}
-      //在user表中根据手机号获取其ID
-      //$res = user::where('phone',$phone)->value('id');
+        //获取form中的密码
+        $pass = $request->input('password');
 
-      //在user_info表中根据user表中的id查出其uid
-      //$uid = user_info::where('uid','=',$res)->value('uid');
-      
-      
-      //判断uid是否为空(因为上面传过来的是null)
-      //if($uid==null){
+        //根据手机号查出其密码
+        $password = user::where('phone',$phone)->value('password');
 
-        //  Session(['uid'=>$res]);
+        //判断密码是否正确
+        if(Hash::check($pass,$password)){
 
-          //return redirect('/home/details');
-         
-      //}else{
+          //在user_info表中根据user表中的id查出其uid
+          $uid = user_info::where('uid',$id)->value('uid');
+          
+          
+          //判断uid是否为空(因为上面传过来的是null)
+          if($uid==null){
 
-        //  Session(['uid'=>$res]);
+              Session(['uid'=>$id]);
 
-          //return redirect('/home/login');
+              return redirect('/home/details');
+             
+          }else{
 
-      //}
+              Session(['uid'=>$id]);
+
+              return redirect('/home/login');
+
+          }
+
+        }else{
+          return redirect('/home/admin');
+        }
+
+
+      }
 
     }
     

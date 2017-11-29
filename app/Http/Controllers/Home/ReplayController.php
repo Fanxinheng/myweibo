@@ -20,19 +20,13 @@ class ReplayController extends Controller
     //前台未登录加载评论页面
     public function create ($id)
     {
-
-        dd($id);
-
-        //查询标签内容
-        $label = label::get();
-
     	//查看微博内容
     	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
 
     	//查询评论信息
     	$replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
-    	return view('homes/show/replay',['label'=>$label,'res'=>$res,'replay'=>$replay]);
+    	return view('homes/show/replay',['res'=>$res,'replay'=>$replay]);
     }
 
     //微博评论功能

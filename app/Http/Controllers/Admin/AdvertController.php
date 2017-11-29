@@ -198,8 +198,6 @@ class AdvertController extends Controller
 
 
         }
-
-
             //获取当前时间戳
             $res['time'] = time();
             //获取商户名字
@@ -211,6 +209,7 @@ class AdvertController extends Controller
 
             //修改数据库里面的信息
             $data = advert::where('id',$id)->update($res);
+            
             //判断如果成功去列表页，如果失败回到当前页面
             if ($data) {
                 return redirect('/admin/advert/')->with('create','修改广告成功！');

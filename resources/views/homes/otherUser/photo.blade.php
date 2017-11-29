@@ -13,10 +13,9 @@
         </script>
         <link rel="stylesheet" href="/homes/css/user.photo.css">
     </head>
+  <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
     
-    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';">
-    
-        <div id="b">
+        <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
                     <div class="navbar-header" id="navbar-header1">
@@ -78,14 +77,26 @@
                             <div class="col-md-4">
                                 <!-- 头像 -->
                                 <div id="jimg">
-                                    <img width="100" height="100" src="/homes/images/197.jpg" class="img-circle">
+                               
+                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
                                 </div>
                                 <div>
-                                    <!-- 昵称 -->
                                     <div id="nickname">
-                                    {{$rev->nickName}}
+                                        {{$rev->nickName}}
+                                        @if($re == 1)
+                                        <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut">取消关注</button>
+                                        @else
+                                        <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" class="btn-defalut">关注</button>
+                                        @endif
                                     </div>
-                                    <!-- 签名 -->
+                                    <div id="nickname">
+                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
+                                        @if($rev->sex=='w')
+                                        <em>女</em>
+                                        @else
+                                        <em>男</em>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -117,7 +128,7 @@
                                 </li>
                                 <li>
                                     <a href="/home/other/photo/{{$rev->uid}}">
-                                        相册管理
+                                        相册
                                     </a>
                                 </li>
                             </ul>
@@ -135,13 +146,21 @@
                             <div class="col-lg-12" >
                                 <!-- 图像遍历的地方 -->
 
-                                @if($res == '')
-                                <div>你还没有上传图片哟!@~@</div>
+                                @if($res->isEmpty())
+                                <div style="margin-top: 10px">他还没有上传图片哟!@~@</div>
                                 @else
                                 <!-- 头像 -->
                                 @foreach($res as $k=>$v)
                                 <div id="weiimg" style="margin-top: 20px;margin-left: 20px;float: left">
-                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                     <?php
+                                    $img = rtrim($v->image,'##');
+
+                                    $imgs = explode('##',$img);
+                                    
+                                ?>
+                                    @foreach($imgs as $i)
+                                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                    @endforeach
                                 </div>
                                  @endforeach
 
@@ -155,6 +174,28 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            
+            
+           function abtn1 (id){
+                $.ajax({
+                    url:'/home/other/act/'+id,
+                    type:'GET',
+                    data:{},
+                    success:function(data){
+                    if(data == 1){
+                        document.getElementById('abtn1').innerHTML="关注";
+                        layer.msg('取消成功');
+                    }else{
+                        document.getElementById('abtn1').innerHTML="取消关注";
+                        layer.msg('关注成功');
+                    }
+
+                   
+                    }
+                });
+            };
+        </script>
     </body>
 
 </html>

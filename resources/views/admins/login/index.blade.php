@@ -36,6 +36,18 @@
                 </div>
             @endif
 
+            @if(session('edit'))
+                <div class="mws-form-message success">
+                    {{session('edit')}}
+                </div>
+            @endif
+
+            @if(session('out'))
+                <div class="mws-form-message success">
+                    {{session('out')}}
+                </div>
+            @endif
+
                 <form class="mws-form" action="/admin/login" method="post">
                     <div class="mws-form-row">
                         <div class="mws-form-item">
