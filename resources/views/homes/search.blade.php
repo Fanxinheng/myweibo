@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
@@ -24,9 +24,9 @@
             微博-随时随地发现新鲜事
         </title>
     </head>
-    
+
     <body class="FRAME_login">
-        
+
         <div style="position: absolute; top: -9999px;">
             <div id="js_style_css_module_global_WB_outframe">
             </div>
@@ -46,7 +46,7 @@
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
+                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
                                         </span>
                                     </a>
                                 </div>
@@ -57,7 +57,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
-                                    </form> 
+                                    </form>
                                 </div>
                                 <div class="gn_position">
                                     <div class="gn_nav">
@@ -73,8 +73,8 @@
                                                     </em>
                                                 </a>
                                             </li>
-                                           
-                                           
+
+
                                         </ul>
                                     </div>
                                     <div class="gn_login">
@@ -84,7 +84,7 @@
                                                     注册
                                                 </a>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                                                 </li>
                                             </div>
                                           @endforeach
-    
+
                                         </ul>
                                     </div>
                                 </div>
@@ -135,16 +135,16 @@
                             <!-- ／左导 -->
                             <div id="plc_main">
                                 <div id="plc_unlogin_home_main">
-                                    
+
                                     <div class="WB_frame_c">
                                         <div id="pl_unlogin_home_feed">
                                             <!--榜单栏位置-->
-                                         
-                                           
+
+
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
-                                                    
+
                                                 @if($index->isEmpty())
                                                     <div style="text-align: center">
                                                     抱歉，我们没有找到您想要的内容:(
@@ -152,47 +152,57 @@
                                                 @endif
 
                                                 @foreach($index as $k=>$v)
-                                                
+
                                                     <div class="list_des">
                                                         <a href="/home/replay/{{$v->cid}}">
                                                         <h3 class="list_title_s">
                                                             <div style="word-break:break-all;padding-bottom:10px;">
                                                                 {{$v->content}}
-                                                            </div> 
+                                                            </div>
                                                         </h3>
                                                         </a>
                                                         @if($v->image)
-                                                        <div id="image" style="width:200px;">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
-                                                        </div>
-                                                        @else
 
-                                                        @endif
-                                                        
+
+
+                                                            <?php
+                                                                $img = rtrim($v->image,'##');
+
+                                                                $imgs = explode('##',$img);
+
+                                                            ?>
+                                                                @foreach($imgs as $i)
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                                @endforeach
+
+                                                            @else
+
+                                                            @endif
+
                                                         <div class="subinfo_box clearfix">
-                                                                
+
                                                                 <span class="subinfo_face" style="cursor: pointer">
                                                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}" alt="" width="20" height="20">
                                                                 </span>
-                                                                
+
                                                                 <span class="subinfo S_txt2">
-                                                                    {{$v->nickName}} 
+                                                                    {{$v->nickName}}
                                                                 </span>
-                                                           
+
                                                             <span class="subinfo S_txt2">
-                                                                {{date('Y-m-d H:i:s',$v->time)}} 
+                                                                {{date('Y-m-d H:i:s',$v->time)}}
                                                             </span>
 
-                                                            
+
                                                             <span class="subinfo_rgt S_txt2" class="point">
                                                                 <em class="W_ficon ficon_praised S_ficon W_f16">
                                                                     <span class="glyphicon glyphicon-thumbs-up" id="point" aria-hidden="true" ></span>
                                                                 </em>
                                                                 <em>
-                                                                    {{$v->pnum}} 
+                                                                    {{$v->pnum}}
                                                                 </em>
                                                             </span>
-                                                            
+
 
                                                             <a href="/home/replay/{{$v->cid}}">
                                                             <span class="rgt_line W_fr">
@@ -202,7 +212,7 @@
                                                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                                                                 </em>
                                                                 <em>
-                                                                    {{$v->rnum}} 
+                                                                    {{$v->rnum}}
                                                                 </em>
                                                             </span>
                                                             </a>
@@ -215,7 +225,7 @@
                                                                     <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
                                                                 </em>
                                                                 <em>
-                                                                    {{$v->fnum}} 
+                                                                    {{$v->fnum}}
                                                                 </em>
                                                             </span>
                                                             </a>
@@ -224,9 +234,9 @@
 
                                                         <hr>
 
-                                                    @endforeach 
+                                                    @endforeach
 
-                                                    
+
                                                     <div style="float: right">
                                                         <nav aria-label="...">
                                                           <ul class="pager">
@@ -262,16 +272,16 @@
                                                                             <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
                                                                             帐号登录
                                                                         </a>
-                                    
+
                                                                     </div>
-                                                                 
+
                                                                 </div>
-                                                               
+
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
                                                                     <form action="/home/nick" method="post">
-                                                                        
+
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号" style="width:250px; ">
@@ -282,12 +292,12 @@
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px"> 
+                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
                                                                         </div>
 
                                                                         {{csrf_field()}}
                                                                         <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
-                                                                </div> 
+                                                                </div>
                                                                     <div class="info_list register" style="font-size:14px">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
@@ -346,8 +356,8 @@
                                 </div>
                             </div>
                         </div>
-                       
-                      
+
+
                     </div>
                 </div>
         <div id="plc_bot">
@@ -363,12 +373,7 @@
                         @endforeach
                     </p>
                     <p class="copy_v2">
-                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                        <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
                     </p>
                 <p class="company"></p>
                 </div>
@@ -380,16 +385,16 @@
     <script type="text/javascript">
 
         //加载照片
-        $('.list_des img').zoomify();
+        $('.list_des #img').zoomify();
 
 
          $('.glyphicon-thumbs-up').on('click', function(){
-            
+
             layer.msg('亲，您好像忘了登录呦:)');
           });
 
          $('.subinfo_face').on('click', function(){
-            
+
             layer.msg('亲，您好像忘了登录呦:)');
           });
 
@@ -403,7 +408,7 @@
                 type: "get",
                 url: "/home/notice",
                 data: {id:id},
-                
+
                 beforeSend:function(){
                     //加载样式
                     a = layer.load(0, {shade: false});
@@ -430,23 +435,23 @@
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-                    
-                    
+
+
                 }
             });
         }
     </script>
 
-    
+
     <script type="text/javascript">
          var ch2;
          var ch3;
 
         //手机号失去焦点事件
         $('#phone').blur(function(){
-           
+
             var pho  = $(this).val();
-            
+
             ch2 = checkTel($('#phone'),$('#e1'));
             if(ch2!=100){
               $('#phone').css('border','solid 2px red');
@@ -469,13 +474,13 @@
                 ch2 = 0;
               }
             },'json')
-                
+
             })
 
-            
+
             //密码失去焦点事件
             $('input[name="password"]').blur(function(){
-            
+
                 var pas = $(this).val();
                 var pho = $('#phone').val();
 
@@ -505,6 +510,6 @@
 
     </script>
     </body>
-        
+
 
 </html>

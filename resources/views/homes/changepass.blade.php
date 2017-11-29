@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
@@ -18,12 +18,12 @@
         <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
         <link rel="stylesheet" href="{{asset('homes/css/changepass.css')}}">
         <!-- <script src="{{ asset('homes/js/details.js') }}" type="text/javascript"></script> -->
-    
+
         <title>
             修改密码
         </title>
     </head>
-    
+
     <body id='body'>
         <div id="a"></div>
 
@@ -38,41 +38,42 @@
                     <div class="col-md-12" id='tit'>
                         <div id="redis">修改密码</div>
                         <div class="rr"></div>
-                        
+
                     </div>
                     <div class="col-md-12" id='content'>
                         <div class="col-md-12" id='con'>
-                            <form class="form-horizontal" method="post" action="/home/details/deposit" enctype="multipart/form-data" id="forms">  
+
+                            <form class="form-horizontal" method="post" action="/home/details/changepassword" enctype="multipart/form-data" id="forms">
                                   <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-2 control-label"><span class="nspan">*</span>旧密码:</label>
                                     <div class="col-sm-4" id='inp1'>
-                                      <input type="password" class="form-control" id="oldpass" maxlength="6" name="oldpass">
+                                      <input type="password" class="form-control" id="oldpass" maxlength="12" name="oldpass">
                                       <div id="spa" class='msg' >
                                     </div>
-                                    
+
                                   </div>
                                  <div class="form-group" style="margin-top: 60px">
                                     <label for="inputPassword3" class="col-sm-2 control-label" style="margin-left:9px"><span class="nspan">*</span>新密码:</label>
                                     <div class="col-sm-4" id='inp2'>
-                                      <input type="password" class="form-control" id="newpass" maxlength="6" name="newpass">
+                                      <input type="password" class="form-control" id="newpass" maxlength="12" name="newpass">
                                       <div id="spa1" class='msg' >
                                     </div>
-                                    
+
                                   </div>
-              
+
                                   <div class="form-group" id='but' style="width: 300px">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        {{csrf_field()}}   
+                                        {{csrf_field()}}
                                       <input type="submit" value="提交"  id="btn1">
                                     </div>
                                   </div>
                                 </form>
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
-                
+
                 <!-- 底部 -->
                 <div class="col-md-12" id='footer'>
                         <div id="fleft">
@@ -89,19 +90,20 @@
                     </div>
             </div>
         </div>
-      
+
      <script>
         var ch2;
+        var ch3;
 
         //旧密码获取焦点事件
         $('#oldpass').focus(function(){
-            $('#spa').html('请输入旧密码');
+            $('#spa').html('请输入6-12位旧密码');
         })
 
         //旧密码失去焦点事件
         $('#oldpass').blur(function(){
-           
-            var oldpass  = $(this).val();
+
+            oldpass  = $(this).val();
 
              ch2 = checkOldPassword($('#oldpass'),$('#spa'),6);
              // console.log(ch2);
@@ -117,25 +119,69 @@
                 // console.log(data);
               if(data==1){
 
+
               }else{
                 $('#spa').css('display','block');
-                $("#spa").html("该邮箱已被注册!"); 
+                $("#spa").html("与旧密码不一致");
                 $('#spa').css('color','red');
-                data = 0;
               }
             })
 
-            console.log(ch2);
-
-            
+            // console.log(ch2);
         })
+
+         //新密码获取焦点事件
+        $('#newpass').focus(function(){
+            $('#spa1').html('请输入6-12位新密码');
+        })
+
+        //新密码失去焦点事件
+        $('#newpass').blur(function(){
+
+            var newpass  = $(this).val();
+
+             ch2 = checkNewPassword($('#newpass'),$('#spa1'),6);
+             // console.log(ch2);
+            if(ch2!=100){
+              $('#spa1').css('display','block');
+              $('#spa1').css('color','red');
+             // return;
+            }else{
+              $('#spa1').css('display','none');
+              ch2 = 100;
+            }
+             $.get("/home/changepass/newpass",{newpass:newpass},function(data){
+                // console.log(data);
+              if(data==1){
+                $('#spa1').css('display','block');
+                $("#spa1").html("与旧密码不能一样哦");
+                $('#spa1').css('color','red');
+              }else{
+
+              }
+            })
+
+            // $.get("/home/changepass/newpass",{newpass:newpass},function(data){
+            //     // console.log(data);
+            //   if(data==1){
+
+            //   }else{
+            //     $('#spa1').css('display','block');
+            //     $("#spa1").html("与旧密码不一致");
+            //     $('#spa1').css('color','red');
+            //   }
+            // })
+
+            console.log(ch2);
+        })
+
 
         // if (PH==1&&NI==1&&AG==1&&EM==1) {
         //  next();
         // }
-        
+
      </script>
-    
+
     </body>
 
 

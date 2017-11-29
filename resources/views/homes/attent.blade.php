@@ -8,7 +8,7 @@
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta name="csrf_token" content="{{ csrf_token() }}"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
@@ -39,7 +39,9 @@
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
+
+                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
+
                                         </span>
                                     </a>
                                 </div>
@@ -53,9 +55,9 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
-                                    </form> 
+                                    </form>
                                 </div>
-                           
+
                             <div class="gn_position">
                                 <div class="gn_nav">
                                         <ul class="gn_nav_list">
@@ -185,11 +187,13 @@
                                                     </em>
 
                                                 </p>
-                                            </div>  
+                                            </div>
                                         </div>
-                                    <form action="/home/release/" method="post" enctype="multipart/form-data">
+
+                                    <form action="/home/release" method="post" enctype="multipart/form-data">
+
                                             <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
-                                        
+
 
                                             <div class="kind" style="height: 35px;margin-top: 3px;">
                                                <a class="S_txt1" href="javascript:void(0);" action-type="face" action-data="type=500&amp;action=1&amp;log=face&amp;cate=1"
@@ -208,12 +212,12 @@
 
                                                             <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
                                                              multiple="multiple" type="file">
-                                                    </div>  
+                                                    </div>
 
                                                 </a>
 
                                                 <span>
-                                                    
+
 
                                                     @foreach($label as $val)
 
@@ -228,10 +232,10 @@
                                             <div style="float: right;margin-top: 6px;">
                                                 {{csrf_field()}}
                                                 <button id="release" style="width:100px;height:40px;border-radius:5px;background:orange;color:white;font-size: 16px">发布</button>
-                                                
+
                                             </div>
 
-                                            
+
                                     </form>
 
 
@@ -252,7 +256,7 @@
                                             action-type="feed_list_item">
 
                                                 <div class="WB_feed_detail clearfix" node-type="feed_content" ">
-                                                    
+
 
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
@@ -268,8 +272,9 @@
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
 
-                                                            target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
-                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/user">
+                                                            target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}"
+
+                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->user_info->uid}}">
                                                                 {{$v->user_info->nickName}}
                                                             </a>
                                                         </div>
@@ -284,14 +289,24 @@
                                                                {{$val->content}}
                                                             </div>
                                                         </a>
-                                                        @if($val->image)
-                                                        <div id="image" style="width:200px;">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$val->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
-                                                        </div>
 
-                                                        @else
+                                                            @if($val->image)
 
-                                                        @endif
+
+                                                            <?php
+                                                                $img = rtrim($val->image,'##');
+
+                                                                $imgs = explode('##',$img);
+
+                                                            ?>
+                                                                @foreach($imgs as $i)
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                                @endforeach
+
+                                                            @else
+
+                                                            @endif
+
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -308,14 +323,14 @@
                                                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px">
-                                                                                    
+
                                                                                     举报
                                                                                 </em>
                                                                             </span>
                                                                         </span>
                                                                     </span>
                                                                 </a>
-                                                                
+
                                                             </li>
                                                             <li>
                                                                 <a href="/home/blog/forward/{{$val->cid}}" class="S_txt2" title="转发">
@@ -359,7 +374,7 @@
                                                             </li>
                                                             <li>
                                                                 <!-- <a href="/home/point/{{$v->cid}}"></a> -->
-                                                                <a class="S_txt2" 
+                                                                <a class="S_txt2"
                                                                 title="点赞">
                                                                     <span class="point">
                                                                         <input type="hidden" name="point" value="{{$val->cid}}">
@@ -369,7 +384,7 @@
                                                                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                                                 </em>
                                                                                 <em style="font-size: 14px" id="pnum{{$val->cid}}">
-                                                                                    
+
                                                                                     {{$val->pnum}}
                                                                                 </em>
                                                                             </span>
@@ -386,7 +401,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
 
                                 @endforeach
 
@@ -398,7 +413,7 @@
                                       </ul>
                                     </nav>
                                 </div>
-                              </div>                     
+                              </div>
 
                               </div>
                                    <div id="v6_pl_rightmod_myinfo" style="float: right;width:245px">
@@ -489,7 +504,7 @@
                                             {{$j->job}}
                                         </label>
                                     </a>
-                                    
+
                                     @endforeach
                                 </div>
                             </div>
@@ -524,9 +539,9 @@
                                </div>
                             </div>
                         </div>
-                        
+
                 <div id="plc_bot">
-                            
+
                     <div class="WB_footer S_bg2">
                         <!-- 友情链接 -->
                         <div class="other_link S_bg1 clearfix T_add_ser">
@@ -538,17 +553,13 @@
                                 @endforeach
                             </p>
                             <p class="copy_v2">
-                                <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                                <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                                <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                                <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                                <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                                <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+
+                                <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
                             </p>
-                        
+
                         </div>
                     </div>
-                    
+
                 </div>
         <script type="text/javascript">
             //加载照片
@@ -576,7 +587,7 @@
                     type: "post",
                     url: "/home/point",
                     data: {poid:id},
-                    
+
                     beforeSend:function(){
                          a = layer.load();
                       },
@@ -597,7 +608,7 @@
 
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                      
+
                         layer.msg("点赞失败，请检查网络后重试", {icon:2 ,})
 
                     }
@@ -627,9 +638,9 @@
                             layer.msg('您已举报过此微博:)', {icon:2 ,})
                         }
                     });
-                   
+
                   }
-                });    
+                });
             });
 
 
@@ -641,7 +652,7 @@
                     type: "get",
                     url: "/home/notice",
                     data: {id:id},
-                    
+
                     beforeSend:function(){
                         //加载样式
                         a = layer.load(0, {shade: false});
@@ -668,13 +679,13 @@
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-                        
-                        
+
+
                     }
                 });
             }
 
             </script>
         </body>
-        
+
     </html>

@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
         <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
-        <link rel="stylesheet" type="text/css" href="/homes/css//iconfont.css">
+        <link rel="stylesheet" type="text/css" href="/homes/css/iconfont.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
@@ -27,15 +27,14 @@
     </head>
 
     <body class="FRAME_login">
-        <div style="position: absolute; top: -9999px;">
-            <div id="js_style_css_module_global_WB_outframe">
-            </div>
+
+        <div id="js_style_css_module_global_WB_outframe">
         </div>
         <link media="all" href="/homes/css/index.css" type="text/css" rel="stylesheet">
-        <div class="B_unlog">
+        <div  class="B_unlog">
             <div class="WB_miniblog">
                 <div class="WB_miniblog_fb">
-                    <div id="weibo_top_public">
+                    <div id="weibo_top_public" >
                         <!--spec start-->
                         <!--顶部导航-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
@@ -45,12 +44,11 @@
                                     <a href="/home/admin" class="box" title="" node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
+                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
                                         </span>
                                     </a>
                                 </div>
-                                <div class=" gn_search_v2">
-
+                                <div class=" gn_search_v2" >
                                     <form action="/home/admin/search" method="get">
                                         <input node-type="searchInput" autocomplete="off" value="" class="W_input"
                                         name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
@@ -58,9 +56,8 @@
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
                                     </form>
-
                                 </div>
-                                <div class="gn_position">
+                                <div class="gn_position" >
                                     <div class="gn_nav">
                                         <ul class="gn_nav_list">
                                             <li>
@@ -138,10 +135,7 @@
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
-
-
                                                 @foreach($index as $k=>$v)
-
                                                     <div class="list_des">
                                                         <a href="/home/replay/{{$v->cid}}">
                                                         <h3 class="list_title_s">
@@ -151,13 +145,21 @@
                                                         </h3>
                                                         </a>
                                                         @if($v->image)
-                                                        <div id="image" style="width:200px;">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
-                                                        </div>
+
+
+                                                        <?php
+                                                            $img = rtrim($v->image,'##');
+
+                                                            $imgs = explode('##',$img);
+
+                                                        ?>
+                                                            @foreach($imgs as $i)
+                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                            @endforeach
+
                                                         @else
 
                                                         @endif
-
                                                         <div class="subinfo_box clearfix">
 
                                                                 <span class="subinfo_face " style="cursor: pointer">
@@ -265,7 +267,6 @@
                                                                     </form>
 
                                                                 </div>
-
                                                                     <div class="info_list register" style="font-size:14px">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
@@ -273,14 +274,13 @@
                                                                         <a target="_top" href="/home/register">
                                                                             立即注册!
                                                                         </a>
-                                                                        <a href="/home/admin/find" style="float: right;">忘记密码</a>
+                                                                        <a href="/home/admin/find" style="float: right;margin-right:9px;">忘记密码</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                              <!-- 公告专用 -->
                                             <div class="UG_box_l" style="width:340px;">
                                                 <div class="UG_contents" style="padding-bottom:10px;">
@@ -296,7 +296,6 @@
                                                         @endforeach
                                                 </div>
                                             </div>
-
 
                                              <!-- 广告显示页面 -->
                                             @foreach($advert as $k=>$v)
@@ -328,7 +327,6 @@
                             </div>
 
                 </div>
-
             </div>
         </div>
 
@@ -346,12 +344,8 @@
                         @endforeach
                     </p>
                     <p class="copy_v2">
-                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                        <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+
                     </p>
                 <p class="company"></p>
                 </div>
@@ -363,7 +357,7 @@
         <script type="text/javascript">
 
             //加载照片
-            $('.list_des img').zoomify();
+            $('.list_des #img').zoomify();
 
             //发布微博
             $('.glyphicon-thumbs-up').on('click',function() {
@@ -382,7 +376,6 @@
                     type: "get",
                     url: "/home/notice",
                     data: {id:id},
-
                     beforeSend:function(){
                         //加载样式
                         a = layer.load(0, {shade: false});
@@ -409,20 +402,15 @@
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
                         layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-
-
                     }
                 });
             }
         </script>
-
-
         <script type="text/javascript">
          var ch2 ;
          var ch3 ;
          var aaa=0;
          var bbb=0;
-
         //手机号失去焦点事件
         $('#phone').blur(function(){
 
@@ -443,7 +431,6 @@
               if(data=='1'){
                 $('#e1').css('display','none');
                 ch2 = 100;
-
                 aaa=1;
               }else{
 
@@ -451,7 +438,6 @@
                 $("#e1").html("该手机号还未注册,请先去注册");
                 $('#e1').css('display','block');
                 aaa=0;
-
               }
             },'json')
             });
@@ -472,14 +458,12 @@
                 }else{
                   $('#e2').css('display','none');
                   ch3 = 100;
-
                 }
                 $.get("/home/pass",{pas:pas,pho:pho},function(data){
                   if(data=='1'){
                     $('#e2').css('display','none');
                     ch3 = 100;
                     bbb=1;
-
                   }else{
                     $("#e2").html("密码不正确");
                     $('#e2').css('display','block');
@@ -495,8 +479,6 @@
                     return false;
                 }
             });
-
-
         </script>
 
     </body>

@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
@@ -44,7 +44,7 @@
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
+                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
                                         </span>
                                     </a>
                                 </div>
@@ -56,7 +56,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
-                                    </form> 
+                                    </form>
 
                                 </div>
                                 <div class="gn_position">
@@ -147,7 +147,7 @@
 
                                                         <div class="list_des">
 
-                                                            
+
                                                             <h3 class="list_title_s" style="padding-bottom: 10px">
 
                                                                 <div>
@@ -156,9 +156,17 @@
                                                             </h3>
 
                                                             @if($res->image)
-                                                            <div id="image" style="width:200px;">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
-                                                        </div>
+
+
+                                                            <?php
+                                                                $img = rtrim($res->image,'##');
+
+                                                                $imgs = explode('##',$img);
+
+                                                            ?>
+                                                                @foreach($imgs as $i)
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                                @endforeach
                                                             @else
 
                                                             @endif
@@ -185,7 +193,7 @@
 
                                                     <a href="#">
                                                         <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
-                                                       
+
                                                         <button id="replay" style="margin:5px 0 5px 605px;" class="btn btn-default">评论</button>
                                                     </a>
 
@@ -349,12 +357,8 @@
                         @endforeach
                     </p>
                     <p class="copy_v2">
-                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+                        <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+
                     </p>
                 <p class="company"></p>
                 </div>
@@ -369,7 +373,7 @@
         //加载照片
         $('.list_des img').zoomify();
 
-        
+
          $('#replay').on('click', function(){
             layer.msg('亲，您好像忘了登录呦:)', {
               time: 20000, //20s后自动关闭
@@ -383,7 +387,7 @@
                 type: "get",
                 url: "/home/notice",
                 data: {id:id},
-                
+
                 beforeSend:function(){
                     //加载样式
                     a = layer.load(0, {shade: false});
@@ -410,8 +414,8 @@
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-                    
-                    
+
+
                 }
             });
         }

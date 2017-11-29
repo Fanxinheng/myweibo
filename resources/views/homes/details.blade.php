@@ -15,7 +15,7 @@
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="/homes/js/validate.js"></script>
-        <script type="text/javascript" src="{{asset('layer/layer.js')}}"></script>
+        <script type="text/javascript" src="{{asset('/homes/layer/layer.js')}}"></script>
         <link rel="stylesheet" href="{{asset('homes/css/details.css')}}">
         <!-- <script src="{{ asset('homes/js/details.js') }}" type="text/javascript"></script> -->
 
@@ -23,7 +23,6 @@
             个人信息
         </title>
     </head>
-
     <body id='body'>
     	<div id="a"></div>
 
@@ -66,16 +65,17 @@
 								    </div>
 								  </div>
 								  <div class="form-group">
+
 								    <label for="inputcode3" class="col-sm-2 control-label" id='wlabel'><span class="nspan">*</span>工作:</label>
 
+
 									<select class="form-control"  name="work" id="sel">
-									  <option value="医生" checked>医生</option>
-									  <option value="IT程序员">IT</option>
-									  <option value="销售">销售</option>
-									  <option value="教师">教师</option>
-									  <option value="餐饮">餐饮</option>
-									  <option value="其他">其他</option>
+
+                                      @foreach($res as $v)
+									  <option value="{{$v->job}}" >{{$v->job}}</option>
+									   @endforeach
 									</select>
+
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span class="nspan">*</span>邮箱:</label>
@@ -95,7 +95,6 @@
 
 								    </div>
 								  </div>
-
 
 								  <div class="form-group" id='but'>
 								    <div class="col-sm-offset-2 col-sm-10">
@@ -200,8 +199,6 @@
         })
 
 
-
-
         //邮箱获取焦点事件
         $('#email').focus(function(){
             $('#spa1').html('请输入邮箱');
@@ -209,7 +206,6 @@
 
         //邮箱失去焦点事件
         $('#email').blur(function(){
-
             var email  = $(this).val();
 
              ch2 = checkEmail($('#email'),$('#spa1'));
@@ -238,7 +234,6 @@
 
             // console.log(ch2);
             console.log(EM);
-
 
         })
 

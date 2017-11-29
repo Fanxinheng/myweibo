@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
@@ -22,9 +22,9 @@
             微博-随时随地发现新鲜事
         </title>
     </head>
-    
+
     <body class="FRAME_login">
-        
+
         <div style="position: absolute; top: -9999px;">
             <div id="js_style_css_module_global_WB_outframe">
             </div>
@@ -44,7 +44,7 @@
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
+                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
                                         </span>
                                     </a>
                                 </div>
@@ -56,7 +56,7 @@
 
                                         {{csrf_field()}}
                                         <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
-                                    </form> 
+                                    </form>
 
                                 </div>
                                 <div class="gn_position">
@@ -73,8 +73,8 @@
                                                     </em>
                                                 </a>
                                             </li>
-                                           
-                                           
+
+
                                         </ul>
                                     </div>
                                     <div class="gn_login">
@@ -84,7 +84,7 @@
                                                     注册
                                                 </a>
                                             </li>
-                                            
+
                                         </ul>
                                     </div>
                                 </div>
@@ -126,9 +126,9 @@
                                                 </li>
                                             </div>
                                             @endforeach
-                                          
-                                            
-                                          
+
+
+
                                         </ul>
                                     </div>
                                 </div>
@@ -146,45 +146,54 @@
 
 
                                                         <div class="list_des">
-                                                            
+
                                                             <h3 class="list_title_s" style="padding-bottom:10px">
                                                                 <div>
                                                                     {{$res->content}}
                                                                 </div>
                                                             </h3>
                                                             @if($res->image)
-                                                            <div id="image" style="width:200px;">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
-                                                        </div>
+
+
+                                                            <?php
+                                                                $img = rtrim($res->image,'##');
+
+                                                                $imgs = explode('##',$img);
+
+                                                            ?>
+                                                                @foreach($imgs as $i)
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                                @endforeach
+
                                                             @else
 
                                                             @endif
                                                             <div class="subinfo_box clearfix">
-                                                                
+
                                                                     <span class="subinfo_face ">
                                                                         <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}" alt="" width="20" height="20">
                                                                     </span>
-                                                                
-                                                                
-                                                                    <span class="subinfo S_txt2">
-                                                                        {{$res->nickName}} 
-                                                                    </span>
-                                                               
-                                                                <span class="subinfo S_txt2">
-                                                                    {{date('Y-m-d H:i:s',$res->time)}} 
-                                                                </span>
 
+
+                                                                    <span class="subinfo S_txt2">
+                                                                        {{$res->nickName}}
+                                                                    </span>
+
+                                                                <span class="subinfo S_txt2">
+                                                                    {{date('Y-m-d H:i:s',$res->time)}}
+                                                                </span>
                                                             </div>
                                                         </div>
-                                                            
+
                                                         <hr>
+
 
                                                     <a href="#">
                                                         <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
-                                                       
+
                                                         <button id="forward" style="margin:5px 0 5px 605px;" class="btn btn-default">转发</button>
                                                     </a>
-                                                       
+
 
                                                     <!-- 转发内容 -->
 
@@ -198,21 +207,21 @@
                                                     </h3>
                                                     @endif
 
-                                                    @foreach($forward as $k=>$v) 
+                                                    @foreach($forward as $k=>$v)
                                                     <div class="subinfo_box clearfix" >
-                                                           
+
                                                             <span class="subinfo_face ">
                                                                 <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}" alt="" width="20" height="20">
                                                             </span>
-                                                        
+
                                                             <span class="subinfo S_txt2">
                                                             {{$v->nickName}}
                                                             </span>
-                                                        
+
                                                         <span class="subinfo S_txt2">
-                                                            {{date('Y-m-d H:i:s',$v->time)}} 
+                                                            {{date('Y-m-d H:i:s',$v->time)}}
                                                         </span>
-                                                      
+
                                                     </div>
 
                                                         @if($v->fcontent)
@@ -225,18 +234,18 @@
 
                                                         @endif
                                                     @endforeach
-                                                    
+
                                                     </div>
-                                                     </div> 
+                                                     </div>
 
                                                     <div style="float: right">
                                                        {!!$forward->render()!!}
                                                     </div>
 
                                                 </ul>
-                                                
+
                                             </div>
-                                         
+
                                         </div>
                                     </div>
                                     <div class="WB_main_r" fixed-box="true">
@@ -254,16 +263,16 @@
                                                                         action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login">
                                                                             帐号登录
                                                                         </a>
-                                    
+
                                                                     </div>
-                                                                 
+
                                                                 </div>
-                                                               
+
                                                                 <!-- /result end -->
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <!--<div class="info_list pre_info clearfix" node-type="prename_box" style="display:none"></div>-->
                                                                     <form action="/home/login" method="get">
-                                                                        
+
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="请输入手机号" style="width:250px;">
@@ -273,7 +282,7 @@
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-                
+
                                                                         <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
                                                                     </form>
                                                                 </div>
@@ -288,12 +297,12 @@
 
                                                                     </div>
                                                             </div>
-                                                           
-                                                            
+
+
                                                         </div>
                                                     </div>
                                                 </div>
-                                            
+
                                             <!-- 公告专用 -->
                                             <div class="UG_box_l" style="width:340px;">
                                                 <div class="UG_contents" style="padding-bottom:10px;">
@@ -338,8 +347,8 @@
                                 </div>
                             </div>
                         </div>
-                       
-                      
+
+
                     </div>
                 </div>
         <div id="plc_bot">
@@ -355,12 +364,9 @@
                         @endforeach
                     </p>
                     <p class="copy_v2">
-                        <a href="//weibo.com/aj/static/jicp.html?_wv=6" target="_blank" class="S_txt2">京ICP证100780号</a>
-                        <a href="//weibo.com/aj/static/medi_license.html?_wv=6" target="_blank" class="S_txt2">互联网药品服务许可证</a>
-                        <a href="//weibo.com/aj/static/jww.html?_wv=6" target="_blank" class="S_txt2">京网文[2014]2046-296号</a>&emsp;
-                        <a href="//www.miibeian.gov.cn" target="_blank" class="S_txt2">京ICP备12002058号</a>&emsp;
-                        <a href="//weibo.com/aj/static/license.html?_wv=6" target="_blank" class="S_txt2">增值电信业务经营许可证B2-20140447</a>
-                        <a href="//weibo.com/aj/static/map_license.html?_wv=6" target="_blank" class="S_txt2">乙测资字1111805</a>
+
+                        <a href="#" class="S_txt2">版权：{{$config[0]->bank}}    出品</a>
+
                     </p>
                 <p class="company"></p>
                 </div>
@@ -386,7 +392,7 @@
                 type: "get",
                 url: "/home/notice",
                 data: {id:id},
-                
+
                 beforeSend:function(){
                     //加载样式
                     a = layer.load(0, {shade: false});
@@ -413,8 +419,8 @@
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
-                    
-                    
+
+
                 }
             });
         }
