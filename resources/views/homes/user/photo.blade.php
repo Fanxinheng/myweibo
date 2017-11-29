@@ -20,13 +20,11 @@
     
     <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';">
     
-        <div id="b">
+        <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
                     <div class="navbar-header" id="navbar-header1">
-                        <a href="/home/login">
                         <img src="/homes/images/wb_logo.png" alt="">
-                        </a>
                     </div>
                     <div class="navbar-header" id="navbar-header2">
                         <form class="navbar-form navbar-right">
@@ -63,7 +61,7 @@
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-                            <a href="/home/login">
+                            <a href="/home/admin">
                                 首页
                             </a>
                         </div>
@@ -84,7 +82,7 @@
                             <div class="col-md-4">
                                 <!-- 头像 -->
                                 <div id="jimg">
-                                    <img width="100" height="100" src="/homes/images/197.jpg" class="img-circle">
+                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="img" class="img-circle">
                                 </div>
                                 <div>
                                     <!-- 昵称 -->
@@ -177,18 +175,25 @@
                             <div class="col-lg-12" style="background-color: #fff;margin-left: 30px;width: 820px;padding-bottom: 20px;margin-top: 10px" >
                                 <!-- 图像遍历的地方 -->
 
-                                @if($res == null)
+                                @if($res == '')
 
                                 <div style="line-height: 20px;padding:10px;">你还没有上传图片哟!@~@</div>
 
                                 @else
                                 <!-- 头像 -->
                                 @foreach($res as $k=>$v)
-                                <div id="weiimg" style="margin-top: 20px;margin-left: 20px;float: left">
+                                 @if($v->image)
+                                                            
+                                <div id="weiimg" class="cl{{$v->cid}}" onmouseover="imgov({{$v->cid}})" style="margin-top: 20px;margin-left: 20px;float: left;">
+                                    <div id="x{{$v->cid}}" onclick="xm({{$v->cid}})" style="position: absolute;margin-left: 85px;font-size: 18px;display: none">x</div>
                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img">
                                 </div>
-                                 @endforeach
+                                 @else  
+                                 @endif
 
+                                 @endforeach
+                                
+                                
                                  @endif
                                 <!-- 图像遍历结束 -->
                             </div>
@@ -206,6 +211,8 @@
                      'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
                 }
             });
+
+         //删除全部
          $('#overall').on( 'click',function (){
       
             layer.confirm('您确定删除全部？', {
@@ -214,6 +221,9 @@
                     $.ajax({
                         url:'/home/photo/delete',
                         type:'POST',
+                         beforeSend:function(){
+                        a = layer.load();                      
+                        },
                         success:function(data){
 
                             $('.img').remove();
@@ -229,7 +239,30 @@
                 }, function(){
                 
                 });
-         });   
+         });  
+
+         //鼠标移入 
+        function imgov(cid){
+
+            $('#x'+cid).show();
+
+          
+        }
+
+        function xm(cid){
+                $.ajax({
+                    url:'/home/photo/move',
+                    type:'POST',
+                    data:{cid:cid},
+                     beforeSend:function(){
+                        a = layer.load();                      
+                    },  
+                    success:function(data){
+                       $('.cl'+cid).remove();
+                       
+                    }
+                });
+            };
 
 
         </script>

@@ -10,6 +10,7 @@ use App\Http\Model\point;
 use App\Http\Model\replay;
 use App\Http\Model\forward;
 use App\Http\Model\user_info;
+use App\Http\Model\user_attention;
 
 use App\Http\Controllers\Controller;
 
@@ -32,6 +33,19 @@ class OtherUserController extends Controller
 
         }
 
+        //查询用户的信息是否存在于数组中
+        $r = user_attention::where('uid',$sid)->where('gid',$id)->get();
+
+        if($r){
+
+            $re = 1;
+
+        }else{
+
+            $re = 0;
+
+        }
+
         //获取微博评论的消息
         $message = Session('message');
 
@@ -42,7 +56,7 @@ class OtherUserController extends Controller
         $res = contents::where('uid',$id)->with('replay.user_info')->get();
 
         //跳转页面
-        return view('homes/otherUser/index',['res'=>$res,'rev'=>$rev,'sid'=>$sid,'message'=>$message]);
+        return view('homes/otherUser/index',['res'=>$res,'rev'=>$rev,'sid'=>$sid,'message'=>$message,'re'=>$re]);
     }
 
      //照片
@@ -57,9 +71,24 @@ class OtherUserController extends Controller
         //获取微博评论的消息
         $message = Session('message');
 
+        //获取登录用户的信息
+        $uid = Session('uid');
+
+        //查询用户的信息是否存在于数组中
+        $r = user_attention::where('uid',$uid)->where('gid',$id)->get();
+
+        if($r){
+
+            $re = 1;
+
+        }else{
+
+            $re = 0;
+
+        }
 
         //页面跳转
-        return view('homes/otherUser/photo',['res'=>$res,'rev'=>$rev,'message'=>$message]);
+        return view('homes/otherUser/photo',['res'=>$res,'rev'=>$rev,'message'=>$message,'re'=>$re]);
     }
 //=================================功能===================================================================//
 
@@ -128,6 +157,12 @@ class OtherUserController extends Controller
         //将时间格式化
         $res['time'] = date('Y-m-d H:i:s',time());
 
+        //获取最后的id
+        $res['id'] = replay::max('id');
+
+        //获取图片
+        $res['photo'] = user_info::where('uid',$res['uid'])->value('photo');
+
         //将回帖数放入一个数组中
         $res['replay'] = $v;
 
@@ -138,8 +173,10 @@ class OtherUserController extends Controller
     } 
 
      //删除评论的微博
-    public function replayDelete($id)
+    public function replayDelete()
     {
+
+        $id=$_POST['id'];
         
         //查询回复的微博的id
         $tid = replay::where('id',$id)->value('tid');
@@ -267,7 +304,33 @@ class OtherUserController extends Controller
 
     } 
 
+    //点击关注
+    public function attentionAction($id)
+    {
+        //获取缓存的id
+        $res['uid'] = Session('uid');
 
-   
+        //获取关注人的id
+        $res['gid'] = $id;
+
+        //
+        $re = user_attention::where('uid',$res['uid'])->where('gid',$res['gid'])->count();
+
+        if($re>0){
+
+            //填到数据库
+            $rev = user_attention::where('uid',$res['uid'])->where('gid',$res['gid'])->delete();
+
+            //返回参数 
+            return 1;
+
+        }else{
+
+            $rev = user_attention::insert($res);
+
+            return 0;
+        }
+
+    }   
 
 }

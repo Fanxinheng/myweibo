@@ -52,7 +52,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	Route::get('delete/{id}','UserController@delete');
 
 	//删除评论
-	Route::get('replay/delete/{id}','UserController@replayDelete');
+	Route::post('replay/delete','UserController@replayDelete');
 
 	//点赞微博
 	Route::get('pointFun','UserController@pointFun');
@@ -98,6 +98,10 @@ Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
 
 	//点赞微博
 	Route::get('/pointFun','OtherUserController@pointFun');
+
+	//关注他人
+	Route::get('/act/{id}','OtherUserController@attentionAction');
+
 
 
 });

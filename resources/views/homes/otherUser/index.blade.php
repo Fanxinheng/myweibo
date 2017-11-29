@@ -12,12 +12,13 @@
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js">
         </script>
         <link rel="stylesheet" href="/homes/css/user.index.css">
+        <meta name="csrf_token" content="{{ csrf_token() }}"/>
+
         <script type="text/javascript" src="/homes/layer/layer.js">
         </script>
     </head>
     
-    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';"
-    onclick="">
+    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
@@ -84,16 +85,20 @@
                             <div class="col-md-4">
                                 <!-- 头像 -->
                                 <div id="jimg">
-                                    @if('{{$rev->photo}}'=='')
-                                    <img width="100" height="100" src="{{$rev->photo}}" class="img-circle">
-                                    @else
-                                    <img width="100" height="100" src="/homes/images/197.jpg" class="img-circle">
-                                    @endif
+                                   
+                                   
+                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
+                                   
                                 </div>
                                 <div>
                                     <!-- 昵称 -->
                                     <div id="nickname">
                                         {{$rev->nickName}}
+                                        @if($re == 1)
+                                        <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut">取消关注</button>
+                                        @else
+                                        <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" class="btn-defalut">关注</button>
+                                        @endif
                                     </div>
                                     <div id="nickname">
                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
@@ -109,6 +114,7 @@
                             </div>
                         </div>
                     </div>
+                   
                     <!-- 头像 及北京-->
                     <style>
                         #weibo #lanmu li { margin-top: 5px; font-size: 14px}
@@ -148,14 +154,14 @@
                                     微博
                                 </h3>
                             </div>
+                            
                             <!-- 微博遍历的地方 -->
                             @foreach($res as $k=>$v)
                             <div class="col-lg-12" id="tiezi" style="width: 830px;overflow: hidden;">
                                 <div class="col-lg-12">
                                     <!-- 头像 -->
                                     <div class="col-log-2" id="tieimg" style="margin-top: 20px">
-                                        <img width="50" height="50" alt="Generic placeholder image" src="/homes/images/2015.jpg"
-                                        class="img-circle">
+                                         <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/50/h/50/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
                                     <div class="col-log-6" id="tiename" style="margin-top: 25px;margin-left: 10px;">
@@ -248,10 +254,12 @@
                                     </div>
                                     <div id="sdf{{$v->cid}}">
                                         @foreach($v->replay as $key=>$val)
-                                        <div class="col-lg-12" id="hejiu{{$v->cid}}">
+                                         <div id="he{{$val->id}}" style="dispaly:block;">
+                                        <div class="col-lg-12" id="hejiu{{$v->cid}}" >
                                             <!-- 头像 -->
                                             <div class="col-log-2" id="rimg">
-                                                <img width="30" height="30" src="/homes/images/2015.jpg">
+                                               
+                                                 <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/30/h/30/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="img" class="img-circle">
                                             </div>
                                             <!-- 名称和时间 -->
                                             <div class="col-log-8" id="cont">
@@ -265,9 +273,9 @@
                                                      @if($val->user_info->uid == $sid)
                                                 <div style="margin-top: 10px;font-size: 12px;color: #808080;word-break:break-all; width: 600px">
                                                     {{date('Y-m-d H:i:s',$val->time)}}
-                                                    <a href="/home/other/replay/delete/{{$val->id}}">
+                                                     <a href="javascript:;" onclick="rdel({{$val->id}})">
                                                         <span style="float: right">
-                                                         删除
+                                                            删除
                                                         </span>
                                                     </a>
                                                 </div>
@@ -277,6 +285,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                         @endforeach
                                         <!-- 内容 -->
                                     </div>
@@ -292,6 +301,31 @@
             <!-- 中间结束 -->
         </div>
         <script>
+
+           function abtn1 (id){
+                $.ajax({
+                    url:'/home/other/act/'+id,
+                    type:'GET',
+                    data:{},
+                    beforeSend:function(){
+                        a = layer.load();                      
+                    },
+                    success:function(data){
+                    if(data == 1){
+                        document.getElementById('abtn1').innerHTML="关注";
+                        layer.msg('取消成功');
+                    }else{
+                        document.getElementById('abtn1').innerHTML="取消关注";
+                        layer.msg('关注成功');
+                    }
+
+                   
+                    }
+                });
+            };
+
+                  
+
             //回复点击事件
             function fun(id) {
 
@@ -299,6 +333,28 @@
                 $('#disd1' + id).show();
 
             };
+
+             //删除微博评论
+            function rdel (id){    
+                    $.ajaxSetup({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                        }
+                    });
+
+                $.ajax({
+                    url:'/home/other/replay/delete',
+                    type:'POST',
+                    data:{id:id},
+                    beforeSend:function(){
+                        a = layer.load();                      
+                    },
+                    success:function(data){
+                       $('#he'+id).hide();
+                    }
+                });
+            }
+
 
             //点击回复
             function rebut(cid){
@@ -314,7 +370,7 @@
 
                 //添加回复消息
                 var newDiv = document.createElement('div');
-                var str = "<div class='col-lg-12'><div class='col-log-2' id='rimg'><img width='30' height='30' src='/homes/images/2015.jpg'></div><div class='col-log-8' id='cont'><div id='div1'><a href='/home/other/user/"+data['nickName']+"'>"+data['nickName']+"</a>&nbsp;回复:&nbsp; "+data['rcontent']+"</div><div id='div2'><em style='color:#676462'>"+data['time']+"</em><a href='/home/other/replay/delete/"+data['id']+"'><span style='float: right;margin-right:142px;'> 删除</span></a></div></div></div>";
+                var str = "<div id='he"+data['id']+"' style='dispaly:block;'><div class='col-lg-12'><div class='col-log-2' id='rimg'><img src='http://ozsrs9z8f.bkt.clouddn.com/"+data['photo']+"?imageView2/1/w/30/h/30/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim' id='img' class='img-circle'></div><div class='col-log-8' id='cont'><div id='div1'><a href='/home/other/user/"+data['nickName']+"'>"+data['nickName']+"</a>&nbsp;回复:&nbsp; "+data['rcontent']+"</div><div id='div2'><em style='color:#676462'>"+data['time']+"</em><a href='javascript:;'' onclick='rdel("+data['id']+")'><span style='float: right;margin-right:140px;'> 删除</span></a></div></div></div></div>";
                 //添加div里内容
                 newDiv.innerHTML=str;
                 //把节点从头部插入div
@@ -338,6 +394,9 @@
                         cid: cid
                     },
                     type: 'GET',
+                     beforeSend:function(){
+                        a = layer.load();                      
+                    },
                     success: function(data) {
                            document.getElementById('spa'+ cid).innerHTML = "点赞" + data['pnum'];
                             // layer.msg('点赞成功');
