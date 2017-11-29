@@ -265,30 +265,45 @@ class LoginController extends Controller
     public function nick(Request $request)
     {   
 
-      //获取form中的手机号
+      //获取form中的手机号和密码
       $req = $request->input('phone');
+     
+      
+      //$date = user::where('phone',$phone)->value('id');
+      //if($data){
 
+      //}
+      //获取form中的密码
+      //$pass = $request->input('pass');
+      
+      //在user表中根据手机号查询出其密码
+      //$password = user::where('phone',$phone)->value('password');
+      
+      //判断密码是否正确
+      //if(Hash::check($password,$pass){
+
+      //}
       //在user表中根据手机号获取其ID
-      $res = user::where('phone',$req)->value('id');
+      //$res = user::where('phone',$phone)->value('id');
 
       //在user_info表中根据user表中的id查出其uid
-      $uid = user_info::where('uid','=',$res)->value('uid');
+      //$uid = user_info::where('uid','=',$res)->value('uid');
       
       
       //判断uid是否为空(因为上面传过来的是null)
-      if($uid==null){
+      //if($uid==null){
 
-          Session(['uid'=>$res]);
+        //  Session(['uid'=>$res]);
 
-          return redirect('/home/details');
+          //return redirect('/home/details');
          
-      }else{
+      //}else{
 
-          Session(['uid'=>$res]);
+        //  Session(['uid'=>$res]);
 
-          return redirect('/home/login');
+          //return redirect('/home/login');
 
-      }
+      //}
 
     }
     

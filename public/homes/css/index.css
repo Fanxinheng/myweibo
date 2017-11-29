@@ -558,3 +558,31 @@ a, .S_link1, a.S_txt1:hover, a.current .S_txt1, a.S_txt2:hover, .SW_fun:hover .S
 .WB_timeline .current em, .WB_timeline .S_dot, .W_gotop { background-color: rgb(105, 110, 120); }
 .WB_miniblog { background: rgba(0, 0, 0, 0) url('body_bg.jpg') no-repeat scroll center top; }
 #js_style_css_module_global_WB_outframe { height: 42px; }
+#gn{width:1200px}
+#wblogo{margin-top:7px;}
+#searcha{height:25px}
+#searchbut{float:right;height:26px;}
+#ug{position: absolute; top: 66px; bottom: auto;}
+#con{word-break:break-all;padding-bottom:10px;}
+#image{width:200px;}
+#img{width:100%;}
+#sub{cursor: pointer}
+#aa{float: right}
+#pl{visibility: hidden;}
+#aac{z-index: 10; transform: translateZ(0px); position: relative; width: 340px;}
+#gly{float: left;margin-top: 10px}
+#inppho{width:250px; }
+#e1{width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px}
+#pasdiv{margin-top:10px}
+#glyspa{float: left;margin-top: 10px}
+#password{width:250px}
+#e2{width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px}
+#btn1{margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px}
+#info{font-size:14px}
+#btnpass{float: right;margin-right:9px;}
+#ggl{width:340px;}
+#ggc{padding-bottom:10px;}
+#xtgg{font-size: 15px;padding-bottom: 10px}
+#ggbt{font-size: 14px}
+#guang{width:340px;height:220px;}
+#imgg{width:300px;height:178px}

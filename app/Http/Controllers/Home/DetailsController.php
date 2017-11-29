@@ -91,6 +91,7 @@ class DetailsController extends Controller
 			//上传到七牛云
 			$bool = $disk->put($logo,file_get_contents($file->getRealPath()));
             if($bool){
+            	
             	//把uid存到res数组中
 			    $res['uid'] = session('uid');
 
@@ -130,50 +131,6 @@ class DetailsController extends Controller
 		return view('homes/edit',['res'=>$res]);
 	}
 
-
- //    public function editphoto(Request $request)
-	// {   
-	//  $img = $request->input('imgPath');
-
-	//   if($request->hasFile('imgPath')){
-	//          //初始化七牛云
-	//          $disk = QiniuStorage::disk('qiniu');
-				
-	//          //获取文件内容
-	//          $file = $request->file('imgPath');
-
-	//          //修改随机生成名字
-	//          $name = rand(1111,9999).time();
-
-	//          //获取上传文件后缀
-	//          $suffix = $request->file('imgPath')->getClientOriginalExtension();
-
- //                //拼装文件名
- //                 $logo = 'homes/uploads/'.$name.'.'.$suffix;
-
- //                $res['photo'] = $logo;
-
- //                //上传到七牛云
- //                $bool = $disk->put($logo,file_get_contents($file->getRealPath()));
-				
- //                //获取session中当前用户的uid
-	//          $uid = $request->session()->get('uid');
-
-	//          //把res数组中的信息按照uid修改到user_info表中
-	//          $data = user_info::where('uid',$uid)->update($res);
-			
-		
-	//          //判断成功就跳转首页,否则返回当前页面并存闪存
-	//          if($data){
- //                    // return $logo;
- //                    echo "0";
-	//          }else{
-
- //                     echo "1";
-	//          }
-	//  }
-	// }
-
 	//照片传送Ajax执行修改个人信息方法
 	public function update(Request $request)
 	{   
@@ -181,7 +138,7 @@ class DetailsController extends Controller
 		  //获取除了token以外的值
 			$res = $request->except('_token');
 
-	   if($request->hasFile('photo')){
+	    if($request->hasFile('photo')){
            
 				//初始化七牛云
 				$disk = QiniuStorage::disk('qiniu');
@@ -203,8 +160,14 @@ class DetailsController extends Controller
 				//上传到七牛云
 				$bool = $disk->put($logo,file_get_contents($file->getRealPath()));
 
-		}       
+				//删除旧头像
+                $old = user_info::where('id',Session('uid'))->value('photo');
+              
+                $data = $disk->delete($old);
 
+
+		}       
+        
 
 		//获取session中当前用户的uid
 		$uid= $request->session()->get('uid');

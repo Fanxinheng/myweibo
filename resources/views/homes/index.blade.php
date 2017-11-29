@@ -38,13 +38,13 @@
                         <!--spec start-->
                         <!--顶部导航-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
-                            <div class="gn_header clearfix" style="width:1200px">
+                            <div class="gn_header clearfix" id="gn" >
                                 <!-- logo -->
                                 <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
                                     <a href="/home/admin" class="box" title="" node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
-                                            <img src="/homes/images/wb_logo.png" alt="" style="margin-top:7px;">
+                                            <img src="/homes/images/wb_logo.png" alt="" id="wblogo" >
                                         </span>
                                     </a>
                                 </div>
@@ -52,10 +52,10 @@
 
                                     <form action="/home/admin/search" method="get">
                                         <input node-type="searchInput" autocomplete="off" value="" class="W_input"
-                                        name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
+                                        name="search" type="text"  id="searcha" placeholder="精彩生活，微博搜索">
 
                                         {{csrf_field()}}
-                                        <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+                                        <button  id="searchbut" class="btn btn-warning btn-sm" >搜索</button>
                                     </form> 
 
                                 </div>
@@ -96,7 +96,7 @@
                             <!-- 左导 -->
                             <div class="WB_main_l">
                                 <div id="pl_unlogin_home_leftnav">
-                                    <div class="UG_left_nav" node-type="UG_fixed_nav" style="position: absolute; top: 66px; bottom: auto;">
+                                    <div class="UG_left_nav" node-type="UG_fixed_nav"  id="ug">
                                         <ul>
                                             <div category_id="0" action-type="filter_cat" suda-data="key=nologin_home&amp;value=nologin_left_hot:0"
                                             suda-uatrack="key=www_unlogin_home&amp;value=recommend">
@@ -144,14 +144,14 @@
                                                     <div class="list_des">
                                                         <a href="/home/replay/{{$v->cid}}">
                                                         <h3 class="list_title_s">
-                                                            <div style="word-break:break-all;padding-bottom:10px;">
+                                                            <div  id="con">
                                                                 {{$v->content}}
                                                             </div> 
                                                         </h3>
                                                         </a>
                                                         @if($v->image)
-                                                        <div id="image" style="width:200px;">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
+                                                        <div id="image">
+                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"  id="img">
                                                         </div>
                                                         @else
 
@@ -159,7 +159,7 @@
                                                         
                                                         <div class="subinfo_box clearfix">
 
-                                                                <span class="subinfo_face " style="cursor: pointer">
+                                                                <span class="subinfo_face " id="sub" >
                                                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}"
                                                                     alt="" width="20" height="20">
                                                                 </span>
@@ -210,7 +210,7 @@
                                                         </div>
                                                         <hr>
                                                     @endforeach  
-                                                    <div style="float: right">
+                                                    <div  id="aa">
                                                         <nav aria-label="...">
                                                           <ul class="pager">
                                                             <li class="previous"><a href="{{$index->previousPageUrl()}}"><span aria-hidden="true">&larr;</span> Older</a></li>
@@ -224,10 +224,10 @@
                                     </div>
                                     <div class="WB_main_r" fixed-box="true">
                                         <div id="pl_unlogin_home_login">
-                                            <div style="visibility: hidden;">
+                                            <div id="pl">
                                             </div>
 
-                                            <div style="z-index: 10; transform: translateZ(0px); position: relative; width: 340px;">
+                                            <div id="aac">
                                                 <div class="UG_box" fixed-inbox="true" fixed-id="2">
                                                     <div class="W_unlogin_v4">
                                                         <div class="login_box" id="pl_login_form">
@@ -243,36 +243,36 @@
                                                                 <div class="W_login_form" node-type="normal_form">
                                                                     <form action="/home/nick" method="post">
                                                                         <div class="form-group">
-                                                                            <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px">
+                                                                            <span class="glyphicon glyphicon-user" aria-hidden="true" id="gly">
                                                                             </span>
                                                                             <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号"
-                                                                            style="width:250px; ">
+                                                                             id="inppho">
                                                                         </div>
-                                                                        <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
+                                                                        <div id="e1">
                                                                         </div>
 
-                                                                        <div class="form-group" style="margin-top:10px">
-                                                                            <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
+                                                                        <div class="form-group" id="pasdiv">
+                                                                            <span class="glyphicon glyphicon-lock" aria-hidden="true"  id="glyspa"></span>
+                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
 
                                                                         </div>
-                                                                        <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
+                                                                        <div id="e2">
                                                                         </div>
                                                                         {{csrf_field()}}
-                                                                        <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
+                                                                        <input type="submit"  value="登录"  id="btn1">
 
                                                                     </form>
 
                                                                 </div>
                                                                     
-                                                                    <div class="info_list register" style="font-size:14px">
+                                                                    <div class="info_list register" id="info" >
                                                                         <span class="S_txt2">
                                                                             还没有微博？
                                                                         </span>
                                                                         <a target="_top" href="/home/register">
                                                                             立即注册!
                                                                         </a>
-                                                                        <a href="/home/admin/find" style="float: right;margin-right:9px;">忘记密码</a>
+                                                                        <a href="/home/admin/find" id="btnpass">忘记密码</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -281,14 +281,14 @@
                                                 </div>
                                             
                                              <!-- 公告专用 -->
-                                            <div class="UG_box_l" style="width:340px;">
-                                                <div class="UG_contents" style="padding-bottom:10px;">
-                                                        <div style="font-size: 15px;padding-bottom: 10px">
+                                            <div class="UG_box_l" id="ggl">
+                                                <div class="UG_contents" id="ggc">
+                                                        <div style="" id="xtgg">
                                                                 系统公告
                                                         </div>
                                                         @foreach($notice as $not)
                                                         <a href="#" class="UG_tag_list" title="公告标题">
-                                                            <div style="font-size: 14px" onclick="notice({{$not->id}})">
+                                                            <div id="ggbt" onclick="notice({{$not->id}})">
                                                                 {{$not->title}}
                                                             </div>
                                                         </a>
@@ -300,14 +300,14 @@
                                              <!-- 广告显示页面 -->
                                             @foreach($advert as $k=>$v)
                                                 @if($v->status == 0)
-                                                    <div class="UG_box_l" style="width:340px;height:220px;">
+                                                    <div class="UG_box_l" id="guang" >
 
                                                         <div class="UG_contents">
                                                             <div class="UG_tag_list">
                                                                     <a target="_blank" class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
                                                                     href="//{{($v->link)}}">
                                                                         <span class="item_icon">
-                                                                           <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" alt="" style="width:300px;height:178px"/>
+                                                                           <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="imgg" />
                                                                         </span>
                                                                     </a>
                                                             </div>
@@ -420,9 +420,7 @@
         <script type="text/javascript">
          var ch2 ;
          var ch3 ;
-         var aaa=0;
-         var bbb=0;
-
+       
         //手机号失去焦点事件
         $('#phone').blur(function(){
            
@@ -432,68 +430,55 @@
             if(ch2==100){
               $('#e1').css('display','none');
               ch2 = 100;
-              
+          
             }else{
-              $('#e1').css('display','block');
-              return;
+              $('#e1').css('display','block');  
            
             }
             $.get("/home/pho",{pho:pho},function(data){
 
               if(data=='1'){
-                $('#e1').css('display','none');
-                ch2 = 100;
-           
-                aaa=1;
+                $('#e1').css('display','none');  
               }else{
 
                 ch2 = 0;
                 $("#e1").html("该手机号还未注册,请先去注册");
                 $('#e1').css('display','block');
-                aaa=0;
-       
               }
             },'json')
             });
-
+          
             //密码失去焦点事件
             $('input[name="password"]').blur(function() {
 
                 var pas = $(this).val();
                 var pho = $('#phone').val();
 
-
                 ch3 = checkPassword($('#password'),$('#e2'),6);
 
                 if(ch3!=100){
                   $('#e2').css('display','block');
                    ch3 = 0;
-
+                
                 }else{
                   $('#e2').css('display','none');
                   ch3 = 100;
-            
+                 
                 }
                 $.get("/home/pass",{pas:pas,pho:pho},function(data){
                   if(data=='1'){
                     $('#e2').css('display','none');
                     ch3 = 100;
-                    bbb=1;
+                    
                   
                   }else{
                     $("#e2").html("密码不正确");
                     $('#e2').css('display','block');
                     ch3 = 0;
-                    bbb=0;            
+                      
                   }
                 },'json')
-
-                // console.log(ch3);
-                if (aaa==1 && bbb==1 ) {
-                    next();
-                }else{
-                    return false;
-                }
+ 
             });
 
             
