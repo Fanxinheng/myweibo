@@ -29,19 +29,7 @@
     <body class="FRAME_login">
         
         <div id="js_style_css_module_global_WB_outframe">
-        </div>
-        <link media="all" href="/homes/css/index.css" type="text/css" rel="stylesheet">
-        <div  class="B_unlog">
-            <div class="WB_miniblog">
-                <div class="WB_miniblog_fb">
-                    <div id="weibo_top_public" >
-                        <!--spec start-->
-                        <!--顶部导航-->
-                        <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
-                            <div class="gn_header clearfix" style="width:1200px">
-                                <!-- logo -->
-                                <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
-                                    <a href="/home/admin" class="box" title="" node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
+        </div>box" title="" node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
                                         <span class="logo">
                                             <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
@@ -255,14 +243,14 @@
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px">
                                                                             </span>
                                                                             <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号"
-                                                                            style="width:250px; ">
+                                                                            style="width:250px; " maxlength="11">
                                                                         </div>
                                                                         <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
                                                                         </div>
 
                                                                         <div class="form-group" style="margin-top:10px">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
+                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password" maxlength="12">
 
                                                                         </div>
                                                                         <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
