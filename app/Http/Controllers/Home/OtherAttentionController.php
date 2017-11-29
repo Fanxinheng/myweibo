@@ -33,9 +33,25 @@ class OtherAttentionController extends Controller
 
         //获取关注人的信息
         $res = user_attention::join('user_info','user_attention.gid','=','user_info.uid')->where('user_attention.uid',$uid)->get();
+
+         //获取登录用户的信息
+        $id = Session('uid');
+
+        //查询用户的信息是否存在于数组中
+        $r = user_attention::where('uid',$id)->where('gid',$uid)->get();
+
+        if($r){
+
+            $re = 1;
+
+        }else{
+
+            $re = 0;
+
+        }
         
         //页面跳转
-        return view('homes/otherUser/attention',['res'=>$res,'rev'=>$rev,'message'=>$message]);
+        return view('homes/otherUser/attention',['res'=>$res,'rev'=>$rev,'message'=>$message,'re'=>$re]);
     }
 
     /**

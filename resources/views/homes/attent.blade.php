@@ -269,7 +269,7 @@
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
 
                                                             target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
-                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/user">
+                                                            usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->user_info->uid}}">
                                                                 {{$v->user_info->nickName}}
                                                             </a>
                                                         </div>
@@ -284,14 +284,22 @@
                                                                {{$val->content}}
                                                             </div>
                                                         </a>
-                                                        @if($val->image)
-                                                        <div id="image" style="width:200px;">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$val->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
-                                                        </div>
+                                                            @if($val->image)
 
-                                                        @else
 
-                                                        @endif
+                                                            <?php
+                                                                $img = rtrim($val->image,'##');
+
+                                                                $imgs = explode('##',$img);
+                                                                
+                                                            ?>
+                                                                @foreach($imgs as $i)
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                                @endforeach
+
+                                                            @else
+
+                                                            @endif
                                                         @endforeach
                                                     </div>
                                                 </div>

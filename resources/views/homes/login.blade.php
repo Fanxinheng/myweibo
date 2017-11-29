@@ -201,16 +201,17 @@
                                                    </em>
                                                    表情
                                                </a>
-                                                <a class="S_txt1" title="图片" style="position: relative;">
+                                                <a class="S_txt1" title="图片" style="position: relative;" onclick="pic_upload()">
                                                     <em class="W_ficon ficon_image" style="font-size:16px">
                                                         <span class="glyphicon glyphicon-picture" aria-hidden="true" ></span>
                                                     </em>
                                                     图片
                                                     <div style="position: absolute; left: 0px; top: 0px; display: block; overflow: hidden; background-color: rgb(0, 0, 0); opacity: 0; width: 49px; height: 24px;">
 
-                                                            <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
-                                                             multiple="multiple" type="file">
-                                                    </div>  
+                                                        <input  name="image"  type="hidden" id="pic22">
+
+                                                    </div>
+
                                                 </a>
                                                 <span>
                                                     @foreach($label as $val)
@@ -290,9 +291,18 @@
                                                             </div>
                                                         </a>
                                                         @if($v->image)
-                                                        <div id="image" style="width:200px;">
-                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
-                                                        </div>
+
+
+                                                        <?php
+
+                                                            $img = rtrim($v->image,'##');
+
+                                                            $imgs = explode('##',$img);
+                                                            
+                                                        ?>
+                                                            @foreach($imgs as $i)
+                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                            @endforeach
 
                                                         @else
 
@@ -723,6 +733,20 @@
                         
                     }
                 });
+            }
+
+
+            //多图上传
+            function pic_upload()
+            {
+                layer.open({
+                  type: 2,
+                  title: '上传图片到MYWEIBO',
+                  shadeClose: true,
+                  shade: 0.8,
+                  area: ['50%', '300px'],
+                  content: '/home/pics/' //iframe的url
+                }); 
             }
 
         </script>
