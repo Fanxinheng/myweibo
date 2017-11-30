@@ -38,8 +38,13 @@
     <form action='/admin/weibo' method='get'>
      <div id="DataTables_Table_0_length" class="dataTables_length">
         <label>
-        <select aria-controls="DataTables_Table_0" name="select"> 
-            <option name="select" value="">全部</option>
+
+        <select aria-controls="DataTables_Table_0" name="select">
+            <option
+            name="select"
+            value="">全部
+            </option>
+
             @foreach($resa as $k => $v)
             <option
 
@@ -53,16 +58,10 @@
      </div>
     <div class="dataTables_filter" id="DataTables_Table_1_filter">
         <label>
-            搜索<input 
-            aria-controls="DataTables_Table_1" 
-            type="text"  
-            name="content" 
-            value="{{isset($_GET['content']) ? $_GET['content'] : '' }}"
-            selected='selected'
-            />
+            搜索<input aria-controls="DataTables_Table_1" type="text" name="content" value="{{isset($_GET['content']) ? $_GET['content'] : '' }}"/> 
             {{ csrf_field()}}
         </label>
-        <button class="btn btn-default">提交</button>
+        <button class="btn btn-default">搜索</button>
     </div>
     </form>
 
@@ -93,11 +92,14 @@
                     <button id="status{{$v->cid}}" onclick="fun({{$v->cid}})" class="btn btn-default">
                          {{$v -> hot == 0 ? ' 登上热门 ' : ' 取消热门 ' }}
                     </button>
-                <button id="djksh" class="btn btn-default" onclick="shan({{$v->cid}})">删除微博</button> 
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+                    </a>
+                    <!-- <form action="/admin/weibo/{{$v->cid}}" method='post' style="display: inline"> -->
+                    <button onclick="shan({{$v->cid}})" class="btn btn-default" >删除微博</button>
+                        <!-- </form> -->
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
             </table>
             <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
                 {!! $resd->render() !!}
@@ -132,8 +134,9 @@
             );
         };
 
-        //微博删除
+    //微博删除
    function shan(cid){
+    console.log(cid);
     //获取要删除微博的id
     layer.confirm('您确定要删除此微博吗？', {
       btn: ['确定','取消'] //按钮
@@ -151,7 +154,7 @@
         success: function(data) {
             //关闭加载样式
             layer.close(a)
-            console.log(data);
+            
             //移除微博
             $('#wei'+cid).remove();
             layer.msg('微博删除成功!', {icon: 1});

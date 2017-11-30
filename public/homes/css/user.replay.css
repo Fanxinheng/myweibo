@@ -10,13 +10,12 @@
 #weibo #backg #jimg{margin-top: 10px;margin-left: 100px}
 #weibo #backg #nickname{text-align: center;margin-top: 15px}
 #weibo #lanmu { background-color: #fff; height:500px;}
-#weibo #lanmu li { margin-top: 5px; font-size: 20px; }
+#weibo #lanmu li { margin-top: 5px;font-size: 14px }
 
 
 #weibo #tiezi {background-color: #fff; margin-bottom: 10px; margin-left: 12px; width: 820px;}
 #weibo #tiezi #tieimg{float: left ;margin-top:15px;height:45px}
 #weibo #tiezi #tiename{float: left;margin-left: 20px;}
-#b #weibo #tiezi #tiecon{background-color:#ccc;margin-left: 100px;margin-bottom: 10px;word-break:break-all;}
 
 
 #b #foot .container{ height: 50px; text-align: center; }

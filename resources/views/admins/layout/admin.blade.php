@@ -5,9 +5,11 @@
 <!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
+<meta name="csrf_token" content="{{ csrf_token() }}"/>
 
 <!-- Viewport Metatag -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/admins/plugins/colorpicker/colorpicker.css" media="screen">
@@ -33,7 +35,7 @@
 <link rel="stylesheet" type="text/css" href="/admins/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/admins/css/themer.css" media="screen">
 
-
+<!-- layer -->
 <link rel="stylesheet" href="/admins/layer/skin/layer.css">
 
 <!-- 分页样式 -->
@@ -41,6 +43,7 @@
 
 
 <title>@yield('title')</title>
+
 
 </head>
 
@@ -75,27 +78,25 @@
                 ?>
             	<!-- User Photo -->
                 	<div id="mws-user-photo">
-                    	<img src="{{$result->pic}}" alt="User Photo">
-                    </div>
 
+                    	<img src="http://ozsrs9z8f.bkt.clouddn.com/{{$result->pic}}" alt="User Photo" id="admin-pic">
+                    </div>
                     <!-- Username and Functions -->
                     <div id="mws-user-functions">
-
-
-                            <div id="mws-username">
-                               用户名:&nbsp;&nbsp;&nbsp;{{$result->name}}
-                            </div>
-                            <ul>
-                                <li><a href="/admin/admins/{{$result->id}}/edit"> 修改个人信息</a></li>
-                                <li><a href="/admin/password/{{$result->id}}"> 修改密码</a></li>
-                                <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
-                            </ul>
-
+                        <div id="mws-username">
+                            Hello:&nbsp;&nbsp;&nbsp;{{$result->name}}
+                        </div>
+                        <ul>
+                            <li><a href="/admin/admins/{{$result->id}}/edit"> 修改头像</a></li>
+                            <li><a href="/admin/password/{{$result->id}}"> 个人信息</a></li>
+                            <li><a href="/admin/password/delete/{{$result->id}}">退出</a></li>
+                        </ul>
                     </div>
             </div>
 
         </div>
     </div>
+
 
     <!-- Start Main Wrapper -->
     <div id="mws-wrapper">
@@ -126,6 +127,12 @@
                             <li><a href="/admin/admins">管理员列表</a></li>
                             <li><a href="/admin/index">用户列表</a></li>
 
+                        </ul>
+                        <a href="#"><i class="icon-briefcase"></i>职业管理</a>
+                        <ul class="closed">
+
+                            <li><a href="/admin/job/create">职业添加</a></li>
+                            <li><a href="/admin/job">职业列表</a></li>
                         </ul>
                         <a href="#"><i class="icon-twitter-2"></i>微博管理</a>
                         <ul class="closed">
@@ -178,6 +185,7 @@
             Copyright Your Website 2012. All Rights Reserved.
             </div>
         </div>
+
 
         <!-- Main Container End -->
     </div>

@@ -62,7 +62,7 @@
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 
                     @foreach($res as $k => $v)
-                        <tr class="@if ( $v->id % 2 == 0 ) odd @else even @endif">
+                        <tr class="@if ( $v->id % 2 == 0 ) odd @else even @endif" id="label{{$v->id}}">
                             <td >
                                 <center>{{$v->id }}</center>
                             </td>
@@ -74,30 +74,17 @@
                                     <a href="/admin/label/{{$v->id}}/edit">
                                         <input type="submit" class="btn btn-default" value="修改">
                                     </a>
-                                        <form action="/admin/label/{{$v->id}}}" method="post" style="display:inline">
-                                            <button onclick="del(this)" class="btn btn-default">删除</button>
-                                                {{csrf_field()}}
-                                                {{method_field('DELETE')}}
-                                        </form>
+                                    <button class="btn btn-default" onclick="label_delete({{$v->id}})">删除</button>                                                                        
                                 </center>
-
-
                             </td>
                         </tr>
-
                     @endforeach
-
                 </tbody>
                 </table>
                     <div class="dataTables_info" id="DataTables_Table_1_info">
-
                 </div>
-
                 <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
-
-
-
-                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -108,9 +95,42 @@
 @section('js')
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
-        function del()
-        {
-            layer.msg('标签已删除')
+
+        //删除标签
+        function label_delete(id){
+
+            layer.confirm('您确定要删除此标签吗？', {
+                  btn: ['确定','取消'] //按钮
+                }, function(){
+
+                    $.ajax({
+                    type: "post",
+                    url: "/admin/label/"+id,
+                    data: {id:id,_token:'{{csrf_token()}}',_method:'delete'},
+                    
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
+
+                        //关闭加载样式
+                        layer.close(a)
+
+                        //移除标签
+                        $('#label'+id).remove();
+
+                        layer.msg('标签删除成功:)', {icon: 1});
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("标签删除失败，请检查网络后重试", {icon:2 ,})  
+                    }
+                });
+
+                }, function(){
+                        
+                });
         }
+ 
     </script>
 @endsection

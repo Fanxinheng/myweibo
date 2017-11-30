@@ -17,19 +17,12 @@ class LinkController extends Controller
      */
     public function index(Request $request)
     {
-        //获取分页信息
-        //获取搜索全部信息
-        //对数据库进行模糊查询
-        $res = link::where('user','like','%'.$request->input('search').'%')->
 
-        orderBy('user','asc')->
-
-        //默认搜索5条数据
-        paginate($request->input('paging',5));
+        //对数据库进行倒叙排列模糊查询收缩n条数据
+        $res = link::where('user','like','%'.$request->input('search').'%')->orderBy('user','asc')->paginate($request->input('paging'));
 
         //将数据传递到页面中
         return view('admins/link/index',['res'=>$res,'request'=>$request]);
-
 
     }
 
@@ -55,7 +48,6 @@ class LinkController extends Controller
 
          //表单验证
             $this->validate($request, [
-                    //不能为空
             'user' => 'required',
             'link' => 'required',
 
@@ -66,17 +58,14 @@ class LinkController extends Controller
         ]);
          //去除不需要的参数
             $res = $request->except('_token');
-
             //获取当前时间戳
             $res['time'] = time();
-
+            //获取友情链接的状态
             $res['status'] = "0";
-
-            //打印form传过来的参数
 
             //添加至数据库
             $data = link::insert($res);
-
+ 
             //判断如果成功去列表页，如果失败回到当前页面
             if($data){
 
@@ -108,10 +97,10 @@ class LinkController extends Controller
      */
     public function edit($id)
     {
-    
+
         //链接友情链接数据库，获取对应id的链接
         $res = link::where('id',$id)->first();
-
+ 
         //进信息传递到修改页面
         return view('/admins/link/edit',['res'=>$res]);
 
@@ -129,7 +118,7 @@ class LinkController extends Controller
 
         //闪存信息，去除不要的参数
         $res = $request->except('_token','_method');
-
+        //获取修改时间戳
         $res['time'] = time();
 
          //数据库获取对应id的参数执行更新
@@ -156,7 +145,7 @@ class LinkController extends Controller
      */
     public function destroy($id)
     {
-        //打印获取到的id
+ 
         // 获取id对数据库进行删除
         $date = link::where('id',$id)->delete();
         

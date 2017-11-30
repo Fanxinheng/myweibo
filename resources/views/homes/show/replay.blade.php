@@ -1,4 +1,4 @@
-PE html>
+<!DOCTYPE html>
 <html>
 
     <head>
@@ -6,13 +6,18 @@ PE html>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
         <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/layer/layer.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
             微博-随时随地发现新鲜事
         </title>
@@ -45,22 +50,14 @@ PE html>
                                 </div>
                                 <div class=" gn_search_v2">
 
-                                    <input node-type="searchInput" autocomplete="off" value="" class="W_input" name="15102240605332" type="text" style="height:25px" placeholder="搜索你想要的">
-                                    <a href="javascript:void(0);" title="搜索" node-type="searchSubmit" class="W_ficon ficon_search S_ficon"
-                                    suda-uatrack="key=topnav_tab&amp;value=search" target="_top">
-                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    <form action="/home/admin/search" method="get">
+                                        <input node-type="searchInput" autocomplete="off" value="" class="W_input"
+                                        name="search" type="text" style="height:25px" placeholder="精彩生活，微博搜索">
 
-                                    </a>
-                                    <!--搜索热词下拉-->
-                                   <!--  <div class="gn_topmenulist_search" node-type="searchSuggest" style="display: none;">
-                                        <div class="gn_topmenulist">
-                                            <div node-type="basic">
-                                            </div>
-                                            <div node-type="plus">
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!--/搜索热词下拉-->
+                                        {{csrf_field()}}
+                                        <button style="float:right;height:26px;" class="btn btn-warning btn-sm" >搜索</button>
+                                    </form> 
+
                                 </div>
                                 <div class="gn_position">
                                     <div class="gn_nav">
@@ -129,9 +126,6 @@ PE html>
                                                 </li>
                                             </div>
                                             @endforeach
-
-
-
                                         </ul>
                                     </div>
                                 </div>
@@ -141,37 +135,38 @@ PE html>
                                 <div id="plc_unlogin_home_main">
 
 
-
-
                                     <div class="WB_frame_c">
                                         <div id="pl_unlogin_home_feed">
-                                            <!--榜单栏位置-->
-
-
                                             <div class="UG_contents" id="PCD_pictext_i_v5">
                                                 <!--feed内容-->
                                                 <ul class="pt_ul clearfix" pagenum="" node-type="feed_list">
-
-                                                    <!--article feed-->
-
-                                                    <!--广告模块-->
-                                                    <div class="UG_list_b" mid="4171968871140682" action-type="feed_list_item"
+                                                    <div mid="4171968871140682" action-type="feed_list_item"
                                                     href="//weibo.com/5187664653/FuceP4MK6?ref=feedsdk" suda="key=nologin_home&amp;value=nologin_card_weibo:4171968871140682"
                                                     suda-uatrack="key=www_unlogin_home&amp;value=recommend_feed">
 
 
                                                         <div class="list_des">
 
-                                                            <h3 class="list_title_s">
+                                                            
+                                                            <h3 class="list_title_s" style="padding-bottom: 10px">
+
                                                                 <div>
                                                                     {{$res->content}}
                                                                 </div>
                                                             </h3>
 
+                                                            @if($res->image)
+                                                            <div id="image" style="width:200px;">
+                                                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->image}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100%;" id="img">
+                                                        </div>
+                                                            @else
+
+                                                            @endif
+
                                                             <div class="subinfo_box clearfix">
 
                                                                     <span class="subinfo_face ">
-                                                                        <img src="{{$res->photo == NULL ? '/homes/uploads/default.jpg' : $res->photo}}" alt="" width="20" height="20">
+                                                                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}" alt="" width="20" height="20">
                                                                     </span>
 
 
@@ -188,18 +183,15 @@ PE html>
 
                                                         <hr>
 
-                                                        <form action="/home/replay/store/" method="post">
-                                                            <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
-                                                            <input type="hidden" name="uid" value="{{$res->uid}}">
-                                                            <input type="hidden" name="tid" value="{{$res->cid}}">
-                                                            {{csrf_field()}}
-                                                            <button id="replay" style="margin:5px 0 5px 605px;" class="btn btn-default">评论</button>
-
-                                                        </form>
+                                                    <a href="#">
+                                                        <textarea class="form-control" rows="3" name="content" style="resize:none;"></textarea>
+                                                       
+                                                        <button id="replay" style="margin:5px 0 5px 605px;" class="btn btn-default">评论</button>
+                                                    </a>
 
                                                     <!-- 转发内容 -->
 
-                                                    <div class="list_des" style="height:60px;border-radius:10px;padding-left:10px;background-color: #F2F2F5;">
+                                                    <div class="list_des" style="border-radius:10px;padding:10px;background-color: #F2F2F5;">
 
                                                     @if($res->rnum == 0)
                                                     <h3 class="list_title_s">
@@ -213,7 +205,7 @@ PE html>
                                                     <div class="subinfo_box clearfix" >
 
                                                             <span class="subinfo_face ">
-                                                                <img src="{{$v->photo == NULL ? '/homes/uploads/default.jpg' : $v->photo}}" alt="" width="20" height="20">
+                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}" alt="" width="20" height="20">
                                                             </span>
 
                                                             <span class="subinfo S_txt2">
@@ -234,17 +226,14 @@ PE html>
                                                     </div>
 
                                                      </div>
-                                                    <!-- read_pos -->
-                                                    <!--/read_pos-->
+
+                                                     <div style="float: right">
+                                                       {!!$replay->render()!!}
+                                                    </div>
                                                 </ul>
-                                                <!--/feed内容-->
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
 
 
 
@@ -260,9 +249,7 @@ PE html>
                                                                 <div class="info_header">
                                                                     <div class="tab clearfix">
                                                                         <a href="javascript:void(0);" node-type="normal_tab" action-type="switchTab"
-                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login"
-                                                                        >
-                                                                            <!-- <span class="W_icon_rec"><span class="W_icon_rec_txt">推荐</span><span class="W_arrow_bor W_arrow_bor_r"><i class="S_spetxt"></i></span></span>-->
+                                                                        action-data="type=normal" suda-uatrack="key=tblog_weibologin3&amp;value=ordinary_login">
                                                                             帐号登录
                                                                         </a>
 
@@ -284,159 +271,70 @@ PE html>
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
                                                                             <input type="password" class="form-control" id="exampleInputEmail1" placeholder="请输入密码" style="width:250px;" name="password">
                                                                         </div>
-
+                                                                        <input type="submit" value="登录" style="margin-top: 8px;background:#ff8140;color: white;width:260px;height: 40px;font-size: 17px;border-radius: 6px" id="btn1">
+                                                                    </form>
                                                                 </div>
-                                                                    <div class="info_list auto_login clearfix">
-                                                                        <label for="login_form_savestate" class="W_fl W_label" title="建议在网吧或公共电脑上取消该选项。"
-                                                                        action-data="content=建议在网吧或公共电脑上取消该选项。" action-type="customTip">
-                                                                            <input id="login_form_savestate" checked="checked" node-type="savestate"
-                                                                            tabindex="5" class="W_checkbox" type="checkbox">
-                                                                            <span class="S_txt2">
-                                                                                记住我
-                                                                            </span>
-                                                                        </label>
-                                                                    </div>
-
-                                                                    <button type="submit" class="btn btn-default" style="margin-top: 8px;background:#ff8140;color: white;width:260px;" id="btn1">登录</button>
-                                                                    <div class="info_list register">
+                                                                    <div class="info_list register" style="font-size:14px">
                                                                         <span class="S_txt2">
                                                                             还没有微博？
                                                                         </span>
-                                                                        <a target="_top" href="register">
+                                                                        <a target="_top" href="/home/register">
                                                                             立即注册!
                                                                         </a>
+                                                                        <a href="/home/admin/find" style="float: right;">忘记密码</a>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div style="height: 1px; margin-top: -1px; visibility: hidden;">
-                                                </div>
-                                            </div>
-                                            <div class="bg" node-type="qr_help" style="position: absolute; top: 2px; left: -220px; width: 264px; height: 372px; background-position: -300px -150px; background-repeat: no-repeat; z-index: 999; background-image: url('sprite_login.png'); display: none;">
-                                            </div>
-                                        </div>
+                                                    <!-- 公告专用 -->
+                                                    <div class="UG_box_l" style="width:340px;" >
+                                                        <div class="UG_contents" style="padding-bottom:10px;">
+                                                                <div style="font-size: 15px;padding-bottom: 10px">
+                                                                        系统公告
+                                                                </div>
+                                                                @foreach($notice as $not)
+                                                                <a href="#" class="UG_tag_list" title="公告标题">
+                                                                    <div style="font-size: 14px" onclick="notice({{$not->id}})">
+                                                                        {{$not->title}}
+                                                                    </div>
+                                                                </a>
+                                                                @endforeach
+                                                        </div>
+                                                    </div>
 
-                                      <!-- 微博找人 -->
-                                    <div id="pl_unlogin_home_hotpersoncategory">
-                                        <div class="UG_box_l" style="width:340px;float: right;">
-                                            <h2 class="UG_box_title">
-                                                微博找人
-                                            </h2>
-                                            <div class="UG_contents">
-                                                <div class="UG_tag_list">
-                                                    <h3 class="tag_title">
-                                                        名人
-                                                    </h3>
-                                                    <ul class="clearfix">
-                                                        <li>
-                                                            <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                            href="https://d.weibo.com/1087030002_2975_1003_0">
-                                                                <i class="item_icon">
-                                                                    <img src="/homes/images/1087030002_892_1003_0.png" class="pic">
-                                                                </i>
-                                                                <span class="text width_fix W_autocut">
-                                                                    明星
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                            href="https://d.weibo.com/1087030002_2975_1001_0">
-                                                                <i class="item_icon">
-                                                                    <img src="/homes/images/1087030002_892_1001_0.png" class="pic">
-                                                                </i>
-                                                                <span class="text width_fix W_autocut">
-                                                                    商界
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                            href="https://d.weibo.com/1087030002_2975_5007_0">
-                                                                <i class="item_icon">
-                                                                    <img src="/homes/images/1087030002_892_1007_0.png" class="pic">
-                                                                </i>
-                                                                <span class="text width_fix W_autocut">
-                                                                    媒体精英
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                            href="https://d.weibo.com/1087030002_2975_2003_0">
-                                                                <i class="item_icon">
-                                                                    <img src="/homes/images/1087030002_892_1005_0.png" class="pic">
-                                                                </i>
-                                                                <span class="text width_fix W_autocut">
-                                                                    作家
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                            href="https://d.weibo.com/1087030002_2975_7002_0">
-                                                                <i class="item_icon">
-                                                                    <img src="/homes/images/1087030002_892_1004_0.png" class="pic">
-                                                                </i>
-                                                                <span class="text width_fix W_autocut">
-                                                                    政府官员
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                                     <!-- 广告显示页面 -->
+                                                    @foreach($advert as $k=>$v)
+                                                        @if($v->status == 0)
+                                                        <div class="UG_box_l" style="width:340px;height:220px;">
+                                                            <div class="UG_contents">
+                                                                <div class="UG_tag_list">
+                                                                    <a target="_blank" class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
+                                                                    href="//{{($v->link)}}">
+                                                                        <span class="item_icon">
+                                                                           <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" alt="" style="width:300px;height:178px"/>
+                                                                        </span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        @endif
+                                                    @endforeach
+
+
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
 
-
-                        <!-- 右边一列div -->
-                    <div style="height:480px;width:340px; float:right; overflow:hidden;">
-                        <!-- 公告专用 -->
-                        <div class="UG_box_l" style="width:340px;height:220px;">
-                            <div class="UG_contents">
-                                    <h1 class="UG_box_title">
-                                            公告专用
-                                    </h1>
-                                    <div class="UG_tag_list">
-
-                                    </div>
-                            </div>
                         </div>
-
-                         <!-- 广告显示页面 -->
-                        @foreach($resres as $k=>$v)
-                            @if($v->status == 0)
-                                <div class="UG_box_l" style="width:340px;height:220px;">
-                                    <div class="UG_contents">
-                                        <div class="UG_tag_list">
-                                            <li>
-                                                <a target="_blank" class="S_txt1" target="_top" suda-uatrack="key=nologin_home&amp;value=nologin_famous"
-                                                href="http:\\{{($v->link)}}">
-                                                    <i class="item_icon">
-                                                       <img src="{{$v->pic}}" alt="" style="width:280px;height:200px" ;/>
-                                                    </i>
-                                                </a>
-
-                                            </li>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            @endif
-                        @endforeach
-
-                    </div>
-                </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
+
 
         <div id="plc_bot">
             <!--footer-->
@@ -444,9 +342,9 @@ PE html>
                 <!-- 友情链接 -->
                 <div class="other_link S_bg1 clearfix T_add_ser">
                     <p class="copy_v2">
-                        @foreach($rec as $k=>$v)
+                        @foreach($link as $k=>$v)
                             @if($v->status==0)
-                                <a href="http:\\{{$v->link}}" target="_blank" class="S_txt2">{{$v->user}}</a>
+                                <a href="//{{$v->link}}" target="_blank" class="S_txt2">{{$v->user}}</a>
                             @endif
                         @endforeach
                     </p>
@@ -461,20 +359,63 @@ PE html>
                 <p class="company"></p>
                 </div>
             </div>
-            <!--/footer-->
         </div>
-
 
 
         </div>
         </div>
         <script type="text/javascript">
+
+        //加载照片
+        $('.list_des img').zoomify();
+
+        
          $('#replay').on('click', function(){
             layer.msg('亲，您好像忘了登录呦:)', {
               time: 20000, //20s后自动关闭
             });
           });
-    </script>
-    </body>
+
+         //系统公告
+        function notice(id){
+
+            $.ajax({
+                type: "get",
+                url: "/home/notice",
+                data: {id:id},
+                
+                beforeSend:function(){
+                    //加载样式
+                    a = layer.load(0, {shade: false});
+                  },
+                success: function(data) {
+
+                    //关闭加载样式
+                    layer.close(a)
+
+                    layer.open({
+                      type: 1
+                      ,title: data.title //不显示标题栏
+                      ,closeBtn: false
+                      ,area: '300px;'
+                      ,shade: 0.8
+                      ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                      ,resize: false
+                      ,btn: ['知道了']
+                      ,btnAlign: 'c'
+                      ,moveType: 1 //拖拽模式，0或者1
+                      ,content: '<div style="padding: 50px; line-height: 22px; background-color: #F2F2F5; color: #23527C; font-weight: 300;word-break:break-all;">'+data.content+'</div>'
+                      ,
+                    });
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    layer.msg("系统公告查看失败，请检查网络后重试", {icon:2 ,})
+                    
+                    
+                }
+            });
+        }
+        </script>
+        </body>
 
 </html>

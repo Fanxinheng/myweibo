@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use session;
-
 use App\Http\Model\admin;
 use App\Http\Model\user_info;
 use App\Http\Model\message;
+
+use Session;
+
+
 
 class NewsController extends Controller
 {
@@ -19,7 +21,7 @@ class NewsController extends Controller
     {
     	
     	//获取管理员用户名
-    	$admin = admin::where('id',session('uid'))->first();
+    	$admin = admin::where('id',Session('pid'))->first();
 
     	//获取用户名
     	$user = user_info::where('uid',$id)->first();
@@ -30,7 +32,7 @@ class NewsController extends Controller
     public function send ($id)
     {
     	//获取管理员ID
-    	$res['aid'] = session('uid');
+    	$res['aid'] = Session('pid');
 
     	//获取用户ID
     	$res['uid'] = $id;

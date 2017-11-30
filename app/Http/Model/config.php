@@ -10,5 +10,6 @@ class config extends Model
 
     protected $fillable = ['id','name','logo','bank'];
 
+
     public $timestamps = false;
 }

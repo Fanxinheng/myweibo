@@ -46,8 +46,8 @@
                     </div>
 
                     <div class="mws-form-row">
-                        <label class="mws-form-label">修改图片</label>
-                        <div class="mws-form-item">
+                        <div style="padding-bottom: 10px">修改图片</div>
+                        <div>
                             <input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="No file selected..." name="pic">
                         </div>
                     </div>

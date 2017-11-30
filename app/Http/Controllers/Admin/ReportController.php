@@ -21,7 +21,7 @@ class ReportController extends Controller
     {
         //查询数据库report表数据
         $res = report::with('user_info','contents.user_info')->paginate(5);
-
+   
         //返回到index页面视图中
         return view('admins/report/index', ['res' => $res]); 
     }

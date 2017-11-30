@@ -18,8 +18,6 @@
             </ul>
         </div>
         @endif
-
-
             <form action="/admin/label/" class="mws-form" method="post" enctype="multipart/form-data">
                 <div class="mws-form-inline">
                     <div class="mws-form-row">
@@ -30,10 +28,8 @@
                     </div>
                 </div>
                 <div class="mws-button-row">
-
                     {{csrf_field()}}
                     <input onclick="add(this)" type="submit" class="btn btn-default" value="添加">
-
                 </div>
             </form>
         </div>

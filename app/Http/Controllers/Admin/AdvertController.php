@@ -19,16 +19,16 @@ class AdvertController extends Controller
      */
     public function index(request $request)
     {
-   
+        //获取分页信息，获取搜索全部信息
+
         //对数据库进行模糊查询
         $res = advert::where('user','like','%'.$request->input('search').'%')->
 
         //倒叙排列
         orderBy('user','asc')->
 
-        //默认搜索5条数据
-        paginate($request->input('paging',5));
-
+        //默认搜索n条数据
+        paginate($request->input('paging'));
 
         //将数据传递到页面中
         return view('admins/advert/index',['res'=>$res,'request'=>$request]);
@@ -72,45 +72,34 @@ class AdvertController extends Controller
 
              //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
-
             //获取文件内容
             $file = $request->file('pic');
-
             //修改名字已时间戳生成文件命
             $name = 'Advert'.rand(1111,9999).time();
-
             //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
-
-            //移动图片到
-            // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
-
             //拼装文件名
-            $prind = '/admins/Uploads/'.$name.'.'.$suffix;
-
+            $prind = 'admins/Uploads/'.$name.'.'.$suffix;
             //上传到七牛云
-             $bool = $disk->put($prind,file_get_contents($file->getRealPath()));
+            $bool = $disk->put($prind,file_get_contents($file->getRealPath()));
+            //判断是否上传到七牛云
+            if (!$bool) {
+                //如果上传失败，回到广告添加页面提示用户
+                return redirect('/admin/advert/')->with('create','广告图片添加失败！');
 
+            }
         }
+            //获取上传的文件名
+            $res['pic'] = $prind;
             //获取广告用户
             $res['user'] = $request->input('user');
 
             //获取广告链接
             $res['link'] = $request->input('link');
 
-            //获取上传的文件名
-            $res['pic'] = $prind;
 
             //获取当前时间戳
             $res['time'] = time();
-
-            //判断是否上传到七牛云
-            if (!$bool) {
-                //如果上传失败，回到广告添加页面提示用户
-                 return redirect('/admin/advert/')->with('create','广告图片添加失败！');
-
-            }
-
             //添加至数据库
             $data = advert::insert($res);
 
@@ -146,7 +135,7 @@ class AdvertController extends Controller
      */
     public function edit($id)
     {
-      
+
         //查询数据库单条信息
         $res = advert::where('id',$id)->first();
 
@@ -167,29 +156,19 @@ class AdvertController extends Controller
 
         //判断是否有文件上传
         if ($request->hasFile('pic')) {
-
             //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
-
             //获取文件内容
             $file = $request->file('pic');
-
             //修改名字已时间戳生成文件命
             $name = 'Advert'.rand(1111,9999).time();
-
-            // //获取文件命的后缀
+            //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
 
-            //移动图片到
-            // $request->file('pic')->move('./admins/Uploads', $name.'.'.$suffix);
-
             //拼装图片信息
-            $print = '/admins/Uploads/'.$name.'.'.$suffix;
-
+            $print = 'admins/Uploads/'.$name.'.'.$suffix;
             //上传到七牛云
             $bool = $disk->put($print,file_get_contents($file->getRealPath()));
-        }
-
             //判断是否上传到七牛云
             if (!$bool) {
                 //如果不成功返回页面修改页面
@@ -198,12 +177,12 @@ class AdvertController extends Controller
 
             //去数据库获取图片信息
             $pic = advert::where('id',$id)->value('pic');
-
             //删除七牛云信息
             $disk->delete($pic);
-
             //获取图片信息
             $res['pic'] = $print;
+
+        }
 
             //获取当前时间戳
             $res['time'] = time();
@@ -216,7 +195,6 @@ class AdvertController extends Controller
 
             //获取状态
             $res['status'] = $request->status;
-
             //修改数据库里面的信息
             $data = advert::where('id',$id)->update($res);
 
@@ -230,8 +208,6 @@ class AdvertController extends Controller
                 return back();
             }
 
-
-
     }
 
     /**
@@ -242,30 +218,15 @@ class AdvertController extends Controller
      */
     public function destroy($id)
     {
-        //获取信息
+        //获取数据库图片信息
         $res = advert::where('id',$id)->value('pic');
-
         //初始化七牛云
         $disk = QiniuStorage::disk('qiniu');
-
-        // 删除图片
-        // $data = unlink('.'.$res->pic);
-    
+ 
         //删除七牛云信息
         $data = $disk->delete($res);
+        //删除数据库指定id的信息
+        $info = advert::where('id',$id)->delete();
 
-        if ($data) {
-
-            //删除数据库指定id的信息
-            $info = advert::where('id',$id)->delete();
-
-            //如果成功返回列表页面，失败回到当前页面
-            if ($info) {
-                return redirect('/admin/advert')->with('create','删除广告成功！');
-            } else {
-                return back();
-
-            }
-        }
     }
 }

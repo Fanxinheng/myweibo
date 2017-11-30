@@ -10,16 +10,15 @@
             #weibo #backg #jimg{margin-top: 10px;margin-left: 100px}
             #weibo #backg #nickname{text-align: center;margin-top: 15px}
             #weibo #lanmu { background-color: #fff; height:500px;}
-            #weibo #lanmu li { margin-top: 5px; font-size: 20px; }
+            #weibo #lanmu li { margin-top: 5px;font-size: 14px }
            
             
             #weibo #tiezi{width: 850px}
-            #weibo #tiezi #tiezi2{ background-color: #fff; margin-bottom: 10px; margin-left: 19px;} 
-            #weibo #tiezi #tiezi2 #tiezi3{background:#f2f2f5;margin-top:20px;margin-bottom: 20px}
-            #weibo #tiezi #tiezi2 #tieimg{float: left ;margin-top:12px;height:100px; }
-            #weibo #tiezi #tiezi2 #tiecon{float: left;margin-left: 20px}
-            #weibo #tiezi #tiezi2 #drop{float: right;margin-top: 20px}
-            #weibo #tiezi #tiezi2 button{float: right;margin-top: 30px;margin-right: 20px}
+
+            #weibo #tiezi #tiezi3{}
+            #weibo #tiezi #tieimg{float: left ;margin-top:12px; }
+            #weibo #tiezi #tiecon{float: left;margin-left: 10px}
+            #weibo #tiezi #drop{float: right;margin-top: 10px}
 
             #weibo #tiezi #atit{margin-bottom: 10px;background:#fff;margin-left: 19px;}
 

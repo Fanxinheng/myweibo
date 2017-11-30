@@ -28,6 +28,9 @@
 
         </div>
 @endif
+
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
         <span>
@@ -120,20 +123,17 @@
                                         <input type="submit" class="btn btn-default" value="修改">
                                     </a>
                                         <form action="/admin/link/{{$v->id}}" method="post" style="display:inline">
-                                            <button onclick="shan(this)" class="btn btn-default">删除</button>
-                                                {{csrf_field()}}
-                                                {{method_field('DELETE')}}
+
+                                                <button class="btn btn-default">删除</button>
+                                                    {{csrf_field()}}
+                                                    {{method_field('DELETE')}} 
                                         </form>
                                 </center>
-
-
                             </td>
                         </tr>
                     @endforeach
-
                 </tbody>
                 </table>
-
 
                 <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
 
@@ -149,10 +149,8 @@
 
 @section('js')
     <script type="text/javascript">
-        $('.mws-form-message').delay(3000).slideUp(1000);
-    function shan(id)
-    {
-        layer.msg('友情链接已添加')
-    } 
+            $('.mws-form-message').delay(3000).slideUp(1000);
     </script>
+
 @endsection
+

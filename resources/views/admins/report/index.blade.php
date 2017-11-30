@@ -40,16 +40,16 @@
                     <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">序号
                     </th>
 
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">被举报人ID
+                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">举报人ID
+                    </th>
+                    
+                     <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">举报理由
+                    </th>
+
+                     <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">被举报人ID
                     </th>
 
                     <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">被举报微博内容
-                    </th>
-
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">举报人ID
-                    </th>
-
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">举报理由
                     </th>
 
                     <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 316px;" aria-label="Platform(s): activate to sort column ascending">举报时间
@@ -61,22 +61,22 @@
             <tr class="odd" align="center">
 
                     <!-- 举报微博序号 -->
-                    <td class="  sorting_1">{{$v->id}}</td>
+                    <td class=" ">{{$v->id}}</td>
+                
+                @foreach($v->contents as $re)
 
-                    <!-- 被举报者 -->
+                    <!-- 举报人 -->
+                    <td class=" ">{{$re->user_info->nickName}}</td>
+
+                    <!-- 举报理由 -->
+                    <td class=" ">{{$v->content}}</td>
+                    
+                    <!-- 被举报人ID -->
                     <td class=" ">{{$v->user_info->nickName}}</td>
 
-                    @foreach($v->contents as $re)
-                    <!-- 微博ID -->
+                    <!-- 被举报微博内容 -->
                     <td class=" ">{{$re->content}}</td>
-
-                    <!-- 举报人ID -->
-                    <td class=" ">{{$re->user_info->nickName}}</td>
-                    @endforeach
-
-                    <!-- 举报内容 -->
-                    <td class=" ">{{$v->content}}</td>
-
+             @endforeach        
                     <!-- 时间 -->
                     <td class=" ">{{$v->time}}</td>
             </tr>
@@ -84,7 +84,7 @@
             </tbody>
         </table>
         <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
-        {!! $res->render() !!}
+            {!! $res->render() !!} 
         </div>
     </div>
     </div>
@@ -98,4 +98,4 @@
         $('.mws-form-message').delay(3000).slideUp(1000);
 
     </script>
-@endsection
+@endsection          

@@ -21,8 +21,7 @@ class NoticeController extends Controller
     {
         //查询数据库notice表所有内容
         $res = notice::paginate(5);
-        // $cont['content'] = notice::where('id',$res)->first('content');
-        // $res = substr($cont,0,10);
+         
         //返回到index页面视图中
         return view('admins/notice/index', ['res' => $res]);
     }

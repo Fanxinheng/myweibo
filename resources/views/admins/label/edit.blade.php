@@ -20,16 +20,12 @@
         @endif
             <form action="/admin/label/{{$res->id}} " class="mws-form" method="post" enctype="multipart/form-data">
                 <div class="mws-form-inline">
-
-
                     <div class="mws-form-row">
                         <label class="mws-form-label">标签名</label>
                         <div class="mws-form-item">
                             <input type="text" class="small" name="lcontent" value="{{ $res->lcontent}} ">
                         </div>
                     </div>
-
-
                 </div>
                 <div class="mws-button-row">
 

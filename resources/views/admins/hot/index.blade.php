@@ -74,7 +74,6 @@
                     <td class=" " ">
                         <a href="/admin/hot/{{$v->cid}}"><button class="btn btn-default">查看微博</button></a>
                     </td>
-
                 </tr>
                 @endforeach
             </tbody>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\user_info;
 use App\Http\Model\contents;
 use App\Http\Model\user;
+use App\Http\Model\message;
 
 use session;
 
@@ -24,7 +25,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //获取用户详细信息
-        $res = user::join('user_info','user_info.uid','=','user.id')->where('nickName','like','%'.$request->input('search').'%')->paginate(2);
+
+        $res = user::join('user_info','user_info.uid','=','user.id')->where('nickName','like','%'.$request->input('search').'%')->paginate(10);
 
         return view('admins/user/index',['res'=>$res,'request'=>$request]);
         
@@ -65,8 +67,8 @@ class UserController extends Controller
         $nickName = user_info::where('uid',$id)->value('nickName');
         
         //获取用户微博信息
-        $res = contents::where('uid','=',$id)->paginate(2);
-  
+        $res = contents::where('uid','=',$id)->paginate(10);
+ 
         return view('admins/user/show',['nickName'=>$nickName,'res'=>$res]);
     }
 
@@ -94,12 +96,16 @@ class UserController extends Controller
         $date = user::where('id',$id)->value('status');
 
         if($date){
-            $update = user::where('id',$id)->update(['status'=>0]);
-        } else {
-            $update = user::where('id',$id)->update(['status'=>1]);
-        }
 
-        return redirect('admin/index');
+            //更新数据库
+            $update = user::where('id',$id)->update(['status'=>0]);
+            return 0;
+        } else {
+
+            //更新数据库
+            $update = user::where('id',$id)->update(['status'=>1]);
+            return 1;
+        }
     }
 
     /**

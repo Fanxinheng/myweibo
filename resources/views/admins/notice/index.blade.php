@@ -63,12 +63,7 @@
                 <a href="/admin/notice/{{$v->id}}/edit">
                 <button class="btn btn-default">修改公告</button>
                 </a>
-
-                <!-- <form action="/admin/notice/{{$v->id}}" method='post'>    -->
                 <button  onclick="shan({{$v->id}})" class="btn btn-default">删除公告</button>
-                <!-- {{csrf_field()}} -->
-                <!-- {{method_field('DELETE')}} -->
-                <!-- </form> -->
                 </td>
             </tr>
              @endforeach

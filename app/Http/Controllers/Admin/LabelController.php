@@ -19,7 +19,7 @@ class LabelController extends Controller
     {
         //获取数据库信息
         $res = label::get();
-
+ 
         //把值传到列表页面
         return view('/admins/label/index',['res'=>$res]);
     }
@@ -50,9 +50,8 @@ class LabelController extends Controller
             'lcontent.required' => '标签名不能为空',
         ]);
 
-        //打印添加页面获取到的信息
         $res = $request->except('_token');
-
+ 
         $data = Label::insert($res);
         //判断如果添加成功前往列表页，如果失败回到当前页
         if ($data) {
@@ -124,18 +123,7 @@ class LabelController extends Controller
      */
     public function destroy($id)
     {
-        //获取要删除的id
         //执行删除方法
-        $data = label::where('id',$id)->delete();
-
-        //判断如果成功回到列表页面,如果失败返回当前页面
-        if ($data) {
-
-            return redirect('/admin/label/')->with('create','删除标签成功');
-
-        }else{
-            
-            return back();
-        }
+        label::where('id',$id)->delete();
     }
 }
