@@ -32,7 +32,7 @@ class OtherAttentionController extends Controller
         $rev = user_info::where('uid','=',$uid)->first();
 
         //获取关注人的信息
-        $res = user_attention::join('user_info','user_attention.gid','=','user_info.uid')->where('user_attention.uid',$uid)->get();
+        $res = user_attention::join('user_info','user_attention.gid','=','user_info.uid')->where('user_attention.uid',$uid)->orderBy('time','desc')->paginate(5);
 
          //获取登录用户的信息
         $id = Session('uid');
@@ -125,9 +125,7 @@ class OtherAttentionController extends Controller
 
         $res = user_attention::where(['gid'=>$id,'uid'=>$uid])->delete();
 
-        // if($res){
-            return redirect('/home/other/attention/');
-        // }
+        return 1;
 
     }
 }

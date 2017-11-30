@@ -18,8 +18,10 @@ class LinkController extends Controller
     public function index(Request $request)
     {
 
-        //对数据库进行模糊查询
-        $res = link::where('user','like','%'.$request->input('search').'%')->orderBy('user','asc')->paginate($request->input('paging',1));
+
+        //对数据库进行倒叙排列模糊查询收缩n条数据
+        $res = link::where('user','like','%'.$request->input('search').'%')->orderBy('user','asc')->paginate($request->input('paging'));
+
 
         //将数据传递到页面中
         return view('admins/link/index',['res'=>$res,'request'=>$request]);
@@ -48,7 +50,6 @@ class LinkController extends Controller
 
          //表单验证
             $this->validate($request, [
-                    //不能为空
             'user' => 'required',
             'link' => 'required',
 
@@ -59,18 +60,12 @@ class LinkController extends Controller
         ]);
          //去除不需要的参数
             $res = $request->except('_token');
-
             //获取当前时间戳
             $res['time'] = time();
-
+            //获取友情链接的状态
             $res['status'] = "0";
-
-            //打印form传过来的参数
-            // var_dump($res);
-
             //添加至数据库
             $data = link::insert($res);
-            // var_dump($data);
             //判断如果成功去列表页，如果失败回到当前页面
             if($data){
                 return redirect('/admin/link/')->with('create','添加链接成功！');
@@ -99,11 +94,8 @@ class LinkController extends Controller
      */
     public function edit($id)
     {
-        //获取修改页面的id
-        // var_dump($id);
         //链接友情链接数据库，获取对应id的链接
         $res = link::where('id',$id)->first();
-        // var_dump($res);
         //进信息传递到修改页面
         return view('/admins/link/edit',['res'=>$res]);
 
@@ -121,10 +113,8 @@ class LinkController extends Controller
 
         //闪存信息，去除不要的参数
         $res = $request->except('_token','_method');
-
+        //获取修改时间戳
         $res['time'] = time();
-
-        // dd($res);
 
          //数据库获取对应id的参数执行更新
         $date = link::where('id',$id)->update($res);
@@ -148,7 +138,8 @@ class LinkController extends Controller
     {
         // 获取id对数据库进行删除
         $date = link::where('id',$id)->delete();
-        
+
+
         //判断如果成功去列表页，如果失败回到当前页面
         if ($date) {
             return redirect('/admin/link')->with('create','删除链接成功！');

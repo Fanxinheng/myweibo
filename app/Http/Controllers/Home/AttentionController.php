@@ -32,7 +32,7 @@ class AttentionController extends Controller
         $rev = user_info::where('uid','=',$uid)->first();
 
         //根据id查询关注的所有人
-        $res = user_attention::join('user_info','user_attention.gid','=','user_info.uid')->where('user_attention.uid',$uid)->get();
+        $res = user_attention::join('user_info','user_attention.gid','=','user_info.uid')->where('user_attention.uid',$uid)->orderBy('time','desc')->paginate(5);
 
         //获取微博评论的消息
         $replay = Session('replay');
@@ -124,7 +124,7 @@ class AttentionController extends Controller
         $res = user_attention::where(['gid'=>$id,'uid'=>$uid])->delete();
 
         //跳转到控制器中
-        return redirect('/home/attention');
+        return 1;
 
     }
 }

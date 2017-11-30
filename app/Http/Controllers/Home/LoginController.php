@@ -266,31 +266,53 @@ class LoginController extends Controller
     {   
 
       //获取form中的手机号
-      $req = $request->input('phone');
-
-      //在user表中根据手机号获取其ID
-      $res = user::where('phone',$req)->value('id');
-
-      //在user_info表中根据user表中的id查出其uid
-      $uid = user_info::where('uid','=',$res)->value('uid');
+      $phone = $request->input('phone');
       
-      
-      //判断uid是否为空(因为上面传过来的是null)
-      if($uid==null){
+      //在User表中根据手机号获取其id 
+      $id = user::where('phone',$phone)->value('id');
 
-          Session(['uid'=>$res]);
+      if($id){
 
-          return redirect('/home/details');
-         
+        //获取form中的密码
+        $pass = $request->input('password');
+
+        //根据手机号查出其密码
+        $password = user::where('phone',$phone)->value('password');
+
+        //判断密码是否正确
+        if(Hash::check($pass,$password)){
+
+          //在user_info表中根据user表中的id查出其uid
+          $uid = user_info::where('uid',$id)->value('uid');
+          
+          
+          //判断uid是否为空(因为上面传过来的是null)
+          if($uid==null){
+
+              Session(['uid'=>$id]);
+
+              return redirect('/home/details');
+             
+          }else{
+
+              Session(['uid'=>$id]);
+
+              return redirect('/home/login');
+
+          }
+
+        }else{
+
+          $request->flashOnly('phone',$phone);
+          echo "<script>alert('手机号或密码不正确！');window.location.href='/home/admin'</script>";
+          
+        }
+
       }else{
-
-          Session(['uid'=>$res]);
-
-          return redirect('/home/login');
-
+           $request->flashOnly('phone',$phone);
+          echo "<script>alert('手机号或密码不正确！');window.location.href='/home/admin'</script>";
       }
 
-    }
-    
+}
 
 }

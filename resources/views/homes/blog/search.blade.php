@@ -10,8 +10,7 @@
         <meta name="csrf_token" content="{{ csrf_token() }}"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
-        <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
+        <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
@@ -21,7 +20,8 @@
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
-            我的首页 微博-随时随地发现新鲜事
+            {{$config[0]->name}}
+            
         </title>
         <link media="all" href="/homes/css/login.css" type="text/css" rel="stylesheet">
     </head>
@@ -200,15 +200,17 @@
                                                    </em>
                                                    表情
                                                </a>
-                                                <a class="S_txt1" title="图片" style="position: relative;">
+                                                <a class="S_txt1" title="图片" style="position: relative;" onclick="pic_upload()">
                                                     <em class="W_ficon ficon_image" style="font-size:16px">
                                                         <span class="glyphicon glyphicon-picture" aria-hidden="true" ></span>
                                                     </em>
                                                     图片
                                                     <div style="position: absolute; left: 0px; top: 0px; display: block; overflow: hidden; background-color: rgb(0, 0, 0); opacity: 0; width: 49px; height: 24px;">
-                                                            <input  name="image" style="cursor: pointer; width: 1000px; height: 1000px; position: absolute; bottom: 0px; right: 0px; font-size: 200px;"
-                                                             multiple="multiple" type="file">
-                                                    </div>  
+
+                                                        <input  name="image"  type="hidden" id="pic22">
+
+                                                    </div>
+
                                                 </a>
                                                 
                                                 <span>
@@ -742,6 +744,21 @@
                         }
                     });
                 }
+
+
+
+            //多图上传
+            function pic_upload()
+            {
+                layer.open({
+                  type: 2,
+                  title: '上传图片到MYWEIBO',
+                  shadeClose: true,
+                  shade: 0.8,
+                  area: ['50%', '350px'],
+                  content: '/home/pics/' //iframe的url
+                }); 
+            }
 
 
 

@@ -8,7 +8,7 @@
         <meta name="renderer" content="webkit">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta name="csrf_token" content="{{ csrf_token() }}"/>
-        <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="">
         <link title="MYWEIBO" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
         <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
-            我的首页 微博-随时随地发现新鲜事
+            {{$config[0]->name}}
         </title>
         <link media="all" href="/homes/css/login.css" type="text/css" rel="stylesheet">
     </head>
@@ -744,7 +744,7 @@
                   title: '上传图片到MYWEIBO',
                   shadeClose: true,
                   shade: 0.8,
-                  area: ['50%', '300px'],
+                  area: ['50%', '350px'],
                   content: '/home/pics/' //iframe的url
                 }); 
             }

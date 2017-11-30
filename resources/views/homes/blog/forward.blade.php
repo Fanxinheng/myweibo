@@ -9,8 +9,7 @@
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
-        <link title="微博" href="https://weibo.com/aj/static/opensearch.xml" type="application/opensearchdescription+xml" rel="search">
+        <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
@@ -20,7 +19,8 @@
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
-            我的首页 微博-随时随地发现新鲜事
+            {{$config[0]->name}}
+            
         </title>
         <link media="all" href="/homes/css/login.css" type="text/css" rel="stylesheet">
     </head>
@@ -598,6 +598,20 @@
                         }
                     });
                 }
+
+
+            //多图上传
+            function pic_upload()
+            {
+                layer.open({
+                  type: 2,
+                  title: '上传图片到MYWEIBO',
+                  shadeClose: true,
+                  shade: 0.8,
+                  area: ['50%', '300px'],
+                  content: '/home/pics/' //iframe的url
+                }); 
+            }
 
             </script>
         </body>

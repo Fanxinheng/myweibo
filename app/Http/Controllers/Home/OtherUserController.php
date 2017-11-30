@@ -53,7 +53,9 @@ class OtherUserController extends Controller
         $rev = user_info::where('uid','=',$id)->first();
 
         //查询用户的帖子和评论
-        $res = contents::where('uid',$id)->with('replay.user_info')->get();
+        $res = contents::where('uid',$id)->with(['replay'=>function ($query){
+            $query->orderBy('time','desc');
+        }],'replay.user_info')->orderBy('time','desc')->paginate(5);
 
         //跳转页面
         return view('homes/otherUser/index',['res'=>$res,'rev'=>$rev,'sid'=>$sid,'message'=>$message,'re'=>$re]);
@@ -63,7 +65,7 @@ class OtherUserController extends Controller
     public function photo($id)
     {
         //查询所有照片
-        $res = contents::where('uid',$id)->get();
+        $res = contents::select('time','image')->whereNotNull('image')->where('uid',$id)->orderBy('time','desc')->paginate(5);
 
         //用户的信息
         $rev = user_info::where('uid',$id)->first();
@@ -288,6 +290,14 @@ class OtherUserController extends Controller
         //获取点赞时间
         $res1['ptime'] = time();
 
+        //判断是否为同一用户点赞同一微博
+        $bool = point::where('pid',$res1['pid'])->where('tid',$res1['tid'])->value('id');
+
+        if($bool){
+            
+            return 0;
+        }
+
         //将数组存入数据库中
         point::insert($res1);
 
@@ -313,7 +323,10 @@ class OtherUserController extends Controller
         //获取关注人的id
         $res['gid'] = $id;
 
-        //
+        //获取关注时间
+        $res['time'] = time();
+
+        //判断数据库中是否村子此关注薪资
         $re = user_attention::where('uid',$res['uid'])->where('gid',$res['gid'])->count();
 
         if($re>0){

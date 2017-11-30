@@ -54,7 +54,9 @@ class UserController extends Controller
         $rev = user_info::where('uid','=',$id)->first();
 
         //查询用户的帖子和评论
-        $res = contents::where('uid',$id)->with('replay.user_info')->paginate(5);
+        $res = contents::where('uid',$id)->with(['replay'=>function ($query){
+            $query->orderBy('time','desc');
+        }],'replay.user_info')->orderBy('time','desc')->paginate(5);
 
         //跳转页面
         return view('homes.user.index',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
@@ -67,7 +69,7 @@ class UserController extends Controller
         $uid = Session('uid');
 
         //查询用户的帖子所有信息
-        $res = contents::where('uid',$uid)->get();
+        $res = contents::select('time','image')->whereNotNull('image')->where('uid',$uid)->orderBy('time','desc')->paginate(5);
 
         //查询用户的所有的信息
         $rev = user_info::where('uid',$uid)->first();
@@ -89,7 +91,7 @@ class UserController extends Controller
 
     }
 
-    //微博的赞赞页面
+    //微博的点赞页面
     public function point()
     {
         //获取缓存的用户id
@@ -99,7 +101,7 @@ class UserController extends Controller
         $status['status'] = 1; 
 
         //将所有的消息设为已读
-        DB::table('point')->where('uid',$uid)->update($status);
+        point::where('uid',$uid)->update($status);
 
         //修改缓存的值
         $point = Session(['point'=>'0']);
@@ -117,7 +119,8 @@ class UserController extends Controller
         $rev = user_info::where('uid',$uid)->first();
 
         //获取点赞表和帖子表的信息
-        $res = point::where('uid',$uid)->with('user_info','content')->get();
+        $res = point::where('uid',$uid)->with('user_info','content.user_info')->orderBy('ptime','desc')->paginate(5);
+
 
         //页面跳转
         return view('homes/user/point',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
@@ -152,7 +155,7 @@ class UserController extends Controller
         $message = Session('message');
 
         //根据用户uid获取帖子的内容回复及个人信息       
-        $res = replay::where(['uid'=>$uid])->with(['content','user_info'])->get();
+        $res = replay::where(['uid'=>$uid])->with(['content','user_info'])->orderBy('time','desc')->paginate(5);
 
         //页面跳转
         return view('homes/user/replay',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
@@ -187,7 +190,7 @@ class UserController extends Controller
         $message = Session('message');
 
         //查询信息
-        $res = forward::where(['uid'=>$uid])->with(['contents','user_info'])->get();
+        $res = forward::where(['uid'=>$uid])->with(['contents','user_info'])->orderBy('time','desc')->paginate(5);
 
         //页面跳转
         return view('homes/user/forward',['res'=>$res,'rev'=>$rev,'message'=>$message,'point'=>$point,'replay'=>$replay,'forward'=>$forward]);
@@ -214,7 +217,7 @@ class UserController extends Controller
         $point = Session('point');
 
         //获取系统消息
-        $res = message::where('uid',$uid)->get();
+        $res = message::where('uid',$uid)->orderBy('time','desc')->paginate(5);
 
         //获取系统消息的个数
         $num = $res->count();
@@ -317,7 +320,7 @@ class UserController extends Controller
     }
 
    
-    //评论微博
+    //评论微博功能
     public function type()
     {
         
@@ -408,6 +411,14 @@ class UserController extends Controller
 
         //获取帖子id
         $res1['tid'] = $_GET['cid'];
+
+        //判断是否为同一用户点赞同一微博
+        $bool = point::where('pid',$res1['pid'])->where('tid',$res1['tid'])->value('id');
+
+        if($bool){
+            
+            return 0;
+        }
         
         //获取发帖人的id
         $res1['uid'] = contents::where('cid',$_GET['cid'])->value('uid');
@@ -426,9 +437,9 @@ class UserController extends Controller
 
         //修改表中的字段
         $res = contents::where('cid',$_GET['cid'])->update($num);
-
+        
         //获取帖子里的未读点赞
-        $num['point'] = point::where('tid',$_GET['cid'])->where('status',0)->count();
+        $num['point'] = point::where('uid',$res1['pid'])->where('status',0)->count();
 
         return $num;
 

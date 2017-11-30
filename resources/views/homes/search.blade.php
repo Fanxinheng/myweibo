@@ -7,10 +7,9 @@
         <meta name="csrf_token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
-        <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！" name="description">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
@@ -21,7 +20,8 @@
         <script type="text/javascript" src="/homes/js/validate.js"></script>
         <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
-            微博-随时随地发现新鲜事
+            {{$config[0]->name}}
+            
         </title>
     </head>
     

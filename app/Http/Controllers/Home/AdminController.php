@@ -30,8 +30,6 @@ class AdminController extends Controller
     }
 
 
-    //获取表单传过来的值并添加到user表中
-
     //加载热门微博
     public function hot ()
     {
@@ -82,10 +80,6 @@ class AdminController extends Controller
 
         //查询公告内容
         $index = notice::where('id',$_GET['id'])->first();
-
-        //判断用户是否登陆
-        $bool = Session('uid');
-
 
         return $index;
 

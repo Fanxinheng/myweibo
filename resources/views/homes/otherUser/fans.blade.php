@@ -3,33 +3,37 @@
     
     <head>
         <meta charset="UTF-8">
-        <title>
-           
-        </title>
+        <title>{{$config[0]->name}}</title>
+
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js">
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js">
         </script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js">
         </script>
-
+        <script type="text/javascript" src="/homes/layer/layer.js">
+        </script>
         <link rel="stylesheet" href="/homes/css/user.fans.css">
     </head>
-   <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
+   <body style="background:#F3F4F9 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
       
             <div>
                 <nav class="navbar navbar-fixed-top" id = "navbar">
                     <div class="container">
                         <div class="navbar-header" id="navbar-header1" >
-                            <img src="/homes/images/wb_logo.png" alt="">
+                            <a href="/home/login">
+                            <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
+                            </a>
                         </div>
                         <div class="navbar-header" id="navbar-header2">
-                            <form class="navbar-form navbar-right">
+                            <form action="/home/search" class="navbar-form navbar-right" method="get">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="搜索框" style="">
+                                    <input type="text" name="search" class="form-control" placeholder="精彩生活，微博搜索" >
                                 </div>
-                                <button class="btn btn-success" type="submit">
-                                   搜索
+
+                                {{csrf_field()}}
+                                <button class="btn btn-warning" type="submit">
+                                    搜索
                                 </button>
                             </form>
                         </div>
@@ -38,29 +42,26 @@
                             <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                                 <span class="glyphicon glyphicon-home" aria-hidden="true">
                                 </span>
-                                <a href="/home/message">
-                                    系统消息
-                                    @if($message>0)
-                                    <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px  ">
-                                        {{$message}}
-                                    </div>
-                                    @else
-                                    <div></div>
-                                    @endif
+                                <a href="/home/details/quit"  title="退出登录" style="text-decoration:none;">
+                                退出
                                 </a>
+                            </div>
+                            <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
+                                <li class="dropdown" style="list-style-type:none">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration:none;">设置<span class="caret"></span></a>
+                                  <ul class="dropdown-menu">
+                                    <li><a href="/home/user">个人中心</a></li>
+                                    <li><a href="/home/details/edit">个人信息</a></li>
+                                    <li><a href="/home/changepass">修改密码</a></li>
+                                    <li><a href="/home/message">系统消息</a></li>
+                                  </ul>
+                                </li>
                             </div>
                             <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                                 <span class="glyphicon glyphicon-cog" aria-hidden="true">
                                 </span>
-                                <a href="/home/user">
-                                 {{$rev->nickName}} 
-                                </a>
-                            </div>
-                            <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
-                                <span class="glyphicon glyphicon-cog" aria-hidden="true">
-                                </span>
-                                <a href="/home/admin">
-                                    首页
+                                <a href="/home/login" style="text-decoration:none;">
+                                首页
                                 </a>
                             </div>
                     </div>
@@ -75,33 +76,32 @@
                 <div class="container" >
                     <!-- 头像 及北京-->
                     <div class="container" >
-                        <div class="jumbotron" id="backg">
+                        <div class="jumbotron" id="backg" style="background:url('/homes/images/2016.jpg');background-repeat:no-repeat">
+
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
                                 <!-- 头像 -->
                                 <div id="jimg" >
                                    
-                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
+                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75" style="width:100px;" id="img" class="img-circle">
                                 </div>
-                                <div>
-                                    <div id="nickname">
+                                <div id="nickname" style="font-size: 18px;">
                                         {{$rev->nickName}}
                                         @if($re == 1)
-                                        <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut">取消关注</button>
+                                        <span id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" style="cursor: pointer;">取消关注</span>
                                         @else
-                                        <button id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" class="btn-defalut">关注</button>
+                                        <span id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" class="btn-defalut" style="cursor: pointer;>关注</span>
                                         @endif
                                     </div>
-                                    <div id="nickname">
+                                    <div id="nickname" style="font-size: 15px;">
                                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
                                         @if($rev->sex=='w')
-                                        <em>女</em>
+                                        女
                                         @else
-                                        <em>男</em>
+                                        男
                                         @endif
-                                    </div>   
-                                </div>
+                                    </div>
                             </div>
                             <div class="col-md-4">
                             </div>
@@ -149,28 +149,27 @@
                             <div class="col-lg-12" style="margin-left: 12px;background-color: #fff;margin-bottom: 10px;width: 830px; ">
                                 <h3>粉丝</h3>
                             </div> 
-                            @if($res ->isEmpty())
-                                <div style="margin-top: 100px;line-height: 40px;height: 40px;background-color: #fff;width
-                                :830px;margin-left: 14px">&nbsp;他还没有粉丝哟~~~
-                                </div>
-                                @else
+                            
 
                             <div class="col-lg-12" style="background-color: #fff;margin-left: 12px;width: 830px;padding-bottom: 10px " >
-                                
+                                @if($res ->isEmpty())
+                                <div style="margin-top: 10px;line-height: 40px;height: 20px;background-color: #fff;width
+                                :800px;margin-left: 14px">他还没有粉丝哟~~~ </div>
+                               
+                                @else
                                @foreach($res as $k=>$v)
 
                                 <div class="col-lg-4" id="tiezi3" style="float: left;width: 250px;margin-left: 5px;background:#DEDEE5;margin-top: 10px;background-color: #F2F2F5;height: 65px;">
                                     <!-- 头像 -->
-                                    <div class="col-log-2" style="margin-top:10px;float: left; ">
-=
-                                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/35/h/35/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"  id="img" class="img-circle">
+                                    <div class="col-log-2" style="margin-top:10px;float: left;">
+
+                                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/35/h/35/q/75"  id="img" class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
                                     <div class="col-log-8" style="margin-top: 15px;margin-left: 10px;float: left;" >
                                         
                                             <a href="/home/other/user/{{$v->uid}}">{{$v->nickName}}</a><br>   
-                                        
-                                        
+                                                                               
                                             <div style="float: left;font-size: 12px;color: #808080;">
                                                 年龄:{{$v->age}}&nbsp;|&nbsp;性别:
 
@@ -191,10 +190,11 @@
                                     </div>
                                 </div>
                                 @endforeach
-                             
+                             @endif
                             <!-- 微博遍历结束 -->
                             </div> 
-                              @endif
+                            <div style="float: right">{!! $res->render() !!}</div>
+                              
                         <!-- 微博结束 -->
                         </div>
                     </div>

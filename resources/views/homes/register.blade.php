@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="微博注册" name="description">
-        <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
@@ -30,15 +30,16 @@
 		.btn {height:40px}
 
 	</style>
-    
-    <body style="background: #9ECCEA">
+    <!-- 9ECCEA -->
+    <body style="background: #F3F4F9">
     	<div id="a"></div>
 
     	<div class="container">
     		<div class="row">
-	       		<div class="col-md-12" style="background: url('/homes/images/body_bg.jpg');">
+	       		<div class="col-md-12" style="background: url('/homes/images/2016.jpg');">
 	        		<div class="W_nologin_logo_big">
-	        			<img src="/homes/images/wb_logo-x2.png" alt="">
+	        			<!-- <img src="/homes/images/wb_logo-x2.png" alt=""> -->
+	        			<h1 style="color:white;font-style:oblique"><b>MYWEB</b></h1>
 	        		</div>
 	        	</div>
 	        	<div class="col-md-12" style="height:500px;background:white;border-radius:10px">
@@ -53,21 +54,21 @@
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>手机号:</label>
 								    <div class="col-sm-4" style="width: 800px;height:40px">
-								      <input type="text" class="form-control"  placeholder="请输入手机号" name="phone" id="phone" style="width: 345px;float: left" value="">
+								      <input type="text" class="form-control"  placeholder="请输入手机号" name="phone" id="phone" style="width: 345px;float: left" value="" required maxlength="11">
 								      <span id="spa" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>密码:</label>
 								    <div class="col-sm-4" style="width: 800px;height:40px">
-								      <input type="password" class="form-control" placeholder="请设置密码" name="password" id="password" style="width: 345px;float: left" value="">
+								      <input type="password" class="form-control" placeholder="请设置密码" name="password" id="password" style="width: 345px;float: left" value="" required maxlength="12">
 								      <span id="spa1" style="float:left;margin-left: 10px;margin-top: 10px;color:#3EA0E1;font-size:18px">
 								    </div>
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>确认密码:</label>
 								    <div class="col-sm-4" style="width: 600px;height:40px">
-								      <input type="password" class="form-control" placeholder="再输一遍密码" name="surepass" id="surepass" style="width: 345px;float: left">
+								      <input type="password" class="form-control" placeholder="再输一遍密码" name="surepass" id="surepass" style="width: 345px;float: left" required maxlength="12">
 								      <span id="spa2" style="float:left;margin-left: 10px;margin-top: 10px;color:#3EA0E1;font-size:18px">
 								    </div>
 								  </div>
@@ -75,11 +76,11 @@
 								    <label for="inputcode3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>激活码:</label>
 									
 									<div class="col-sm-offset-2 col-sm-2" style="margin-left:2px">
-								      <button type="submit" class="btn btn-default" id="btn1" style="font-size:16px">免费获取短信激活码</button>
+								      <input  type="submit" class="btn btn-default" id="btn1" style="font-size:16px" value="免费获取短信激活码">
 								    </div>
 
 								    <div class="col-sm-2" style="width: 600px;height:40px">
-								      <input type="text" class="form-control"  name="code" placeholder="输入验证码" name="code" id="code" style="width: 156px;float: left">
+								      <input type="text" class="form-control"  name="code" placeholder="输入验证码" name="code" id="code" style="width: 156px;float: left" required maxlength="6"> 
 								      <span id="spa3" style="float:left;margin-left: 10px;margin-top: 10px;color:#3EA0E1;font-size:18px">
 								    </div>
 								    
@@ -87,7 +88,7 @@
 								  <div class="form-group" style="margin-top:30px">
 								    <div class="col-sm-offset-2 col-sm-10">
 								    	{{csrf_field()}}
-								      <input type="submit" value="立即注册" style="background:#FFA00A; color:white;width:200px;height:40px;border-radius:5px;font-size:19px">
+								      <input type="submit" value="立即注册" style="background:#FFA00A; color:white;width:200px;height:40px;border-radius:5px;font-size:19px" id="zc">
 								      已有账号,
 								      <a href="/home/admin">直接登录>></a>
 								    </div>
@@ -99,16 +100,18 @@
 
 					<!-- 底部 -->
 					<div class="col-md-12" style="height:50px;margin-top: 30px;text-align: center;">
-						<div class="left_link" style="width:550px;float:left;">
-							<img src="/homes/images/favicon.ico" alt="">
-							<em class="company_name">北京微梦创科网络技术有限公司</em>
-					        <a href="//weibo.com/aj/static/jww.html">京网文[2011]0398-130号</a>
-					        <a href="http://www.miibeian.gov.cn">京ICP备12002058号</a>
+						<div class="left_link" style="width:500px;float:left;">
+                            <span>友情连接：</span>
+							@foreach($link as $k=>$v)
+                            @if($v->status==0)
+                                <a href="//{{$v->link}}" target="_blank" class="S_txt2" style="text-decoration:none;">{{$v->user}}</a>
+                            @endif
+                        @endforeach
 						</div>
 
+						<div class="copy" style="width:200px;float:right;margin-right: 100px">
+                        <a href="#" class="S_txt2" style="text-decoration:none;">版权：{{$config[0]->bank}}    出品</a>
 
-						<div class="copy" style="width:400px;float:right;">
-							<span>Copyright &copy; 2009-2017 WEIBO</span
 						</div>
 					</div>
 	        	</div>
@@ -149,10 +152,7 @@
      	var spa2 = document.getElementById('spa2');
      	var spa3 = document.getElementById('spa3');
      	var code = document.getElementById('code');
-     	var PH = 0;
-     	var PA = 0;
-     	var SP = 0;
-     	var CO = 0;
+     	
 
      	//手机号获取焦点事件
      	phones.onfocus = function(){
@@ -176,13 +176,7 @@
 
 			// console.log(check);
 			//判断手机号是否为空,在判断正则
-			if(phone==""){
-
-				spa.innerHTML= '手机号不能为空!';
-				spa.style.color='red';
-				PH = 0;
-
-			}else if(check){
+			if(check){
 
 				//ajax传过去链接数据库检验手机号
 				$.get('/home/register/phone',{phone:phone},function(data){
@@ -191,11 +185,11 @@
 
 						spa.innerHTML= '手机号已注册,请直接去登陆!';
 						spa.style.color='red';
-						PH = 0;
+						$('#btn1').attr('disabled',true);
 					}else{
 						spa.innerHTML= '√';
 						spa.style.color='green';
-						PH = 1;
+						$('#btn1').attr('disabled',false);
 					}
 					
 				});
@@ -203,7 +197,7 @@
 
 				spa.innerHTML= '手机号格式不正确!';
 				spa.style.color='red';
-				PH = 0;
+				$('#btn1').attr('disabled',true);
 			}
 
 			
@@ -214,7 +208,7 @@
 		password.onfocus = function(){
 
 			//添加提示信息
-     		spa1.innerHTML= '请输入6-16位数字,字母或常用符号!';
+     		spa1.innerHTML= '请输入6-12位数字,字母或常用符号!';
 
      	}
 
@@ -225,7 +219,7 @@
 			pass = this.value;
 
 			//写正则
-			var reg = /^\S{6,16}$/;
+			var reg = /^\S{6,12}$/;
 
 			// console.log(pv);
 			//检测
@@ -236,18 +230,22 @@
 
 				spa1.innerHTML= '密码不能为空!';
 				spa1.style.color='red';
-				PA = 0; 
-
+				$('#btn1').attr('disabled',true);
+				$('#zc').attr('disabled',true);
 			}else if(check){
 
 				spa1.innerHTML= '√';
 				spa1.style.color='green';
-				PA = 1;
+				$('#btn1').attr('disabled',false);
+				$('#zc').attr('disabled',false);
+
 			} else {
+				
 
 				spa1.innerHTML= '密码格式不正确!';
 				spa1.style.color='red';
-				PA = 0;
+				$('#btn1').attr('disabled',true);
+				$('#zc').attr('disabled',true);
 			}
 		};
 
@@ -268,17 +266,20 @@
 
 				spa2.innerHTML='密码不能为空';
 				spa2.style.color='red';
-				SP = 0;
+				$('#btn1').attr('disabled',true);
+				$('#zc').attr('disabled',true);
 			}else if(surepass==pass){
 
 				spa2.innerHTML= '√';
 				spa2.style.color='green';
-				SP = 1;
+				$('#btn1').attr('disabled',false);
+				$('#zc').attr('disabled',false);
 			} else {
 
 				spa2.innerHTML= '两次密码不一致!';
 				spa2.style.color='red';
-				SP = 0;
+				$('#btn1').attr('disabled',true);
+				$('#zc').attr('disabled',true);
 			}
 		};
 
@@ -306,28 +307,21 @@
 
      				spa3.innerHTML= '验证码不能为空!';
 					spa3.style.color='red';
-					CO = 0;
+					$('#zc').attr('disabled',true);
      			}else if(code==data){
      				spa3.innerHTML= '√';
 					spa3.style.color='green';
-					// alert('122345');
-					CO = 1;
+					$('#zc').attr('disabled',false);
      			}else{
      				// alert('adsd');
      				spa3.innerHTML= '验证码不正确!';
 					spa3.style.color='red';
-					CO = 0;
+					$('#zc').attr('disabled',true);
+
      			}
      		});
-			
-		};
 
-		//表单验证都正确才能提交的方法
-		function mysubmit(){
-			if(PH==0&&PA==0&&SP==0&&CO==0){ //这里判断
-				return false;
-				}
-			} 
+     	};
 
 	 </script>
     </body>

@@ -82,11 +82,11 @@
                                 商户名
                             </th>
                             <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                            rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">
+                            rowspan="1" colspan="1" style="width: 280px;" aria-label="Browser: activate to sort column ascending">
                                 链接地址
                             </th>
                             <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                            rowspan="1" colspan="1" style="width: 300px;" aria-label="Platform(s): activate to sort column ascending">
+                            rowspan="1" colspan="1" style="width: 200px;" aria-label="Platform(s): activate to sort column ascending">
                                 图片
                             </th>
                             <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -94,11 +94,11 @@
                                 广告添加时间
                             </th>
                             <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                            rowspan="1" colspan="1" style="width: 200px;" aria-label="Engine version: activate to sort column ascending">
+                            rowspan="1" colspan="1" style="width: 150px;" aria-label="Engine version: activate to sort column ascending">
                                 广告状态
                             </th>
                             <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                            rowspan="1" colspan="1" style="width: 200px;" aria-label="CSS grade: activate to sort column ascending">
+                            rowspan="1" colspan="1" style="width: 250px;" aria-label="CSS grade: activate to sort column ascending">
                                 操作
                             </th>
                         </tr>
@@ -116,22 +116,28 @@
                                         <center> {{$v->link}}</center>
                                     </td>
                                     <td class=" ">
-                                        <center><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img">
+                                        <center><img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->pic}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" >
                                         </center>
                                     </td>
                                     <td class=" ">
-                                        <center> {{date("Y年m月d日 H:i:s",$v->time+8*60*60)}}</center>
+                                        <center> {{date("Y年m月d日 H:i:s",$v->time)}}</center>
                                     </td>
                                     <td class=" ">
-                                        <center> {{$v->status == 0 ? '开启' : '关闭'}}</center>
+                                        <center id="status{{$v->id}}"> {{$v->status == 0 ? '上架' : '下架'}}</center>
                                     </td>
                                     <td class=" ">
                                         <center>
+
+                        <button class="btn btn-default" id="user{{$v->id}}"  onclick="advert_status({{$v->id}})">{{$v->status== 1 ? '广告上架':'广告下架'}}</button>
+
                                             <a href="/admin/advert/{{$v->id}}/edit">
+
+
+
                                             <input type="submit" class="btn btn-default" value="修改"></a>
-                                            
+
                                             <button class="btn btn-default" onclick="advert_delete({{$v->id}})">删除</button>
-                                            
+
                                         </center>
                                     </td>
                             </tr>
@@ -147,11 +153,6 @@
                 {!! $res->appends($request->all())->render() !!}
 
             </div>
-
-
-
-
-
         </div>
     </div>
 </div>
@@ -165,6 +166,49 @@
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
 
+        //切换广告状态按钮
+        function advert_status(id){
+
+            layer.confirm('您确定要修改状态此吗？', {
+                  btn: ['确定','取消'] //按钮
+                }, function(){
+
+                    $.ajax({
+                    type: "get",
+                    url: "/admin/advert/"+id,
+                    data: {id:id},
+                    beforeSend:function(){
+                        //加载样式
+                        a = layer.load(0, {shade: false});
+                      },
+                    success: function(data) {
+
+                        //关闭加载样式
+                        layer.close(a)
+
+                        //改变用户状态
+                        if(data==0){
+                            layer.msg('广告状态已上架！', {icon: 1});
+                            document.getElementById('status'+id).innerHTML = '上架';
+                            document.getElementById('user'+id).innerHTML = '广告下架';
+                        }else{
+                            layer.msg('广告状态已下架！', {icon: 1});
+                            document.getElementById('status'+id).innerHTML = '下架';
+                            document.getElementById('user'+id).innerHTML = '广告上架';
+                        }
+
+                                            },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        layer.msg("状态修改失败，请检查网络后重试", {icon:2 ,})
+                    }
+                });
+
+                }, function(){
+
+                });
+
+        }
+
         //删除广告
         function advert_delete(id){
 
@@ -176,7 +220,6 @@
                     type: "post",
                     url: "/admin/advert/"+id,
                     data: {id:id,_token:'{{csrf_token()}}',_method:'delete'},
-                    
                     beforeSend:function(){
                         //加载样式
                         a = layer.load(0, {shade: false});
@@ -192,12 +235,13 @@
                         layer.msg('广告删除成功:)', {icon: 1});
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        layer.msg("广告删除失败，请检查网络后重试", {icon:2 ,})  
+
+                        layer.msg("广告删除失败，请检查网络后重试", {icon:2 ,})
                     }
                 });
 
                 }, function(){
-                        
+
                 });
         }
     </script>

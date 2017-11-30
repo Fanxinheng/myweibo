@@ -13,5 +13,10 @@ class message extends Model
 
    protected $fillable = ['id','aid','uid','mess','time','status'];
 
+   public function user_info()
+   {
+   	return $this->hasOne('App\Http\Model\user_info','uid','uid');
+   }
+
 
 }

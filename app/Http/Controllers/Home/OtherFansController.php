@@ -30,7 +30,7 @@ class OtherFansController extends Controller
         //获取关注人及关注人的信息
         $res = user_attention::join('user_info',function($join){
             $join->on('user_attention.uid','=','user_info.uid');
-        })->where('user_attention.gid',$uid)->get();
+        })->where('user_attention.gid',$uid)->orderBy('time','desc')->paginate(5);
 
          //获取登录用户的信息
         $id = Session('uid');

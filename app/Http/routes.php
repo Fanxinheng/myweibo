@@ -176,7 +176,7 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 	Route::get('/pho','LoginController@pho');
 
 	//检测密码是否与数据库一致
-	Route::get('/pass','LoginController@pass');
+	Route::post('/pass','LoginController@pass');
 
 	//检测昵称是否存在,存在跳到首页,不存在跳到个人信息页
 	Route::post('/nick','LoginController@nick');
@@ -287,10 +287,10 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	Route::get('changepass','DetailsController@changepass');
     
     //修改密码判断旧密码是否与表中一致
-	Route::get('changepass/oldpass','DetailsController@oldpass');
+	Route::post('changepass/oldpass','DetailsController@oldpass');
     
     //修改密码判断旧新密码是否与旧密码中一致
-	Route::get('changepass/newpass','DetailsController@newpass');
+	Route::post('changepass/newpass','DetailsController@newpass');
 
 	//执行修改密码存到数据库
 	Route::post('details/changepassword','DetailsController@changepassword');

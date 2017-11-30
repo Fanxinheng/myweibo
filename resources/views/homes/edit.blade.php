@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="修改个人信息" name="description">
-        <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
@@ -39,14 +39,14 @@
 		.btn {height:40px}
 	</style>
     
-    <body style="background: #9ECCEA">
+    <body style="background: #F3F4F9">
     	<div id="a"></div>
 
     	<div class="container">
     		<div class="row">
-	       		<div class="col-md-12" style="background: url('/homes/images/body_bg.jpg');">
+	       		<div class="col-md-12" style="background: url('/homes/images/2016.jpg');">
 	        		<div class="W_nologin_logo_big">
-	        			<img src="/homes/images/wb_logo-x2.png" alt="">
+	        			<h1 style="color:white;font-style:oblique"><b>MYWEB</b></h1>
 	        		</div>
 	        	</div>
 	        	<div class="col-md-12" style="height:700px;background:white;border-radius:10px">
@@ -57,12 +57,11 @@
 	        		</div>
 	        		<div class="col-md-12" style="height:360px;">
 						<div class="col-md-12" style="height:300px;margin-top: 30px">
-							<form class="form-horizontal"  id="forms">
-                                <!-- action="/home/details/update" method="post" -->
+							<form class="form-horizontal" action="/home/details/update" method="post" id="forms">
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>昵称:</label>
 								    <div class="col-sm-4" style="width: 700px;height:40px">
-								      <input type="text" class="form-control" maxlength="8" placeholder="请输入昵称" name="nickName" id="uname" style="width: 345px;float: left" value="{{$res->nickName}}">
+								      <input type="text" class="form-control" maxlength="8" placeholder="请输入昵称" name="nickName" id="uname" style="width: 345px;float: left" value="{{$res->nickName}}" required maxlength="8">
 								       <span id="spa" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
 								    </div>
 								  </div>
@@ -82,7 +81,7 @@
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>年龄:</label>
 								    <div class="col-sm-4" style="width: 600px;height:40px">
-								      <input type="text" class="form-control" id="age" maxlength="3" style="width: 345px;float: left" name="age" value="{{$res->age}}">
+								      <input type="text" class="form-control" id="age" maxlength="3" style="width: 345px;float: left" name="age" value="{{$res->age}}" required>
 								    </div>
 								  </div>
 								  <div class="form-group">
@@ -100,35 +99,28 @@
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>邮箱:</label>
 								    <div class="col-sm-4" style="width: 600px;height:40px">
-								      <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" style="width: 345px;float: left" value="{{$res->email}}">
+								      <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" style="width: 345px;float: left" value="{{$res->email}}" required>
 								     <div id="spa1" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px">
 								     </div>
 
 								    </div>
 								  </div>
-                                
-                                    <form id="formphoto">
                                  
-                                      <div class="form-group">
+                                     <div class="form-group">
                                          <label for="inputPassword3" class="col-sm-2 control-label" style="margin-top:20px;"><span style="color:red;margin-right: 5px;margin-top:30px;">*</span>头像:</label>
                                     
                                     
                                          <div class="col-sm-4" style="width:150px;">
-                                         <input type="file" style="width:100px;position:absolute;height:100px;opacity:0" class="form-control" id="photo" name="photo"   >
+                                         <input type="text" style="width:300px;height:5px;position:absolute;opacity:0" class="form-control" id="photo" name="tp"   >
+                                         {{csrf_field()}}
                                           <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"   style="width:100px;height: 100px;border-radius:50%;border:solid 1px #ABB1BA" id="img">
                                          </div>
-                                      </div>
-                                 
-                                    </form>
-								  
+                                      </div>         				  
           
 								  <div class="form-group" style="margin-top:30px">
 								    <div class="col-sm-offset-2 col-sm-10" >
 								    	{{csrf_field()}}
-                                        <a href="/home/login" style="line-height:40px;">
-                                             <button style="background:#FFA00A;color: white;width:200px;height: 40px;font-size: 18px;border-radius: 6px;" id="btn1">修改</button>
-                                        </a>
-								      
+                                        <input type="submit" value="修改" style="background:#FFA00A;color: white;width:200px;height: 40px;font-size: 18px;border-radius: 6px;text-align:center" id="btn1">
 								    </div>
 								  </div>
 							</form>
@@ -140,217 +132,163 @@
 				
 				<!-- 底部 -->
 	        	<div class="col-md-12" style="height:50px;margin-top: 30px;text-align: center;">
-						<div class="left_link" style="width:550px;float:left;">
-							<img src="/homes/images/favicon.ico" alt="">
-							<em class="company_name">北京微梦创科网络技术有限公司</em>
-					        <a href="//weibo.com/aj/static/jww.html">京网文[2011]0398-130号</a>
-					        <a href="http://www.miibeian.gov.cn">京ICP备12002058号</a>
+						<div class="left_link" style="width:500px;float:left;">
+                            <span>友情连接：</span>
+							@foreach($link as $k=>$v)
+                            @if($v->status==0)
+                                <a href="//{{$v->link}}" target="_blank" class="S_txt2" style="text-decoration:none;">{{$v->user}}</a>
+                            @endif
+                        @endforeach
 						</div>
 
+						<div class="copy" style="width:200px;float:right;margin-right: 100px">
+                        <a href="#" class="S_txt2" style="text-decoration:none;">版权：{{$config[0]->bank}}    出品</a>
 
-						<div class="copy" style="width:400px;float:right;">
-							<span>Copyright &copy; 2009-2017 WEIBO</span>
 						</div>
-					</div>
+				</div>
        		</div>
     	</div>
       
      <script>
   
-     	//表单验证
-     	var uname = document.getElementById('uname');
-     	var spa = document.getElementById('spa');
-     	var email = document.getElementById('email');
-     	var age = document.getElementById('age');
-     	var photo = document.getElementById('photo');
-     	var NI = 1;
-     	var EM;
-     	var AG = 0;
-     	var PH = 0;
-     	var ch2;
-     	//年龄失去焦点事件
-     	age.onblur = function(){
-     		//获取年龄
-     		var age = this.value;
+     	  //表单验证
+        var uname = document.getElementById('uname');
+        var spa = document.getElementById('spa');
+        var email = document.getElementById('email');
+        var age = document.getElementById('age');
+        var photo = document.getElementById('photo');
+     
+        //昵称获取焦点事件
+        uname.onfocus = function(){
+            //添加提示信息
+            spa.innerHTML = '请输入4-8位用户名(数字,字母,下划线)';
+        }
 
-     		//判断为空
-     		if(age == ""){
-     			AG = 0;
-     		}else{
-     			AG = 1;
-     		}
-     		console.log(AG);
-     	}
+        //昵称失去焦点事件
+        uname.onchange = function(){
 
+            //获取昵称
+            var uname = this.value;
+            // console.log(uname);
 
-     	//昵称获取焦点事件
-     	uname.onfocus = function(){
-     		//添加提示信息
-     		spa.innerHTML = '请输入4-8位用户名(数字,字母,下划线)';
-     	}
+            //写正则
+            var reg  = /^\w{4,8}$/;
 
-     	//昵称失去焦点事件
-     	uname.onblur = function(){
+            //检测
+            var check = reg.test(uname);
 
-     		//获取昵称
-     		var uname = this.value;
-     		// console.log(uname);
+            //判断
+            if(uname == ""){
+                spa.innerHTML = '昵称不能为空!';
+                spa.style.color='red';
+                $('#btn1').attr('disabled',true);
+            }else if(check){
 
-     		//写正则
-     		var reg  = /^\w{4,8}$/;
+                //ajax传过去连接数据库检验昵称
+                $.get('/home/details/uname',{uname:uname},function(data){
+                    if(data==0){
+                        spa.innerHTML = '该昵称已存在,请换一个昵称!';
+                        spa.style.color = 'red';
+                        $('#btn1').attr('disabled',true);
 
-     		//检测
-     		var check = reg.test(uname);
+                    }else{
+                        spa.innerHTML = '√';
+                        spa.style.color='green';
+                        $('#btn1').attr('disabled',false);
 
-     		//判断
-     		if(uname == ""){
-				spa.innerHTML = '昵称不能为空!';
-				spa.style.color='red';
-				NI = 0;
-     		}else if(check){
-
-     			//ajax传过去连接数据库检验昵称
-     			$.get('/home/details/uname',{uname:uname},function(data){
-     				if(data==0){
-     					spa.innerHTML = '该昵称已存在,请换一个昵称!';
-     					spa.style.color = 'red';
-     					NI = 0;
-
-     				}else{
-     					spa.innerHTML = '√';
-     					spa.style.color='green';
-     					NI = 1;
-
-     				}
-     			})
-     		}else{
- 					spa.innerHTML = '昵称格式不正确!';
- 					spa.style.color = 'red';
- 					NI = 0;
- 				}
- 				// console.log(NI);
-     	};
+                    }
+                })
+            }else{
+                    spa.innerHTML = '昵称格式不正确!';
+                    spa.style.color = 'red';
+                    $('#btn1').attr('disabled',true);
+                }
+                
+        };
 
 
-     	
+        
 
-     	//邮箱获取焦点事件
-     	email.onfocus = function(){
-     		spa1.innerHTML = '请输入邮箱';
-     	}
-     	//邮箱失去焦点事件
-     	$('#email').blur(function(){
+        
+        //邮箱失去焦点事件
+        $('#email').change(function(){
            
             var email  = $(this).val();
 
              ch2 = checkEmail($('#email'),$('#spa1'));
-             // console.log(ch2);
+
             if(ch2!=100){
               $('#spa1').css('display','block');
               $('#spa1').css('color','red');
-              // return;
-              EM = 0;
+              $('#btn1').attr('disabled',true);
             }else{
               $('#spa1').css('display','none');
-              ch2 = 100;
-              EM = 1;
+             $('#btn1').attr('disabled',false);
             }
-            $.get("/home/details/email",{email:email},function(data){
-            	// console.log(data);
-              if(data==1){
+          
 
-              }else{
-              	$('#spa1').css('display','block');
-              	$("#spa1").html("该邮箱已被注册!"); 
-                $('#spa1').css('color','red');
-                data = 0;
-              }
-            },'json')
-
-            // console.log(ch2);
-            console.log(EM);
-
-            
         })
 
-      //   //头像失去焦点事件
-     	// photo.onblur = function(){
-     	// 	//获取头像的值
-     	// 	var photo = this.value;
+        //头像发送Ajax
+      document.getElementById('img').onclick=function(){
 
-     	// 	//判断为空
-     	// 	if(photo== ""){
-     	// 		PH = 0;
-     	// 	}else{
-     	// 		PH = 1;
-     	// 	}
-     	// 	console.log(PH);
-     	// 	//判断
-     	// 	if(PH==0){
-      //       	return false;
-      //       }
-     	// }
-     	
+            layer.alert(' <form id="formphoto"><i class="icon-upload-2" id="wngbng"></i><input type="file" name="photo" id="tp" value=""></form>',{
+                    skin: 'layui-layer-molv',
+                    btn: ['确认', '取消'],
+                    area: ['200px', '150px'],
+                    title: '上传文件',
+                yes:function(index){
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-            }
-        });
-        $(function () {
-            $("#photo").change(function (){ 
-                uploadImage();
-            });
-        });
-        function uploadImage() {
-//                            判断是否有选择上传文件
-//                            input type file
+                    var imgPath = $("#tp").val();
+                    if (imgPath == "") {
+                        alert("请选择上传图片！");
+                        return;
+                    }
+                    //判断上传文件的后缀名
+                    var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+                    if (strExtension != 'jpg' && strExtension != 'gif'
+                        && strExtension != 'png' && strExtension != 'bmp') {
+                        alert("请选择图片文件");
+                        return;
+                    }
+                        var formData = new FormData($('#formphoto')[0]);
 
-            var imgPath = $("#photo").val();
-      
-            if (imgPath == "") {
-                alert("请选择上传图片！");
-                return;
-            }
-            //判断上传文件的后缀名
-            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
-            if (strExtension != 'jpg' && strExtension != 'gif'
-                && strExtension != 'png' && strExtension != 'bmp') {
-                alert("请选择图片文件");
-                return;
-            }
+                        $.ajaxSetup({
+                           headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                            }
+                        });
+                        // alert("1234");
+                        $.ajax({
+                            type: "post",
+                            url: "/home/details/editphoto",
+                            data: formData ,
+                            cache: false,
+                            async: true,
+                            contentType: false,
+                            processData: false,
+                            beforeSend:function(){
+                                  
+                                layer.load(2);
+                                // console.log(data);
 
-            var formData = new FormData($( "#forms" )[0]);
-            console.log(formData);
-            $.ajax({
-                type: "post",
-                url: "/home/details/update",
-                data: formData,
-                async: true,
-                cache: false,
-                contentType: false,
-                processData: false,
-               beforeSend:function(){
-                      // 菊花转转图
-                      // $('#img1').attr('src', 'http://img.lanrentuku.com/img/allimg/1212/5-121204193R0-50.gif');
-                      //
-
-                    a = layer.load();
-                      
-                  },
-                success: function(data) {
-                    console.log(data);
-                    layer.close(a);
-                    $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
-
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("上传失败，请检查网络后重试");
-                    $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/homes/uploads/96261511620891.jpg');
+                              },
+                            success: function(data) { 
+                                layer.closeAll('loading');
+                               $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                layer.alert("上传失败，请检查网络后重试");
+                                $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/homes/uploads/96261511620891.jpg');
+                                layer.closeAll('loading');
+                            }
+                        });
+                    layer.close(index);
                 }
             });
-        }
 
+                       
+    };
      
      </script>
     

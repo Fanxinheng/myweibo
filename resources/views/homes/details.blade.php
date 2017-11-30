@@ -46,7 +46,7 @@
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" ><span  class="nspan">*</span>昵称:</label>
 								    <div class="col-sm-4" id='inp1'>
-								      <input type="text" class="form-control" maxlength="8" placeholder="请输入昵称" name="nickName" id="uname" >
+								      <input type="text" class="form-control" maxlength="8" placeholder="请输入昵称" name="nickName" id="uname" required maxlength="8">
 								       <span id="spa" class="msg"></span>
 								    </div>
 								  </div>
@@ -62,7 +62,7 @@
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span class="nspan">*</span>年龄:</label>
 								    <div class="col-sm-4" id='inp2'>
-								      <input type="text" class="form-control" id="age" maxlength="3" name="age">
+								      <input type="text" class="form-control" id="age" maxlength="3" name="age" required>
 								    </div>
 								  </div>
 								  <div class="form-group">
@@ -80,7 +80,7 @@
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span class="nspan">*</span>邮箱:</label>
 								    <div class="col-sm-4" id='inp3'>
-								      <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" >
+								      <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱" required>
 								     <div id="spa1" class='msg' >
 
 								     </div>
@@ -91,7 +91,7 @@
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span class="nspan">*</span>头像:</label>
 								    <div class="col-sm-4">
-								      <input type="file"  class="form-control" id="photo" name="photo" value="" >
+								      <input type="file"  class="form-control" id="photo" name="photo" value="" required>
                                     
 								    </div>
 								  </div>
@@ -128,28 +128,7 @@
     	</div>
       
      <script>
-               //表单验证
-
-        var NI = 1;
-        var EM;
-        var AG = 0;
-        var PH = 0;
-        var ch2;
-
-        //年龄失去焦点事件
-        $('#age').blur(function(){
-            //获取年龄
-            var age = this.value;
-
-            //判断为空
-            if(age == ""){
-                AG = 0;
-            }else{
-                AG = 1;
-            }
-            console.log(AG);
-        })
-
+       //表单验证
 
         //昵称获取焦点事件
         $('#uname').focus(function(){
@@ -173,8 +152,7 @@
             //判断
             if(uname == ""){
                 $('#spa').html('昵称不能为空!');
-                $('#spa').css('color','red');
-                NI = 0;
+                $('#spa').css('color','red'); 
             }else if(check){
 
                 //ajax传过去连接数据库检验昵称
@@ -182,26 +160,22 @@
                     if(data==0){
                         $('#spa').html('该昵称已存在,请换一个昵称!');
                         $('#spa').css('color','red');
-                        NI = 0;
-
+                        $('#btn1').attr('disabled',true);
                     }else{
                         $('#spa').html('√');
                         $('#spa').css('color','green');
-                        NI = 1;
-
+                        $('#btn1').attr('disabled',false);
                     }
                 })
             }else{
                     $('#spa').html('昵称格式不正确!');
                     $('#spa').css('color','red');
-                    NI = 0;
+                    $('#btn1').attr('disabled',true);
                 }
-                // console.log(NI);
         })
 
 
-        
-
+       
         //邮箱获取焦点事件
         $('#email').focus(function(){
             $('#spa1').html('请输入邮箱');
@@ -217,51 +191,25 @@
             if(ch2!=100){
               $('#spa1').css('display','block');
               $('#spa1').css('color','red');
-             // return;
-              EM = 0;
+              $('#btn1').attr('disabled',true);
             }else{
               $('#spa1').css('display','none');
-              ch2 = 100;
-              EM = 1;
+              $('#btn1').attr('disabled',false);
             }
             $.get("/home/details/email",{email:email},function(data){
-                // console.log(data);
+                
               if(data==1){
-
+                
               }else{
                 $('#spa1').css('display','block');
                 $("#spa1").html("该邮箱已被注册!"); 
                 $('#spa1').css('color','red');
-                data = 0;
+                $('#btn1').attr('disabled',true);
               }
             })
 
-            // console.log(ch2);
-            console.log(EM);
-
             
         })
-
-        //头像失去焦点事件
-        $('#photo').blur(function(){
-            //获取头像的值
-            var photo = this.value;
-
-            //判断为空
-            if(photo== ""){
-                PH = 0;
-            }else{
-                PH = 1;
-            }
-            console.log(PH);
-            //判断
-            if(PH==0){
-                return false;
-            }
-        })
-        // if (PH==1&&NI==1&&AG==1&&EM==1) {
-        //  next();
-        // }
      	
      </script>
     

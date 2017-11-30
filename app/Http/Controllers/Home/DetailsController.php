@@ -100,7 +100,7 @@ class DetailsController extends Controller
 				//判断成功就跳转首页,否则返回当前页面并存闪存
 				if($data){
 		           
-		            return redirect('/home/login');
+		            echo "<script>alert('添加成功!');window.location.href='/home/login';</script>";
 					
 				}else{
 
@@ -110,10 +110,6 @@ class DetailsController extends Controller
             }else{
             	echo "<script>alert('请检查网络是否畅通');wind</script>";
             }
-			//移动图片
-			// $request->file('photo')->move('./homes/uploads',$name.'.'.$suffix);
-		
-			
 			
 		}
 		   
@@ -131,55 +127,9 @@ class DetailsController extends Controller
 	}
 
 
- //    public function editphoto(Request $request)
-	// {   
-	//  $img = $request->input('imgPath');
-
-	//   if($request->hasFile('imgPath')){
-	//          //初始化七牛云
-	//          $disk = QiniuStorage::disk('qiniu');
-				
-	//          //获取文件内容
-	//          $file = $request->file('imgPath');
-
-	//          //修改随机生成名字
-	//          $name = rand(1111,9999).time();
-
-	//          //获取上传文件后缀
-	//          $suffix = $request->file('imgPath')->getClientOriginalExtension();
-
- //                //拼装文件名
- //                 $logo = 'homes/uploads/'.$name.'.'.$suffix;
-
- //                $res['photo'] = $logo;
-
- //                //上传到七牛云
- //                $bool = $disk->put($logo,file_get_contents($file->getRealPath()));
-				
- //                //获取session中当前用户的uid
-	//          $uid = $request->session()->get('uid');
-
-	//          //把res数组中的信息按照uid修改到user_info表中
-	//          $data = user_info::where('uid',$uid)->update($res);
-			
-		
-	//          //判断成功就跳转首页,否则返回当前页面并存闪存
-	//          if($data){
- //                    // return $logo;
- //                    echo "0";
-	//          }else{
-
- //                     echo "1";
-	//          }
-	//  }
-	// }
-
-	//照片传送Ajax执行修改个人信息方法
-	public function update(Request $request)
-	{   
-
-		  //获取除了token以外的值
-			$res = $request->except('_token');
+  //修改头像发送ajax存入数据库
+     public function editphoto(Request $request)
+	 {   
 
 	   if($request->hasFile('photo')){
            
@@ -190,22 +140,49 @@ class DetailsController extends Controller
 				$file = $request->file('photo');
 				
 				//修改随机生成名字
-				$name = rand(1111,9999).time();
+ 				$name = rand(1111,9999).time();
 
 				//获取上传文件后缀
 				$suffix = $request->file('photo')->getClientOriginalExtension();
 
 				//拼装文件名
 				$logo = 'homes/uploads/'.$name.'.'.$suffix;
-                
+
 				$res['photo'] = $logo;
 
 				//上传到七牛云
 				$bool = $disk->put($logo,file_get_contents($file->getRealPath()));
 
+				//获取session中当前用户的uid
+				$uid= $request->session()->get('uid');
+                
+				//删除旧头像
+		        $old = user_info::where('uid',$uid)->value('photo');
+
+		        $del = $disk->delete($old);
+		      
+				//把res数组中的信息按照uid修改到user_info表中
+				$data = user_info::where('uid',$uid)->update($res);
+					
+				//判断成功就跳转首页,否则返回当前页面并存闪存
+				if($data){
+					return $logo;
+						//echo "0";
+				}else{
+
+					echo "1";
+				}
+
 		}       
+	}
 
+	//form表单提交执行修改个人信息方法
+	public function update(Request $request)
+	{   
 
+		//获取除了token以外的值
+		$res = $request->except('_token','tp');
+		
 		//获取session中当前用户的uid
 		$uid= $request->session()->get('uid');
         
@@ -214,11 +191,11 @@ class DetailsController extends Controller
 			
 		//判断成功就跳转首页,否则返回当前页面并存闪存
 		if($data){
-			return $logo;
-				//echo "0";
+			echo "<script>alert('修改成功！');window.location.href='/home/login'</script>";
 		}else{
 
-			echo "1";
+			echo "<script>alert('修改失败！');</script>";
+			return false;
 		}
 
 	}
@@ -289,7 +266,7 @@ class DetailsController extends Controller
 		$data = user::where('id',$uid)->update($res);
 		if($data){
 
-		   echo "<script>alert('修改成功');window.location.href='/home/admin';</script>";
+		   echo "<script>alert('密码修改成功，请重新登录！');window.location.href='/home/admin';</script>";
 		   
 		}else{
 			echo "0";

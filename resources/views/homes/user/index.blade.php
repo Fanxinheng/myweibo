@@ -3,33 +3,40 @@
     
     <head>
         <meta charset="UTF-8">
-        <title>
-        </title>
+        
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js">
-        </script>
-        <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js">
-        </script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
         <meta name="csrf_token" content="{{ csrf_token() }}"/>
         <link rel="stylesheet" href="/homes/css/user.index.css">
-        <script type="text/javascript" src="/homes/layer/layer.js">
-        </script>
+        <script type="text/javascript" src="/homes/layer/layer.js"></script>
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="/homes/jquery/dist/zoomify.min.css">
+        <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
+        <title>{{$config[0]->name}}</title>
     </head>
     
-    <body style="background: url('/homes/images/body_bg.jpg') no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
+    <body style="background: #F3F4F9 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
                     <div class="navbar-header" id="navbar-header1">
-                        <img src="/homes/images/wb_logo.png" alt="">
+                        <a href="/home/login">
+                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$config[0]->logo}}" alt="" style="width:80px;height:27px;margin-top:7px;">
+                        </a>
                     </div>
                     <div class="navbar-header" id="navbar-header2">
-                        <form class="navbar-form navbar-right">
+                        <form action="/home/search" class="navbar-form navbar-right" method="get">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="搜索框" style="">
+                                <input type="text" name="search" class="form-control" placeholder="精彩生活，微博搜索" >
                             </div>
-                            <button class="btn btn-success" type="submit">
+
+                            {{csrf_field()}}
+                            <button class="btn btn-warning" type="submit">
                                 搜索
                             </button>
                         </form>
@@ -38,28 +45,25 @@
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-home" aria-hidden="true">
                             </span>
-                            <a href="/home/message">
-                                系统消息 @if($message>0)
-                                <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px  ">
-                                    {{$message}}
-                                </div>
-                                @else
-                                <div>
-                                </div>
-                                @endif
+                            <a href="/home/details/quit"  title="退出登录" style="text-decoration:none;">
+                                退出
                             </a>
+                        </div>
+                        <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
+                            <li class="dropdown" style="list-style-type:none">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration:none;">{{$rev->nickName}}<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="/home/user">个人中心</a></li>
+                                <li><a href="/home/details/edit">个人信息</a></li>
+                                <li><a href="/home/changepass">修改密码</a></li>
+                                <li><a href="/home/message">系统消息</a></li>
+                              </ul>
+                            </li>
                         </div>
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true">
                             </span>
-                            <a href="/home/user">
-                                {{$rev->nickName}}
-                            </a>
-                        </div>
-                        <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true">
-                            </span>
-                            <a href="/home/admin">
+                            <a href="/home/login" style="text-decoration:none;">
                                 首页
                             </a>
                         </div>
@@ -72,30 +76,30 @@
         <!-- 中间开始 -->
         <div class="row" id="weibo">
             <div class="container">
-                <!-- 头像 及北京-->
+                <!-- 头像 及背景-->
                 <div class="container">
 
-                        <div class="jumbotron" id="backg" style="background:url('/homes/images/197.jpg');">
+                        <div class="jumbotron" id="backg" style="background:url('/homes/images/2016.jpg');background-repeat:no-repeat">
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
                                 <!-- 头像 -->
                                 <div id="jimg" style="margin-left: 100px">
-                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/100/h/100/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
+                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:100px;" id="img" class="img-circle">
 
                                 </div>
                                 <div>
                                     <!-- 昵称 -->
-                                    <div id="nickname" >
+                                    <div id="nickname" style="font-size: 20px;">
                                         {{$rev->nickName}}&nbsp;&nbsp;
                                         
                                     </div>
-                                    <div id="nickName" style="margin-left: 20px;margin-top:10px;">
+                                    <div id="nickName" style="margin-top:10px;font-size: 15px;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年龄:&nbsp;{{$rev->age}}&nbsp;&nbsp;职业:&nbsp;{{$rev->work}}&nbsp;&nbsp;积分:<span id="fsoc">{{$rev->socre}}</span>&nbsp;&nbsp;&nbsp;性别:&nbsp;
                                         @if($rev->sex=='w')
-                                        <em>女</em>
+                                        女
                                         @else
-                                        <em>男</em>
+                                        男
                                         @endif
                                         
                                     </div>
@@ -171,6 +175,18 @@
                                         @endif
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="/home/message" style="text-decoration:none;">
+                                        系统消息 @if($message>0)
+                                        <div style="width: 20px;height: 20px;background:#fa7d3c;float: right;border-radius: 10px;margin-left: 3px;text-align:center;color: #fff;line-height: 20px  ">
+                                            {{$message}}
+                                        </div>
+                                        @else
+                                        <div>
+                                        </div>
+                                        @endif
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <!-- 栏目结束 -->
@@ -194,7 +210,7 @@
                                 <div class="col-lg-12" id="buhuo" class="layer_notice">
                                     <!-- 头像 -->
                                     <div class="col-log-2" id="tieimg" style="margin-top: 20px;float: left">
-                                          <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/50/h/50/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="img" class="img-circle">
+                                          <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$rev->photo}}?imageView2/1/w/50/h/50/q/75" id="img" class="img-circle">
                                     </div>
                                     <!-- 名称和时间 -->
                                     <div class="col-log-6" id="tiename" style="margin-top: 25px;margin-left: 50px;">
@@ -205,7 +221,9 @@
                                         <div style="margin-top: 5px;font-size: 12px;color: #808080;margin-left: 10px">
                                             <em style="color:#676462"> {{date('Y-m-d H:i:s',$v->time)}}   </em>
                                         </div>
+                                        <a href="/home/blog/replay/{{$v->cid}}" style="text-decoration:none;">
                                         <div id="nei" style="margin-top: 20px; word-break:break-all;width:600px;margin-left: 10px">{{$v->content}} </div><br>
+                                        </a>
                                         @if($v->image)
                                         <div style="margin-top: 10px" id="fimg">
                                              <?php
@@ -215,7 +233,7 @@
                                             
                                         ?>
                                             @foreach($imgs as $i)
-                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75" style="width:110px;" id="img">
                                             @endforeach
                                         </div>
                                         @else
@@ -248,14 +266,14 @@
                                         <li>
                                             <a href="javascript:;" onclick="fnum({{$v->cid}})">
                                                 <span id="fspan">
-                                                    转发{{$v->fnum}}&nbsp;&nbsp;|
+                                                    转发{{$v->fnum}}
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="javascript:;" onclick="fun({{$v->cid}})">
                                                 <span id="rspa">
-                                                    评论{{$v->rnum}}&nbsp;&nbsp;|
+                                                    评论{{$v->rnum}}
                                                 </span>
                                             </a>
                                         </li>
@@ -263,16 +281,16 @@
                                             <a href="javascript:;" onclick="poin({{$v->cid}})">
                                                 <span class="glyphicon glyphicon-thumbs-up" id="spa{{$v->cid}}">
                                                     
-                                                    点赞{{$v->pnum}}&nbsp;&nbsp;|
+                                                    点赞{{$v->pnum}}
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="javascript:;" onclick="del({{$v->cid}})">
                                                 <span>
-                                                    <em>
-                                                        删除&nbsp;&nbsp;|
-                                                    </em>
+                                                    
+                                                        删除
+                                                    
                                                 </span>
                                             </a>
                                         </li>
@@ -281,7 +299,7 @@
                                 <div id="v" >
                                     <div class="col-lg-12 disd1" id="disd1{{$v->cid}}">                                 
                                             <div id="tex">
-                                                <textarea name="connb" id="conn" cols="70" rows="1"></textarea>
+                                                <textarea name="connb" id="conn" class="connn" cols="70" rows="1"></textarea>
                                             </div>
                                             <span class="btn btn-defalut" style="height: 28px;line-height: 15px"
                                             id="butt"  onclick="rebut({{$v->cid}})">
@@ -294,10 +312,12 @@
                                         
                                         <div class="col-lg-12" id="hejiu{{$v->cid}}" >
                                             <!-- 头像 -->
+                                            <a href="/home/other/user/{{$val->user_info->uid}}">
                                             <div class="col-log-2" id="rimg">
                                                 <!-- <img width="30" height="30" src="/homes/images/2015.jpg"> -->
-                                                  <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/40/h/40/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" id="img" class="img-circle">
+                                                  <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/35/h/35/q/75" id="img" class="img-circle">
                                             </div>
+                                            </a>
                                             <!-- 名称和时间 -->
                                       <div class="col-log-8" id="cont">
                                                 <div id="div1">
@@ -308,9 +328,10 @@
                                                 </div>
                                                 <div id="div2">
                                                     <em style="color:#676462">{{date('Y-m-d H:i:s',$val->time)}}</em>
+
                                                     <a href="javascript:;" onclick="rdel({{$val->id}})">
                                                         <span style="float: right;margin-right: 140px">
-                                                            删除
+                                                            删除 
                                                         </span>
                                                     </a>
                                                 </div>
@@ -326,8 +347,9 @@
                             @endforeach                           
                             <!-- 微博遍历结束 -->
                             @endif
-                            <div style="float: right">{!! $res->render() !!}</div>
+                            
                         </div>
+                        <div style="float: right">{!! $res->render() !!}</div>
                         <!-- 微博结束 -->
                          
                     </div>
@@ -413,14 +435,14 @@
                 //添加回复消息
                 var newDiv = document.createElement('div');
                 console.log(data);
-                  var str = "<div id='he"+data['id']+"' style='dispaly:block;'><div class='col-lg-12'><div class='col-log-2' id='rimg'><img src='http://ozsrs9z8f.bkt.clouddn.com/"+data['photo']+"?imageView2/1/w/40/h/40/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim' id='img' class='img-circle'></div><div class='col-log-8' id='cont'><div id='div1'><a href='/home/other/user/"+data['nickName']+"'>"+data['nickName']+"</a>&nbsp;回复:&nbsp; "+data['rcontent']+"</div><div id='div2'><em style='color:#676462'>"+data['time']+"</em><a href='javascript:;'' onclick='rdel("+data['id']+")'><span style='float: right;margin-right:140px;'> 删除</span></a></div></div></div></div>";
+                  var str = "<div id='he"+data['id']+"' style='dispaly:block;'><div class='col-lg-12'><div class='col-log-2' id='rimg'><img src='http://ozsrs9z8f.bkt.clouddn.com/"+data['photo']+"?imageView2/1/w/40/h/40/q/75' id='img' class='img-circle'></div><div class='col-log-8' id='cont'><div id='div1'><a href='/home/other/user/"+data['nickName']+"'>"+data['nickName']+"</a>&nbsp;回复:&nbsp; "+data['rcontent']+"</div><div id='div2'><em style='color:#676462'>"+data['time']+"</em><a href='javascript:;'' onclick='rdel("+data['id']+")'><span style='float: right;margin-right:140px;'> 删除</span></a></div></div></div></div>";
                 newDiv.innerHTML=str;
                 //添加回复消息
                 $('#sdf'+cid).prepend(newDiv,hejiu);
                 //让回复框隐藏
                  $('#disd1' + cid).hide();
                  //让回复框的内容清空
-                $('#conn').val('');
+                $('.connn').val('');
                 //弹出提示
                 layer.msg('评论成功');
 
@@ -484,13 +506,20 @@
                     type: 'GET',
                     success: function(data) {
 
-                       document.getElementById('spa'+ cid).innerHTML = "点赞" + data['pnum'];
+                        //判断是否重复点赞
+                        if(data==0){
+                            layer.msg('您已赞过此微博:)', {icon:2,})
+                        }else{
+                            document.getElementById('spa'+ cid).innerHTML = "点赞" + data.pnum;
 
-                        document.getElementById('pdiv').innerHTML = data['point'];
+                            document.getElementById('pdiv').innerHTML = data.point;
 
-                        $('#pdiv').show();
+                            $('#pdiv').show();
 
-                        layer.msg('点赞成功');
+                            layer.msg('点赞成功', {icon:1 ,});
+                        }
+
+                       
                     },
                     asycn: true
                 });
@@ -507,6 +536,9 @@
 
                 });
             };
+
+            //加载照片
+            // $('.col-lg-12 img').zoomify();
         </script>
     </body>
 

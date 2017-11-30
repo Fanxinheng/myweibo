@@ -10,7 +10,7 @@
         name="description">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="/homes/jquery/css/bootstrap-grid.min.css">
@@ -22,7 +22,8 @@
         <script type="text/javascript" src="/homes/js/validate.js"></script>
         <script type="text/javascript" src="/homes/jquery/dist/zoomify.min.js"></script>
         <title>
-            微博-随时随地发现新鲜事
+            {{$config[0]->name}}
+            
         </title>
     </head>
 
@@ -254,15 +255,14 @@
                                                                         <div class="form-group">
                                                                             <span class="glyphicon glyphicon-user" aria-hidden="true" style="float: left;margin-top: 10px">
                                                                             </span>
-                                                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号"
-                                                                            style="width:250px; ">
+                                                                            <input type="text" name="phone" class="form-control" id="phone" placeholder="请输入手机号" style="width:250px; " required maxlength="11" value="{{old('phone')}}">
                                                                         </div>
                                                                         <div id="e1" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
                                                                         </div>
 
                                                                         <div class="form-group" style="margin-top:10px">
                                                                             <span class="glyphicon glyphicon-lock" aria-hidden="true" style="float: left;margin-top: 10px"></span>
-                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password">
+                                                                            <input type="password" class="form-control" id="password" placeholder="请输入密码" style="width:250px;" name="password" maxlength="12" required>
 
                                                                         </div>
                                                                         <div id="e2" style="width: 200px;height: 20px;display: none;color: red;font-size: 13px;font-weight: bold;margin-bottom:10px;margin-left: 13px">
@@ -479,7 +479,14 @@
                   ch3 = 100;
             
                 }
-                $.get("/home/pass",{pas:pas,pho:pho},function(data){
+
+                //post发送Ajax
+                $.ajaxSetup({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                    }
+                });
+                $.post("/home/pass",{pas:pas,pho:pho},function(data){
                   if(data=='1'){
                     $('#e2').css('display','none');
                     ch3 = 100;
