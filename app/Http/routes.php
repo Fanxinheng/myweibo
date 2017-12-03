@@ -22,95 +22,7 @@ Route::get('/','Home\AdminController@welcome');
 
 //==========================前台路由===================================//
 
-//前台个人
-Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
-	//====================页面==========================//
-	
-	//个人主页
-	Route::get('user','UserController@index');
-
-	//系统消息
-	Route::get('message','UserController@message');
-
-	//个人相册页面
-	Route::resource('photo','UserController@photo');
-
-	//个人的点赞页面
-	Route::get('point','UserController@point');
-
-	//个人的转发页面
-	Route::get('forward','UserController@forward');
-
-	//关注页面
-	Route::resource('attention','AttentionController');
-
-	//粉丝页面
-	Route::resource('fans','FansController');
-
-	//======================功能=============================//
-
-	//删除微博
-	Route::get('delete/{id}','UserController@delete');
-
-	//删除评论
-	Route::post('replay/delete','UserController@replayDelete');
-
-	//点赞微博
-	Route::get('pointFun','UserController@pointFun');
-
-	//微博评论
-	Route::get('type','UserController@type');
-
-	//微博转发
-	Route::get('ward','UserController@ward');
-
-	//删除全部图片
-	Route::post('photo/delete','UserController@photoDelete');
-
-	//删除单个图片
-	Route::post('photo/move','UserController@photomove');
-	
-	
-});
-
-//前台他人个人
-Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
-
-	//======================页面===============================//
-	
-	//个人主页
-	Route::get('/user/{id}','OtherUserController@index');
-
-	//个人相册
-	Route::resource('/photo','OtherUserController@photo');
-
-	//微博评论
-	Route::get('/type','OtherUserController@type');
-
-	//关注
-	Route::get('/attention/{id}','OtherAttentionController@index');
-
-	//粉丝
-	Route::get('/fans/{id}','OtherFansController@index');
-
-	//========================功能==================================//
-
-	//删除评论
-	Route::post('/replay/delete','OtherUserController@replayDelete');
-
-	//微博转发
-	Route::get('/ward','OtherUserController@ward');
-
-	//点赞微博
-	Route::get('/pointFun','OtherUserController@pointFun');
-
-	//关注他人
-	Route::get('/act/{id}','OtherUserController@attentionAction');
-
-
-
-});
 
 
 //===========================前台未登录==============================//
@@ -139,33 +51,33 @@ Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
 
 
 	//系统公告
-	Route::get('/notice/','AdminController@notice');
+	Route::get('/notice','AdminController@notice');
 
 //============================注册=========================//
 
 	//注册跳登录页面
-	Route::post('admin','AdminController@alog');
+	Route::post('/admin','AdminController@alog');
 
 	//登录时验证手机号是否已注册
-	Route::post('admin/phones','AdminController@phone');
+	Route::post('/admin/phones','AdminController@phone');
 
 	//忘记密码页面
-	Route::get('admin/find','AdminController@find');
+	Route::get('/admin/find','AdminController@find');
 
 	//忘记密码页面修改手机号验证是否已注册
-	Route::get('admin/find/phone','AdminController@fphone');
+	Route::get('/admin/find/phone','AdminController@fphone');
 
 	//忘记密码更新数据库
-	Route::post('admin/find/fupdate','AdminController@fupdate');
+	Route::post('/admin/find/fupdate','AdminController@fupdate');
 	
 	//注册页面
-	Route::get('register','RegisterController@index');
+	Route::get('/register','RegisterController@index');
 
 	//注册时验证手机号是否存在
-	Route::get('register/phone','RegisterController@verification');
+	Route::get('/register/phone','RegisterController@verification');
 
 	//检验验证码是否正确
-	Route::get('register/code','RegisterController@code');
+	Route::get('/register/code','RegisterController@code');
 
 	//前台短信验证
 	Route::post('/code','CodeController@send');
@@ -258,9 +170,6 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 
 	Route::post('/blog/pics',"BlogController@pics");
 
-	
-
-
 
 //=======================完善个人中心===========================//
 
@@ -277,60 +186,123 @@ Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],functio
 	Route::post('/details/deposit','DetailsController@deposit');
 
 	//修改个人信息页面
-	Route::get('details/edit','DetailsController@edit');
+	Route::get('/details/edit','DetailsController@edit');
 
 	//修改个人信息头像页面
-	Route::post('details/editphoto','DetailsController@editphoto');
+	Route::post('/details/editphoto','DetailsController@editphoto');
 
 	//修改个人信息方法执行
-	Route::post('details/update','DetailsController@update');
+	Route::post('/details/update','DetailsController@update');
 
 	//修改密码页面
-	Route::get('changepass','DetailsController@changepass');
+	Route::get('/changepass','DetailsController@changepass');
     
     //修改密码判断旧密码是否与表中一致
-	Route::post('changepass/oldpass','DetailsController@oldpass');
+	Route::post('/changepass/oldpass','DetailsController@oldpass');
     
     //修改密码判断旧新密码是否与旧密码中一致
-	Route::post('changepass/newpass','DetailsController@newpass');
+	Route::post('/changepass/newpass','DetailsController@newpass');
 
 	//执行修改密码存到数据库
-	Route::post('details/changepassword','DetailsController@changepassword');
+	Route::post('/details/changepassword','DetailsController@changepassword');
 
 	//执行退出
-	Route::get('details/quit','DetailsController@quit');
+	Route::get('/details/quit','DetailsController@quit');
 });
 
 
-//===================前台个人中心=====================//
+//前台个人
 Route::group(['prefix'=>'home','namespace'=>'Home','middleware'=>'home'],function(){
 
+	//====================页面==========================//
+	
 	//个人主页
 	Route::get('/user','UserController@index');
 
-	//个人相册
-	Route::get('/photo','UserController@photo');
+	//系统消息
+	Route::get('/message','UserController@message');
 
-	//个人的点赞
+	//个人相册页面
+	Route::resource('/photo','UserController@photo');
+
+	//个人的点赞页面
 	Route::get('/point','UserController@point');
+
+	//个人的转发页面
+	Route::get('/forward','UserController@forward');
 
 	//个人微博的评论
 	Route::get('/replay','UserController@replay');
 
-	//个人的转发
-	Route::get('/forward','UserController@forward');
-
-	//删除微博
-	Route::post('/delete/{id}','UserController@delete');
-
-	//关注
+	//关注页面
 	Route::resource('/attention','AttentionController');
 
-	//粉丝
+	//粉丝页面
 	Route::resource('/fans','FansController');
+
+	//======================功能=============================//
+
+	//删除微博
+	Route::get('/delete/{id}','UserController@delete');
+
+	//删除评论
+	Route::post('/replay/delete','UserController@replayDelete');
+
+	//点赞微博
+	Route::get('/pointFun','UserController@pointFun');
+
+	//微博评论
+	Route::get('/type','UserController@type');
+
+	//微博转发
+	Route::get('/ward','UserController@ward');
+
+	//删除全部图片
+	Route::post('/photo/delete','UserController@photoDelete');
+
+	//删除单个图片
+	Route::post('/photo/move','UserController@photomove');
+	
+	
 });
 
+//前台他人个人
+Route::group(['prefix'=>'home/other','namespace'=>'Home','middleware'=>'home'],function(){
 
+	//======================页面===============================//
+	
+	//个人主页
+	Route::get('/user/{id}','OtherUserController@index');
+
+	//个人相册
+	Route::resource('/photo','OtherUserController@photo');
+
+	//微博评论
+	Route::get('/type','OtherUserController@type');
+
+	//关注
+	Route::get('/attention/{id}','OtherAttentionController@index');
+
+	//粉丝
+	Route::get('/fans/{id}','OtherFansController@index');
+
+	//========================功能==================================//
+
+	//删除评论
+	Route::post('/replay/delete','OtherUserController@replayDelete');
+
+	//微博转发
+	Route::get('/ward','OtherUserController@ward');
+
+	//点赞微博
+	Route::get('/pointFun','OtherUserController@pointFun');
+
+	//关注他人
+	Route::get('/act/{id}','OtherUserController@attentionAction');
+
+
+
+});
 
 
 //==========================后台路由===================================//
