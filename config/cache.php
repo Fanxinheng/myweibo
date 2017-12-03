@@ -58,7 +58,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'default',
+            'connection' => '127.0.0.1',
         ],
 
     ],

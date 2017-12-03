@@ -50,9 +50,18 @@
         <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 550px;" aria-label="CSS grade: activate to sort column ascending">操作</th>
     </tr>
     </thead>
+        <div class="dataTables_filter" id="DataTables_Table_1_filter">
+            <label style="text-align:content">
+                <center>
+                @if($res->isEmpty())
+                    暂时还没有热门,请快快聚集人气吧!!!
+                @endif
+                </center>
+            </label>
+        </div>
             <tbody role="alert" aria-live="polite" aria-relevant="all">
             @foreach($res as $k => $v)
-                <tr class="odd" align="center">
+                <tr class="even" align="center">
                     <td class="">{{$v->cid}}</td>
                     <td class=" ">{{$v->nickName}}</td>
                     <td class=" ">{{$v->content}}</td>
@@ -70,49 +79,6 @@
             </tbody>
     </table>
             <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
-            <style>
-            .pagination li
-            {
-                background-color: #444444;
-                border-left: 1px solid rgba(255, 255, 255, 0.15);
-                border-right: 1px solid rgba(0, 0, 0, 0.5);
-                box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
-
-                cursor: pointer;
-                display: block;
-                float: left;
-                font-size: 12px;
-                height: 20px;
-                line-height: 20px;
-                outline: medium none;
-                padding: 0 10px;
-                text-align: center;
-                text-decoration: none;
-            }
-
-            .pagination a{
-                color: #fff;
-
-            }
-
-            .pagination .active{
-                background-color: #88a9eb;
-                background-image: none;
-                border: medium none;
-                box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) inset;
-                color: #323232;
-            }
-
-            .pagination .disabled{
-                color: #666666;
-                cursor: default;
-            }
-
-            .pagination{
-
-                margin:0px;
-            }
-            </style>
                  {!! $res->render() !!}
             </div>
         </div>

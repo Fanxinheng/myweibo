@@ -11,7 +11,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="/homes/js/validate.js"></script>
@@ -24,14 +24,16 @@
         </title>
     </head>
     
-    <body id='body'>
+    <body id='body' style="background: #B4DAF0">
         <div id="a"></div>
 
         <div class="container">
             <div class="row">
                 <div class="col-md-12" id='logo' style="background: url('/homes/images/2016.jpg');">
                     <div class="W_nologin_logo_big">
-                        <h1 style="color:white;font-style:oblique"><b>MYWEB</b></h1>
+                        <a href="/home/login" style="text-decoration:none;">
+                        <h1 style="color:white;font-style:oblique"><b>{{$config[0]->name}}</b></h1>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-12"  id='bigbox'>
@@ -95,14 +97,13 @@
      <script>
         var ch2;
         var ch3;
-        var aa = 0;
         //旧密码获取焦点事件
         $('#oldpass').focus(function(){
             $('#spa').html('请输入6-12位旧密码');
         })
 
-        //旧密码失去焦点事件
-        $('#oldpass').blur(function(){
+        //旧密码鼠标移出事件
+        $('#oldpass').mouseout(function(){
            
             oldpass  = $(this).val();
 
@@ -148,13 +149,12 @@
             $('#spa1').html('请输入6-12位新密码');
         })
 
-        //新密码失去焦点事件
-        $('#newpass').blur(function(){
+        //新密码鼠标移出事件
+        $('#newpass').mouseout(function(){
            
             var newpass  = $(this).val();
 
              ch3 = checkNewPassword($('#newpass'),$('#spa1'),6);
-             console.log(ch3);
             if(ch3!=100){
              
               $('#spa1').css('display','block');   

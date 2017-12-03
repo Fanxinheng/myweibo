@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\user;
 
+use Session;
+
 class RegisterController extends Controller
 {
    
@@ -33,7 +35,7 @@ class RegisterController extends Controller
 
     public function code(Request $request)
     {
-    	$res = session('code');
+    	$res = Session('code');
     	echo $res;
     }
 

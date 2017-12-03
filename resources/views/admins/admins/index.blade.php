@@ -30,7 +30,7 @@
 
                         <tbody role="alert" aria-live="polite" aria-relevant="all" style="text-align: center;">
                             @foreach($admin as $k => $v)
-                            <tr class="@if($k%2 == 0) odd @else even @endif" id="admin{{$v->id}}">
+                            <tr class="even" id="admin{{$v->id}}">
                                 <td class=" ">{{$v->id}}</td>
                                 <td class=" ">{{$v->name}}</td>
                                 <td class=" ">{{$v->phone}}</td>

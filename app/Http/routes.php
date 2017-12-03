@@ -10,12 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 
-});
+});*/
 
+//加载主页面
+Route::get('/','Home\AdminController@welcome');
 
 
 //==========================前台路由===================================//
@@ -95,7 +97,7 @@ Route::group(['prefix'=>'home/other','namespace'=>'Home'],function(){
 	//========================功能==================================//
 
 	//删除评论
-	Route::get('/replay/delete/{id}','OtherUserController@replayDelete');
+	Route::post('/replay/delete','OtherUserController@replayDelete');
 
 	//微博转发
 	Route::get('/ward','OtherUserController@ward');

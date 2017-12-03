@@ -175,12 +175,12 @@
                                                             <div class="subinfo_box clearfix">
 
                                                                     <span class="subinfo_face ">
-                                                                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->photo}}" alt="" width="20" height="20">
+                                                                        <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$res->user_info->photo}}" alt="" width="20" height="20">
                                                                     </span>
 
 
                                                                     <span class="subinfo S_txt2">
-                                                                        {{$res->nickName}}
+                                                                        {{$res->user_info->nickName}}
                                                                     </span>
 
                                                                 <span class="subinfo S_txt2">
@@ -214,11 +214,11 @@
                                                     <div class="subinfo_box clearfix" >
 
                                                             <span class="subinfo_face ">
-                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}" alt="" width="20" height="20">
+                                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}" alt="" width="20" height="20">
                                                             </span>
 
                                                             <span class="subinfo S_txt2">
-                                                            {{$v->nickName}}
+                                                            {{$v->user_info->nickName}}
                                                             </span>
 
                                                         <span class="subinfo S_txt2">

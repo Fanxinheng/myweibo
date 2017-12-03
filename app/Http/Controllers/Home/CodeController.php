@@ -28,7 +28,7 @@ class CodeController extends Controller
 		$sendSms = new SendSms;
 		$sendSms->setPhoneNumbers($phone);
 		$sendSms->setSignName('阿呆');
-		$sendSms->setTemplateCode('SMS_111315012');
+		$sendSms->setTemplateCode('SMS_113445617');
 		$sendSms->setTemplateParam(['code' => $code]);
 		$sendSms->setOutId('demo');
 

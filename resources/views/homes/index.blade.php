@@ -6,8 +6,6 @@
         <meta name="csrf_token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
-        <meta content="随时随地发现新鲜事！微博带你欣赏世界上每一个精彩瞬间，了解每一个幕后故事。分享你想表达的，让全世界都能听到你的心声！"
-        name="description">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" type="image/x-icon" href="">
@@ -170,11 +168,11 @@
                                                         <div class="subinfo_box clearfix">
 
                                                                 <span class="subinfo_face " style="cursor: pointer">
-                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}"
+                                                                    <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}"
                                                                     alt="" width="20" height="20">
                                                                 </span>
                                                                 <span class="subinfo S_txt2">
-                                                                    {{$v->nickName}}
+                                                                    {{$v->user_info->nickName}}
                                                                 </span>
                                                                 <span class="subinfo S_txt2">
                                                                     {{date('Y-m-d H:i:s',$v->time)}}
@@ -444,20 +442,24 @@
            
             }
             $.get("/home/pho",{pho:pho},function(data){
+                if(data==2){
+                    layer.msg('您已被冻结，不能正常登录！',{icon: 2})
+                }else{
+                    if(data=='1'){
+                    $('#e1').css('display','none');
+                    ch2 = 100;
+               
+                    aaa=1;
+                  }else{
 
-              if(data=='1'){
-                $('#e1').css('display','none');
-                ch2 = 100;
+                    ch2 = 0;
+                    $("#e1").html("该手机号还未注册,请先去注册");
+                    $('#e1').css('display','block');
+                    aaa=0;
            
-                aaa=1;
-              }else{
+                  }
+                }
 
-                ch2 = 0;
-                $("#e1").html("该手机号还未注册,请先去注册");
-                $('#e1').css('display','block');
-                aaa=0;
-       
-              }
             },'json')
             });
 

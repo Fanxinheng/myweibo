@@ -49,16 +49,16 @@
                     <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">被举报人ID
                     </th>
 
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">举报理由
+                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 316px;" aria-label="Platform(s): activate to sort column ascending">举报时间
                     </th>
 
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 316px;" aria-label="Platform(s): activate to sort column ascending">举报时间
+                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 316px;" aria-label="Platform(s): activate to sort column ascending">操作
                     </th>
                 </tr>
             </thead>
         <tbody role="alert" aria-live="polite" aria-relevant="all">
             @foreach($res as $k => $v)
-            <tr class="odd" align="center">
+            <tr class="even" align="center" id="report{{$v->id}}">
 
                     <!-- 举报微博序号 -->
                     <td class=" ">{{$v->id}}</td>
@@ -74,11 +74,13 @@
                     <td class=" ">{{$re->user_info->nickName}}</td>
                     @endforeach
 
-                    <!-- 举报内容 -->
-                    <td class=" ">{{$v->content}}</td>
-
                     <!-- 时间 -->
                     <td class=" ">{{$v->time}}</td>
+
+                    <!-- 操作 -->
+                    <td class=" ">
+                        <button onclick="shan({{$v->id}})" class="btn btn-default">删除</button>
+                    </td>
             </tr>
             @endforeach
             </tbody>
@@ -97,6 +99,35 @@
 @section('js')
     <script type="text/javascript">
         $('.mws-form-message').delay(3000).slideUp(1000);
+    
+    //举报删除
+   function shan(id){
+    
+    //获取要删除举报的id
+    layer.confirm('您确定要删除此举报微博吗？', {
+      btn: ['确定','取消'] //按钮
+        }, 
+        function(){
+        $.ajax({
+        type: "post",
+        url: '/admin/report/'+id,
+        data: {id:id,_token:'{{csrf_token()}}',_method:'delete'},
 
+        beforeSend:function(){
+        //加载样式
+        a = layer.load(0, {shade: false});},
+
+        success: function(data) {
+ 
+            //关闭加载样式
+            layer.close(a)
+            
+            //移除微博
+            $('#report'+id).remove();
+            layer.msg('举报微博删除成功!', {icon: 1});
+            },
+        })
+    });      
+}
     </script>
 @endsection

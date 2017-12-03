@@ -11,7 +11,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="/homes/js/validate.js"></script>
@@ -39,15 +39,17 @@
 		.btn {height:40px}
 	</style>
     
-    <body style="background: #F3F4F9">
+    <body style="background: #B4DAF0">
     	<div id="a"></div>
 
     	<div class="container">
     		<div class="row">
 	       		<div class="col-md-12" style="background: url('/homes/images/2016.jpg');">
 	        		<div class="W_nologin_logo_big">
-	        			<h1 style="color:white;font-style:oblique"><b>MYWEB</b></h1>
-	        		</div>
+                        <a href="/home/login" style="text-decoration:none;">
+                        <h1 style="color:white;font-style:oblique"><b>{{$config[0]->name}}</b></h1>
+                        </a>
+                    </div>
 	        	</div>
 	        	<div class="col-md-12" style="height:700px;background:white;border-radius:10px">
 	        		<div class="col-md-12" style="height:130px;">
@@ -164,7 +166,7 @@
             spa.innerHTML = '请输入4-8位用户名(数字,字母,下划线)';
         }
 
-        //昵称失去焦点事件
+        //昵称改变事件
         uname.onchange = function(){
 
             //获取昵称
@@ -210,7 +212,7 @@
         
 
         
-        //邮箱失去焦点事件
+        //邮箱改变事件
         $('#email').change(function(){
            
             var email  = $(this).val();

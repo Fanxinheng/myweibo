@@ -17,7 +17,7 @@
         </script>
     </head>
     
-    <body style="background:#F3F4F9 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
+    <body style="background:#B4DAF0 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
@@ -92,7 +92,7 @@
                                         @if($re == 1)
                                         <span id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" style="cursor: pointer;">取消关注</span>
                                         @else
-                                        <span id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" class="btn-defalut" style="cursor: pointer;>关注</span>
+                                        <span id="abtn1" onclick="abtn1({{$rev->uid}})"  class="btn-defalut" class="btn-defalut" style="cursor: pointer;">关注</span>
                                         @endif
                                     </div>
                                     <div id="nickname" style="font-size: 15px;">
@@ -218,14 +218,14 @@
                                     <ul class="nav nav-sidebar">
                                         <li>
                                             <a href="javascript:;" onclick="fnum({{$v->cid}})">
-                                                <span  id="fspan">
+                                                <span  id="fspan{{$v->cid}}">
                                                     转发{{$v->fnum}}&nbsp;&nbsp;|
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="javascript:;" onclick="fun({{$v->cid}})">
-                                                <span id="rspa">
+                                                <span id="rspa{{$v->cid}}">
                                                     评论{{$v->rnum}}&nbsp;&nbsp;|
                                                 </span>
                                             </a>
@@ -383,6 +383,7 @@
                     },
                     success:function(data){
                        $('#he'+id).hide();
+                       layer.close(a);
                     }
                 });
             }
@@ -396,7 +397,7 @@
              $.get('/home/other/type',{tid:cid,conn:conn},function(data){
 
                 //改变转发那里的转发量
-                document.getElementById('rspa').innerHTML="评论"+data['replay'];
+                document.getElementById('rspa'+cid).innerHTML="评论"+data['replay'];
 
                 hejiu = document.getElementById('hejiu'+cid);       
 
@@ -460,7 +461,7 @@
                     $.get('/home/other/ward',{tid:cid,rcon:te},function(data){
 
                     //改变内容    
-                    document.getElementById('fspan').innerHTML="转发"+data['fnum'];
+                    document.getElementById('fspan'+cid).innerHTML="转发"+data['fnum'];
 
                     // //获取积分
                     // document.getElementById('fsoc').innerHTML=data['socre'];

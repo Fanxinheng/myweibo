@@ -21,10 +21,10 @@ class ReplayController extends Controller
     public function create ($id)
     {
     	//查看微博内容
-    	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
+    	$res = contents::with('user_info')->where('cid',$id)->first();
 
     	//查询评论信息
-    	$replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
+    	$replay = replay::with('user_info')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
     	return view('homes/show/replay',['res'=>$res,'replay'=>$replay]);
     }
@@ -55,18 +55,29 @@ class ReplayController extends Controller
 
     	$data = contents::where('cid',$res['tid'])->update($num);
 
-        //登录用户积分+1
-        $socre = user_info::where('uid',$res['uid'])->value('socre');
-
-        $socres['socre'] = $socre + 1;
-
-        $data2 = user_info::where('uid',$res['uid'])->update($socres);
-
     	//将转发内容存入数据库
     	$data1 = replay::insert($res);
 
+        //判断评论人和登录用户是否为同一个人
+        if($request->only('uid')['uid'] != $res['rid']){
+
+            //登录用户积分+1
+            $socre = user_info::where('uid',Session('uid'))->value('socre');
+
+            $socres['socre'] = $socre + 1;
+
+            $data2 = user_info::where('uid',Session('uid'))->update($socres);
+
+            //微博发布者积分+1
+            $socre1 = user_info::where('uid',$request->only('uid'))->value('socre');
+
+            $socres1['socre'] = $socre1 + 1;
+
+            $data3 = user_info::where('uid',$request->only('uid'))->update($socres1);
+        }
+
         //将数据拼装返回
-    	if($data && $data1 && $data2){
+    	if($data && $data1 ){
 
     		return back();
     	}else{

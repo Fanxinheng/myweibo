@@ -27,15 +27,15 @@
     </head>
 
     <body class="FRAME_main B_index">
-        <div class="WB_miniblog">
+        <div class="WB_miniblog" >
             <div class="WB_miniblog_fb">
                 <div id="plc_top">
                     <!--简易顶部导航拼页面用-->
                         <div class="WB_global_nav WB_global_nav_v2 " node-type="top_all">
-                            <div class="gn_header clearfix" style="width:1000px">
+                            <div class="gn_header clearfix" style="width:1000px;">
 
                                 <!-- logo -->
-                                <div class="gn_logo" node-type="logo" data-logotype="logo" data-logourl="/admin">
+                                <div class="gn_logo" node-type="logo" data-logotype="logo" d>
                                     <a href="/home/login" class="box" title=""
                                     node-type="logolink" suda-uatrack="key=topnav_tab&amp;value=weibologo"
                                     target="_top">
@@ -194,13 +194,7 @@
                                         
 
                                             <div class="kind" style="height: 35px;margin-top: 3px;">
-                                               <a class="S_txt1" href="javascript:void(0);" action-type="face" action-data="type=500&amp;action=1&amp;log=face&amp;cate=1"
-                                               title="表情" node-type="smileyBtn" suda-uatrack="key=tblog_home_edit&amp;value=phiz_button">
-                                                   <em class="W_ficon ficon_face">
-                                                       <img src="/homes/images/bq.png" alt="" style="width: 15px;height: 15px;margin-bottom: 5px">
-                                                   </em>
-                                                   表情
-                                               </a>
+                                               
                                                 <a class="S_txt1" title="图片" style="position: relative;" onclick="pic_upload()">
                                                     <em class="W_ficon ficon_image" style="font-size:16px">
                                                         <span class="glyphicon glyphicon-picture" aria-hidden="true" ></span>
@@ -253,9 +247,9 @@
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
                                                             <a target="_top" class="W_face_radius" suda-uatrack="key=feed_headnick&amp;value=pubuser_head:4172237139817031"
-                                                            href="/home/other/user/{{$v->uid}}" title="{{$v->nickName}}" indepth="true">
-                                                                <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->nickName}}"
-                                                                alt="" src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"
+                                                            href="/home/other/user/{{$v->user_info->uid}}" title="{{$v->user_info->nickName}}" indepth="true">
+                                                                <img usercard="id=3305085281&amp;refer_flag=0000015010_" title="{{$v->user_info->nickName}}"
+                                                                alt="" src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim"
                                                                 width="50" height="50" class="W_face_radius">
                                                             </a>
                                                         </div>
@@ -264,12 +258,12 @@
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
 
-                                                            target="_top" class="W_f14 W_fb S_txt1" nick-name="{{$v->nickName}}" title="{{$v->nickName}}" 
+                                                            target="_top" class="W_f14 W_fb S_txt1" title="{{$v->user_info->nickName}}" 
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true" href="/home/other/user/{{$v->uid}}">
-                                                                {{$v->nickName}}
+                                                                {{$v->user_info->nickName}}
                                                             </a>
                                                             <!-- 判断微博是否为登录用户自己发布 -->
-                                                            @if($uid == $v->uid)
+                                                            @if($uid == $v->user_info->uid)
                                                                 <a class="glyphicon glyphicon-remove destroy" onclick="destroy({{$v->cid}})" style="float: right;cursor: pointer;" title="删除微博" id="des{{$v->cid}}">
                                                                     <input type="hidden" name="destroy" value="{{$v->cid}}">
                                                                 </a>

@@ -194,8 +194,8 @@ class DetailsController extends Controller
 			echo "<script>alert('修改成功！');window.location.href='/home/login'</script>";
 		}else{
 
-			echo "<script>alert('修改失败！');</script>";
-			return false;
+			echo "<script>alert('修改失败！');window.location.href='/home/details/edit'</script>";
+			
 		}
 
 	}

@@ -90,6 +90,45 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+         // 通过微博ID查询被删除微博ID对应的评论表
+        $resb = replay::where('tid',$id)->delete();
+
+        // 通过微博ID查询被删除微博ID对应的举报表
+        $resc = report::where('tid',$id)->delete();
+
+        // 通过微博ID查询被删除微博ID对应的转发表
+        $rese = forward::where('tid',$id)->delete();
+
+        // 通过微博ID查询被删除微博ID对应的点赞表
+        $resf = point::where('tid',$id)->delete();
+
+        // 删除七牛云图片
+        $images = contents::where('cid',$id)->value('image');
+        if ($images) {
+            
+            // 初始化七牛云
+            $disk=QiniuStorage::disk('qiniu');
+
+            // 删除七牛云图片
+            $disk->delete($images);
+        }
+
+        // 获取表中当前微博的uid获取
+        $res['uid'] = contents::where('cid',$id)->value('uid');
+
+        // 获取管理员ID
+        $res['aid'] = Session('pid');
+
+        // 写一条信息放入数组中
+        $res['content'] = '您的微博信息违规已被删除!!';
+
+        // 获取时间戳
+        $res['time'] = time();
+
+        // 将此条信息整合发送给被删除微博的用户
+        $res = message::insert($res);
+        
+        // 通过ID查询到要删除的那一条微博ID从数据库删除
+        $resg = contents::where('cid',$id)->delete();
     }
 }

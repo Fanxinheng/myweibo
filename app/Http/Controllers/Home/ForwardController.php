@@ -23,10 +23,10 @@ class ForwardController extends Controller
 
 
     	//查看微博内容
-    	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
+    	$res = contents::with('user_info')->where('cid',$id)->first();
 
     	//查询转发信息
-    	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
+    	$forward = forward::with('user_info')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
 
     	return view('homes/show/forward',['res'=>$res,'forward'=>$forward]);

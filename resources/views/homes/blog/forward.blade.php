@@ -184,28 +184,28 @@
                                                     
                                                     <div class="WB_face W_fl">
                                                         <div class="face">
-                                                            <a title="{{$content->nickName}}" indepth="true">
-                                                                <img class="W_face_radius" width="50" height="50"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$content->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
+                                                            <a title="{{$content->user_info->nickName}}" indepth="true">
+                                                                <img class="W_face_radius" width="50" height="50"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$content->user_info->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                             </a>
                                                         </div>
                                                     </div>
                                                     <div class="WB_detail">
                                                         <div class="WB_info">
                                                             <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
-                                                            target="_top" class="W_f14 W_fb S_txt1" title="{{$content->nickName}}" 
+                                                            target="_top" class="W_f14 W_fb S_txt1" title="{{$content->user_info->nickName}}" 
                                                             usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
-                                                                {{$content->nickName}}
+                                                                {{$content->user_info->nickName}}
                                                             </a>
                                                             
                                                             <!-- 判断微博是否为登录用户发布 -->
-                                                            @if($uid != $content->uid)
+                                                            @if($uid != $content->user_info->uid)
                                                                 @if($bool)
-                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 14px;" onclick="attent({{$content->uid}})" title="取消关注">√ 已关注
+                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 14px;" onclick="attent({{$content->user_info->uid}})" title="取消关注">√ 已关注
                                                                         <input type="hidden" name="attent" value="{{$content->uid}}">
                                                                     </a>
 
                                                                 @else
-                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 15px;" onclick="attent({{$content->uid}})" title="关注博主">关注
+                                                                    <a id="attent" style="float: right;cursor: pointer;font-size: 15px;" onclick="attent({{$content->user_info->uid}})" title="关注博主">关注
                                                                         <input type="hidden" name="attent" value="{{$content->uid}}">
                                                                     </a>
                                                                 @endif
@@ -270,7 +270,7 @@
                                             <form action="/home/forward/store/" method="post">
                                                 <div class="WB_feed_detail clearfix" node-type="feed_content" ">
                                                     <textarea class="form-control" rows="3" name="fcontent"></textarea>
-                                                    <input type="hidden" name="uid" value="{{$content->uid}}">
+                                                    <input type="hidden" name="uid" value="{{$content->user_info->uid}}">
                                                     <input type="hidden" name="tid" value="{{$content->cid}}">
                                                     {{csrf_field()}}
                                                     <button class="btn btn-default btn-sm" id="report" style="float: right;margin:5px 0 5px 0">转发</button>
@@ -317,17 +317,17 @@
                                         
                                         <div class="WB_face W_fl">
                                             <div class="face">
-                                                <a title="{{$v->nickName}}" indepth="true">
-                                                    <img class="W_face_radius" width="50" height="50"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
+                                                <a title="{{$v->user_info->nickName}}" indepth="true">
+                                                    <img class="W_face_radius" width="50" height="50"  src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/200/h/200/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim">
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="WB_detail">
                                             <div class="WB_info">
                                                 <a suda-uatrack="key=feed_headnick&amp;value=pubuser_nick:4172237139817031"
-                                                target="_top" class="W_f14 W_fb S_txt1" title="{{$v->nickName}}" 
+                                                target="_top" class="W_f14 W_fb S_txt1" title="{{$v->user_info->nickName}}" 
                                                 usercard="id=3305085281&amp;refer_flag=0000015010_" indepth="true">
-                                                    {{$v->nickName}}
+                                                    {{$v->user_info->nickName}}
                                                 </a>
                                                
                                             </div>

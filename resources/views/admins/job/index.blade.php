@@ -60,7 +60,7 @@
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
 
                     @foreach($job as $k => $v)
-                        <tr class="@if ( $v->id % 2 == 0 ) odd @else even @endif" id="job{{$v->id}}">
+                        <tr class="even" id="job{{$v->id}}">
                             <td >
                                 <center>{{$v->id }}</center>
                             </td>

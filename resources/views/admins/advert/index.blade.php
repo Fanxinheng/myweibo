@@ -107,7 +107,7 @@
 
                     @foreach($res as $k=>$v)
 
-                        <tr class="@if($k % 2 == 0 ) odd @else even @endif" id="advert{{$v->id}}">
+                        <tr class="even" id="advert{{$v->id}}">
 
                                     <td class=" ">
                                         <center> {{$v->user}}</center>
@@ -188,18 +188,18 @@
 
                         //改变用户状态
                         if(data==0){
-                            layer.msg('广告状态已上架！', {icon: 1});
+                            layer.msg('广告已上架！', {icon: 1});
                             document.getElementById('status'+id).innerHTML = '上架';
                             document.getElementById('user'+id).innerHTML = '广告下架';
                         }else{
-                            layer.msg('广告状态已下架！', {icon: 1});
+                            layer.msg('广告已下架！', {icon: 1});
                             document.getElementById('status'+id).innerHTML = '下架';
                             document.getElementById('user'+id).innerHTML = '广告上架';
                         }
 
                                             },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        layer.msg("状态修改失败，请检查网络后重试", {icon:2 ,})
+                        layer.msg("广告状态修改失败，请检查网络后重试", {icon:2 ,})
                     }
                 });
 

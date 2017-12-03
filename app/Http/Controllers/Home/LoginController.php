@@ -16,6 +16,7 @@ use App\Http\Model\job;
 
 use Hash;
 use Session;
+use Redis;
 
 
 class LoginController extends Controller
@@ -41,9 +42,7 @@ class LoginController extends Controller
      	$cnum = contents::where('uid',$uid)->count();
 
       //查询微博内容
-      $index = contents::join('user_info',function($join){
-      	$join->on('contents.uid','=','user_info.uid');
-      })->orderBy('time','desc')->paginate(10);
+      $index = contents::with('user_info')->orderBy('time','desc')->paginate(10);
 
     	return view('homes/login',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
@@ -97,9 +96,8 @@ class LoginController extends Controller
      	$cnum = contents::where('uid',$uid)->count();
 
   	//查询热门微博内容
-      $index = contents::join('user_info',function($join){
-      	$join->on('contents.uid','=','user_info.uid');
-      })->where('hot',1)
+      $index = contents::with('user_info')
+      ->where('hot',1)
       ->orWhere('fnum','>',1)
       ->orWhere('rnum','>',1)
       ->orderBy('time','desc')
@@ -127,9 +125,8 @@ class LoginController extends Controller
      	$cnum = contents::where('uid',$uid)->count();
 
       //查询标签微博内容
-      $index = contents::join('user_info',function($join){
-      	$join->on('contents.uid','=','user_info.uid');
-      })->where('label','like','%'.$id.'%')
+      $index = contents::with('user_info')
+      ->where('label','like','%'.$id.'%')
       ->orderBy('time','desc')
       ->paginate(5);
 
@@ -156,8 +153,6 @@ class LoginController extends Controller
 
       //查询转发内容相关
       $index = forward::with('contents.user_info','user_info')->orderBy('time','desc')->paginate(10);
-      // dd($index);
-      
 
       return view('homes/forward',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
@@ -223,19 +218,29 @@ class LoginController extends Controller
 
       //在数据表中查询填写的手机号        
       $res = user::where('phone',$pho)->value('phone');            
-           
+      
+      //在user表中查询出当前用户的状态
+      $status = user::where('phone',$pho)->value('status');
+      
+      //判断该用户是否被举报被举报则不能登录
+      if($status==1){
+        return 2;
+      }
+      
       //判断input框里的手机号是否为空
       if($pho==null){
 
       }else{
-        //判断form获取的手机号和user表中是否一致
-        if ($pho==$res) {
-          echo "1";
-        }else{
-          echo "0";
+          //判断form获取的手机号和user表中是否一致
+          if ($pho==$res) {
+            echo "1";
+          }else{
+            echo "0";
+          }
         }
+      
       }
-    }
+    
 
     //验证密码是否与数据库中的一致
     public function pass(Request $request)         
@@ -267,6 +272,15 @@ class LoginController extends Controller
 
       //获取form中的手机号
       $phone = $request->input('phone');
+
+      $status = user::where('phone',$phone)->value('status');
+
+     if($status==1){
+
+        echo "<script>alert('您已被冻结，不能正常登录！');window.location.href='/home/admin'</script>";
+        die;
+        
+      }
       
       //在User表中根据手机号获取其id 
       $id = user::where('phone',$phone)->value('id');

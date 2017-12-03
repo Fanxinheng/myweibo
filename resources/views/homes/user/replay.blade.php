@@ -13,7 +13,7 @@
         </script>
         <link rel="stylesheet" href="/homes/css/user.replay.css">
     </head>  
-    <body style="background:#F3F4F9 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
+    <body style="background:#B4DAF0 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
     
         <div>
             <div>

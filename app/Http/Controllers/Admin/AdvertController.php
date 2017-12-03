@@ -24,7 +24,7 @@ class AdvertController extends Controller
         //对数据库进行模糊查询
         $res = advert::where('user','like','%'.$request->input('search').'%')->
         //倒叙排列
-        orderBy('user','asc')->
+        orderBy('time','desc')->
         //默认搜索n条数据
         paginate($request->input('paging'));
         //将数据传递到页面中
@@ -114,7 +114,7 @@ class AdvertController extends Controller
      */
     public function show($id)
     {
-                //查询用户原来状态
+        //查询用户原来状态
 
         $date = advert::where('id',$id)->value('status');
 
@@ -221,6 +221,7 @@ class AdvertController extends Controller
 
         //删除七牛云信息
         $data = $disk->delete($res);
+        
         //删除数据库指定id的信息
         $info = advert::where('id',$id)->delete();
 

@@ -8,36 +8,37 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="initial-scale=1,minimum-scale=1">
         <meta content="个人信息" name="description">
-        <link rel="shortcut icon" type="image/x-icon" href="/homes/images/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="/homes/js/validate.js"></script>
         <script type="text/javascript" src="{{asset('/homes/layer/layer.js')}}"></script>
         <link rel="stylesheet" href="{{asset('homes/css/details.css')}}">
-        <!-- <script src="{{ asset('homes/js/details.js') }}" type="text/javascript"></script> -->
     
         <title>
-            个人信息
+            请完善个人信息
         </title>
     </head>
     
-    <body id='body'>
+    <body id='body' style="background: #B4DAF0">
     	<div id="a"></div>
 
     	<div class="container">
     		<div class="row">
-	       		<div class="col-md-12" id='logo'>
-	        		<div class="W_nologin_logo_big">
-	        			<img src="/homes/images/wb_logo-x2.png" alt="">
-	        		</div>
-	        	</div>
+	       		<div class="col-md-12" id='logo' style="background: url('/homes/images/2016.jpg');">
+                    <div class="W_nologin_logo_big">
+                        <a href="/home/login" style="text-decoration:none;">
+                        <h1 style="color:white;font-style:oblique"><b>{{$config[0]->name}}</b></h1>
+                        </a>
+                    </div>
+                </div>
 	        	<div class="col-md-12"  id='bigbox'>
 	        		<div class="col-md-12" id='tit'>
-	        			<div id="redis">个人信息</div>
-	        			<div class="rr"></div>
+	        			<div id="redis">请完善个人信息</div>
+	        			<div class="rr" style="width:249px;"></div>
 						
 	        		</div>
 	        		<div class="col-md-12" id='content'>
@@ -112,18 +113,20 @@
 				
 				<!-- 底部 -->
 	        	<div class="col-md-12" id='footer'>
-						<div id="fleft">
-							<img src="/homes/images/favicon.ico" alt="">
-							<em class="company_name">北京微梦创科网络技术有限公司</em>
-					        <a href="//weibo.com/aj/static/jww.html">京网文[2011]0398-130号</a>
-					        <a href="http://www.miibeian.gov.cn">京ICP备12002058号</a>
-						</div>
+						<div class="left_link" style="width:500px;float:left;">
+                            <span>友情连接：</span>
+                            @foreach($link as $k=>$v)
+                            @if($v->status==0)
+                                <a href="//{{$v->link}}" target="_blank" class="S_txt2" style="text-decoration:none;">{{$v->user}}</a>
+                            @endif
+                            @endforeach
+                        </div>
 
+                        <div class="copy" style="width:200px;float:right;margin-right: 100px">
+                        <a href="#" class="S_txt2" style="text-decoration:none;">版权：{{$config[0]->bank}}    出品</a>
 
-						<div id="fright">
-							<span>Copyright &copy; 2009-2017 WEIBO</span>
-						</div>
-					</div>
+                        </div>
+				</div>
        		</div>
     	</div>
       

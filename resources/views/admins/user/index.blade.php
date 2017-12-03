@@ -64,7 +64,7 @@
 
                         <tbody role="alert" aria-live="polite" aria-relevant="all">
                                 @foreach($res as $k => $v)
-                                <tr class="@if($k%2 == 0) odd @else even @endif" style="text-align: center;">
+                                <tr class="even" style="text-align: center;">
                                     <td class=" ">{{$v->phone ? $v->phone : '未设置'}}</td>
                                     <td class=" ">{{$v->nickName ? $v->nickName : '未设置'}}</td>
                                     <td class=" ">{{$v->sex ? $v->sex : '未设置'}}</td>

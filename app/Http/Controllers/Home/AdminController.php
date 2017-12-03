@@ -15,15 +15,18 @@ use Session;
 use Hash;
 class AdminController extends Controller
 {
+    //加载主页面
+    public function welcome ()
+    {
+        return redirect('home/admin');
+    }
    
    //加载全部微博
     public function index(Request $request)
     {
        
        //查询微博内容
-        $index = contents::join('user_info',function($join){
-            $join->on('contents.uid','=','user_info.uid');
-        })->orderBy('time','desc')->paginate(10);
+        $index = contents::with('user_info')->orderBy('time','desc')->paginate(10);
 
        return view('homes/index',['index'=>$index]);
 
@@ -35,9 +38,8 @@ class AdminController extends Controller
     {
         
     	//查询热门微博内容
-        $index = contents::join('user_info',function($join){
-        	$join->on('contents.uid','=','user_info.uid');
-        })->where('hot',1)
+        $index = contents::with('user_info')
+        ->where('hot',1)
         ->orWhere('fnum','>',1)
         ->orWhere('rnum','>',1)
         ->orderBy('time','desc')
@@ -51,9 +53,8 @@ class AdminController extends Controller
     {
        
         //查询标签
-        $index = contents::join('user_info',function($join){
-            $join->on('contents.uid','=','user_info.uid');
-        })->where('label','like','%'.$id.'%')
+        $index = contents::with('user_info')
+        ->where('label','like','%'.$id.'%')
         ->orderBy('time','desc')
         ->paginate(10);
 
@@ -92,12 +93,23 @@ class AdminController extends Controller
     {
 
         //获取表单传过来的信息
-        $res = $request->only('phone','password');
+        $res['phone'] = $request->input('phone');
+
+        //获取验证码
+        $code = $request->input('code');
+
+        if($code != Session('code')){
+
+            $request->flashOnly('phone',$res['phone']);
+            echo "<script>alert('验证码不正确');window.location.href='/home/register';</script>";
+            die;
+
+        }
 
         //密码用哈希加密
         $res['password']=Hash::make($request->input('password'));
 
-        // //往user表里添加数据
+        //往user表里添加数据
         $data = user::insert($res);
 
         //判断注册成功

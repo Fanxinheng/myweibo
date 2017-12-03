@@ -102,7 +102,7 @@
 
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
                 @foreach ($res as $k => $v)
-                        <tr class="@if($k % 2 == 0 ) odd @else even @endif" id="link{{$v->id}}"">
+                        <tr class="even" id="link{{$v->id}}"">
                             <td class=" ">
                                 <center>{{$v->user}}</center>
                             </td>
@@ -156,7 +156,7 @@
 
             function link_delete(id){
 
-                layer.confirm('您确定要删除此广告吗？', {
+                layer.confirm('您确定要删除此链接吗？', {
                   btn: ['确定','取消'] //按钮
               },function(){
                  $.ajax({
@@ -176,10 +176,10 @@
                         //移除标签
                         $('#link'+id).remove();
 
-                        layer.msg('广告删除成功:)', {icon: 1});
+                        layer.msg('链接删除成功:)', {icon: 1});
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        layer.msg("广告删除失败，请检查网络后重试", {icon:2 ,})
+                        layer.msg("链接删除失败，请检查网络后重试", {icon:2 ,})
                     }
                 });
 

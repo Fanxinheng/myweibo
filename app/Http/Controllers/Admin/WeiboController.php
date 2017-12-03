@@ -10,6 +10,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\label;
 use App\Http\Model\contents;
 use App\Http\Model\user_info;
+use App\Http\Model\replay;
+use App\Http\Model\forward;
+use App\Http\Model\point;
+use App\Http\Model\message;
+use zgldh\QiniuStorage\QiniuStorage;
+use Session;
+
 class WeiboController extends Controller
 {
     /**
@@ -25,9 +32,14 @@ class WeiboController extends Controller
 
         // 通过contents表联查user_info表查询相应发博人用户名
         $resd = contents::join('user_info','contents.uid','=','user_info.uid')
-        ->where('content','like','%'.$request->input('content').'%')
-        ->orWhere('label','like','%'.$request->input('select').'%')
-        ->paginate(5); 
+
+        ->Where('label','like','%'.$request->input('select').'%')
+
+        ->Where('content','like','%'.$request->input('content').'%')
+
+        ->paginate(10); 
+
+        
 
         // 返回视图页面并把查询到的值发送到模板遍历到相应位置
         return view('admins/weibo/index',['resa'=>$resa,'resd'=>$resd,'request'=>$request]);
@@ -72,10 +84,10 @@ class WeiboController extends Controller
      * @param  int  $id
      * @returnint(0) \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($cid)
     {   
         //获取表中当前微博的hot值
-        $hot = contents::where('cid',$id)->value('hot');
+        $hot = contents::where('cid',$cid)->value('hot');
 
         //判断如果hot为1修改其为0，反之为1
         if($hot=='1'){
@@ -84,7 +96,7 @@ class WeiboController extends Controller
             $res['hot'] = 0;
 
             //以contents表的cid查询相对应hot下的值并更新其值
-            $req = contents::where('cid',$id)->update($res);
+            $req = contents::where('cid',$cid)->update($res);
 
         }else{
 
@@ -92,10 +104,9 @@ class WeiboController extends Controller
             $res['hot']=1;
 
             //以contents表的cid查询相对应hot下的值并更新其值
-            $req = contents::where('cid',$id)->update($res);}
+            $req = contents::where('cid',$cid)->update($res);}
 
-        // 返回并重新走一遍index方法   
-        return redirect('admin/weibo');  
+        return $res; 
     }
 
     /**
@@ -125,8 +136,46 @@ class WeiboController extends Controller
      */
     public function destroy($id)
     {
+         // 通过微博ID查询被删除微博ID对应的评论表
+        $resb = replay::where('tid',$id)->delete();
 
+        // 通过微博ID查询被删除微博ID对应的举报表
+        $resc = report::where('tid',$id)->delete();
+
+        // 通过微博ID查询被删除微博ID对应的转发表
+        $rese = forward::where('tid',$id)->delete();
+
+        // 通过微博ID查询被删除微博ID对应的点赞表
+        $resf = point::where('tid',$id)->delete();
+
+        // 删除七牛云图片
+        $images = contents::where('cid',$id)->value('image');
+        if ($images) {
+            
+            // 初始化七牛云
+            $disk=QiniuStorage::disk('qiniu');
+
+            // 删除七牛云图片
+            $disk->delete($images);
+        }
+
+        // 获取表中当前微博的uid获取
+        $res['uid'] = contents::where('cid',$id)->value('uid');
+
+        // 获取管理员ID
+        $res['aid'] = Session('pid');
+
+        // 写一条信息放入数组中
+        $res['content'] = '您的微博信息违规已被删除!!';
+
+        // 获取时间戳
+        $res['time'] = time();
+
+        // 将此条信息整合发送给被删除微博的用户
+        $res = message::insert($res);
         
-        
+        // 通过ID查询到要删除的那一条微博ID从数据库删除
+        $resg = contents::where('cid',$id)->delete();
     }
+        
 }

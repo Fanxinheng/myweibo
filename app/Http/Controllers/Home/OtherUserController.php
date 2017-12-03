@@ -34,9 +34,9 @@ class OtherUserController extends Controller
         }
 
         //查询用户的信息是否存在于数组中
-        $r = user_attention::where('uid',$sid)->where('gid',$id)->get();
+        $r = user_attention::where('uid',$sid)->where('gid',$id)->count();
 
-        if($r){
+        if($r>0){
 
             $re = 1;
 

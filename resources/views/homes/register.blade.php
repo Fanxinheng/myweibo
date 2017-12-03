@@ -11,7 +11,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
 	
 
@@ -31,16 +31,17 @@
 
 	</style>
     <!-- 9ECCEA -->
-    <body style="background: #F3F4F9">
+    <body style="background: #B4DAF0">
     	<div id="a"></div>
 
     	<div class="container">
     		<div class="row">
 	       		<div class="col-md-12" style="background: url('/homes/images/2016.jpg');">
 	        		<div class="W_nologin_logo_big">
-	        			<!-- <img src="/homes/images/wb_logo-x2.png" alt=""> -->
-	        			<h1 style="color:white;font-style:oblique"><b>MYWEB</b></h1>
-	        		</div>
+                        <a href="/home/login" style="text-decoration:none;">
+                        <h1 style="color:white;font-style:oblique"><b>{{$config[0]->name}}</b></h1>
+                        </a>
+                    </div>
 	        	</div>
 	        	<div class="col-md-12" style="height:500px;background:white;border-radius:10px">
 	        		<div class="col-md-12" style="height:130px;">
@@ -54,10 +55,26 @@
 								  <div class="form-group" >
 								    <label for="inputphone3" class="col-sm-2 control-label" ><span style="color:red;margin-right: 5px;">*</span>手机号:</label>
 								    <div class="col-sm-4" style="width: 800px;height:40px">
-								      <input type="text" class="form-control"  placeholder="请输入手机号" name="phone" id="phone" style="width: 345px;float: left" value="" required maxlength="11">
+								      <input type="text" class="form-control"  placeholder="请输入手机号" name="phone" id="phone" style="width: 345px;float: left" required maxlength="11" value="{{old('phone')}}">
 								      <span id="spa" style="float:left;margin-left: 10px;margin-top: 7px;color:#3EA0E1;font-size:18px"></span>
 								    </div>
 								  </div>
+
+								  <div class="form-group">
+								    <label for="inputcode3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>激活码:</label>
+									
+									<div class="col-sm-offset-2 col-sm-2" style="margin-left:2px">
+								      <input  type="submit" class="btn btn-default" id="btn1" style="font-size:16px" value="免费获取短信激活码">
+								    </div>
+
+								    <div class="col-sm-2" style="width: 600px;height:40px">
+								      <input type="text" class="form-control"  name="code" placeholder="输入验证码" name="code" id="code" style="width: 156px;float: left" required maxlength="6"> 
+								      <span id="spa3" style="float:left;margin-left: 10px;margin-top: 10px;color:#3EA0E1;font-size:18px">
+								    </div>
+								    
+								  </div>
+
+
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>密码:</label>
 								    <div class="col-sm-4" style="width: 800px;height:40px">
@@ -72,19 +89,7 @@
 								      <span id="spa2" style="float:left;margin-left: 10px;margin-top: 10px;color:#3EA0E1;font-size:18px">
 								    </div>
 								  </div>
-								  <div class="form-group">
-								    <label for="inputcode3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>激活码:</label>
-									
-									<div class="col-sm-offset-2 col-sm-2" style="margin-left:2px">
-								      <input  type="submit" class="btn btn-default" id="btn1" style="font-size:16px" value="免费获取短信激活码">
-								    </div>
-
-								    <div class="col-sm-2" style="width: 600px;height:40px">
-								      <input type="text" class="form-control"  name="code" placeholder="输入验证码" name="code" id="code" style="width: 156px;float: left" required maxlength="6"> 
-								      <span id="spa3" style="float:left;margin-left: 10px;margin-top: 10px;color:#3EA0E1;font-size:18px">
-								    </div>
-								    
-								  </div>
+								  
 								  <div class="form-group" style="margin-top:30px">
 								    <div class="col-sm-offset-2 col-sm-10">
 								    	{{csrf_field()}}
@@ -121,27 +126,6 @@
       <script>
       		
      	// alert($);
-     	//验证码发送ajax
-     	$('#btn1').click(function(){
-
-     		$.ajaxSetup({
-		        headers: {
-		            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-		       }
-			});
-
-     		var phone = $('input[name=phone]').val();
-     		// console.log(phone);
-
-     		$.post('/home/code',{phone:phone},function(data){
-
-				// console.log(data);
-				// alert(data);
-			});
-
-			return false;
-     	});
-
 
      	//表单验证
      	var phones = document.getElementById('phone');
@@ -152,6 +136,8 @@
      	var spa2 = document.getElementById('spa2');
      	var spa3 = document.getElementById('spa3');
      	var code = document.getElementById('code');
+     	var zc = document.getElementById('zc');
+     	var btn1 = document.getElementById('btn1');
      	
 
      	//手机号获取焦点事件
@@ -161,20 +147,18 @@
      		spa.innerHTML= '请输入11位手机号!';
 
      	}
-		//手机号失去焦点事件
-		phones.onblur = function(){
+		//手机号鼠标移出事件
+		phone.onmouseout = function(){
 
 			//获取手机号
-			var phone = this.value;
+			var phone = $('#phone').val();
 
 			//写正则
 			var reg = /^1[34578]\d{9}$/;
 
-			// console.log(pv);
 			//检测
 			var check = reg.test(phone);
 
-			// console.log(check);
 			//判断手机号是否为空,在判断正则
 			if(check){
 
@@ -202,88 +186,31 @@
 
 			
 		};
-	
 
-		//密码获取去焦点事件
-		password.onfocus = function(){
+		
+		//验证码发送ajax
+     	
+     	$('#btn1').click(function(){
 
-			//添加提示信息
-     		spa1.innerHTML= '请输入6-12位数字,字母或常用符号!';
+     		$.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+		       }
+			});
 
-     	}
+     		var phone = $('input[name=phone]').val();
+     		// console.log(phone);
 
-		//密码失去焦点事件
-		password.onblur = function(){
+     		$.post('/home/code',{phone:phone},function(data){
 
-			//获取密码
-			pass = this.value;
+				// console.log(data);
+				// alert(data);
+			});
 
-			//写正则
-			var reg = /^\S{6,12}$/;
+			return false;
+     	});
 
-			// console.log(pv);
-			//检测
-			var check = reg.test(pass);
-
-			// console.log(check);
-			if(pass==""){
-
-				spa1.innerHTML= '密码不能为空!';
-				spa1.style.color='red';
-				$('#btn1').attr('disabled',true);
-				$('#zc').attr('disabled',true);
-			}else if(check){
-
-				spa1.innerHTML= '√';
-				spa1.style.color='green';
-				$('#btn1').attr('disabled',false);
-				$('#zc').attr('disabled',false);
-
-			} else {
-				
-
-				spa1.innerHTML= '密码格式不正确!';
-				spa1.style.color='red';
-				$('#btn1').attr('disabled',true);
-				$('#zc').attr('disabled',true);
-			}
-		};
-
-		//确认密码获取焦点事件
-		surepass.onfocus = function(){
-
-			//添加提示信息
-     		spa2.innerHTML= '再输一遍密码';
-
-     	}
-		//确认密码失去焦点事件
-		surepass.onblur = function(){
-
-			//获取密码
-			var surepass = this.value;
-
-			if(surepass==""){
-
-				spa2.innerHTML='密码不能为空';
-				spa2.style.color='red';
-				$('#btn1').attr('disabled',true);
-				$('#zc').attr('disabled',true);
-			}else if(surepass==pass){
-
-				spa2.innerHTML= '√';
-				spa2.style.color='green';
-				$('#btn1').attr('disabled',false);
-				$('#zc').attr('disabled',false);
-			} else {
-
-				spa2.innerHTML= '两次密码不一致!';
-				spa2.style.color='red';
-				$('#btn1').attr('disabled',true);
-				$('#zc').attr('disabled',true);
-			}
-		};
-
-		//验证码获取焦点事件
+     	//验证码获取焦点事件
 		code.onfocus = function(){
 
 			//添加提示信息
@@ -291,17 +218,13 @@
 
      	}
 
-		//验证码失去焦点事件
-		code.onblur = function(){
+		//验证码鼠标移出事件
+		code.onmouseout = function(){
 
 			//获取验证码
-			code = this.value;
-			// console.log(code);
-
+			code = $('#code').val();
 
 			$.get('/home/register/code',{code:code},function(data){
-     			console.log(code);
-     			console.log(data);
 
      			if(code==""){
 
@@ -322,6 +245,80 @@
      		});
 
      	};
+
+		//密码获取焦点事件
+		password.onfocus = function(){
+
+			//添加提示信息
+     		spa1.innerHTML= '请输入6-12位数字,字母或常用符号!';
+
+     	}
+
+		//密码鼠标移出事件
+		password.onmouseout = function(){
+
+			//获取密码
+			pass = this.value;
+
+			//写正则
+			var reg = /^\S{6,12}$/;
+
+			//检测
+			var check = reg.test(pass);
+
+			if(pass==""){
+
+				spa1.innerHTML= '密码不能为空!';
+				spa1.style.color='red';
+				$('#zc').attr('disabled',true);
+			}else if(check){
+
+				spa1.innerHTML= '√';
+				spa1.style.color='green';
+				$('#zc').attr('disabled',false);
+
+			} else {
+				
+
+				spa1.innerHTML= '密码格式不正确!';
+				spa1.style.color='red';
+				$('#zc').attr('disabled',true);
+			}
+		};
+
+		//确认密码获取焦点事件
+		surepass.onfocus = function(){
+			$('#zc').attr('disabled',false);
+			//添加提示信息
+     		spa2.innerHTML= '再输一遍密码';
+
+     	}
+
+		//确认密码鼠标移出事件
+		surepass.onmouseout = function(){
+
+			//获取确认密码的值
+			var surepass = $('#surepass').val();
+
+			if(surepass==""){
+
+				spa2.innerHTML='密码不能为空';
+				spa2.style.color='red';
+				$('#zc').attr('disabled',true);
+			}else if(surepass==pass){
+
+				spa2.innerHTML= '√';
+				spa2.style.color='green';
+				$('#zc').attr('disabled',false);
+			} else {
+
+				spa2.innerHTML= '两次密码不一致!';
+				spa2.style.color='red';
+				$('#zc').attr('disabled',true);
+			}
+		};
+
+		
 
 	 </script>
     </body>

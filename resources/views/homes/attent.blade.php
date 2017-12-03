@@ -193,13 +193,7 @@
                                         
 
                                             <div class="kind" style="height: 35px;margin-top: 3px;">
-                                               <a class="S_txt1" href="javascript:void(0);" action-type="face" action-data="type=500&amp;action=1&amp;log=face&amp;cate=1"
-                                               title="表情" node-type="smileyBtn" suda-uatrack="key=tblog_home_edit&amp;value=phiz_button">
-                                                   <em class="W_ficon ficon_face">
-                                                       <img src="/homes/images/bq.png" alt="" style="width: 15px;height: 15px;margin-bottom: 5px">
-                                                   </em>
-                                                   表情
-                                               </a>
+                                               
                                                 <a class="S_txt1" title="图片" style="position: relative;" onclick="pic_upload()">
                                                     <em class="W_ficon ficon_image" style="font-size:16px">
                                                         <span class="glyphicon glyphicon-picture" aria-hidden="true" ></span>

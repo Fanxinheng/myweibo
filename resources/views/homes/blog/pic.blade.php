@@ -34,12 +34,12 @@
 
                 //图片全部上传成功后判断是否继续
                 layer.confirm('图片上传成功，是否需要继续上传？', {
-                    btn: ['继续','取消'] //按钮
-                }, function(){
-                    
+                    btn: ['取消','继续'] //按钮
                 }, function(){
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);
+                }, function(){
+                    
                 });
 
             },

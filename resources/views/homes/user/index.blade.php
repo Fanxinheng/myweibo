@@ -20,7 +20,7 @@
         <title>{{$config[0]->name}}</title>
     </head>
     
-    <body style="background: #F3F4F9 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
+    <body style="background: #B4DAF0 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
@@ -265,14 +265,14 @@
                                     <ul class="nav nav-sidebar">
                                         <li>
                                             <a href="javascript:;" onclick="fnum({{$v->cid}})">
-                                                <span id="fspan">
+                                                <span id="fspan{{$v->cid}}">
                                                     转发{{$v->fnum}}
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="javascript:;" onclick="fun({{$v->cid}})">
-                                                <span id="rspa">
+                                                <span id="rspa{{$v->cid}}">
                                                     评论{{$v->rnum}}
                                                 </span>
                                             </a>
@@ -315,7 +315,7 @@
                                             <a href="/home/other/user/{{$val->user_info->uid}}">
                                             <div class="col-log-2" id="rimg">
                                                 <!-- <img width="30" height="30" src="/homes/images/2015.jpg"> -->
-                                                  <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$v->user_info->photo}}?imageView2/1/w/35/h/35/q/75" id="img" class="img-circle">
+                                                  <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$val->user_info->photo}}?imageView2/1/w/35/h/35/q/75" id="img" class="img-circle">
                                             </div>
                                             </a>
                                             <!-- 名称和时间 -->
@@ -394,7 +394,7 @@
                     success:function(data){
                       
                     //改变转发那里的转发量
-                    document.getElementById('rspa').innerHTML="评论"+data['rnum'];
+                    document.getElementById('rspa'+data['tid']).innerHTML="评论"+data['rnum'];
 
                     //改变未读的消息量
                     document.getElementById('rediv').innerHTML=data['status']; 
@@ -403,6 +403,7 @@
                         //隐藏未读消息框
                         $('#rediv').hide();
                     }
+
 
                     $('#he'+id).remove();
 
@@ -420,8 +421,8 @@
 
              $.get('/home/type',{tid:cid,conn:conn},function(data){
 
-                //改变转发那里的转发量
-                document.getElementById('rspa').innerHTML="评论"+data['replay'];
+                //改变评论那里的转发量
+                document.getElementById('rspa'+cid).innerHTML="评论"+data['replay'];
 
                 //改变未读的消息量
                 document.getElementById('rediv').innerHTML=data['status'];
@@ -469,7 +470,7 @@
                     $.get('/home/ward',{tid:cid,rcon:te},function(data){
 
                     //改变内容    
-                    document.getElementById('fspan').innerHTML="转发"+data['fnum'];
+                    document.getElementById('fspan'+cid).innerHTML="转发"+data['fnum'];
 
                     //改变消息框里的内容
                     document.getElementById('fdiv').innerHTML=data['news'];

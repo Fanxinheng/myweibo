@@ -11,7 +11,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/homes/bootstrap/css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="/homes/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
     
 
@@ -31,15 +31,16 @@
 
     </style>
     <!-- #9ECCEA -->
-    <body style="background:#F3F4F9 ">
+    <body style="background:#B4DAF0">
         <div id="a"></div>
 
         <div class="container">
             <div class="row">
                 <div class="col-md-12" style="background: url('/homes/images/2016.jpg');">
                     <div class="W_nologin_logo_big">
-                        <!-- <img src="/homes/images/wb_logo-x2.png" alt=""> -->
-                        <h1 style="color:white;font-style:oblique"><b>MYWEB</b></h1>
+                        <a href="/home/login" style="text-decoration:none;">
+                        <h1 style="color:white;font-style:oblique"><b>{{$config[0]->name}}</b></h1>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-12" style="height:500px;background:white;border-radius:10px">
@@ -62,7 +63,7 @@
                                     <label for="inputcode3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>短信验证:</label>
                                     
                                     <div class="col-sm-offset-2 col-sm-2" style="margin-left:2px">
-                                      <input type="submit" class="btn btn-default" id="btn1" style="font-size:16px" value="获取短信验证码">
+                                      <input type="submit" class="btn btn-default" id="btn1" style="font-size:16px;width:170px" value="获取短信验证码">
                                     </div>
 
                                     <div class="col-sm-2" style="width: 600px;height:40px">
@@ -90,8 +91,8 @@
                                     <div class="col-sm-offset-2 col-sm-10">
                                         {{csrf_field()}}
                                       <input type="submit" value="立即修改" style="background:#FFA00A; color:white;width:200px;height:40px;border-radius:5px;font-size:19px" id="btn2">
-                                      已修改密码,
-                                      <a href="/home/admin">直接登录>></a>
+                                      不修改密码,
+                                      <a href="/home/admin">前去登录>></a>
                                     </div>
                                   </div>
                                 </form>
@@ -130,9 +131,17 @@
         var spa2 = document.getElementById('spa2');
         var spa3 = document.getElementById('spa3');
         var code = document.getElementById('code');
+       
+        //手机号获取焦点事件
+        phones.onfocus = function(){
+
+            //添加提示信息
+            spa.innerHTML= '请输入11位手机号!';
+
+        }
  
-        //手机号失去焦点事件
-        phones.onblur = function(){
+        //手机号移出事件
+        phones.onmouseout = function(){
 
             //获取手机号
             var phone = this.value;
@@ -208,8 +217,8 @@
 
         }
 
-        //验证码失去焦点事件
-        code.onblur = function(){
+        //验证码鼠标移出事件
+        code.onmouseout = function(){
 
             //获取验证码
             code = this.value;
@@ -249,8 +258,8 @@
 
         }
 
-        //密码失去焦点事件
-        password.onblur = function(){
+        //密码鼠标移出事件
+        password.onmouseout = function(){
 
             //获取密码
             pass = this.value;
@@ -291,8 +300,8 @@
             spa2.innerHTML= '再输一遍密码';
 
         }
-        //确认密码失去焦点事件
-        surepass.onblur = function(){
+        //确认密码移出事件判断确认密码
+        surepass.onmouseout = function(){
 
             //获取密码
             var surepass = this.value;

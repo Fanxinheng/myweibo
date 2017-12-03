@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="/homes/css/user.index.css">
     </head>
     
-    <body style="background: #F3F4F9 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
+    <body style="background: #B4DAF0 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
                 <div class="container">
@@ -247,6 +247,22 @@
                                         @ {{$s->user_info->nickName}}:
                                     </b>
                                     {{$s->content}} 
+                                    @if($s->image)
+                                        <div style="margin-top: 10px" id="fimg">
+                                             <?php
+                                            $img = rtrim($s->image,'##');
+
+                                            $imgs = explode('##',$img);
+                                            
+                                        ?>
+                                            @foreach($imgs as $i)
+                                                <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$i}}?imageView2/0/q/75|watermark/2/text/TVlXRUlCTy5DT00=/font/5a6L5L2T/fontsize/400/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim" style="width:110px;" id="img">
+                                            @endforeach
+                                        </div>
+                                        @else
+                                        <div></div>
+                                        @endif
+
                                     @endforeach
                                 </div>
                             </div>

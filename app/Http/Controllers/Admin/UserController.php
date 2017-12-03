@@ -66,7 +66,7 @@ class UserController extends Controller
         $nickName = user_info::where('uid',$id)->value('nickName');
         
         //获取用户微博信息
-        $res = contents::where('uid','=',$id)->paginate(10);
+        $res = contents::where('uid','=',$id)->orderBy('time','desc')->paginate(10);
 
         return view('admins/user/show',['nickName'=>$nickName,'res'=>$res]);
     }

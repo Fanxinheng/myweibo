@@ -69,7 +69,7 @@ class UserController extends Controller
         $uid = Session('uid');
 
         //查询用户的帖子所有信息
-        $res = contents::select('time','image')->whereNotNull('image')->where('uid',$uid)->orderBy('time','desc')->paginate(5);
+        $res = contents::select('time','image','cid')->whereNotNull('image')->where('uid',$uid)->orderBy('time','desc')->paginate(5);
 
         //查询用户的所有的信息
         $rev = user_info::where('uid',$uid)->first();
@@ -265,13 +265,21 @@ class UserController extends Controller
         //删除七牛云的照片
         $image = contents::where('cid',$id)->value('image');
 
+
         if($image){
 
             //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
 
-            //删除云中图片
-            $disk->delete($image);
+
+            $img = rtrim($image,'##');
+
+            $imgs = explode('##',$img);
+
+            foreach($imgs as $i){
+                //删除云中图片
+                $disk->delete($i);
+            }
 
         }
 
@@ -293,6 +301,8 @@ class UserController extends Controller
         //查询回复的微博的id
         $tid = replay::where('id',$id)->value('tid');
 
+
+
         //查询微博信息的评论条数
         $rnum = contents::where('cid',$tid)->value('rnum');
 
@@ -313,6 +323,8 @@ class UserController extends Controller
 
         //将数据存入数组
         $res1['status'] = $status;
+
+        $res1['tid'] = $tid; 
 
         //页面跳转
         return $res1;
@@ -537,9 +549,14 @@ class UserController extends Controller
             //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
 
-            //删除云中图片
-            $disk->delete($image);
+             $img = rtrim($image,'##');
 
+            $imgs = explode('##',$img);
+
+            foreach($imgs as $i){
+                //删除云中图片
+                $disk->delete($i);
+            }
         }
 
          //删除所有微博图片

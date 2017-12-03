@@ -83,10 +83,10 @@ class BlogController extends Controller
 	 	$cnum = contents::where('uid',$uid)->count();
 
         //查看微博内容
-    	$content = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
+    	$content = contents::with('user_info')->where('cid',$id)->first();
 
         //查询转发信息
-    	$forward = forward::join('user_info','forward.fid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
+    	$forward = forward::with('user_info')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
         //查询用户关注信息
         $bool = user_attention::where('uid',$uid)->where('gid',$content->uid)->value('id');
@@ -118,10 +118,10 @@ class BlogController extends Controller
         $cnum = contents::where('uid',$uid)->count();
 
         //查看微博内容
-        $content = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
+        $content = contents::with('user_info')->where('cid',$id)->first();
 
         //查询评论信息
-        $replay = replay::join('user_info','replay.rid','=','user_info.uid')->where('tid',$id)->orderBy('time','desc')->paginate(10);
+        $replay = replay::with('user_info')->where('tid',$id)->orderBy('time','desc')->paginate(10);
 
         //查询用户关注信息
         $bool = user_attention::where('uid',$uid)->where('gid',$content->uid)->value('id');
@@ -203,11 +203,18 @@ class BlogController extends Controller
 
         $bool = contents::where('cid',$tid)->update($fnums);
 
+        //登录用户积分-2
+        $socre = user_info::where('uid',Session('uid'))->value('socre');
+
+        $num['socre'] = $socre - 2;
+
+        user_info::where('uid',Session('uid'))->update($num);
+
         //删除此转发
         $bool1 = forward::where('id',$id)->delete();
 
         if($bool && $bool1) {
-            return 1;
+            return $num;
         }
         
         

@@ -16,7 +16,7 @@
 
     </head>
     
-    <body style="background:#F3F4F9 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
+    <body style="background:#B4DAF0 no-repeat center center fixed;font: 12px/1.3 'Arial','Microsoft YaHei';background-size: 100% 100%;background-position: top center;">
     
         <div>
             <nav class="navbar navbar-fixed-top" id="navbar">
@@ -201,11 +201,11 @@
                                  @if($v->image)
                                 
                                                          
-                                <div id="weiimg" class="cl{{$v->cid}}"  style="margin-top: 20px;margin-left: 20px;float: left;">
+                                <div id="weiimg" class="cl{{$v->cid}}"  style="margin-top: 20px;margin-left: 60px;float: left;">
 
                                 <div>{{date('Y-m-d H:i:s',$v->time)}}</div><hr>
 
-                                    <div id="x{{$v->cid}}" style="position: absolute;margin-left: 130px;font-size: 18px;cursor: pointer;margin-top: -60px">删除</div>
+                                    <div onclick="xm({{$v->cid}})"  style="position: absolute;margin-left: 120px;font-size: 18px;cursor: pointer;margin-top: -60px">删除</div>
                                    <?php
                                     $img = rtrim($v->image,'##');
 
@@ -218,8 +218,8 @@
                                 </div>
                                  @else  
                                  @endif
-
                                  @endforeach
+
                                    
                                 <!-- 图像遍历结束 -->
                             </div>
@@ -254,7 +254,7 @@
                         success:function(data){
                             layer.close(a);
 
-                            $('.img').remove();
+                            $('#weiimg').remove();
 
                             document.getElementById('weiimg').innerHTML = "你还没有上传图片哟!@~@";
                             
@@ -272,6 +272,8 @@
 
         //删除单条
         function xm(cid){
+
+            console.log(cid);
                 $.ajax({
                     url:'/home/photo/move',
                     type:'POST',

@@ -8,7 +8,7 @@ class forward extends Model
 {
     public $table = 'forward';
 
-
+    public $timestamps = false;
 
     protected $fillable = ['id','uid','tid','pid','content','time','status'];
 

@@ -18,8 +18,6 @@ class ShowController extends Controller
     {
     	//查看微博内容
     	$res = contents::join('user_info','contents.uid','=','user_info.uid')->where('cid',$id)->first();
-
-    	// var_dump($res);die;
     	
     	//微博评论
     	$replay = replay::join('user_info','replay.rid','=','user_info.uid')->orderBy('time','desc')->where('tid',$id)->get();
