@@ -188,6 +188,11 @@
 
                 //ajax传过去连接数据库检验昵称
                 $.get('/home/details/uname',{uname:uname},function(data){
+                    if(data==2){
+                        spa.innerHTML = '√';
+                        spa.style.color='green';
+                        $('#btn1').attr('disabled',false);
+                    }
                     if(data==0){
                         spa.innerHTML = '该昵称已存在,请换一个昵称!';
                         spa.style.color = 'red';
@@ -277,6 +282,7 @@
                               },
                             success: function(data) { 
                                 layer.closeAll('loading');
+                                layer.alert('头像上传成功！');
                                $('#img').attr('src','http://ozsrs9z8f.bkt.clouddn.com/'+data);
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) {

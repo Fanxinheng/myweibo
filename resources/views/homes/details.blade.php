@@ -139,8 +139,8 @@
             $('#spa').html('请输入4-8位用户名(数字,字母,下划线');
         })
 
-        //昵称失去焦点事件
-        $('#uname').blur(function(){
+        //昵称鼠标移出事件
+        $('#uname').mouseout(function(){
 
             //获取昵称
             var uname = this.value;
@@ -156,6 +156,7 @@
             if(uname == ""){
                 $('#spa').html('昵称不能为空!');
                 $('#spa').css('color','red'); 
+                $('#age').attr('readonly',true);
             }else if(check){
 
                 //ajax传过去连接数据库检验昵称
@@ -163,16 +164,19 @@
                     if(data==0){
                         $('#spa').html('该昵称已存在,请换一个昵称!');
                         $('#spa').css('color','red');
+                        $('#age').attr('readonly',true);
                         $('#btn1').attr('disabled',true);
                     }else{
                         $('#spa').html('√');
                         $('#spa').css('color','green');
+                        $('#age').attr('readonly',false);
                         $('#btn1').attr('disabled',false);
                     }
                 })
             }else{
                     $('#spa').html('昵称格式不正确!');
                     $('#spa').css('color','red');
+                    $('#age').attr('readonly',true);
                     $('#btn1').attr('disabled',true);
                 }
         })

@@ -37,50 +37,47 @@
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
             <thead>
                 <tr role="row">
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">序号
+
+                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">举报人
                     </th>
 
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">举报人ID
+                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 500px;" aria-label="Browser: activate to sort column ascending">被举报微博内容
                     </th>
 
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 338px;" aria-label="Browser: activate to sort column ascending">被举报微博内容
-                    </th>
-
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">被举报人ID
+                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 255px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">被举报人
                     </th>
 
                     <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 316px;" aria-label="Platform(s): activate to sort column ascending">举报时间
                     </th>
 
-                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 316px;" aria-label="Platform(s): activate to sort column ascending">操作
+                    <th class="" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 100px;" aria-label="Platform(s): activate to sort column ascending">操作
                     </th>
                 </tr>
             </thead>
         <tbody role="alert" aria-live="polite" aria-relevant="all">
             @foreach($res as $k => $v)
-            <tr class="even" align="center" id="report{{$v->id}}">
-
-                    <!-- 举报微博序号 -->
-                    <td class=" ">{{$v->id}}</td>
+             @foreach($v->contents as $re)
+            <tr class="even" align="center" id="report{{$re->cid}}">
 
                     <!-- 被举报者 -->
                     <td class=" ">{{$v->user_info->nickName}}</td>
 
-                    @foreach($v->contents as $re)
+                   
                     <!-- 微博ID -->
                     <td class=" ">{{$re->content}}</td>
 
                     <!-- 举报人ID -->
                     <td class=" ">{{$re->user_info->nickName}}</td>
-                    @endforeach
+                    
 
                     <!-- 时间 -->
-                    <td class=" ">{{$v->time}}</td>
+                    <td class=" ">{{date('Y-m-d H:i:s',$v->time)}}</td>
 
                     <!-- 操作 -->
                     <td class=" ">
-                        <button onclick="shan({{$v->id}})" class="btn btn-default">删除</button>
+                        <button onclick="shan({{$re->cid}})" class="btn btn-default">删除</button>
                     </td>
+                    @endforeach
             </tr>
             @endforeach
             </tbody>

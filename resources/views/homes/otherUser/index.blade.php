@@ -40,8 +40,7 @@
                     </div>
                     <div id="nav-1">
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
-                            <span class="glyphicon glyphicon-home" aria-hidden="true">
-                            </span>
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                             <a href="/home/details/quit"  title="退出登录" style="text-decoration:none;">
                                 退出
                             </a>
@@ -58,8 +57,7 @@
                             </li>
                         </div>
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true">
-                            </span>
+                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             <a href="/home/login" style="text-decoration:none;">
                                 首页
                             </a>
@@ -156,6 +154,7 @@
                                 @else
                             <!-- 微博遍历的地方 -->
                             @foreach($res as $k=>$v)
+                            
                             <div class="col-lg-12" id="tiezi" style="width: 830px;overflow: hidden;background-color: #fff;margin-left: 12px;margin-top: 20px">
                                 <div class="col-lg-12">
                                     <!-- 头像 -->
@@ -218,6 +217,7 @@
                                     <ul class="nav nav-sidebar">
                                         <li>
                                             <a href="javascript:;" onclick="fnum({{$v->cid}})">
+                                                 <span class="glyphicon glyphicon-share" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                 <span  id="fspan{{$v->cid}}">
                                                     转发{{$v->fnum}}&nbsp;&nbsp;|
                                                 </span>
@@ -225,6 +225,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:;" onclick="fun({{$v->cid}})">
+                                                <span class="glyphicon glyphicon-comment" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                 <span id="rspa{{$v->cid}}">
                                                     评论{{$v->rnum}}&nbsp;&nbsp;|
                                                 </span>
@@ -239,6 +240,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:;" onclick="jubao({{$v->cid}})">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                 <span id="spa{{$v->cid}}">
                                                         举报&nbsp;&nbsp;|
                                                 </span>
@@ -248,49 +250,47 @@
                                 </div>
                                 <div id="v" >
                                     <div class="col-lg-12 disd1" id="disd1{{$v->cid}}">
-                                       
                                             <div id="tex">
                                                 <textarea name="conn" id="conn" cols="70" rows="1"></textarea>
                                             </div>
                                             <button class="btn btn-defalut" style="height: 28px;line-height: 15px"
                                             id="butt" onclick="rebut({{$v->cid}})">
                                                 回复
-                                            </button>
-                                         
+                                            </button>    
                                     </div>
                                     <div id="sdf{{$v->cid}}">
                                         @foreach($v->replay as $key=>$val)
                                          <div id="he{{$val->id}}" style="dispaly:block;">
-                                        <div class="col-lg-12" id="hejiu{{$v->cid}}" >
-                                            <!-- 头像 -->
-                                            <div class="col-log-2" id="rimg">
-                                               
-                                                 <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$val->user_info->photo}}?imageView2/1/w/30/h/30/q/75" id="img" class="img-circle">
+                                            <div class="col-lg-12" id="hejiu{{$v->cid}}" >
+                                                <!-- 头像 -->
+                                                <div class="col-log-2" id="rimg">
+                                                   
+                                                     <img src="http://ozsrs9z8f.bkt.clouddn.com/{{$val->user_info->photo}}?imageView2/1/w/30/h/30/q/75" id="img" class="img-circle">
+                                                </div>
+                                                <!-- 名称和时间 -->
+                                                <div class="col-log-8" id="cont">
+                                                    <div id="div1">
+                                                        <a href="/home/other/user/{{$val->user_info->uid}}">
+                                                            {{$val->user_info->nickName}}
+                                                        </a>
+                                                        &nbsp;回复:&nbsp; {{$val->rcontent}}
+                                                    </div>
+                                                    <div id="div2">
+                                                         @if($val->user_info->uid == $sid)
+                                                    <div style="margin-top: 10px;font-size: 12px;color: #808080;word-break:break-all; width: 600px">
+                                                        {{date('Y-m-d H:i:s',$val->time)}}
+                                                         <a href="javascript:;" onclick="rdel({{$val->id}})">
+                                                            <span style="float: right">
+                                                                删除
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    @else
+                                                    
+                                                    @endif
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <!-- 名称和时间 -->
-                                            <div class="col-log-8" id="cont">
-                                                <div id="div1">
-                                                    <a href="/home/other/user/{{$val->user_info->uid}}">
-                                                        {{$val->user_info->nickName}}
-                                                    </a>
-                                                    &nbsp;回复:&nbsp; {{$val->rcontent}}
-                                                </div>
-                                                <div id="div2">
-                                                     @if($val->user_info->uid == $sid)
-                                                <div style="margin-top: 10px;font-size: 12px;color: #808080;word-break:break-all; width: 600px">
-                                                    {{date('Y-m-d H:i:s',$val->time)}}
-                                                     <a href="javascript:;" onclick="rdel({{$val->id}})">
-                                                        <span style="float: right">
-                                                            删除
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                @else
-                                                <div></div>
-                                                @endif
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                         @endforeach
                                         <!-- 内容 -->
@@ -382,7 +382,11 @@
                         a = layer.load();                      
                     },
                     success:function(data){
-                       $('#he'+id).hide();
+
+                    //改变转发那里的转发量
+                    document.getElementById('rspa'+data['tid']).innerHTML="评论"+data['rnum'];
+
+                       $('#he'+id).remove();
                        layer.close(a);
                     }
                 });
@@ -399,11 +403,15 @@
                 //改变转发那里的转发量
                 document.getElementById('rspa'+cid).innerHTML="评论"+data['replay'];
 
-                hejiu = document.getElementById('hejiu'+cid);       
+                //改变积分
+                document.getElementById('fsoc').innerHTML=data['socre'];
+
+
+                hejiu = document.getElementById('sdf'+cid);       
 
                 //添加回复消息
                 var newDiv = document.createElement('div');
-                var str = "<div id='he"+data['id']+"' style='dispaly:block;'><div class='col-lg-12'><div class='col-log-2' id='rimg'><img src='http://ozsrs9z8f.bkt.clouddn.com/"+data['photo']+"?imageView2/1/w/30/h/30/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim' id='img' class='img-circle'></div><div class='col-log-8' id='cont'><div id='div1'><a href='/home/other/user/"+data['nickName']+"'>"+data['nickName']+"</a>&nbsp;回复:&nbsp; "+data['rcontent']+"</div><div id='div2'><em style='color:#676462'>"+data['time']+"</em><a href='javascript:;'' onclick='rdel("+data['id']+")'><span style='float: right;margin-right:140px;'> 删除</span></a></div></div></div></div>";
+                var str = "<div id='he"+data['id']+"' style='dispaly:block;'><div class='col-lg-12'><div class='col-log-2' id='rimg'><img src='http://ozsrs9z8f.bkt.clouddn.com/"+data['photo']+"?imageView2/1/w/30/h/30/q/75|watermark/2/text/bXl3ZWlibw==/font/5a6L5L2T/fontsize/240/fill/I0YxRUZFNg==/dissolve/100/gravity/SouthEast/dx/10/dy/10|imageslim' id='img' class='img-circle'></div><div class='col-log-8' id='cont'><div id='div1'><a href='/home/other/user/"+data['nickName']+"'>"+data['nickName']+"</a>&nbsp;回复:&nbsp; "+data['rcontent']+"</div><div id='div2'><em style='color:#676462'>"+data['time']+"</em><a href='javascript:;'' onclick='rdel("+data['id']+")'><span style='float: right;margin-right:140px;'>删除</span></a></div></div></div></div>";
                 //添加div里内容
                 newDiv.innerHTML=str;
                 //把节点从头部插入div
@@ -464,7 +472,7 @@
                     document.getElementById('fspan'+cid).innerHTML="转发"+data['fnum'];
 
                     // //获取积分
-                    // document.getElementById('fsoc').innerHTML=data['socre'];
+                    document.getElementById('fsoc').innerHTML=data['socre'];
 
                     //弹出提示框
                     layer.msg('转发成功');

@@ -39,8 +39,7 @@
                         </div>
                           <div id="nav-1">
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
-                            <span class="glyphicon glyphicon-home" aria-hidden="true">
-                            </span>
+                           <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                             <a href="/home/details/quit"  title="退出登录" style="text-decoration:none;">
                                 退出
                             </a>
@@ -57,8 +56,8 @@
                             </li>
                         </div>
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true">
-                            </span>
+                            <span class="glyphicon glyphicon-home" aria-hidden="true">
+                                                        </span>
                             <a href="/home/login" style="text-decoration:none;">
                                 首页
                             </a>

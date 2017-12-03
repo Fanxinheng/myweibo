@@ -158,18 +158,25 @@ class AdvertController extends Controller
 
         //判断是否有文件上传
         if ($request->hasFile('pic')) {
+
             //初始化七牛云
             $disk = QiniuStorage::disk('qiniu');
+
             //获取文件内容
             $file = $request->file('pic');
+
             //修改名字已时间戳生成文件命
             $name = 'Advert'.rand(1111,9999).time();
+
             //获取文件命的后缀
             $suffix = $request->file('pic')->getClientOriginalExtension();
+
             //拼装图片信息
             $print = 'admins/Uploads/'.$name.'.'.$suffix;
+
             //上传到七牛云
             $bool = $disk->put($print,file_get_contents($file->getRealPath()));
+
             //判断是否上传到七牛云
             if (!$bool) {
                 //如果不成功返回页面修改页面
@@ -178,8 +185,10 @@ class AdvertController extends Controller
 
             //去数据库获取图片信息
             $pic = advert::where('id',$id)->value('pic');
+
             //删除七牛云信息
             $disk->delete($pic);
+
             //获取图片信息
             $res['pic'] = $print;
 
@@ -188,12 +197,16 @@ class AdvertController extends Controller
 
             //获取当前时间戳
             $res['time'] = time();
+
             //获取商户名字
             $res['user'] = $request->user;
+
             //获取链接地址
             $res['link'] = $request->link;
+
             //获取状态
             $res['status'] = $request->status;
+            
             //修改数据库里面的信息
             $data = advert::where('id',$id)->update($res);
 

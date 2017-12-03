@@ -250,6 +250,19 @@ class UserController extends Controller
     //删除微博
     public function delete($id)
     {
+
+        //获取用户的id
+        $uid = Session('uid');
+
+        //获取用户的积分
+        $num = user_info::where('uid',$uid)->value('socre');
+        
+        //积分减五
+        $num1['socre'] = $num - 5;
+
+        //修改用户的积分
+        user_info::where('uid',$uid)->update($num1);
+
         //删除评论
         replay::where('tid',$id)->delete();
 
@@ -287,7 +300,7 @@ class UserController extends Controller
         contents::where('cid',$id)->delete();
 
         //页面跳转
-        return 1;
+        return $num1;
 
     }
 
@@ -300,8 +313,6 @@ class UserController extends Controller
         
         //查询回复的微博的id
         $tid = replay::where('id',$id)->value('tid');
-
-
 
         //查询微博信息的评论条数
         $rnum = contents::where('cid',$tid)->value('rnum');

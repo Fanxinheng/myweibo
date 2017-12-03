@@ -40,7 +40,7 @@
         <label>
         <select aria-controls="DataTables_Table_0" name="select">
             <option
-            name="select"value="">全部</option>
+            name="select" value="">全部</option>
 
             @foreach($resa as $k => $v)
 
@@ -81,7 +81,7 @@
     </thead>
            <tbody role="alert" aria-live="polite" aria-relevant="all">
              @foreach($resd as $k => $v)
-                <tr class="@if ( $v->id % 2 == 0 ) odd @else even @endif" align="center" id="wei{{$v->uid}}">
+                <tr class="even" align="center" id="wei{{$v->cid}}">
                 <td class="">{{$v->nickName}}</td>
                 <td class="">{{$v->content}}</td>
                 <td class="">{{date('Y-m-d H:i:s',$v->time)}}</td>
@@ -111,28 +111,29 @@
 
 @section('js')
     <script type="text/javascript">$('.mws-form-message').delay(3000).slideUp(1000);</script>
-    <script type="text/javascript">                          
+    <script type="text/javascript">
+
         //微博热门状态修改
-           function fun(cid)
-           {
-            $.ajax({
-                url:'/admin/weibo/'+cid+'/edit',
-                type:'GET',
-                data:'',
-                success:function(data){
-                    if(data['hot'] == 1){
-                        document.getElementById('status'+cid).innerHTML="取消热门";
-                        document.getElementById(cid).innerHTML="是";
-                        layer.msg('登上热门');
-                    }else{
-                        document.getElementById('status'+cid).innerHTML="登上热门";
-                        document.getElementById(cid).innerHTML="否";
-                        layer.msg('取消热门');
-                        }
+       function fun(cid)
+       {
+        $.ajax({
+            url:'/admin/weibo/'+cid+'/edit',
+            type:'GET',
+            data:'',
+            success:function(data){
+                if(data['hot'] == 1){
+                    document.getElementById('status'+cid).innerHTML="取消热门";
+                    document.getElementById(cid).innerHTML="是";
+                    layer.msg('登上热门');
+                }else{
+                    document.getElementById('status'+cid).innerHTML="登上热门";
+                    document.getElementById(cid).innerHTML="否";
+                    layer.msg('取消热门');
                     }
                 }
-            );
-        };
+            }
+        );
+    };
 
     //微博删除
    function shan(cid){
@@ -158,6 +159,7 @@
             
             //移除微博
             $('#wei'+cid).remove();
+
             layer.msg('微博删除成功!', {icon: 1});
             },
         })

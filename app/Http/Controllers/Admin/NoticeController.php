@@ -43,6 +43,17 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
+
+        //正则验证
+        $this->validate($request, [
+            'title' => 'required',
+            'content' => 'required',
+
+        ],[
+            'title.required' => '*公告标题不能为空*',
+            'content.required' => '*公告内容不能为空*',
+        ]);
+
         // 接收页面传过来的数据除了哈希验证
         $res = $request->except('_token');
 

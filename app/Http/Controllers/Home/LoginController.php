@@ -176,10 +176,11 @@ class LoginController extends Controller
       $cnum = contents::where('uid',$uid)->count();
 
       //查询我的关注
-      $index = user_attention::with('contents','user_info')->where('uid',$uid)->orderBy('time','desc')->paginate(10);
+      $index = user_attention::with(['contents'=>function($query){$query->orderBy('time','desc');}],'user_info')->where('uid',$uid)->paginate(10);
     
       return view('homes/attent',['uid'=>$uid,'user'=>$user,'unum'=>$unum,'gnum'=>$gnum,'cnum'=>$cnum,'index'=>$index]);
     }
+
 
     //加载微博找人
     public function job ($id)

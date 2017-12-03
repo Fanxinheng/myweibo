@@ -41,7 +41,7 @@
             </div>
             <div class="mws-button-row">
                 {{csrf_field()}}
-                <input type="submit" onclick="changetext(this)" class="btn btn-default" value="添加">
+                <input type="submit" class="btn btn-default" value="添加">
             </div>
         </form>
     </div>
@@ -54,9 +54,5 @@
 <script type="text/javascript">
     $('.mws-form-message').delay(3000).slideUp(1000);
 
-        function changetext(id)
-        {
-            layer.msg('公告已添加');
-        }
 </script>
 @endsection

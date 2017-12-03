@@ -43,8 +43,7 @@
                     </div>
                     <div id="nav-1">
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
-                            <span class="glyphicon glyphicon-home" aria-hidden="true">
-                            </span>
+                           <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                             <a href="/home/details/quit"  title="退出登录" style="text-decoration:none;">
                                 退出
                             </a>
@@ -61,8 +60,8 @@
                             </li>
                         </div>
                         <div style="float:right;line-height: 20px;font-size: 16px;margin-right: 20px;margin-top: 10px">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true">
-                            </span>
+                            <span class="glyphicon glyphicon-home" aria-hidden="true">
+                                                        </span>
                             <a href="/home/login" style="text-decoration:none;">
                                 首页
                             </a>
@@ -205,8 +204,9 @@
                                 @else
                             <!-- 微博遍历的地方 -->
                             @foreach($res as $k=>$v)
-                        <div id="wei{{$v->cid}}" >
-                            <div class="col-lg-12" id="tiezi" style="width: 830px;overflow: hidden; background-color: #fff;margin-left: 12px;margin-top: 20px">
+                      
+                            <div class="col-lg-12"  id="tiezi" >  
+                                <div id="wei{{$v->cid}}" style="width: 830px;overflow: hidden; background-color: #fff;margin-top: 20px" >
                                 <div class="col-lg-12" id="buhuo" class="layer_notice">
                                     <!-- 头像 -->
                                     <div class="col-log-2" id="tieimg" style="margin-top: 20px;float: left">
@@ -254,7 +254,7 @@
                                     10px} 
 
                                     #weibo #tiezi #v #rimg{float:left;margin-left: 18px;margin-top: 10px}
-                                    #weibo #tiezi #v .col-lg-12{background-color:#F2F2F5;margin-left: -15px;width: 830px }
+                                    #weibo #tiezi #v .col-lg-12{background-color:#F2F2F5;width: 850px }
                                     #weibo #tiezi #v #cont{margin-top: 14px;margin-left: 60px;margin-bottom:
                                     10px} #weibo #tiezi #v #cont #div1{margin-top: 5px;font-size: 12px;word-break:break-all;
                                     width: 600px} #weibo #tiezi #v #con #div2{margin-top: 10px;font-size: 12px;word-break:break-all;
@@ -265,6 +265,7 @@
                                     <ul class="nav nav-sidebar">
                                         <li>
                                             <a href="javascript:;" onclick="fnum({{$v->cid}})">
+                                                 <span class="glyphicon glyphicon-share" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                 <span id="fspan{{$v->cid}}">
                                                     转发{{$v->fnum}}
                                                 </span>
@@ -272,6 +273,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:;" onclick="fun({{$v->cid}})">
+                                                <span class="glyphicon glyphicon-comment" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
                                                 <span id="rspa{{$v->cid}}">
                                                     评论{{$v->rnum}}
                                                 </span>
@@ -287,10 +289,9 @@
                                         </li>
                                         <li>
                                             <a href="javascript:;" onclick="del({{$v->cid}})">
-                                                <span>
-                                                    
-                                                        删除
-                                                    
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true" style="margin-top: 4px;width: 10px;height: 10px"></span>
+                                                <span>                                                    
+                                                        删除                                                    
                                                 </span>
                                             </a>
                                         </li>
@@ -331,7 +332,7 @@
 
                                                     <a href="javascript:;" onclick="rdel({{$val->id}})">
                                                         <span style="float: right;margin-right: 140px">
-                                                            删除 
+                                                            删除
                                                         </span>
                                                     </a>
                                                 </div>
@@ -366,6 +367,7 @@
                     type:'GET',
                     success:function (data){
                     $('#wei'+cid).remove();
+                    document.getElementById('fsoc').innerHTML=data['socre']; 
                     layer.msg('删除成功');
 
                     }
@@ -391,8 +393,7 @@
                     url:'/home/replay/delete',
                     type:'POST',
                     data:{id:id},
-                    success:function(data){
-                      
+                    success:function(data){                      
                     //改变转发那里的转发量
                     document.getElementById('rspa'+data['tid']).innerHTML="评论"+data['rnum'];
 
@@ -432,10 +433,9 @@
 
                 //改变积分
                 document.getElementById('fsoc').innerHTML=data['socre'];
-                hejiu = document.getElementById('hejiu'+cid);
+                hejiu = document.getElementById('sdf'+cid);
                 //添加回复消息
                 var newDiv = document.createElement('div');
-                console.log(data);
                   var str = "<div id='he"+data['id']+"' style='dispaly:block;'><div class='col-lg-12'><div class='col-log-2' id='rimg'><img src='http://ozsrs9z8f.bkt.clouddn.com/"+data['photo']+"?imageView2/1/w/40/h/40/q/75' id='img' class='img-circle'></div><div class='col-log-8' id='cont'><div id='div1'><a href='/home/other/user/"+data['nickName']+"'>"+data['nickName']+"</a>&nbsp;回复:&nbsp; "+data['rcontent']+"</div><div id='div2'><em style='color:#676462'>"+data['time']+"</em><a href='javascript:;'' onclick='rdel("+data['id']+")'><span style='float: right;margin-right:140px;'> 删除</span></a></div></div></div></div>";
                 newDiv.innerHTML=str;
                 //添加回复消息

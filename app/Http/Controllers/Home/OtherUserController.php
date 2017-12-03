@@ -149,8 +149,8 @@ class OtherUserController extends Controller
 
         }else{
 
-            //获取登录用户的id
-            $soc['socre'] = user_info::where('uid',$res['rid'])->value('socre');
+            //发帖人的积分
+            $soc1['socre'] = user_info::where('uid',$res['uid'])->value('socre');
 
         }
         //将用户名添加在数组中
@@ -163,13 +163,13 @@ class OtherUserController extends Controller
         $res['id'] = replay::max('id');
 
         //获取图片
-        $res['photo'] = user_info::where('uid',$res['uid'])->value('photo');
+        $res['photo'] = user_info::where('uid',$res['rid'])->value('photo');
 
         //将回帖数放入一个数组中
         $res['replay'] = $v;
 
         //将积分放入一个数组中
-        $res['socre'] = $soc['socre'];
+        $res['socre'] = $soc1['socre'];
 
         return $res;
     } 
@@ -198,8 +198,10 @@ class OtherUserController extends Controller
         //删除微博评论
         replay::where('id',$id)->delete();
 
+        $res1['tid'] = $tid;
+
         //页面跳转
-        return redirect('/home/other/user/'.$uid);
+        return $res1;
 
     }
 

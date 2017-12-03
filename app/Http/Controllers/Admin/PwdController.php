@@ -76,6 +76,7 @@ class PwdController extends Controller
             if ($data) {
                     //消除session里面的pid弹回登录页面
                     $request->session()->forget('pid');
+                    
                     return redirect('admin/')->with('edit','修改成功,请再次登录！');
             }else {
                     return back()->with('msg','个人信息修改失败！');

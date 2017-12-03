@@ -31,16 +31,31 @@ class DetailsController extends Controller
 
 		// 获取input框里的昵称值
 		$res = $request->input('uname');
+        
+        //获取session中的uid
+        $uid = $request->session()->get('uid');
 
-		//在user_info表中查询昵称值
-		$uname = user_info::where('nickName','=',$res)->value('nickName');
+       	//根据uid查询出当前用户的昵称
+       	$nickName = user_info::where('uid',$uid)->value('nickName');
 
-		// 为空返回1,否则返回0
-		if($uname==null){
-			echo "1";
-		}else{
-			echo "0";
-		}
+       	if($res==$nickName){
+            
+       		echo "2";
+
+       	}else{
+
+       		//在user_info表中查询昵称值
+			$uname = user_info::where('nickName','=',$res)->value('nickName');
+
+			// 为空返回1,否则返回0
+			if($uname==null){
+				echo "1";
+			}else{
+				echo "0";
+			}
+
+       	}
+		
 
 	}
 
@@ -186,18 +201,28 @@ class DetailsController extends Controller
 		//获取session中当前用户的uid
 		$uid= $request->session()->get('uid');
         
-		//把res数组中的信息按照uid修改到user_info表中
-		$data = user_info::where('uid',$uid)->update($res);
-			
-		//判断成功就跳转首页,否则返回当前页面并存闪存
-		if($data){
-			echo "<script>alert('修改成功！');window.location.href='/home/login'</script>";
-		}else{
+        //根据uid获取其一条数据
+        $re = user_info::where('uid',$uid)->first();
+        $a = ['nickName'=>$re['nickName'],'sex'=>$re['sex'],'age'=>$re['age'],'work'=>$re['work'],'email'=>$re['email']];
 
-			echo "<script>alert('修改失败！');window.location.href='/home/details/edit'</script>";
-			
-		}
+        //判断是否修改个人信息，修改则更新数据库，没修改则不更新数据库
+        if($res==$a){
+        	echo "<script>alert('修改成功！');window.location.href='/home/login'</script>";
+        }else{
+        	//把res数组中的信息按照uid修改到user_info表中
+			$data = user_info::where('uid',$uid)->update($res);
+				
+			//判断成功就跳转首页,否则返回当前页面并存闪存
+			if($data){
+				echo "<script>alert('修改成功！');window.location.href='/home/login'</script>";
+			}else{
 
+				echo "<script>alert('修改失败！');window.location.href='/home/details/edit'</script>";
+				
+			}
+
+        }
+		
 	}
 	
 	//加载修改密码页面 

@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 
 });*/
-
 //加载主页面
 Route::get('/','Home\AdminController@welcome');
 

@@ -14,7 +14,7 @@
         <script type="text/javascript" src="/homes/js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="/homes/bootstrap/js/bootstrap.min.js"></script>
 	
-
+		<script type="text/javascript" src="{{asset('/homes/layer/layer.js')}}"></script>
         <title>
             微博注册
         </title>
@@ -203,8 +203,11 @@
 
      		$.post('/home/code',{phone:phone},function(data){
 
-				// console.log(data);
-				// alert(data);
+				if(data){
+					layer.alert('验证码发送成功！');
+				}else{
+					layer.alert('验证码发送失败！')
+				}
 			});
 
 			return false;

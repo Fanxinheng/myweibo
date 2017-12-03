@@ -9,6 +9,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\report;
 use App\Http\Model\user_info;
 use App\Http\Model\contents;
+use App\Http\Model\replay;
+use App\Http\Model\forward;
+use App\Http\Model\point;
+use App\Http\Model\message;
+
+use zgldh\QiniuStorage\QiniuStorage;
+
+
+
 class ReportController extends Controller
 {
     /**
@@ -104,14 +113,29 @@ class ReportController extends Controller
 
         // 删除七牛云图片
         $images = contents::where('cid',$id)->value('image');
-        if ($images) {
-            
-            // 初始化七牛云
-            $disk=QiniuStorage::disk('qiniu');
 
-            // 删除七牛云图片
-            $disk->delete($images);
+       if($images){
+
+            //初始化七牛云
+            $disk = QiniuStorage::disk('qiniu');
+
+            $img = rtrim($images,'##');
+
+            $imgs = explode('##',$img);
+
+            foreach($imgs as $i){
+                //删除云中图片
+                $disk->delete($i);
+            }
+
         }
+
+        //登录用户积分-5
+        $socre = user_info::where('uid',Session('uid'))->value('socre');
+
+        $num['socre'] = $socre - 5;
+
+        user_info::where('uid',Session('uid'))->update($num);
 
         // 获取表中当前微博的uid获取
         $res['uid'] = contents::where('cid',$id)->value('uid');
@@ -126,7 +150,7 @@ class ReportController extends Controller
         $res['time'] = time();
 
         // 将此条信息整合发送给被删除微博的用户
-        $res = message::insert($res);
+        message::insert($res);
         
         // 通过ID查询到要删除的那一条微博ID从数据库删除
         $resg = contents::where('cid',$id)->delete();
