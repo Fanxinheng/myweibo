@@ -17,7 +17,7 @@ use zgldh\QiniuStorage\QiniuStorage;
 
 class DetailsController extends Controller
 {
-	//
+	
 	public function index(Request $request)
 	{   
 
@@ -134,11 +134,16 @@ class DetailsController extends Controller
 	//加载修改个人信息页面
 	public function edit(Request $request)
 	{   
+		//获取职业列表
+        $job = job::get();
+
+        //获取登录者id
 		$uid = $request->session()->get('uid');
 
+		//获取登录者信息
 		$res = user_info::where('uid',$uid)->first();
 
-		return view('homes/edit',['res'=>$res]);
+		return view('homes/edit',['job'=>$job,'res'=>$res]);
 	}
 
 
@@ -203,11 +208,12 @@ class DetailsController extends Controller
         
         //根据uid获取其一条数据
         $re = user_info::where('uid',$uid)->first();
+
         $a = ['nickName'=>$re['nickName'],'sex'=>$re['sex'],'age'=>$re['age'],'work'=>$re['work'],'email'=>$re['email']];
 
         //判断是否修改个人信息，修改则更新数据库，没修改则不更新数据库
         if($res==$a){
-        	echo "<script>alert('修改成功！');window.location.href='/home/login'</script>";
+        	echo "<script>alert('您还没有修改个人信息！');window.location.href='/home/details/edit'</script>";
         }else{
         	//把res数组中的信息按照uid修改到user_info表中
 			$data = user_info::where('uid',$uid)->update($res);

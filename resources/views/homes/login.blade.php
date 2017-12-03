@@ -193,7 +193,7 @@
                                             <textarea rows="4"  class="form-control" maxlength="200" onchange="this.value=this.value.substring(0, 200)" onkeydown="this.value=this.value.substring(0, 200)" onkeyup="this.value=this.value.substring(0, 200)" placeholder="请输入不多于200字内容" name="content" maxlength="200"></textarea>
                                         
 
-                                            <div class="kind" style="height: 35px;margin-top: 3px;">
+                                            <div class="kind" style="width:450px;height: 35px;margin-top: 3px;">
                                                
                                                 <a class="S_txt1" title="图片" style="position: relative;" onclick="pic_upload()">
                                                     <em class="W_ficon ficon_image" style="font-size:16px">

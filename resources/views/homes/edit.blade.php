@@ -90,13 +90,11 @@
 								    <label for="inputcode3" class="col-sm-2 control-label" style="margin-right:15px"><span style="color:red;margin-right: 5px;">*</span>工作:</label> 
 									
 									<select class="form-control" style="width:345px;font-size: 18px" name="work" >
-									  <option value="医生" @if($res->work == '医生') selected @endif >医生</option>
-									  <option value="IT程序员" @if($res->work == 'IT') selected @endif >IT</option>
-									  <option value="销售" @if($res->work == '销售') selected @endif >销售</option>
-									  <option value="教师" @if($res->work == '教师') selected @endif >教师</option>
-									  <option value="餐饮" @if($res->work == '餐饮') selected @endif >餐饮</option>
-									  <option value="其他" @if($res->work == '其他') selected @endif >其他</option>
+    									@foreach($job as $v)
+                                        <option value="{{$v->job}}">{{$v->job}}</option>
+                                        @endforeach
 									</select>
+
 								  </div>
 								  <div class="form-group">
 								    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red;margin-right: 5px;">*</span>邮箱:</label>
