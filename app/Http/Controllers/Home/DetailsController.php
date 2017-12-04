@@ -213,7 +213,7 @@ class DetailsController extends Controller
 
         //判断是否修改个人信息，修改则更新数据库，没修改则不更新数据库
         if($res==$a){
-        	echo "<script>alert('您还没有修改个人信息！');window.location.href='/home/details/edit'</script>";
+        	echo "<script>alert('修改成功！');window.location.href='/home/login'</script>";
         }else{
         	//把res数组中的信息按照uid修改到user_info表中
 			$data = user_info::where('uid',$uid)->update($res);

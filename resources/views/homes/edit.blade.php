@@ -167,47 +167,49 @@
         //昵称改变事件
         uname.onchange = function(){
 
-            //获取昵称
-            var uname = this.value;
-            // console.log(uname);
+                //获取昵称
+                var uname = this.value;
+                // console.log(uname);
 
-            //写正则
-            var reg  = /^\w{4,8}$/;
+                //写正则
+                var reg  = /^\w{4,8}$/;
 
-            //检测
-            var check = reg.test(uname);
+                //检测
+                var check = reg.test(uname);
 
-            //判断
-            if(uname == ""){
-                spa.innerHTML = '昵称不能为空!';
-                spa.style.color='red';
-                $('#btn1').attr('disabled',true);
-            }else if(check){
+                //判断
+                if(uname == ""){
+                    spa.innerHTML = '昵称不能为空!';
+                    spa.style.color='red';
+                    $('#btn1').attr('disabled',true);
+                }else if(check){
 
-                //ajax传过去连接数据库检验昵称
-                $.get('/home/details/uname',{uname:uname},function(data){
-                    if(data==2){
-                        spa.innerHTML = '√';
-                        spa.style.color='green';
-                        $('#btn1').attr('disabled',false);
-                    }
-                    if(data==0){
-                        spa.innerHTML = '该昵称已存在,请换一个昵称!';
+                    //ajax传过去连接数据库检验昵称
+                    $.get('/home/details/uname',{uname:uname},function(data){
+                        if(data==2){
+                            spa.innerHTML = '√';
+                            spa.style.color='green';
+                            $('#btn1').attr('disabled',false);
+                        }
+                        if(data==0){
+                            spa.innerHTML = '该昵称已存在,请换一个昵称!';
+                            spa.style.color = 'red';
+                            $('#btn1').attr('disabled',true);
+
+                        }else{
+                            spa.innerHTML = '√';
+                            spa.style.color='green';
+                            $('#btn1').attr('disabled',false);
+
+                        }
+                    })
+                }else{
+                        spa.innerHTML = '昵称格式不正确!';
                         spa.style.color = 'red';
                         $('#btn1').attr('disabled',true);
-
-                    }else{
-                        spa.innerHTML = '√';
-                        spa.style.color='green';
-                        $('#btn1').attr('disabled',false);
-
                     }
-                })
-            }else{
-                    spa.innerHTML = '昵称格式不正确!';
-                    spa.style.color = 'red';
-                    $('#btn1').attr('disabled',true);
-                }
+
+            
                 
         };
 

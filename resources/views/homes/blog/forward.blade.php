@@ -69,7 +69,7 @@
                                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{$user->nickName}}<span class="caret"></span></a>
                                               <ul class="dropdown-menu">
                                                 <li><a href="/home/user">个人中心</a></li>
-                                                <li><a href="/home/details">个人信息</a></li>
+                                                <li><a href="/home/details/edit">个人信息</a></li>
                                                 <li><a href="/home/changepass">修改密码</a></li>
                                                 <li><a href="/home/message">系统消息</a></li>
                                               </ul>
